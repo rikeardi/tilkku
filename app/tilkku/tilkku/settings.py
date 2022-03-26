@@ -79,9 +79,11 @@ WSGI_APPLICATION = 'tilkku.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': 'geodjango',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': env('POSTGRES_DBNAME'),
         'USER': env('POSTGRES_USER'),
+        'PASSWORD': env('POSTGRES_PASS'),
+        'HOST': env('POSTGRES_HOST')
     }
 }
 
@@ -126,3 +128,10 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+ADMINS = (
+    (env('ADMIN_USER'), env('ADMIN_EMAIL')),
+)
+ADMIN_USERNAME = env('ADMIN_USER')
+ADMIN_EMAIL = env('ADMIN_EMAIL')
+ADMIN_INITIAL_PASSWORD = env('ADMIN_PASS')

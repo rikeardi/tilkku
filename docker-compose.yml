@@ -1,8 +1,8 @@
 version: "3.9"
 services:
-  postgis:
-    container_name: postgis
-    image: kartoza/postgis:14-3.2
+  postgres:
+    container_name: postgres
+    image: postgres
     environment:
       POSTGRES_USER: ${DBUSER}
       POSTGRES_PASS: ${DBPASS}
@@ -20,4 +20,8 @@ services:
       POSTGRES_USER: ${DBUSER}
       POSTGRES_PASS: ${DBPASS}
       POSTGRES_DBNAME: ${DBNAME}
+      POSTGRES_HOST: 'postgres'
+      ADMIN_USER: ${ADMIN_USER}
+      ADMIN_EMAIL: ${ADMIN_EMAIL}
+      ADMIN_PASS: ${ADMIN_PASS}
     restart: unless-stopped
