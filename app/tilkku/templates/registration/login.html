@@ -7,7 +7,9 @@
   <div class="column is-half">
     <div class="box columns">
       <div class="column is-quarter"><img src="{% static 'img/logo.png' %}" style="height: 80px"/></div>
-      <h3 class="column">Kirjaudu sisään</h3>
+      <div class="column">
+        <h3>Kirjaudu sisään</h3>
+      </div>
     </div>
     <form class="box" method="post" action="{% url 'main:login' %}">
       {% csrf_token %}
