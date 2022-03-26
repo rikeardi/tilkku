@@ -10,9 +10,7 @@
       {% csrf_token %}
 
       <label>Käyttäjätunnus</label>
-      {{ form.username }}
       <label>Salasana</label>
-      {{ form.password }}
       <input class="btn" type="submit" value="Kirjaudu" />
       <input type="hidden" name="next" value="{{ next }}" />
     </form>
