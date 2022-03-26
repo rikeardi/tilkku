@@ -1,0 +1,106 @@
+<div class="sidebar">
+    <div class="logo-details">
+        <i class='fa fa-compass icon'></i>
+        <div class="logo_name">Tulospalvelu</div>
+        <div id="btn"><i class='fa fa-bars'></i></div>
+    </div>
+    <ul class="nav-list">
+        <li>
+            <i class='fa fa-search'></i>
+            <input type="text" placeholder="Haku...">
+            <span class="tooltip">Haku</span>
+        </li>
+        <li>
+            <a class="sidebar-link" href="{% url 'main:index' %}">
+                <i class='fa fa-chart-line'></i>
+                <span class="links_name">Tilanne</span>
+            </a>
+            <span class="tooltip">Tilanne</span>
+        </li>
+        <li>
+            <a class="sidebar-link" href="#">
+                <i class='fa fa-users'></i>
+                <span class="links_name">Sarjat</span>
+            </a>
+            <span class="tooltip">Sarjat</span>
+        </li>
+        <li>
+            <a class="sidebar-link" href="{% url 'main:vartiot' %}">
+                <i class='fa fa-child'></i>
+                <span class="links_name">Vartiot</span>
+            </a>
+            <span class="tooltip">Vartiot</span>
+        </li>
+        <li>
+            <a class="sidebar-link" href="#">
+                <i class='fa fa-route'></i>
+                <span class="links_name">Reitit</span>
+            </a>
+            <span class="tooltip">Reitit</span>
+        </li>
+        <li>
+            <a class="sidebar-link" href="#">
+                <i class='fa fa-campground'></i>
+                <span class="links_name">Tehtävät</span>
+            </a>
+            <span class="tooltip">Tehtävät</span>
+        </li>
+        <li>
+            <a class="sidebar-link" href="#">
+                <i class='fa fa-table'></i>
+                <span class="links_name">Tulokset</span>
+            </a>
+            <span class="tooltip">Tulokset</span>
+        </li>
+        <li>
+            <a class="sidebar-link" href="#">
+                <i class='fa fa-house-user'></i>
+                <span class="links_name">Staabi</span>
+            </a>
+            <span class="tooltip">Staabi</span>
+        </li>
+        <li>
+            <a class="sidebar-link" href="#">
+                <i class='fa fa-cog'></i>
+                <span class="links_name">Asetukset</span>
+            </a>
+            <span class="tooltip">Asetukset</span>
+        </li>
+        <li class="profile">
+            <div class="profile-details">
+                <div class="name_job">
+                    <div class="name">{{ user.get_full_name }}</div>
+                    <div class="job">{{ user.titteli }}</div>
+                </div>
+            </div>
+            <a href="{% url 'main:logout' %}">
+                <i class='fa fa-door-open' id="log_out"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+<script>
+  let sidebar = document.querySelector(".sidebar");
+  let closeBtn = document.querySelector("#btn");
+  let searchBtn = document.querySelector(".fa-search");
+
+  closeBtn.addEventListener("click", ()=>{
+    sidebar.classList.toggle("open");
+    menuBtnChange();//calling the function(optional)
+  });
+
+  searchBtn.addEventListener("click", ()=>{ // Sidebar open when you click on the search iocn
+    sidebar.classList.toggle("open");
+    menuBtnChange(); //calling the function(optional)
+  });
+
+  // following are the code to change sidebar button(optional)
+  function menuBtnChange() {
+   if(sidebar.classList.contains("open")){
+     closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");//replacing the iocns class
+   }else {
+     closeBtn.classList.replace("bx-menu-alt-right","bx-menu");//replacing the iocns class
+   }
+  }
+
+</script>

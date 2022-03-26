@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="centerbox" style="width: 400px">
+  <div class="box">
+    <div class="title">Kirjautuminen</div>
+    <div class="content">
+
+    <form method="post" action="{% url 'main:login' %}">
+      {% csrf_token %}
+
+      <label>Käyttäjätunnus</label>
+      {{ form.username }}
+      <label>Salasana</label>
+      {{ form.password }}
+      <input class="btn" type="submit" value="Kirjaudu" />
+      <input type="hidden" name="next" value="{{ next }}" />
+    </form>
+    {% if form.errors %}
+      <p class="formerror">Käyttäjätunnus ja salasana ei täsmää. Yritä uudelleen.</p>
+    {% endif %}
+    {% if next %}
+      {% if user.is_authenticated %}
+        <p class="formerror">Sinulla ei ole käyttöoikeutta tähän sivuun. Ole hyvä ja kirjaudu toisella tunnuksella.</p>
+      {% endif %}
+    {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

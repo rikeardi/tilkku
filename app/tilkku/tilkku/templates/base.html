@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<!-- Created by CodingLab |www.youtube.com/CodingLabYT-->
+<html lang="en" dir="ltr">
+<head>
+    {% block title %}<title>Tilkku</title>{% endblock %}
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
+    <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<div style="background-image: url({% static 'img/background.jpg' %})" class="img"></div>
+{% if user.is_authenticated %}
+{% include 'sidebar.html' %}
+{% endif %}
+
+{% if user.is_authenticated %}
+<section class="home-section">
+{% endif %}
+    {% block content %}{% endblock %}
+{% if user.is_authenticated %}
+</section>
+{% endif %}
+<div id="messages">{% include 'messages.html' %}</div>
+</body>
+</html>

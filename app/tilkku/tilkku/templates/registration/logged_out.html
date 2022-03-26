@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="center" style="width: 400px">
+  <div class="box">
+    <div class="title">Olet kirjautunut ulos</div>
+    <div class="content">
+    <p><a href="{% url 'main:login'%}">Kirjaudu uudestaan sisään.</a></p>
+    </div>
+  </div>
+</div>
+{% endblock %}

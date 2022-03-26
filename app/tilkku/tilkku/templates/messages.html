@@ -1,0 +1,12 @@
+{% block messages %}
+{% if messages %}
+{% for message in messages %}
+<div{% if message.tags %} class="w3-panel w3-red w3-border w3-small w3-round w3-card {{ message.tags }}"{% endif %}><h4>
+    {{ message.tags|title }}</h4><p>{{ message }}</p></div>
+{% endfor %}
+{% endif %}
+<script>
+  $("#messages div").delay(2000).fadeOut('slow')
+</script>
+{% endblock %}
+
