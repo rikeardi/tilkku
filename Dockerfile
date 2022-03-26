@@ -11,5 +11,8 @@ ENV LD_LIBRARY_PATH=/usr/local/lib
 
 WORKDIR /code
 COPY requirements.txt /code/
+
+RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
+
 COPY app/tilkku/ /code/
