@@ -1,10 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="centerbox" style="width: 400px">
-  <div class="box">
-    <div class="title">Kirjautuminen</div>
-    <div class="content">
+  <div class="">
+    <div class="">Kirjautuminen</div>
+    <div class="">
 
     <form method="post" action="{% url 'main:login' %}">
       {% csrf_token %}
@@ -13,7 +12,7 @@
       {{ form.username }}
       <label>Salasana</label>
       {{ form.password }}
-      <input class="button" type="submit" value="Kirjaudu" />
+      <input class="button is-primary" type="submit" value="Kirjaudu" />
       <input type="hidden" name="next" value="{{ next }}" />
     </form>
     {% if form.errors %}
@@ -26,5 +25,5 @@
     {% endif %}
     </div>
   </div>
-</div>
+
 {% endblock %}
