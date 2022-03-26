@@ -4,10 +4,8 @@
 <div class="columns">
   <div class="column is-quarter"></div>
   <div class="column is-half">
-    <div class="">Kirjautuminen</div>
-    <div class="">
-
-    <form method="post" action="{% url 'main:login' %}">
+    <div class="box"><img src="url({% static 'img/logo.png' %}" height="50px"/><h3>Kirjaudu sisään</h3></div>
+    <form class="box" method="post" action="{% url 'main:login' %}">
       {% csrf_token %}
 
       <label>Käyttäjätunnus</label>

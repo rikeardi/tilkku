@@ -22,9 +22,7 @@
 {% if user.is_authenticated %}
 {% include 'sidebar.html' %}
 {% endif %}
-    <div class="">
 {% block content %}{% endblock %}
-    </div>
 {% if user.is_authenticated %}
 
 {% else %}
