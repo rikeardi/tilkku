@@ -1,7 +1,7 @@
 FROM python:3
 
-RUN apt-get install -y libgdal-dev g++ --no-install-recommends && \
-    apt-get clean -y
+RUN apt-get update && apt-get install -y tzdata \
+    libgdal-dev
 
 ENV CPLUS_INCLUDE_PATH=/usr/include/gdal
 ENV C_INCLUDE_PATH=/usr/include/gdal
