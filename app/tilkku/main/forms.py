@@ -8,6 +8,6 @@ class LoginForm(AuthenticationForm):
         super(LoginForm, self).__init__(*args, **kwargs)
 
     username = forms.CharField(widget=forms.TextInput(
-        attrs={'class': 'w3-input w3-margin-bottom'}))
+        attrs={'class': 'input'}))
     password = forms.CharField(widget=forms.PasswordInput(
-        attrs={'class': 'w3-input w3-margin-bottom'}))
+        attrs={'class': 'input'}))
