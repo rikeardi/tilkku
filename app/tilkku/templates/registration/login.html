@@ -5,10 +5,12 @@
 <div class="columns">
   <div class="column is-quarter"></div>
   <div class="column is-half">
-    <div class="box columns">
-      <div class="column is-narrow"><img src="{% static 'img/logo.png' %}" style="height: 80px"/></div>
-      <div class="column">
-        <h1 class="title">Kirjaudu sisään</h1>
+    <div class="box">
+      <div class="columns">
+        <div class="column is-narrow"><img src="{% static 'img/logo.png' %}" style="height: 80px"/></div>
+        <div class="column">
+          <h1 class="title">Kirjaudu sisään</h1>
+        </div>
       </div>
     </div>
     <div class="box">
@@ -22,7 +24,7 @@
         </div>
 
         <div class="field">
-          <label class="label">Käyttäjätunnus</label>
+          <label class="label">Salasana</label>
           <div class="control">
             {{ form.password }}
           </div>
