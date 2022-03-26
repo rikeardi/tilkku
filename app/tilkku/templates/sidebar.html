@@ -11,7 +11,7 @@
             <span class="tooltip">Haku</span>
         </li>
         <li>
-            <a class="sidebar-link" href="{% url 'main:index' %}">
+            <a class="sidebar-link" href="{% url 'index' %}">
                 <i class='fa fa-chart-line'></i>
                 <span class="links_name">Tilanne</span>
             </a>
@@ -25,7 +25,7 @@
             <span class="tooltip">Sarjat</span>
         </li>
         <li>
-            <a class="sidebar-link" href="{% url 'main:vartiot' %}">
+            <a class="sidebar-link" href="{% url 'vartiot' %}">
                 <i class='fa fa-child'></i>
                 <span class="links_name">Vartiot</span>
             </a>
@@ -70,10 +70,9 @@
             <div class="profile-details">
                 <div class="name_job">
                     <div class="name">{{ user.get_full_name }}</div>
-                    <div class="job">{{ user.titteli }}</div>
                 </div>
             </div>
-            <a href="{% url 'main:logout' %}">
+            <a href="{% url 'logout' %}">
                 <i class='fa fa-door-open' id="log_out"></i>
             </a>
         </li>
