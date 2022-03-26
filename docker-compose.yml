@@ -5,7 +5,7 @@ services:
     image: postgres
     environment:
       POSTGRES_USER: ${DBUSER}
-      POSTGRES_PASS: ${DBPASS}
+      POSTGRES_PASSWORD: ${DBPASS}
       POSTGRES_DBNAME: ${DBNAME}
     volumes:
       - ./db/data:/var/lib/postgresql/data
