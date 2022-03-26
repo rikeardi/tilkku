@@ -5,7 +5,7 @@
 <div class="columns">
   <div class="column is-quarter"></div>
   <div class="column is-half">
-    <div class="box"><img src="url({% static 'img/logo.png' %}" height="50px"/><h3>Kirjaudu sisään</h3></div>
+    <div class="box"><img src="{% static 'img/logo.png' %}" height="50px"/><h3>Kirjaudu sisään</h3></div>
     <form class="box" method="post" action="{% url 'main:login' %}">
       {% csrf_token %}
 
@@ -24,7 +24,6 @@
         <p class="formerror">Sinulla ei ole käyttöoikeutta tähän sivuun. Ole hyvä ja kirjaudu toisella tunnuksella.</p>
       {% endif %}
     {% endif %}
-    </div>
   </div>
   <div class="column is-quarter"></div>
 </div>
