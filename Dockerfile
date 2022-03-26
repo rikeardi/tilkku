@@ -15,6 +15,6 @@ COPY requirements.txt /code/
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
-COPY app/tilkku/ /code/
+COPY . /code/
 
 CMD ["/code/runserver.sh"]

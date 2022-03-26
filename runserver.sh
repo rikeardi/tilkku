@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd /code/
+cd /code/app/tilkku
 
 python manage.py migrate --noinput
 python manage.py initadmin
