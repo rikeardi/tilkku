@@ -79,7 +79,7 @@ WSGI_APPLICATION = 'tilkku.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.contrib.gis.db.backend.postgis',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'geodjango',
         'USER': env('POSTGRES_USER'),
     }
