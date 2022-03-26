@@ -20,3 +20,4 @@ services:
       POSTGRES_USER: ${DBUSER}
       POSTGRES_PASS: ${DBPASS}
       POSTGRES_DBNAME: ${DBNAME}
+    restart: unless-stopped
