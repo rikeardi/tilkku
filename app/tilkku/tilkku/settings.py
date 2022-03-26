@@ -129,10 +129,3 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-ADMINS = (
-    (env('ADMIN_USER'), env('ADMIN_EMAIL')),
-)
-ADMIN_USERNAME = env('ADMIN_USER')
-ADMIN_EMAIL = env('ADMIN_EMAIL')
-ADMIN_INITIAL_PASSWORD = env('ADMIN_PASS')

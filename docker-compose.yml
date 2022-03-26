@@ -21,9 +21,9 @@ services:
       POSTGRES_PASS: ${DBPASS}
       POSTGRES_DBNAME: ${DBNAME}
       POSTGRES_HOST: postgres
-      ADMIN_USER: ${ADMIN_USER}
-      ADMIN_EMAIL: ${ADMIN_EMAIL}
-      ADMIN_PASS: ${ADMIN_PASS}
+      DJANGO_SUPERUSER_USERNAME: ${ADMIN_USER}
+      DJANGO_SUPERUSER_EMAIL: ${ADMIN_EMAIL}
+      DJANGO_SUPERUSER_PASSWORD: ${ADMIN_PASS}
     restart: unless-stopped
     depends_on:
       - postgres
