@@ -17,11 +17,9 @@ from django.contrib import admin
 from django.contrib.auth.decorators import login_required
 from django.urls import path, include
 from django.views.generic import TemplateView
-from .. import main, map
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('', login_required(TemplateView.as_view(template_name='front.html')), name='home'),
-    path('main/', main.site.urls),
+    path('', include('main.urls')),
 ]
