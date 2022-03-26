@@ -17,11 +17,9 @@
 {% endif %}
 
 {% if user.is_authenticated %}
-<section class="home-section">
-{% endif %}
-    {% block content %}{% endblock %}
-{% if user.is_authenticated %}
-</section>
+
+{% else %}
+
 {% endif %}
 <div id="messages">{% include 'messages.html' %}</div>
 </body>
