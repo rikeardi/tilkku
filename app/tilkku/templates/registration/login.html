@@ -6,7 +6,7 @@
     <div class="title">Kirjautuminen</div>
     <div class="content">
 
-    <form method="post" action="{% url 'main:login' %}">
+    <form method="post" action="{% url 'login' %}">
       {% csrf_token %}
 
       <label>Käyttäjätunnus</label>
