@@ -12,13 +12,22 @@
       </div>
     </div>
     <div class="box">
-      <form class="box" method="post" action="{% url 'main:login' %}">
+      <form method="post" action="{% url 'main:login' %}">
         {% csrf_token %}
+        <div class="field">
+          <label class="label">Käyttäjätunnus</label>
+          <div class="control">
+            {{ form.username }}
+          </div>
+        </div>
 
-        <label>Käyttäjätunnus</label>
-        {{ form.username }}
-        <label>Salasana</label>
-        {{ form.password }}
+        <div class="field">
+          <label class="label">Käyttäjätunnus</label>
+          <div class="control">
+            {{ form.password }}
+          </div>
+        </div>
+
         <input class="button is-primary" type="submit" value="Kirjaudu" />
         <input type="hidden" name="next" value="{{ next }}" />
       </form>
