@@ -7,5 +7,5 @@ from . import views, forms
 
 app_name = 'main'
 urlpatterns = [
-    path('', login_required(TemplateView.as_view(template_name='front.html')), name='home'),
+    path('', views.home, name='home'),
 ]
