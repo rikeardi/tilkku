@@ -1,64 +1,17 @@
 <div class="sidebar">
     <div class="logo-details">
         <i class='fa fa-compass icon'></i>
-        <div class="logo_name">Tulospalvelu</div>
+        <div class="logo_name"></div>
         <div id="btn"><i class='fa fa-bars'></i></div>
     </div>
     <ul class="nav-list">
-        <li>
-            <i class='fa fa-search'></i>
-            <input type="text" placeholder="Haku...">
-            <span class="tooltip">Haku</span>
-        </li>
-        <li>
-            <a class="sidebar-link" href="{% url 'main:home' %}">
-                <i class='fa fa-chart-line'></i>
-                <span class="links_name">Tilanne</span>
-            </a>
-            <span class="tooltip">Tilanne</span>
-        </li>
-        <li>
-            <a class="sidebar-link" href="#">
-                <i class='fa fa-route'></i>
-                <span class="links_name">Reitit</span>
-            </a>
-            <span class="tooltip">Reitit</span>
-        </li>
-        <li>
-            <a class="sidebar-link" href="#">
-                <i class='fa fa-campground'></i>
-                <span class="links_name">Tehtävät</span>
-            </a>
-            <span class="tooltip">Tehtävät</span>
-        </li>
-        <li>
-            <a class="sidebar-link" href="#">
-                <i class='fa fa-table'></i>
-                <span class="links_name">Tulokset</span>
-            </a>
-            <span class="tooltip">Tulokset</span>
-        </li>
-        <li>
-            <a class="sidebar-link" href="#">
-                <i class='fa fa-house-user'></i>
-                <span class="links_name">Staabi</span>
-            </a>
-            <span class="tooltip">Staabi</span>
-        </li>
-        <li>
-            <a class="sidebar-link" href="#">
-                <i class='fa fa-cog'></i>
-                <span class="links_name">Asetukset</span>
-            </a>
-            <span class="tooltip">Asetukset</span>
-        </li>
         <li class="profile">
             <div class="profile-details">
                 <div class="name_job">
                     <div class="name">{{ user.get_full_name }}</div>
                 </div>
             </div>
-            <a href="{% url 'logout' %}">
+            <a href="{% url 'main:logout' %}">
                 <i class='fa fa-door-open' id="log_out"></i>
             </a>
         </li>
