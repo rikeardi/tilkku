@@ -17,4 +17,5 @@ RUN pip install -r requirements.txt
 
 COPY . /code/
 
+RUN chmod +x runserver.sh
 CMD ["/code/runserver.sh"]
