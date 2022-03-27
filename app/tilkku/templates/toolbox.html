@@ -1,5 +1,21 @@
 {% block content %}
 <div class="buttons has-addons is-right">
-    <button class="button"><i class="fas fa-user"></i></button>
+    <div class="dropdown is-hoverable">
+      <div class="dropdown-trigger">
+        <button class="button" aria-haspopup="true" aria-controls="dropdown-menu4">
+          <i class="fas fa-user"></i>
+          <span class="icon is-small">
+            <i class="fas fa-angle-down" aria-hidden="true"></i>
+          </span>
+        </button>
+      </div>
+      <div class="dropdown-menu" id="dropdown-menu4" role="menu">
+        <div class="dropdown-content">
+            <a href="#" class="dropdown-item"></a>
+            <hr class="dropdown-divider">
+            <a href="{% url 'main:logout' %}" class="dropdown-item">Kirjaudu ulos</a>
+        </div>
+      </div>
+    </div>
 </div>
 {% endblock %}
