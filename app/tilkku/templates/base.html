@@ -19,9 +19,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-<section class="section">
-<div style="background-image: url({% static 'img/background.jpg' %})" class="img"></div>
-
 {% if user.is_authenticated %}
 {% include 'sidebar.html' %}
 {% endif %}
@@ -32,6 +29,5 @@
 
 {% endif %}
 <div id="messages">{% include 'messages.html' %}</div>
-</section>
 </body>
 </html>
