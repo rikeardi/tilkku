@@ -20,7 +20,6 @@
 </head>
 <body>
 {% if user.is_authenticated %}
-{% include 'sidebar.html' %}
 {% endif %}
 {% block content %}{% endblock %}
 {% if user.is_authenticated %}
