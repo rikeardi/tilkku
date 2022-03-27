@@ -11,6 +11,11 @@ services:
     volumes:
       - ./db/data:/var/lib/postgresql/data
 
+  redis:
+    container_name: redis
+    image: redis
+    restart: unless-stopped
+
   web:
     container_name: web
     build: .
@@ -28,3 +33,4 @@ services:
     restart: unless-stopped
     depends_on:
       - postgres
+      - redis

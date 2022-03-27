@@ -94,6 +94,16 @@ DATABASES = {
     }
 }
 
+CHANNEL_LAYERS = {
+   "default": {
+      "BACKEND": "asgi_redis.RedisChannelLayer",
+      "CONFIG": {
+         "hosts": [("redis", 6379)],
+      },
+      "ROUTING": "routing.application",
+   }
+}
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
