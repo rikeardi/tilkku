@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'djgeojson',
     'main.apps.MainConfig',
     'map.apps.MapConfig',
+    'chat.apps.ChatConfig',
 ]
 
 MIDDLEWARE = [
@@ -75,7 +76,8 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'tilkku.wsgi.application'
+ASGI_APPLICATION = 'tilkku.asgi.application'
+#WSGI_APPLICATION = 'tilkku.wsgi.application'
 
 
 # Database

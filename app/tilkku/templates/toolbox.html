@@ -8,9 +8,13 @@
       </div>
       <div class="dropdown-menu" id="asetusmenu" role="menu">
         <div class="dropdown-content">
-            <a href="#" class="dropdown-item"></a>
+            <a href="#" class="dropdown-item">Taustakartta</a>
+            <a href="#" class="dropdown-item">Kerrokset</a>
+            <a href="#" class="dropdown-item">Merkinnät</a>
+            {% if user.is_superuser %}
             <hr class="dropdown-divider">
-            <a href="#" class="dropdown-item"></a>
+            <a href="{% url 'admin' %}" class="dropdown-item">Hallinta</a>
+            {% endif %}
         </div>
       </div>
     </div>
