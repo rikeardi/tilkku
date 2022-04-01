@@ -1,16 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
 <div id="map" style="width: 100%; height: 100%; position: fixed; top: 0; left: 0;"></div>
-<div class="columns" style="height: 100%;">
+<div class="columns" style="height: 100%; margin: 0px;">
     <div class="column is-two-thirds">
-
-    </div>
-    <div class="column is-third" style="z-index: 2;">
-        <div class="p-3">
+        <div class="p-3 is-right" style="width: 80px;">
             {% include 'toolbox.html' %}
         </div>
-        <div class="box">
-            <div class="tabs is-boxed">
+    </div>
+    <div class="column is-third" style="z-index: 2;">
+        <div class="box p-0">
+            <div class="tabs is-boxed is-small" style="margin-bottom: 0px;">
                 <ul>
                     <li>
                         <a><span>Tapahtumat</span></a>
@@ -20,7 +19,7 @@
                     </li>
                 </ul>
             </div>
-            <div id="tools-content">
+            <div class="content p-4" id="tools-content" style="height: calc(100% - 30px);">
                 <div id="tools-events">
                     {% include 'events.html' %}
                 </div>
