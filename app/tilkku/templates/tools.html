@@ -1,0 +1,20 @@
+{% block content %}
+<div class="tabs is-boxed is-small" style="margin-bottom: 0px;">
+    <ul>
+        <li>
+            <a><span>Tapahtumat</span></a>
+        </li>
+        <li>
+            <a><span>Keskustelu</span></a>
+        </li>
+    </ul>
+</div>
+<div class="content p-4" id="tools-content" style="height: calc(100% - 30px);">
+    <div id="tools-events">
+        {% include 'events.html' %}
+    </div>
+    <div id="tools-chat" style="display: none;">
+        {% include 'chat.html' %}
+    </div>
+</div>
+{% endblock %}

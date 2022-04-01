@@ -9,29 +9,12 @@
     </div>
     <div class="column is-third" style="z-index: 2;">
         <div class="box p-0" style="height: 100%;">
-            <div class="tabs is-boxed is-small" style="margin-bottom: 0px;">
-                <ul>
-                    <li>
-                        <a><span>Tapahtumat</span></a>
-                    </li>
-                    <li>
-                        <a><span>Keskustelu</span></a>
-                    </li>
-                </ul>
-            </div>
-            <div class="content p-4" id="tools-content" style="height: calc(100% - 30px);">
-                <div id="tools-events">
-                    {% include 'events.html' %}
-                </div>
-                <div id="tools-chat" style="display: none;">
-                    {% include 'chat.html' %}
-                </div>
-            </div>
+            {% include 'tools.html' %}
         </div>
     </div>
 </div>
 <script>
-var map = L.map('map').setView([61.205, 25.121], 16);
+var map = L.map('map').setView([61.205, 25.130], 16);
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
