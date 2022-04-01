@@ -1,13 +1,13 @@
 {% block content %}
 <div class="tabs is-boxed is-small" style="margin-bottom: 0px;">
     <ul>
-        <li class="is-active">
+        <li>
             <a>
                 <span class="icon"><i class="fas fa-memo"></i></span>
                 <span>Tapahtumat</span>
             </a>
         </li>
-        <li>
+        <li class="is-active">
             <a>
                 <span class="icon"><i class="fas fa-comments"></i></span>
                 <span>Keskustelu</span>
@@ -22,13 +22,13 @@
     </ul>
 </div>
 <div class="content p-4" id="tools-content" style="height: calc(100% - 30px);">
-    <div id="tools-events">
+    <div id="tools-events" style="height: 100%; display: none;">
         {% include 'events.html' %}
     </div>
-    <div id="tools-chat" style="display: none;">
+    <div id="tools-chat" style="height: 100%;">
         {% include 'chat.html' %}
     </div>
-    <div id="tools-sites" style="display: none;">
+    <div id="tools-sites" style="height: 100%; display: none;">
         {% include 'sites.html' %}
     </div>
 </div>
