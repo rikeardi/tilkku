@@ -1,8 +1,8 @@
 {% block content %}
-<div>
-    <div class="dropdown is-hoverable is-fullwidth is-right">
-      <div class="dropdown-trigger is-fullwidth">
-        <button class="button m-0 is-small is-fullwidth" aria-haspopup="true" aria-controls="asetusmenu">
+<div style="width: 100%;">
+    <div class="dropdown is-hoverable is-right" style="width: 100%;">
+      <div class="dropdown-trigger" style="width: 100%;">
+        <button class="button m-0 is-small" style="width: 100%;" aria-haspopup="true" aria-controls="asetusmenu">
           <i class="fas fa-cog"></i>
         </button>
       </div>
@@ -18,9 +18,9 @@
         </div>
       </div>
     </div>
-    <div class="dropdown is-hoverable is-fullwidth is-right">
-      <div class="dropdown-trigger">
-        <button class="button m-0 is-small is-fullwidth" aria-haspopup="true" aria-controls="kayttajamenu">
+    <div class="dropdown is-hoverable is-right" style="width: 100%;">
+      <div class="dropdown-trigger" style="width: 100%;">
+        <button class="button m-0 is-small" style="width: 100%;" aria-haspopup="true" aria-controls="kayttajamenu">
           <i class="fas fa-user"></i>
         </button>
       </div>
@@ -31,6 +31,9 @@
             <a href="{% url 'main:logout' %}" class="dropdown-item">Kirjaudu ulos</a>
         </div>
       </div>
+    </div>
+    <div class="button m-0 is-small" style="width: 100%;">
+        <i class="fas fa-house"></i>
     </div>
 </div>
 {% endblock %}
