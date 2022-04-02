@@ -6,5 +6,6 @@ from django.shortcuts import render
 @login_required
 def home(request):
     context = {
+
     }
     return render(request, "front.html", context)

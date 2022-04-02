@@ -89,6 +89,8 @@
 <input id="chat-input" class="input" type="text" />
 
 <script>
+var user = {{ user }};
+
 const chatSocket = new WebSocket(
     'ws://'
     + window.location.host
