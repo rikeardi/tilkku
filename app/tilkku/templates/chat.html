@@ -21,11 +21,6 @@
     overflow: hidden;
     display: flex;
 }
-.other .msg {
-    order: 1;
-    border-top-left-radius: 0px;
-    box-shadow: -1px 2px 0px #D4D4D4;
-}
 .other:before {
     content: "";
     position: relative;
@@ -45,19 +40,22 @@
 .self .msg {
     order: 1;
     border-bottom-right-radius: 0px;
-    box-shadow: 1px 2px 0px #D4D4D4;
+    background-color: #3e8ed0;
+    color: #fff;
+}
+.other .msg {
+    order: 1;
+    border-bottom-left-radius: 0px;
+    background-color: #eff5fb;
+    color: #296fa8;
 }
 .msg {
-    background: white;
     min-width: 50px;
-    padding: 10px;
+    padding: 0.5rem !important;
     border-radius: 2px;
-    box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.07);
-}
-.msg p {
-    font-size: 0.8rem;
-    margin: 0 0 0.2rem 0;
-    color: #777;
+    font-size: .75rem !important;
+    box-shadow: 3px;
+    border-radius: 4px;
 }
 .msg time {
     font-size: 0.7rem;
