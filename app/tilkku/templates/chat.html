@@ -89,8 +89,9 @@
 <input id="chat-input" class="input" type="text" />
 
 <script>
-var user = "{{ user }}";
-console.log(user);
+var username = "{{ user }}";
+var firstName = "{{ user.first_name }}";
+var lastName = "{{ user.last_name }}";
 
 const chatSocket = new WebSocket(
     'ws://'
@@ -115,8 +116,14 @@ $('#chat-input').keyup(function(e) {
 
 function chat_send() {
     const message = $('#chat-input').val();
+    var name = user;
+    if(firstName != "" && lastName != "") {
+        name = firstName + " " + lastName;
+    }
     chatSocket.send(JSON.stringify({
-        'message': message
+        'message': message,
+        'sender': name,
+        'user': user
     }));
     $('#chat-input').val('');
 };
