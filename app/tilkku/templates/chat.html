@@ -102,7 +102,7 @@ const chatSocket = new WebSocket(
 chatSocket.onmessage = function(e) {
     const data = JSON.parse(e.data);
 
-    if(data.user == user) {
+    if(data.user == username) {
         elem = "<li class='self'>\n<div class='msg'>\n<p>" + data.message + "</p>\n<time>" + data.time + "</time>\n</div>\n</li>";
     } else {
         elem = "<li class='other'>\n<div class='msg'>\n<span class='name'>" + data.sender + "</span>\n<p>" + data.message + "</p>\n<time>" + data.time + "</time>\n</div>\n</li>";
