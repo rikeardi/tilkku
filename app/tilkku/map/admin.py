@@ -3,10 +3,8 @@ from .models import *
 
 
 # Register your models here.
-admin.site.register(
-    LayerType,
-    MapStyle,
-    Layer,
-    Area,
-    Marker,
-)
+admin.site.register(LayerType)
+admin.site.register(MapStyle)
+admin.site.register(Layer)
+admin.site.register(Area)
+admin.site.register(Marker)
