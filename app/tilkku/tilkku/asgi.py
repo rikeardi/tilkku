@@ -12,7 +12,7 @@ import os
 from channels.auth import AuthMiddlewareStack
 from django.core.asgi import get_asgi_application
 from channels.routing import ProtocolTypeRouter, URLRouter
-import chat.routing
+import app.tilkku.chat.routing as routing
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tilkku.settings')
 
@@ -20,7 +20,7 @@ application = ProtocolTypeRouter({
     "http": get_asgi_application(),
     "websocket": AuthMiddlewareStack(
         URLRouter(
-            chat.routing.websocket_urlpatterns
+            routing.websocket_urlpatterns
         )
     )
 })
