@@ -97,11 +97,10 @@ DATABASES = {
 
 CHANNEL_LAYERS = {
    "default": {
-      "BACKEND": "asgi_redis.RedisChannelLayer",
+      "BACKEND": "channels_redis.core.RedisChannelLayer",
       "CONFIG": {
          "hosts": [("redis", 6379)],
       },
-      "ROUTING": "routing.application",
    }
 }
 
