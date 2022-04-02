@@ -89,7 +89,7 @@
 <input id="chat-input" class="input" type="text" />
 
 <script>
-var user = "{% json.dumps(user) %}";
+var user = "{{ user }}";
 console.log(user);
 
 const chatSocket = new WebSocket(
