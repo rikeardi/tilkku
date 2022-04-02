@@ -1,4 +1,5 @@
 import json
+from datetime import datetime
 from channels.generic.websocket import AsyncWebsocketConsumer
 
 
@@ -27,13 +28,17 @@ class ChatConsumer(AsyncWebsocketConsumer):
         sender = text_data_json['sender']
         user = text_data_json['user']
 
+        now = datetime.now()
+        timestamp = now.strftime("%H:%M")
+
         await self.channel_layer.group_send(
             self.room_group_name,
             {
                 'type': 'chat_message',
                 'message': message,
                 'sender': sender,
-                'user': user
+                'user': user,
+                'time': timestamp
             }
         )
 
@@ -41,10 +46,12 @@ class ChatConsumer(AsyncWebsocketConsumer):
         message = event['message']
         sender = event['sender']
         user = event['user']
+        time = event['time']
 
         # Send message to WebSocket
         await self.send(text_data=json.dumps({
             'message': message,
             'sender': sender,
-            'user': user
+            'user': user,
+            'time': time
         }))

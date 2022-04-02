@@ -70,8 +70,8 @@
 
 </style>
 <div class="chat-window">
-    <ol class="chat">
-        <li class="other">
+    <ol id="chat-box" class="chat">
+        <!--<li class="other">
             <div class="msg">
                 <span class="name">Pena</span>
                 <p>Moro!</p>
@@ -83,7 +83,7 @@
                 <p>No moi!</p>
                 <time>10:01</time>
             </div>
-        </li>
+        </li>-->
     </ol>
 </div>
 <input id="chat-input" class="input" type="text" />
@@ -101,7 +101,14 @@ const chatSocket = new WebSocket(
 
 chatSocket.onmessage = function(e) {
     const data = JSON.parse(e.data);
-    console.log(data);
+
+    if(data.user == user) {
+        elem = "<li class='self'>\n<div class='msg'>\n<p>" + data.message + "</p>\n<time>" + data.time + "</time>\n</div>\n</li>";
+    } else {
+        elem = "<li class='other'>\n<div class='msg'>\n<span class='name'>" + data.sender + "</span>\n<p>" + data.message + "</p>\n<time>" + data.time + "</time>\n</div>\n</li>";
+    }
+
+    $("#chat-box").append(elem);
 }
 
 chatSocket.onclose = function(e) {
