@@ -150,11 +150,11 @@ $('#chat-input').keyup(function(e) {
 });
 
 function chat_send() {
-    const message = $('#chat-input').value();
+    const message = $('#chat-input').val();
     chatSocket.send(JSON.stringify({
         'message': message
     }));
-    $('#chat-input').value('');
+    $('#chat-input').val('');
 };
 </script>
 {% endblock %}
