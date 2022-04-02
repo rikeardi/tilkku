@@ -118,6 +118,8 @@ chatSocket.onmessage = function(e) {
     if(!$("#front-tools").is(":visible")) {
         $("#front-chat-btn").addClass("newmsg");
     }
+
+    $("#chat-box").stop().animate({ scrollTop: $("#chat-box")[0].scrollHeight}, 1000);
 }
 
 chatSocket.onclose = function(e) {
