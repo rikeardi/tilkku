@@ -47,10 +47,10 @@
     </div>
 
     <div id="front-toolsmenu" style="display: none;">
-        <button class="button m-0 is-small" style="width: 100%;" title="Tapahtumat" onclick="">
-            <i id="front-event-btn" class="fas fa-book"></i>
+        <button class="button m-0 is-small" style="width: 100%;" title="Tapahtumat" onclick="toolbox_events();">
+            <i id="front-events-btn" class="fas fa-book"></i>
         </button>
-        <button class="button m-0 is-small" style="width: 100%;" title="Keskustelu" onclick="">
+        <button class="button m-0 is-small" style="width: 100%;" title="Keskustelu" onclick="toolbox_chat();">
             <i id="front-chat-btn" class="fas fa-comments"></i>
         </button>
     </div>
@@ -69,6 +69,18 @@ function toolbox_menu() {
 
 function toolbox_center() {
     map.setView(home, home_zoom);
+}
+
+function toolbox_chat() {
+    $("#front-chat-btn").removeClass("newmsg");
+    toolbox_menu();
+    tools_select('chat');
+}
+
+function toolbox_events() {
+    $("#front-events-btn").removeClass("newmsg");
+    toolbox_menu();
+    tools_select('events');
 }
 
 </script>
