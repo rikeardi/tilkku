@@ -119,7 +119,7 @@ chatSocket.onmessage = function(e) {
         $("#front-chat-btn").addClass("newmsg");
     }
 
-    $("#chat-window").stop().animate({ scrollTop: $("#chat-window")[0].scrollHeight}, 1000);
+    $("#chat-window").stop().animate({ scrollTop: $("#chat-window").scrollHeight}, 1000);
 }
 
 chatSocket.onclose = function(e) {
