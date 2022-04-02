@@ -53,6 +53,9 @@
         <button class="button m-0 is-small" style="width: 100%;" title="Keskustelu" onclick="toolbox_chat();">
             <i id="front-chat-btn" class="fas fa-comments"></i>
         </button>
+        <button class="button m-0 is-small" style="width: 100%;" title="Paikat" onclick="toolbox_sites();">
+            <i id="front-sites-btn" class="fas fa-thumbtack"></i>
+        </button>
     </div>
 </div>
 
@@ -81,6 +84,12 @@ function toolbox_events() {
     $("#front-events-btn").removeClass("newmsg");
     toolbox_menu();
     tools_select('events');
+}
+
+function toolbox_sites() {
+    $("#front-sites-btn").removeClass("newmsg");
+    toolbox_menu();
+    tools_select('sites');
 }
 
 </script>
