@@ -1,5 +1,8 @@
 {% block content %}
 <div style="width: 100%;">
+    <button class="button m-0 is-small" style="width: 100%;" title="Valikko" onclick="toolbox_menu();">
+        <i class="fas fa-bars"></i>
+    </button>
     <div class="dropdown is-hoverable is-right" style="width: 100%;" title="Asetukset">
       <div class="dropdown-trigger" style="width: 100%;">
         <button class="button m-0 is-small" style="width: 100%;" aria-haspopup="true" aria-controls="asetusmenu">
@@ -38,6 +41,10 @@
 </div>
 
 <script>
+
+function toolbox_menu() {
+    $("#front-tools").toggle();
+}
 
 function toolbox_center() {
     map.setView(home, home_zoom);
