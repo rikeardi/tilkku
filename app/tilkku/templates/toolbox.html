@@ -1,49 +1,65 @@
 {% block content %}
 <div style="width: 100%;">
-    <button class="button m-0 is-small" style="width: 100%;" title="Valikko" onclick="toolbox_menu();">
-        <i class="fas fa-bars"></i>
-    </button>
-    <div class="dropdown is-hoverable is-right" style="width: 100%;" title="Asetukset">
-      <div class="dropdown-trigger" style="width: 100%;">
-        <button class="button m-0 is-small" style="width: 100%;" aria-haspopup="true" aria-controls="asetusmenu">
-          <i class="fas fa-cog"></i>
+    <div style="margin-bottom: 20px;">
+        <button class="button m-0 is-small" style="width: 100%;" title="Valikko" onclick="toolbox_menu();">
+            <i class="fas fa-bars"></i>
         </button>
-      </div>
-      <div class="dropdown-menu" id="asetusmenu" role="menu">
-        <div class="dropdown-content">
-            <a href="#" class="dropdown-item">Taustakartta</a>
-            <a href="#" class="dropdown-item">Kerrokset</a>
-            <a href="#" class="dropdown-item">Merkinnät</a>
-            {% if user.is_superuser %}
-            <hr class="dropdown-divider">
-            <a href="{% url 'admin:index' %}" class="dropdown-item">Hallinta</a>
-            {% endif %}
+        <div class="dropdown is-hoverable is-right" style="width: 100%;" title="Asetukset">
+          <div class="dropdown-trigger" style="width: 100%;">
+            <button class="button m-0 is-small" style="width: 100%;" aria-haspopup="true" aria-controls="asetusmenu">
+              <i class="fas fa-cog"></i>
+            </button>
+          </div>
+          <div class="dropdown-menu" id="asetusmenu" role="menu">
+            <div class="dropdown-content">
+                <a href="#" class="dropdown-item">Taustakartta</a>
+                <a href="#" class="dropdown-item">Kerrokset</a>
+                <a href="#" class="dropdown-item">Merkinnät</a>
+                {% if user.is_superuser %}
+                <hr class="dropdown-divider">
+                <a href="{% url 'admin:index' %}" class="dropdown-item">Hallinta</a>
+                {% endif %}
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-    <div class="dropdown is-hoverable is-right" style="width: 100%;" title="Käyttäjä">
-      <div class="dropdown-trigger" style="width: 100%;">
-        <button class="button m-0 is-small" style="width: 100%;" aria-haspopup="true" aria-controls="kayttajamenu">
-          <i class="fas fa-user"></i>
+        <div class="dropdown is-hoverable is-right" style="width: 100%;" title="Käyttäjä">
+          <div class="dropdown-trigger" style="width: 100%;">
+            <button class="button m-0 is-small" style="width: 100%;" aria-haspopup="true" aria-controls="kayttajamenu">
+              <i class="fas fa-user"></i>
+            </button>
+          </div>
+          <div class="dropdown-menu" id="kayttajamenu" role="menu">
+            <div class="dropdown-content">
+                <a href="#" class="dropdown-item"></a>
+                <hr class="dropdown-divider">
+                <a href="{% url 'main:logout' %}" class="dropdown-item">Kirjaudu ulos</a>
+            </div>
+          </div>
+        </div>
+        <button class="button m-0 is-small" style="width: 100%;" title="Keskitä" onclick="toolbox_center();">
+            <i class="fas fa-home"></i>
         </button>
-      </div>
-      <div class="dropdown-menu" id="kayttajamenu" role="menu">
-        <div class="dropdown-content">
-            <a href="#" class="dropdown-item"></a>
-            <hr class="dropdown-divider">
-            <a href="{% url 'main:logout' %}" class="dropdown-item">Kirjaudu ulos</a>
-        </div>
-      </div>
     </div>
-    <button class="button m-0 is-small" style="width: 100%;" title="Keskitä" onclick="toolbox_center();">
-        <i class="fas fa-home"></i>
-    </button>
+
+    <div id="front-toolsmenu" style="display: none;">
+        <button class="button m-0 is-small" style="width: 100%;" title="Tapahtumat" onclick="">
+            <i class="fas fa-book"></i>
+        </button>
+        <button class="button m-0 is-small" style="width: 100%;" title="Keskustelu" onclick="">
+            <i class="fas fa-comments"></i>
+        </button>
+    </div>
 </div>
 
 <script>
 
 function toolbox_menu() {
     $("#front-tools").toggle();
+    if($("#front-tools").is(":visible")) {
+        $("#front-toolsmenu").hide();
+    } else {
+        $("#front-toolsmenu").show();
+    }
 }
 
 function toolbox_center() {
