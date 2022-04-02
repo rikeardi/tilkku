@@ -143,11 +143,11 @@ chatSocket.onclose = function(e) {
     console.error('Chat socket closed unexpectedly');
 };
 
-$('#chat-input').onkeyup = function(e) {
+$('#chat-input').keyup(function(e) {
     if (e.keyCode === 13) {  // enter, return
         chat_send();
     }
-};
+});
 
 function chat_send() {
     const message = $('#chat-input').value();
