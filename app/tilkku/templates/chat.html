@@ -1,11 +1,19 @@
 {% block content %}
 <style>
+.chat-window {
+    height: calc(100% - 50px);
+    overflow-y: auto;
+    margin-bottom: 5px;
+    position: relative;
+}
 .chat {
     list-style: none;
     background: none;
     position: absolute;
     bottom: 0;
     width: 100%;
+    height: auto;
+    max-height: 100%;
     margin: 0 !important;
 }
 .chat li {
@@ -64,7 +72,7 @@
 }
 
 </style>
-<div class="content" style="height: calc(100% - 50px); overflow-y: auto; margin-bottom: 5px; position: relative;">
+<div class="chat-window">
     <!-- <div class="notification is-success is-light is-size-7" style="margin-right: 20px; padding: 10px; margin-bottom: 10px;">
         <strong>Mikkihiiri</strong><br/>
         Ootko sä siellä?
@@ -73,7 +81,7 @@
         <strong>Sinä</strong><br/>
         No olen olen. Mitä nyt?
     </div>-->
-    <div style="position: absolute; bottom: 0; width: 100%; max-height: 100%;">
+    <!--<div style="position: absolute; bottom: 0; width: 100%; max-height: 100%;">-->
         <ol class="chat">
             <li class="other">
                 <div class="msg">
@@ -124,7 +132,7 @@
                 </div>
             </li>
         </ol>
-    </div>
+    <!--</div>-->
 </div>
 <input class="input" type="text" />
 {% endblock %}
