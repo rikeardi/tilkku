@@ -1,20 +1,20 @@
 {% block content %}
 <div class="tabs is-boxed is-small" style="margin-bottom: 0px;">
     <ul>
-        <li>
-            <a>
+        <li id="tools-menu-events" class="tools-menu">
+            <a href="#" onclick="tools_select('events')">
                 <span class="icon"><i class="fas fa-book"></i></span>
                 <span>Tapahtumat</span>
             </a>
         </li>
-        <li class="is-active">
-            <a>
+        <li id="tools-menu-chat" class="tools-menu is-active">
+            <a href="#" onclick="tools_select('chat')">
                 <span class="icon"><i class="fas fa-comments"></i></span>
                 <span>Keskustelu</span>
             </a>
         </li>
-        <li>
-            <a>
+        <li id="tools-menu-sites" class="tools-menu">
+            <a href="#" onclick="tools_select('sites')">
                 <span class="icon"><i class="fas fa-location"></i></span>
                 <span>Paikat</span>
             </a>
@@ -22,18 +22,23 @@
     </ul>
 </div>
 <div class="content p-4" id="tools-content" style="height: calc(100% - 30px);">
-    <div id="tools-events" style="height: 100%; display: none;">
+    <div id="tools-events" class="tools-box" style="height: 100%; display: none;">
         {% include 'events.html' %}
     </div>
-    <div id="tools-chat" style="height: 100%;">
+    <div id="tools-chat" class="tools-box" style="height: 100%;">
         {% include 'chat.html' %}
     </div>
-    <div id="tools-sites" style="height: 100%; display: none;">
+    <div id="tools-sites" class="tools-box" style="height: 100%; display: none;">
         {% include 'sites.html' %}
     </div>
 </div>
 
 <script>
-
+function tools_select(tool) {
+    $(".tools-menu").removeClass('is-active');
+    $(".tools-box").hide();
+    $("#tools-menu-" + tool).addClass('is-active');
+    $("#tools-" + tool).show();
+}
 </script>
 {% endblock %}
