@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'channels',
     'djgeojson',
     'main.apps.MainConfig',
     'map.apps.MapConfig',

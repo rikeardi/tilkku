@@ -117,4 +117,38 @@
     </ol>
 </div>
 <input class="input" type="text" />
+
+<script>
+const chatSocket = new WebSocket(
+    'ws://'
+    + window.location.host
+    + '/ws/chat/'
+    + roomName
+    + '/'
+);
+
+chatSocket.onmessage = function(e) {
+    const data = JSON.parse(e.data);
+    console.log(data);
+}
+
+chatSocket.onclose = function(e) {
+    console.error('Chat socket closed unexpectedly');
+};
+
+$('#chat-message-input').onkeyup = function(e) {
+    if (e.keyCode === 13) {  // enter, return
+        $('#chat-message-submit').click();
+    }
+};
+
+$('#chat-message-submit').onclick = function(e) {
+    const messageInputDom = $('#chat-message-input');
+    const message = messageInputDom.value;
+    chatSocket.send(JSON.stringify({
+        'message': message
+    }));
+    messageInputDom.value = '';
+};
+</script>
 {% endblock %}
