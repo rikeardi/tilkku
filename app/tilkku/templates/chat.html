@@ -109,6 +109,10 @@ chatSocket.onmessage = function(e) {
     }
 
     $("#chat-box").append(elem);
+
+    if(!$("#front-tools").is(":visible")) {
+        $("#front-chat-btn").addClass("newmsg");
+    }
 }
 
 chatSocket.onclose = function(e) {
