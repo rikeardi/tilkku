@@ -32,8 +32,16 @@
         </div>
       </div>
     </div>
-    <div class="button m-0 is-small" style="width: 100%;" title="Keskitä">
+    <button class="button m-0 is-small" style="width: 100%;" title="Keskitä" onclick="toolbox_center();">
         <i class="fas fa-home"></i>
-    </div>
+    </button>
 </div>
+
+<script>
+
+function toolbox_center() {
+    map.setView(home, home_zoom);
+}
+
+</script>
 {% endblock %}
