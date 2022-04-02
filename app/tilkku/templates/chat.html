@@ -116,14 +116,14 @@ $('#chat-input').keyup(function(e) {
 
 function chat_send() {
     const message = $('#chat-input').val();
-    var name = user;
+    var name = username;
     if(firstName != "" && lastName != "") {
         name = firstName + " " + lastName;
     }
     chatSocket.send(JSON.stringify({
         'message': message,
         'sender': name,
-        'user': user
+        'user': username
     }));
     $('#chat-input').val('');
 };
