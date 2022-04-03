@@ -14,6 +14,8 @@
     </div>
 </div>
 <script>
+
+
 var home = [61.205, 25.130];
 var home_zoom = 15;
 var map = L.map('map').setView(home, home_zoom);
@@ -21,6 +23,10 @@ var map = L.map('map').setView(home, home_zoom);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
+
+map.on("moveend", function () {
+  console.log(map.getCenter().toString());
+});
 
 var kerros = {
   "type": "FeatureCollection",
