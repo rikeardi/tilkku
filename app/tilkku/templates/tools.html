@@ -40,6 +40,10 @@ function tools_select(tool) {
     $("#tools-menu-" + tool).addClass('is-active');
     $("#tools-" + tool).show();
     $("#front-" + tool + "-btn").removeClass("newmsg");
+    settings.tool = tool;
+    refresh_settings();
 }
+
+tools_select(settings.tool);
 </script>
 {% endblock %}

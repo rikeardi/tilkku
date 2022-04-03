@@ -47,13 +47,13 @@
     </div>
 
     <div id="front-toolsmenu" style="display: none;">
-        <button class="button m-0 is-small" style="width: 100%;" title="Tapahtumat" onclick="toolbox_events();">
+        <button class="button m-0 is-small" style="width: 100%;" title="Tapahtumat" onclick="toolbox_tool('events');">
             <i id="front-events-btn" class="fas fa-book"></i>
         </button>
-        <button class="button m-0 is-small" style="width: 100%;" title="Keskustelu" onclick="toolbox_chat();">
+        <button class="button m-0 is-small" style="width: 100%;" title="Keskustelu" onclick="toolbox_tool('chat');">
             <i id="front-chat-btn" class="fas fa-comments"></i>
         </button>
-        <button class="button m-0 is-small" style="width: 100%;" title="Paikat" onclick="toolbox_sites();">
+        <button class="button m-0 is-small" style="width: 100%;" title="Paikat" onclick="toolbox_tool('sites');">
             <i id="front-sites-btn" class="fas fa-thumbtack"></i>
         </button>
     </div>
@@ -65,10 +65,10 @@ function toolbox_menu() {
     $("#front-tools").toggle();
     if($("#front-tools").is(":visible")) {
         $("#front-toolsmenu").hide();
-        settings.menu = "hidden";
+        settings.menu = "visible";
     } else {
         $("#front-toolsmenu").show();
-        settings.menu = "visible";
+        settings.menu = "hidden";
     }
     refresh_settings();
 }
@@ -77,31 +77,14 @@ function toolbox_center() {
     map.setView(home, home_zoom);
 }
 
-function toolbox_chat() {
-    $("#front-chat-btn").removeClass("newmsg");
+function toolbox_tool(tool) {
+    $("#front-" + tool + "-btn").removeClass("newmsg");
     toolbox_menu();
-    tools_select('chat');
-    settings.tools = "chat";
+    tools_select(tool);
+    settings.tool = tool;
     refresh_settings();
 }
 
-function toolbox_events() {
-    $("#front-events-btn").removeClass("newmsg");
-    toolbox_menu();
-    tools_select('events');
-    settings.tools = "events";
-    refresh_settings();
-}
-
-function toolbox_sites() {
-    $("#front-sites-btn").removeClass("newmsg");
-    toolbox_menu();
-    tools_select('sites');
-    settings.tools = "sites";
-    refresh_settings();
-}
-
-tools_select(settings.tools);
 if(settings.menu == "hidden") toolbox_menu();
 
 </script>
