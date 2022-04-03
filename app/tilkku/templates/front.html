@@ -15,10 +15,19 @@
 </div>
 <script>
 
+var settings = {
+    map: {
+        center: {
+            lat: 61.205,
+            lng: 25.130
+        },
+        zoom: 15
+    }
+}
 
 var home = [61.205, 25.130];
 var home_zoom = 15;
-var map = L.map('map').setView(home, home_zoom);
+var map = L.map('map').setView(settings.map.center, settings.map.zoom);
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
