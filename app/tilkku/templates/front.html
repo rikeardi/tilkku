@@ -41,8 +41,27 @@ var home = [61.205, 25.130];
 var home_zoom = 15;
 var map = L.map('map').setView(settings.map.center, settings.map.zoom);
 
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+servers = [
+    {
+        name: "Basic",
+        server: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+        attribution: "<a href='https://www.maptiler.com/copyright/' target='_blank'>&copy; MapTiler</a> <a href='https://www.openstreetmap.org/copyright' target='_blank'>&copy; OpenStreetMap contributors</a>"
+    },
+    {
+        name: "Satellite",
+        server: "https://api.maptiler.com/maps/hybrid/{z}/{x}/{y}.jpg?key=x5HQNRqipBYmO7CdoEui",
+        attribution: "<a href='https://www.maptiler.com/copyright/' target='_blank'>&copy; MapTiler</a> <a href='https://www.openstreetmap.org/copyright' target='_blank'>&copy; OpenStreetMap contributors</a>"
+    }
+    {
+        name: "Outdoor",
+        server: "https://api.maptiler.com/maps/outdoor/{z}/{x}/{y}.png?key=x5HQNRqipBYmO7CdoEui",
+        attribution: "<a href='https://www.maptiler.com/copyright/' target='_blank'>&copy; MapTiler</a> <a href='https://www.openstreetmap.org/copyright' target='_blank'>&copy; OpenStreetMap contributors</a>"
+    }
+]
+
+var i = 1;
+L.tileLayer(servers[i].server, {
+    attribution: servers[i].attribution
 }).addTo(map);
 
 map.on("moveend", function () {
