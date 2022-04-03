@@ -45,5 +45,10 @@ function tools_select(tool) {
 }
 
 tools_select(settings.tool);
+
+if(settings.menu == "hidden") {
+    $("#front-tools").hide();
+    $("#front-toolsmenu").show();
+}
 </script>
 {% endblock %}
