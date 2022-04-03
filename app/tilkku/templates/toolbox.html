@@ -65,9 +65,12 @@ function toolbox_menu() {
     $("#front-tools").toggle();
     if($("#front-tools").is(":visible")) {
         $("#front-toolsmenu").hide();
+        settings.menu = "hidden";
     } else {
         $("#front-toolsmenu").show();
+        settings.menu = "visible";
     }
+    refresh_settings();
 }
 
 function toolbox_center() {
@@ -78,19 +81,28 @@ function toolbox_chat() {
     $("#front-chat-btn").removeClass("newmsg");
     toolbox_menu();
     tools_select('chat');
+    settings.tools = "chat";
+    refresh_settings();
 }
 
 function toolbox_events() {
     $("#front-events-btn").removeClass("newmsg");
     toolbox_menu();
     tools_select('events');
+    settings.tools = "events";
+    refresh_settings();
 }
 
 function toolbox_sites() {
     $("#front-sites-btn").removeClass("newmsg");
     toolbox_menu();
     tools_select('sites');
+    settings.tools = "sites";
+    refresh_settings();
 }
+
+tools_select(settings.tools);
+if(settings.menu == "hidden") toolbox_menu();
 
 </script>
 {% endblock %}
