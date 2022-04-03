@@ -25,13 +25,13 @@ var settings = {
 }
 
 function refresh_settings() {
-    localStorage.setItem('settings', settings);
+    localStorage.setItem('settings', JSON.stringify(settings));
 }
 
 if(localStorage.getItem('settings') == null) {
-    localStorage.setItem('settings', settings);
+    refresh_settings();
 } else {
-    settings = localStorage.getItem('settings');
+    settings = JSON.parse(localStorage.getItem('settings'));
 }
 
 var home = [61.205, 25.130];
