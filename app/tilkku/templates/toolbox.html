@@ -85,7 +85,10 @@ function toolbox_tool(tool) {
     refresh_settings();
 }
 
-if(settings.menu == "hidden") toolbox_menu();
+console.log(settings);
+if(settings.menu == "hidden") {
+    toolbox_menu();
+}
 
 </script>
 {% endblock %}
