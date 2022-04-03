@@ -14,7 +14,6 @@
     </div>
 </div>
 <script>
-
 var settings = {
     map: {
         center: {
@@ -23,6 +22,16 @@ var settings = {
         },
         zoom: 15
     }
+}
+
+function refresh_settings() {
+    localStorage.setItem('settings', settings);
+}
+
+if(localStorage.getItem('settings') == null) {
+    localStorage.setItem('settings', settings);
+} else {
+    settings = localStorage.getItem('settings');
 }
 
 var home = [61.205, 25.130];
@@ -34,8 +43,9 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 map.on("moveend", function () {
-  console.log(map.getCenter());
-  console.log(map.getZoom());
+    settings.map.center = map.getCenter();
+    settings.map.zoom = map.getZoom();
+    refresh_settings();
 });
 
 var kerros = {
