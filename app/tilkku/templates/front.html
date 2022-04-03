@@ -25,7 +25,8 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 map.on("moveend", function () {
-  console.log(map.getCenter().toString());
+  console.log(map.getCenter());
+  console.log(map.getZoom());
 });
 
 var kerros = {
