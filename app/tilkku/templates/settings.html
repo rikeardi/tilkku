@@ -10,10 +10,22 @@
             <div class="box p-0" style="width: 100%; height: 80vh;">
                 <div class="tabs is-boxed is-small" style="margin-bottom: 0px;">
                     <ul>
-                        <li class="">
+                        <li class="is-active">
                             <a href="#" onclick="settings_select('map')">
                                 <span class="icon"><i class="fas fa-map"></i></span>
                                 <span>Kartta</span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="#" onclick="settings_select('events')">
+                                <span class="icon"><i class="fas fa-book"></i></span>
+                                <span>Tapahtumat</span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="#" onclick="settings_select('sites')">
+                                <span class="icon"><i class="fas fa-thumbtack"></i></span>
+                                <span>Paikat</span>
                             </a>
                         </li>
                         {% if user.is_superuser %}
