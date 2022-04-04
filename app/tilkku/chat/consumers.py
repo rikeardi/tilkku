@@ -34,7 +34,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 self.room_group_name,
                 {
                     'type': 'user_join',
-                    'user': self.user,
+                    'user': json.dumps(self.user),
                     'time': timestamp
                 }
             )
@@ -56,7 +56,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 self.room_group_name,
                 {
                     'type': 'user_leave',
-                    'user': self.user,
+                    'user': json.dumps(self.user),
                     'time': timestamp
                 }
             )
@@ -80,7 +80,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 'type': 'chat_message',
                 'message': message,
                 'sender': self.user.first_name + ' ' + self.user.last_name,
-                'user': self.user,
+                'user': json.dumps(self.user),
                 'time': timestamp
             }
         )
