@@ -56,8 +56,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 'time': timestamp
             }
         )
-        @sync_to_async
-        Message.objects.create(user=self.user, room=self.room, content=message)
+
+        await sync_to_async(Message.objects.create)(user=self.user, room=self.room, content=message)
 
     async def chat_message(self, event):
         message = event['message']
