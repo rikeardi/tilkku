@@ -1,0 +1,19 @@
+{% block content %}
+{% load static %}
+<div class="modal" id="settings-modal">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+        <div id="" class="column is-third" style="z-index: 2;">
+            <div class="box p-0" style="height: calc(100% - 10px);">
+            </div>
+        </div>
+    <!-- Any other Bulma elements you want -->
+    </div>
+    <button class="modal-close is-large" aria-label="close"></button>
+</div>
+<script>
+function settings_open() {
+    $("#settings-modal").show();
+}
+</script>
+{% endblock %}
