@@ -88,13 +88,13 @@ class ChatConsumer(AsyncWebsocketConsumer):
         await sync_to_async(Message.objects.create)(user=self.user, room=self.room, content=message)
 
     async def chat_message(self, event):
-        await self.send(event)
+        await self.send(text_data=json.dumps(event))
 
     async def user_join(self, event):
-        await self.send(event)
+        await self.send(text_data=json.dumps(event))
 
     async def user_leave(self, event):
-        await self.send(event)
+        await self.send(text_data=json.dumps(event))
 
 #    async def chat_message(self, event):
 #        message = event['message']
