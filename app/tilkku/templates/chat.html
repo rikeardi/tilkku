@@ -68,6 +68,15 @@
 .other time {
     float: left;
 }
+.system p {
+    width: 100%;
+    text-align: center;
+    font-size: 0.6rem;
+    border-radius: 5px;
+    background-color: #fbf4f4;
+    box-shadow: 3px 3px 5px #f6f0f0;
+    padding: 2px;
+}
 
 </style>
 <div class="chat-window">
@@ -94,9 +103,9 @@ chatSocket.onmessage = function(e) {
     console.log(data);
 
     if(data.type == "user_join") {
-        elem = "<li class='system'>\n<p>" + data.time + ": " + data.user + " liittyi.</p>\n</li>";
+        elem = "<li class='system'>\n<p>" + data.time + " " + data.user + " liittyi.</p>\n</li>";
     } else if(data.type == "user_leave") {
-        elem = "<li class='system'>\n<p>" + data.time + ": " + data.user + " poistui.</p>\n</li>";
+        elem = "<li class='system'>\n<p>" + data.time + " " + data.user + " poistui.</p>\n</li>";
     }
     else if(data.type == "chat_message") {
         if(data.user == username) {
