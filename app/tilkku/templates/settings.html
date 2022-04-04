@@ -3,19 +3,27 @@
 <div class="modal" id="settings-modal">
     <div class="modal-background"></div>
     <div class="modal-content">
-        <div class="box">
+        <div class="box" style="text-align: center;">
             <h1>Asetukset</h1>
         </div>
-        <div id="">
+        <div>
             <div class="box p-0" style="width: 100%; height: 80vh;">
                 <div class="tabs is-boxed is-small" style="margin-bottom: 0px;">
                     <ul>
-                        <li id="" class="">
+                        <li class="">
                             <a href="#" onclick="settings_select('map')">
                                 <span class="icon"><i class="fas fa-map"></i></span>
                                 <span>Kartta</span>
                             </a>
                         </li>
+                        {% if user.is_superuser %}
+                        <li class="">
+                            <a href="{% url 'admin:index' %}" target="_blank">
+                                <span class="icon"><i class="fas fa-screwdriver-wrench"></i></span>
+                                <span>Hallinta</span>
+                            </a>
+                        </li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>
