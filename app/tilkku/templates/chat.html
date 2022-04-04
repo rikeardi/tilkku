@@ -107,11 +107,18 @@ chatSocket.onmessage = function(e) {
     const data = JSON.parse(e.data);
     console.log(data);
 
-    if(data.user == username) {
-        elem = "<li class='self'>\n<div class='msg'>\n<p>" + data.message + "</p>\n<time>" + data.time + "</time>\n</div>\n</li>";
-    } else {
-        elem = "<li class='other'>\n<div class='msg'>\n<span class='name'>" + data.sender + "</span>\n<p>" + data.message + "</p>\n<time>" + data.time + "</time>\n</div>\n</li>";
-        chat_pop.play();
+    if(data.type == "user_join") {
+        elem = "<li class='system'>\n<div class='msg'>\n<p>" + data.message + "</p>\n<time>" + data.time + "</time>\n</div>\n</li>";
+    } else if(data.type == "user_leave") {
+        elem = "<li class='system'>\n<div class='msg'>\n<p>" + data.message + "</p>\n<time>" + data.time + "</time>\n</div>\n</li>";
+    }
+    else if(data.type == "chat_message") {
+        if(data.user == username) {
+            elem = "<li class='self'>\n<div class='msg'>\n<p>" + data.message + "</p>\n<time>" + data.time + "</time>\n</div>\n</li>";
+        } else {
+            elem = "<li class='other'>\n<div class='msg'>\n<span class='name'>" + data.sender + "</span>\n<p>" + data.message + "</p>\n<time>" + data.time + "</time>\n</div>\n</li>";
+            chat_pop.play();
+        }
     }
 
     $("#chat-box").append(elem);
