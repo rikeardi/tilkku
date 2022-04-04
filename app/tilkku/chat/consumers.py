@@ -21,10 +21,24 @@ class ChatConsumer(AsyncWebsocketConsumer):
         self.user = self.scope['user']
 
         # Join room group
-        await self.channel_layer.group_add(
-            self.room_group_name,
-            self.channel_name
-        )
+        if self.user.is_authenticated:
+            await self.channel_layer.group_add(
+                self.room_group_name,
+                self.channel_name
+            )
+
+            now = datetime.now()
+            timestamp = now.strftime("%H:%M")
+
+            await self.channel_layer.group_send(
+                self.room_group_name,
+                {
+                    'type': 'user_join',
+                    'user': self.user.first_name + ' ' + self.user.last_name,
+                    'time': timestamp
+                }
+            )
+            await sync_to_async(self.room.online.add)(self.user)
 
         await self.accept()
 
@@ -33,6 +47,20 @@ class ChatConsumer(AsyncWebsocketConsumer):
             self.room_group_name,
             self.channel_name
         )
+
+        if self.user.is_authenticated:
+            now = datetime.now()
+            timestamp = now.strftime("%H:%M")
+
+            await self.channel_layer.group_send(
+                self.room_group_name,
+                {
+                    'type': 'user_leave',
+                    'user': self.user.first_name + ' ' + self.user.last_name,
+                    'time': timestamp
+                }
+            )
+            await sync_to_async(self.room.online.remove)(self.user)
 
     async def receive(self, text_data=None, blob_data=None):
         text_data_json = json.loads(text_data)
