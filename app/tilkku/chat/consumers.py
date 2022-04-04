@@ -80,7 +80,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 'type': 'chat_message',
                 'message': message,
                 'sender': self.user.first_name + ' ' + self.user.last_name,
-                'user': self.user.username,
+                'user': json.dumps(self.user),
                 'time': timestamp
             }
         )
