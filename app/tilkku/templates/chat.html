@@ -71,21 +71,7 @@
 
 </style>
 <div class="chat-window">
-    <ol id="chat-box" class="chat">
-        <!--<li class="other">
-            <div class="msg">
-                <span class="name">Pena</span>
-                <p>Moro!</p>
-                <time>10:00</time>
-            </div>
-        </li>
-        <li class="self">
-            <div class="msg">
-                <p>No moi!</p>
-                <time>10:01</time>
-            </div>
-        </li>-->
-    </ol>
+    <ol id="chat-box" class="chat"></ol>
 </div>
 <input id="chat-input" class="input" type="text" />
 <audio id="chat-pop" src="{% static 'audio/msg2.wav' %}"></audio>
@@ -108,9 +94,9 @@ chatSocket.onmessage = function(e) {
     console.log(data);
 
     if(data.type == "user_join") {
-        elem = "<li class='system'>\n<div class='msg'>\n<p>" + data.message + "</p>\n<time>" + data.time + "</time>\n</div>\n</li>";
+        elem = "<li class='system'>\n<p>" + data.time + ": " + data.user + " liittyi.</p>\n</li>";
     } else if(data.type == "user_leave") {
-        elem = "<li class='system'>\n<div class='msg'>\n<p>" + data.message + "</p>\n<time>" + data.time + "</time>\n</div>\n</li>";
+        elem = "<li class='system'>\n<p>" + data.time + ": " + data.user + " poistui.</p>\n</li>";
     }
     else if(data.type == "chat_message") {
         if(data.user == username) {
