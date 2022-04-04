@@ -30,6 +30,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+CSRF_TRUSTED_ORIGINS = ['https://rikeardi.duckdns.org', 'https://reki.jamboree.fi']
+
 
 # Application definition
 
