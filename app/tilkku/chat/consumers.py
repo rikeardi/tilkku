@@ -1,5 +1,7 @@
 import json
 from datetime import datetime
+
+from asgiref.sync import sync_to_async
 from channels.generic.websocket import AsyncWebsocketConsumer
 from .models import Room, Message
 
@@ -54,6 +56,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 'time': timestamp
             }
         )
+        @sync_to_async
         Message.objects.create(user=self.user, room=self.room, content=message)
 
     async def chat_message(self, event):
