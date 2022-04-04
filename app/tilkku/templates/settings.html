@@ -13,7 +13,10 @@
 </div>
 <script>
 function settings_open() {
-    $("#settings-modal").show();
+    $("#settings-modal").addClass('is-active');
+}
+function settings_close() {
+    $("#settings-modal").removeClass('is-active');
 }
 </script>
 {% endblock %}
