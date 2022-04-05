@@ -96,7 +96,6 @@ var firstName = "{{ user.first_name }}";
 var lastName = "{{ user.last_name }}";
 
 var chat_pop = document.getElementById('chat-pop');
-var chatSocket = null
 
 function createSocket() {
     chatSocket = new WebSocket(
@@ -105,6 +104,7 @@ function createSocket() {
         + '/ws/chat/opke/'
     );
 }
+createSocket();
 
 chatSocket.onmessage = function(e) {
     const data = JSON.parse(e.data);
@@ -145,7 +145,6 @@ chatSocket.onerror = function(err) {
     chatSocket.close();
 };
 
-createSocket();
 
 $('#chat-input').keyup(function(e) {
     if (e.keyCode === 13) {  // enter, return
