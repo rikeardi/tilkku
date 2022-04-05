@@ -25,12 +25,14 @@
 
 <script>
 
-for(var i=0;i<map_servers.length;i++) {
-    var selected = "";
-    var server = map_servers[i];
-    if(settings.map.server == i) selected = " selected";
-    $("#settings-map-bg").append("<option value='" + i + "'" + selected + ">" + server.name + "</option>");
-}
+$(document).ready(function() {
+    for(var i=0;i<map_servers.length;i++) {
+        var selected = "";
+        var server = map_servers[i];
+        if(settings.map.server == i) selected = " selected";
+        $("#settings-map-bg").append("<option value='" + i + "'" + selected + ">" + server.name + "</option>");
+    }
+});
 
 function map_select_bg() {
     console.log(map_background);
