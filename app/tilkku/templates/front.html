@@ -64,6 +64,10 @@ var map_background = L.tileLayer(map_servers[settings.map.server].server, {
     attribution: map_servers[settings.map.server].attribution
 }).addTo(map);
 
+function map_set_bg() {
+    map_background.setUrl(map_servers[settings.map.server]);
+}
+
 map.on("moveend", function () {
     settings.map.center = map.getCenter();
     settings.map.zoom = map.getZoom();
