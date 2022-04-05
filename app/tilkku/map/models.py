@@ -13,11 +13,17 @@ class MapStyle(models.Model):
     fill = models.CharField(max_length=10)
     opacity = models.FloatField()
 
+    def __str__(self):
+        return f'{self.name}'
+
 
 class Layer(models.Model):
     name = models.CharField(max_length=100)
     type = models.CharField(max_length=2, choices=LayerType.choices, default=LayerType.AREA)
     style = models.ForeignKey(MapStyle, on_delete=models.DO_NOTHING)
+
+    def __str__(self):
+        return f'{self.name}'
 
 
 class Area(models.Model):
@@ -25,8 +31,23 @@ class Area(models.Model):
     layer = models.ForeignKey(Layer, on_delete=models.DO_NOTHING)
     coordinates = models.TextField()
 
+    def __str__(self):
+        return f'{self.name}'
+
 
 class Marker(models.Model):
     name = models.CharField(max_length=200)
     layer = models.ForeignKey(Layer, on_delete=models.DO_NOTHING)
     coordinates = models.TextField()
+
+    def __str__(self):
+        return f'{self.name}'
+
+
+class MapServer(models.Model):
+    name = models.CharField(max_length=100)
+    url = models.CharField(max_length=500)
+    attribution = models.CharField(max_length=300)
+
+    def __str__(self):
+        return f'{self.name}'

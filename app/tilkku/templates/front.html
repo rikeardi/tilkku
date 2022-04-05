@@ -42,7 +42,8 @@ var home = [61.205, 25.130];
 var home_zoom = 15;
 var map = L.map('map').setView(settings.map.center, settings.map.zoom);
 
-map_servers = [
+map_servers = JSON.parse("{{ map_servers }}")
+/*[
     {
         name: "Peruskartta",
         layer: L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -61,7 +62,7 @@ map_servers = [
             attribution: "<a href='https://www.maptiler.com/copyright/' target='_blank'>&copy; MapTiler</a> <a href='https://www.openstreetmap.org/copyright' target='_blank'>&copy; OpenStreetMap contributors</a>"
         })
     }
-]
+]*/
 
 var map_background = map_servers[settings.map.server].layer.addTo(map);
 

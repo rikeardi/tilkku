@@ -65,8 +65,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
     async def receive(self, text_data=None, blob_data=None):
         text_data_json = json.loads(text_data)
         message = text_data_json['message']
-        #sender = text_data_json['sender']
-        #user = text_data_json['user']
 
         if not self.user.is_authenticated:
             return
@@ -95,17 +93,3 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
     async def user_leave(self, event):
         await self.send(text_data=json.dumps(event))
-
-#    async def chat_message(self, event):
-#        message = event['message']
-#        sender = event['sender']
-#        user = event['user']
-#        time = event['time']
-
-        # Send message to WebSocket
-#        await self.send(text_data=json.dumps({
-#            'message': message,
-#            'sender': sender,
-#            'user': user,
-#            'time': time
-#        }))
