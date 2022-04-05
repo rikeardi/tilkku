@@ -140,7 +140,7 @@ chatSocket.onclose = function(e) {
     }, 1000);
 };
 
-chatSocket.onerror = funtion(err) {
+chatSocket.onerror = function(err) {
     console.error('Socket encountered error: ', err.message, 'Closing socket');
     chatSocket.close();
 };
