@@ -97,11 +97,14 @@ var lastName = "{{ user.last_name }}";
 
 var chat_pop = document.getElementById('chat-pop');
 
-const chatSocket = new WebSocket(
-    'wss://'
-    + window.location.host
-    + '/ws/chat/opke/'
-);
+function createSocket() {
+    const chatSocket = new WebSocket(
+        'wss://'
+        + window.location.host
+        + '/ws/chat/opke/'
+    );
+}
+createSocket();
 
 chatSocket.onmessage = function(e) {
     const data = JSON.parse(e.data);
@@ -132,6 +135,7 @@ chatSocket.onmessage = function(e) {
 
 chatSocket.onclose = function(e) {
     console.error('Chat socket closed unexpectedly');
+    createSocket();
 };
 
 $('#chat-input').keyup(function(e) {
