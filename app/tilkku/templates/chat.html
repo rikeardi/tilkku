@@ -105,7 +105,7 @@ const chatSocket = new WebSocket(
 
 chatSocket.onmessage = function(e) {
     const data = JSON.parse(e.data);
-    console.log(data);
+    //console.log(data);
 
     if(data.type == "user_join") {
         elem = "<li class='system'>\n<p>" + data.time + " " + data.user + " liittyi.</p>\n</li>";
