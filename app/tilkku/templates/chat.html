@@ -96,15 +96,11 @@ var firstName = "{{ user.first_name }}";
 var lastName = "{{ user.last_name }}";
 
 var chat_pop = document.getElementById('chat-pop');
-
-function createSocket() {
-    chatSocket = new WebSocket(
-        'wss://'
-        + window.location.host
-        + '/ws/chat/opke/'
-    );
-}
-createSocket();
+const chatSocket = new WebSocket(
+    'wss://'
+    + window.location.host
+    + '/ws/chat/opke/'
+);
 
 chatSocket.onmessage = function(e) {
     const data = JSON.parse(e.data);
@@ -135,17 +131,7 @@ chatSocket.onmessage = function(e) {
 
 chatSocket.onclose = function(e) {
     console.error('Chat socket closed unexpectedly');
-    setTimeout(function() {
-        createSocket();
-    }, 1000);
 };
-
-/*
-chatSocket.onerror = function(err) {
-    console.error('Socket encountered error: ', err.message, 'Closing socket');
-    chatSocket.close();
-};
-*/
 
 $('#chat-input').keyup(function(e) {
     if (e.keyCode === 13) {  // enter, return
