@@ -37,10 +37,16 @@
                     {% endif %}
                 </ul>
             </div>
-            <div class="content p-4">
-                <div id="settings-map" class="settings-box" style="height: 100%;"></div>
-                <div id="settings-events" class="settings-box" style="height: 100%; display: none;"></div>
-                <div id="settings-sites" class="settings-box" style="height: 100%; display: none;"></div>
+            <div class="content p-0" style="height: 94%; overflow: none;">
+                <div id="settings-map" class="settings-box" style="height: 100%;">
+                    {% include 'settings/map.html' %}
+                </div>
+                <div id="settings-events" class="settings-box" style="height: 100%; display: none;">
+                    {% include 'settings/events.html' %}
+                </div>
+                <div id="settings-sites" class="settings-box" style="height: 100%; display: none;">
+                    {% include 'settings/sites.html' %}
+                </div>
             </div>
         </div>
     <!-- Any other Bulma elements you want -->
