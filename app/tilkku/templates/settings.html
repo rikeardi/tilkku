@@ -2,7 +2,7 @@
 {% load static %}
 <div class="modal" id="settings-modal">
     <div class="modal-background"></div>
-    <div class="modal-content">
+    <div class="modal-content" style="overflow: none;">
         <div class="box" style="text-align: center;">
             <h1>Asetukset</h1>
         </div>
@@ -37,7 +37,7 @@
                     {% endif %}
                 </ul>
             </div>
-            <div class="content p-0" style="height: 94%; overflow: none;">
+            <div class="content p-0" style="height: 93%; overflow: none;">
                 <div id="settings-map" class="settings-box" style="height: 100%;">
                     {% include 'settings/map.html' %}
                 </div>
