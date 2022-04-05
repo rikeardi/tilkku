@@ -9,7 +9,8 @@ var settings = {
             lat: 61.205,
             lng: 25.130
         },
-        zoom: 15
+        zoom: 15,
+        server: 0
     }
 }
 
@@ -41,27 +42,26 @@ var home = [61.205, 25.130];
 var home_zoom = 15;
 var map = L.map('map').setView(settings.map.center, settings.map.zoom);
 
-servers = [
+map_servers = [
     {
-        name: "Basic",
+        name: "Peruskartta",
         server: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
         attribution: "<a href='https://www.maptiler.com/copyright/' target='_blank'>&copy; MapTiler</a> <a href='https://www.openstreetmap.org/copyright' target='_blank'>&copy; OpenStreetMap contributors</a>"
     },
     {
-        name: "Outdoor",
+        name: "Ulkoilukartta",
         server: "https://api.maptiler.com/maps/outdoor/{z}/{x}/{y}.png?key=x5HQNRqipBYmO7CdoEui",
         attribution: "<a href='https://www.maptiler.com/copyright/' target='_blank'>&copy; MapTiler</a> <a href='https://www.openstreetmap.org/copyright' target='_blank'>&copy; OpenStreetMap contributors</a>"
     },
     {
-        name: "Satellite",
+        name: "Satelliittikuva",
         server: "https://api.maptiler.com/maps/hybrid/{z}/{x}/{y}.jpg?key=x5HQNRqipBYmO7CdoEui",
         attribution: "<a href='https://www.maptiler.com/copyright/' target='_blank'>&copy; MapTiler</a> <a href='https://www.openstreetmap.org/copyright' target='_blank'>&copy; OpenStreetMap contributors</a>"
     }
 ]
 
-var i = 0;
-L.tileLayer(servers[i].server, {
-    attribution: servers[i].attribution
+var map_background = L.tileLayer(map_servers[settings.map.server].server, {
+    attribution: map_servers[settings.map.server].attribution
 }).addTo(map);
 
 map.on("moveend", function () {

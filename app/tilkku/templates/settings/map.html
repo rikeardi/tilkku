@@ -5,18 +5,14 @@
         <label class="label">Taustakartta</label>
         <div class="control">
             <div class="select">
-                <select>
-                    <option>Peruskartta</option>
-                    <option>Maastokartta</option>
-                    <option>Satelliittikuva</option>
-                </select>
+                <select id="settings-map-bg" onchange="map_select_bg();"></select>
             </div>
         </div>
     </div>
     <div class="field">
         <label class="label">Kerrokset</label>
         <div class="control">
-            <div class="select">
+            <div class="select is-multiple">
                 <select>
                     <option>Peruskartta</option>
                     <option>Maastokartta</option>
@@ -25,6 +21,19 @@
             </div>
         </div>
     </div>
-
 </div>
+
+<script>
+
+for(var i=0;i<map_servers.length;i++) {
+    var selected = "";
+    var server = map_servers[i];
+    if(settings.map.server == i) selected = " selected";
+    $("#settings-map-bg").append("<option value='" + i + '" + selected + ">" + server.name + "</option>");
+}
+
+function map_select_bg() {
+    console.log(map_background);
+}
+</script>
 {% endblock %}
