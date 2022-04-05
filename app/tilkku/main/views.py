@@ -8,7 +8,8 @@ from map.models import MapServer
 
 @login_required
 def home(request):
+    mapservers = list(MapServer.objects.all())
     context = {
-        "map_servers": json.dumps(MapServer.objects.all())
+        "map_servers": mapservers
     }
     return render(request, "front.html", context)
