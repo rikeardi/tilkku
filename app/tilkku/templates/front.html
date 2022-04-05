@@ -45,27 +45,29 @@ var map = L.map('map').setView(settings.map.center, settings.map.zoom);
 map_servers = [
     {
         name: "Peruskartta",
-        server: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-        attribution: "<a href='https://www.maptiler.com/copyright/' target='_blank'>&copy; MapTiler</a> <a href='https://www.openstreetmap.org/copyright' target='_blank'>&copy; OpenStreetMap contributors</a>"
+        layer: L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+            attribution: "<a href='https://www.openstreetmap.org/copyright' target='_blank'>&copy; OpenStreetMap contributors</a>"
+        })
     },
     {
         name: "Ulkoilukartta",
-        server: "https://api.maptiler.com/maps/outdoor/{z}/{x}/{y}.png?key=x5HQNRqipBYmO7CdoEui",
-        attribution: "<a href='https://www.maptiler.com/copyright/' target='_blank'>&copy; MapTiler</a> <a href='https://www.openstreetmap.org/copyright' target='_blank'>&copy; OpenStreetMap contributors</a>"
+        layer: L.tileLayer("https://api.maptiler.com/maps/outdoor/{z}/{x}/{y}.png?key=x5HQNRqipBYmO7CdoEui", {
+            attribution: "<a href='https://www.maptiler.com/copyright/' target='_blank'>&copy; MapTiler</a> <a href='https://www.openstreetmap.org/copyright' target='_blank'>&copy; OpenStreetMap contributors</a>"
+        })
     },
     {
         name: "Satelliittikuva",
-        server: "https://api.maptiler.com/maps/hybrid/{z}/{x}/{y}.jpg?key=x5HQNRqipBYmO7CdoEui",
-        attribution: "<a href='https://www.maptiler.com/copyright/' target='_blank'>&copy; MapTiler</a> <a href='https://www.openstreetmap.org/copyright' target='_blank'>&copy; OpenStreetMap contributors</a>"
+        layer: L.tileLayer("https://api.maptiler.com/maps/hybrid/{z}/{x}/{y}.jpg?key=x5HQNRqipBYmO7CdoEui", {
+            attribution: "<a href='https://www.maptiler.com/copyright/' target='_blank'>&copy; MapTiler</a> <a href='https://www.openstreetmap.org/copyright' target='_blank'>&copy; OpenStreetMap contributors</a>"
+        })
     }
 ]
 
-var map_background = L.tileLayer(map_servers[settings.map.server].server, {
-    attribution: map_servers[settings.map.server].attribution
-}).addTo(map);
+var map_background = map_servers[settings.map.server].layer.addTo(map);
 
 function map_set_bg() {
-    map_background.setUrl(map_servers[settings.map.server]);
+    map_background.remove();
+    map_background = map_servers[settings.map.server].layer.addTo(map);
 }
 
 map.on("moveend", function () {
