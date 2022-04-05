@@ -7,7 +7,7 @@ from map.models import MapServer
 
 @login_required
 def home(request):
-    mapservers = MapServer.objects.all()
+    mapservers = list(MapServer.objects.all())
     context = {
         "map_servers": serializers.serialize('json', mapservers)
     }
