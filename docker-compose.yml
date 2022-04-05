@@ -35,4 +35,7 @@ services:
       - postgres
       - redis
     volumes:
-      - ./code:/code:rw
+      - tilkku-web:/code
+
+volumes:
+  tilkku-web:
