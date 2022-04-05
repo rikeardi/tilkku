@@ -3,7 +3,7 @@ from django.shortcuts import render
 
 
 # Create your views here.
-from tilkku.map.models import MapServer
+from app.tilkku.map.models import MapServer
 
 
 @login_required
