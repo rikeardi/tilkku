@@ -34,8 +34,8 @@ services:
     depends_on:
       - postgres
       - redis
-    volumes:
-      - tilkku-web:/code
+#    volumes:
+#      - tilkku-web:/code
 
-volumes:
-  tilkku-web:
+#volumes:
+#  tilkku-web:
