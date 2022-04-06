@@ -10,7 +10,7 @@ def home(request):
     layers = Layer.objects.all()
     for layer in layers:
         layer.style = MapStyle.objects.get(id=layer.style_id)
-        layer.areas = Area.objects.get(layer=layer.id)
+        layer.areas = Area.objects.filter(layer=layer.id)
 
     context = {
         "map_servers": serialize("json", MapServer.objects.all()),
