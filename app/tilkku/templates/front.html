@@ -42,7 +42,13 @@ var home = [61.205, 25.130];
 var home_zoom = 15;
 var map = L.map('map').setView(settings.map.center, settings.map.zoom);
 
-map_servers = {{ map_servers | safe }};
+mapservers = {{ map_servers | safe }};
+map_servers = [];
+foreach(mapservers as server) {
+    map_servers.append(L.tileLayer(server.url, {
+        attribution: server.attribution,
+    }));
+}
 console.log(map_servers);
 /*[
     {
