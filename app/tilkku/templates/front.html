@@ -44,11 +44,13 @@ var map = L.map('map').setView(settings.map.center, settings.map.zoom);
 
 mapservers = {{ map_servers | safe }};
 map_servers = [];
-foreach(mapservers as server) {
-    map_servers.append(L.tileLayer(server.url, {
-        attribution: server.attribution,
-    }));
-}
+mapservers.forEach(function(server) {
+    map_servers.push({
+        name: server.name,
+        url: server.url,
+        attribution: server.attribution
+    });
+});
 console.log(map_servers);
 /*[
     {
