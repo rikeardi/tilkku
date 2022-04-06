@@ -49,7 +49,7 @@ mapservers.forEach(function(server) {
         name: server.fields.name,
         url: server.fields.url,
         attribution: server.fields.attribution,
-        layers: L.tileLayer(server.fields.url, {
+        layer: L.tileLayer(server.fields.url, {
             attribution: server.fields.attribution
         })
     });
