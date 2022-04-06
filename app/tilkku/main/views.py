@@ -9,6 +9,6 @@ from map.models import MapServer, Layer
 def home(request):
     context = {
         "map_servers": serialize('json', MapServer.objects.all()),
-        "layers": serialize('json', Layer.objects.all())
+        "layers": serialize('json', Layer.objects.all().values())
     }
     return render(request, "front.html", context)
