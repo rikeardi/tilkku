@@ -38,21 +38,12 @@ if(localStorage.getItem('settings') == null) {
     </div>
 </div>
 {{ map_servers }}
-{% for server in map_servers %}
-{{ server.name }}
-{% endfor %}
 <script>
 var home = [61.205, 25.130];
 var home_zoom = 15;
 var map = L.map('map').setView(settings.map.center, settings.map.zoom);
 
-map_servers = JSON.parse("[{% for server in map_servers %}
-    {
-        'name': {{ server.name }},
-        'url': {{ server.url }},
-        'attribution': {{ server.attribution }}
-    },
-{% endfor %}]")
+map_servers = JSON.parse("{{ map_servers }}")
 /*[
     {
         name: "Peruskartta",
