@@ -46,9 +46,12 @@ mapservers = {{ map_servers | safe }};
 map_servers = [];
 mapservers.forEach(function(server) {
     map_servers.push({
-        name: server.name,
-        url: server.url,
-        attribution: server.attribution
+        name: server.fields.name,
+        url: server.fields.url,
+        attribution: server.fields.attribution,
+        layers: L.tileLayer(server.fields.url, {
+            attribution: server.fields.attribution
+        })
     });
 });
 console.log(map_servers);
