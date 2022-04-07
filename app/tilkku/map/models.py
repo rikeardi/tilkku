@@ -28,7 +28,7 @@ class Layer(models.Model):
 
 class Area(models.Model):
     name = models.CharField(max_length=200)
-    layer = models.ForeignKey(Layer, to_field="areas", on_delete=models.DO_NOTHING)
+    layer = models.ForeignKey(Layer, related_name="areas", on_delete=models.DO_NOTHING)
     coordinates = models.TextField()
 
     def __str__(self):
@@ -37,7 +37,7 @@ class Area(models.Model):
 
 class Marker(models.Model):
     name = models.CharField(max_length=200)
-    layer = models.ForeignKey(Layer, to_field="markers", on_delete=models.DO_NOTHING)
+    layer = models.ForeignKey(Layer, related_name="markers", on_delete=models.DO_NOTHING)
     coordinates = models.TextField()
 
     def __str__(self):
