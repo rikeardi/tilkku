@@ -7,7 +7,7 @@ from map.models import *
 
 @login_required
 def home(request):
-    layers = Layer.objects.all().select_related()
+    layers = Layer.objects.select_related()
 
     context = {
         "map_servers": serialize("json", MapServer.objects.all()),
