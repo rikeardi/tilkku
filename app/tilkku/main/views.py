@@ -7,10 +7,12 @@ from map.models import *
 
 @login_required
 def home(request):
-    layers = Layer.objects.all()
-    for layer in layers:
+    layerlist = Layer.objects.all()
+    layers = []
+    for layer in layerlist:
         layer.style = MapStyle.objects.get(id=layer.style_id)
         layer.areas = Area.objects.filter(layer=layer.id)
+        layers.append(layer)
 
     context = {
         "map_servers": serialize("json", MapServer.objects.all()),
