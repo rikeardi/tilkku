@@ -43,6 +43,8 @@ var home_zoom = 15;
 var map = L.map('map').setView(settings.map.center, settings.map.zoom);
 
 mapservers = {{ map_servers | safe }};
+console.log(mapservers);
+
 map_servers = [];
 mapservers.forEach(function(server) {
     map_servers.push({
@@ -70,9 +72,6 @@ map.on("moveend", function () {
 
 var layers = {{ layers | safe }};
 console.log(layers);
-
-var areas = {{ areas | safe }};
-console.log(areas);
 
 </script>
 {% include 'settings.html' %}
