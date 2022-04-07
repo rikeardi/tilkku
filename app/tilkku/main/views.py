@@ -12,8 +12,8 @@ def home(request):
 
 
     context = {
-        "map_servers": serialize("json", MapServer.objects.all()),
-        "layers": serialize("json", layers),
-        "areas": serialize("json", areas),
+        "map_servers": MapServer.objects.all(),
+        "layers": layers,
+        "areas": areas,
     }
     return render(request, "front.html", context)
