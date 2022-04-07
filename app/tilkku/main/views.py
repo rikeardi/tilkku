@@ -10,10 +10,9 @@ def home(request):
     layers = Layer.objects.select_related()
     areas = Area.objects.select_related()
 
-
     context = {
-        "map_servers": MapServer.objects.all(),
-        "layers": layers,
-        "areas": areas,
+        "map_servers": serialize('json', MapServer.objects.all()),
+        "layers": serialize('json', layers),
+        "areas": serialize('json', areas),
     }
     return render(request, "front.html", context)
