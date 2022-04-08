@@ -9,7 +9,8 @@ from map.serializers import *
 @login_required
 def home(request):
     context = {
-        'map_servers': serialize('json', MapServer.objects.all()),
+        'map_servers': MapServerSerializer(MapServer.objects.all(), many=True).data.decode('utf-8'),
+#        'map_servers': serialize('json', MapServer.objects.all()),
     }
     return render(request, 'front.html', context)
 
