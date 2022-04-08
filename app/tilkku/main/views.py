@@ -1,3 +1,5 @@
+import json
+
 from django.core.serializers import serialize
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
@@ -9,7 +11,7 @@ from map.serializers import *
 @login_required
 def home(request):
     context = {
-        'map_servers': MapServerSerializer(MapServer.objects.all(), many=True).data.decode('utf-8'),
+        'map_servers': json.dumps(MapServerSerializer(MapServer.objects.all(), many=True).data),
 #        'map_servers': serialize('json', MapServer.objects.all()),
     }
     return render(request, 'front.html', context)
