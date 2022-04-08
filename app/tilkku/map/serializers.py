@@ -9,6 +9,8 @@ class MapStyleSerializer(serializers.ModelSerializer):
 
 
 class AreaSerializer(serializers.ModelSerializer):
+    coordinates = serializers.JSONField()
+
     class Meta:
         model = Area
         fields = '__all__'
