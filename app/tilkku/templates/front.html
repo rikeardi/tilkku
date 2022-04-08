@@ -10,7 +10,8 @@ var settings = {
             lng: 25.130
         },
         zoom: 15,
-        server: 0
+        server: 0,
+        layers: []
     }
 }
 
@@ -64,10 +65,9 @@ map.on("moveend", function() {
     refresh_settings();
 });
 
-var layers = {{ layers | safe }};
-console.log(layers);
-layers.forEach(function(layer) {
-    console.log(layer);
+var map_layers = {{ layers | safe }};
+
+map_layers.forEach(function(layer) {
     layer.layer = L.featureGroup();
 
     var style = {
@@ -77,17 +77,28 @@ layers.forEach(function(layer) {
         fillOpacity: layer.style.opacity + 0.2
     }
 
-    console.log(style);
-
     layer.areas.forEach(function(area) {
-        var alayer = L.polygon(area.coordinates, style).addTo(layer.layer);
+        L.polygon(area.coordinates, style).addTo(layer.layer);
     });
-//    layer.markers.forEach(function(marker) {
-//        L.marker(marker.coordinates, style).addTo(layer.layer);
-//    });
+    layer.markers.forEach(function(marker) {
+        L.marker(marker.coordinates, style).addTo(layer.layer);
+    });
 });
-console.log(layers);
+console.log(map_layers);
 
+var map_active_layers = [];
+function map_set_layers() {
+    for(var i = 0; i < map_active_layers.length; i++) {
+        map_active_layers[i].layer.remove();
+    }
+
+    for(var i = 0; i < map_layers.length; i++) {
+        if(settings.map.layers.includes(i)) {
+            map_active_layers.push(i);
+            map_layers[i].layer.addTo(map);
+        }
+    }
+}
 </script>
 {% include 'settings.html' %}
 {% endblock %}

@@ -1,23 +1,24 @@
 {% block content %}
 {% load static %}
-<div class="content p-3">
-    <div class="field">
-        <label class="label">Taustakartta</label>
-        <div class="control">
-            <div class="select">
-                <select id="settings-map-bg" onchange="map_select_bg();"></select>
+
+<div class="columns">
+    <div class="content p-3 column is-half">
+        <div class="field">
+            <label class="label">Taustakartta</label>
+            <div class="control">
+                <div class="select" style="width: 100%;">
+                    <select id="settings-map-bg" onchange="map_select_bg();"></select>
+                </div>
             </div>
         </div>
     </div>
-    <div class="field">
-        <label class="label">Kerrokset</label>
-        <div class="control">
-            <div class="select is-multiple">
-                <select>
-                    <option>Peruskartta</option>
-                    <option>Maastokartta</option>
-                    <option>Satelliittikuva</option>
-                </select>
+    <div class="content p-3 column is-half">
+        <div class="field">
+            <label class="label">Karttatasot</label>
+            <div class="control">
+                <div class="select is-multiple" style="width: 100%;">
+                    <select multiple size="8" id="settings-map-layers" onchange="map_select_layers();"></select>
+                </div>
             </div>
         </div>
     </div>
@@ -29,8 +30,17 @@ $(document).ready(function() {
     for(var i=0;i<map_servers.length;i++) {
         var selected = "";
         var server = map_servers[i];
+
         if(settings.map.server == i) selected = " selected";
         $("#settings-map-bg").append("<option value='" + i + "'" + selected + ">" + server.name + "</option>");
+    }
+
+    for(var i=0;i<map_layers.length;i++) {
+        var selected = "";
+        var layer = map_layers[i];
+
+        if(settings.map.layers.includes(i)) selected = " selected";
+        $("#settings-map-layers").append("<option value='" + i + "'" + selected + ">" + layer.name + "</option>");
     }
 });
 
@@ -38,6 +48,15 @@ function map_select_bg() {
     settings.map.server = $("#settings-map-bg").val();
     refresh_settings();
     map_set_bg();
+}
+
+function map_select_layers() {
+    settings.map.layers = [];
+    $("#settings-map-layers option:selected").each(function() {
+        settings.map.layers.push($(this).val());
+    });
+    refresh_settings();
+    map_set_layers();
 }
 </script>
 {% endblock %}
