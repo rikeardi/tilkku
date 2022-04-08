@@ -58,13 +58,14 @@ function map_set_bg() {
     map_background = map_servers[settings.map.server].layer.addTo(map);
 }
 
-map.on("moveend", function () {
+map.on("moveend", function() {
     settings.map.center = map.getCenter();
     settings.map.zoom = map.getZoom();
     refresh_settings();
 });
 
 var layers = {{ layers | safe }};
+console.log(layers);
 layers.forEach(function(layer) {
     layer.layer = L.FeatureGroup();
 
