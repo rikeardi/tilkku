@@ -74,7 +74,7 @@ layers.forEach(function(layer) {
         stroke: layer.style.stroke,
         fill: layer.style.fill,
         opacity: layer.style.opacity,
-        fillOpacity: if(style.opacity >= 0.8) { 1 } else { style.opacity + 0.2 }
+        fillOpacity: layer.style.opacity + 0.2
     }
 
     console.log(style);
