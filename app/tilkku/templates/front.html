@@ -67,6 +67,7 @@ map.on("moveend", function () {
 var layers = {{ layers | safe }};
 layers.forEach(function(layer) {
     layer.layer = L.FeatureGroup();
+
     if(layer.style.opacity >= 0.8) {
         layer.style.fillopacity = 1;
     } else {
@@ -77,7 +78,8 @@ layers.forEach(function(layer) {
         fill: layer.style.fill,
         opacity: layer.style.opacity,
         fillOpacity: layer.style.fillopacity,
-    };
+    }
+
     layer.areas.forEach(function(area) {
         L.polygon(area.coordinates, style).addTo(layer.layer);
     });
