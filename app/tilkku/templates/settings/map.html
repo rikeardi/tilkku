@@ -2,22 +2,26 @@
 {% load static %}
 
 <div class="columns">
-    <div class="content p-3 column is-half">
-        <div class="field">
-            <label class="label">Taustakartta</label>
-            <div class="control">
-                <div class="select" style="width: 100%;">
-                    <select id="settings-map-bg" onchange="map_select_bg();"></select>
+    <div class="column is-half">
+        <div class="content p-3">
+            <div class="field">
+                <label class="label">Taustakartta</label>
+                <div class="control">
+                    <div class="select" style="width: 100%;">
+                        <select id="settings-map-bg" onchange="map_select_bg();"></select>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="content p-3 column is-half">
-        <div class="field">
-            <label class="label">Karttatasot</label>
-            <div class="control">
-                <div class="select is-multiple" style="width: 100%;">
-                    <select multiple size="8" id="settings-map-layers" onchange="map_select_layers();"></select>
+    <div class="column is-half">
+        <div class="content p-3">
+            <div class="field">
+                <label class="label">Karttatasot</label>
+                <div class="control">
+                    <div class="select is-multiple" style="width: 100%;">
+                        <select multiple size="8" id="settings-map-layers" onchange="map_select_layers();"></select>
+                    </div>
                 </div>
             </div>
         </div>
