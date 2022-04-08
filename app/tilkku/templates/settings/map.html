@@ -18,10 +18,7 @@
         <div class="content p-3">
             <div class="field">
                 <label class="label">Karttatasot</label>
-                <div class="control">
-                    <div class="select is-multiple" style="width: 100%;">
-                        <select multiple size="8" id="settings-map-layers" onchange="map_select_layers();"></select>
-                    </div>
+                <div id="settings-map-layers" class="control">
                 </div>
             </div>
         </div>
@@ -43,8 +40,8 @@ $(document).ready(function() {
         var selected = "";
         var layer = map_layers[i];
 
-        if(settings.map.layers.includes(i)) selected = " selected";
-        $("#settings-map-layers").append("<option value='" + i + "'" + selected + ">" + layer.name + "</option>");
+        if(settings.map.layers.includes(i)) selected = " checked";
+        $("#settings-map-layers").append("<label class='checkbox'><input type='checkbox' value='" + i + "'" + selected + " onchange='map_select_layer();'>" + layer.name + "</label>");</label>");
     }
 });
 
@@ -54,13 +51,16 @@ function map_select_bg() {
     map_set_bg();
 }
 
-function map_select_layers() {
-    settings.map.layers = [];
-    $("#settings-map-layers option:selected").each(function() {
-        settings.map.layers.push(parseInt($(this).val()));
-    });
+function map_select_layer() {
+    var layer = $("#settings-map-layers input:checked").val();
+    if(settings.map.layers.includes(layer)) {
+        settings.map.layers.splice(settings.map.layers.indexOf(layer), 1);
+    } else {
+        settings.map.layers.push(layer);
+    }
     refresh_settings();
     map_set_layers();
 }
+
 </script>
 {% endblock %}
