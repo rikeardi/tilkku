@@ -8,7 +8,7 @@
                 <label class="label">Taustakartta</label>
                 <div class="control">
                     <div class="select" style="width: 100%;">
-                        <select id="settings-map-bg" onchange="map_select_bg();"></select>
+                        <select id="settings-map-bg" style="width: 100%;" onchange="map_select_bg();"></select>
                     </div>
                 </div>
             </div>
@@ -41,7 +41,7 @@ $(document).ready(function() {
         var layer = map_layers[i];
 
         if(settings.map.layers.includes(i)) selected = " checked";
-        $("#settings-map-layers").append("<label class='checkbox'><input type='checkbox' value='" + i + "'" + selected + " onchange='map_select_layer();'>" + layer.name + "</label>");
+        $("#settings-map-layers").append("<label class='checkbox'><input type='checkbox' value='" + i + "'" + selected + " onchange='map_select_layer();'> " + layer.name + "</label>");
     }
 });
 
@@ -53,6 +53,7 @@ function map_select_bg() {
 
 function map_select_layer() {
     var layer = $("#settings-map-layers input:checked").val();
+    console.log(layer);
     if(settings.map.layers.includes(layer)) {
         settings.map.layers.splice(settings.map.layers.indexOf(layer), 1);
     } else {
