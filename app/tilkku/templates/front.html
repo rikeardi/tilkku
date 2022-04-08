@@ -73,8 +73,8 @@ map_layers.forEach(function(layer) {
     var style = {
         color: layer.style.stroke,
         fillColor: layer.style.fill,
-        opacity: layer.style.opacity,
-        fillOpacity: layer.style.opacity + 0.2
+        opacity: layer.style.opacity + 0.2,
+        fillOpacity: layer.style.opacity
     }
 
     layer.areas.forEach(function(area) {
