@@ -1,7 +1,7 @@
 {% block content %}
 <div class="content" style="height: calc(100% - 20px); overflow-y: clip;">
     <div id="events-event-box">
-        <div class="box p-2 mb-2 notification is-info">
+        <div class="event-item box p-2 mb-2 notification is-info">
             <div class="columns">
                 <div class="column is-quarter">
                     <i class="fa fa-info-circle" style="cursor:pointer" title="Lisätiedot"></i>
@@ -14,7 +14,7 @@
                 </div>
             </div>
         </div>
-        <div class="box p-2 mb-2 notification is-info">
+        <div class="event-item box p-2 mb-2 notification is-info">
             <div class="columns">
                 <div class="column is-quarter">
                     <i class="fa fa-info-circle" style="cursor:pointer" title="Lisätiedot"></i>
@@ -48,8 +48,10 @@
     </div>
 </div>
 <script>
-$(document).ready(function() {
-    $(".input-item").sortable();
+$(function() {
+    $(".input-item").sortable({
+        connectWith: ".event-item",
+    }).disableSelection();
 });
 </script>
 {% endblock %}
