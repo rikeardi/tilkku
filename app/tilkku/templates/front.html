@@ -42,18 +42,12 @@ var home = [61.205, 25.130];
 var home_zoom = 15;
 var map = L.map('map').setView(settings.map.center, settings.map.zoom);
 
-mapservers = {{ map_servers | safe }};
-console.log(mapservers);
+map_servers = {{ map_servers | safe }};
+console.log(map_servers);
 
-map_servers = [];
-mapservers.forEach(function(server) {
-    map_servers.push({
-        name: server.fields.name,
-        url: server.fields.url,
-        attribution: server.fields.attribution,
-        layer: L.tileLayer(server.fields.url, {
-            attribution: server.fields.attribution
-        })
+map_servers.forEach(function(server) {
+    server.layer = L.tileLayer(server.url, {
+        attribution: server.attribution,
     });
 });
 
