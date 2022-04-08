@@ -11,6 +11,6 @@ from map.serializers import *
 def home(request):
     context = {
         'map_servers': serialize('json', MapServer.objects.all()),
-        'layers': JSONRenderer.render(LayerSerializer(Layer.objects.all(), many=True).data),
+        'layers': JSONRenderer().render(LayerSerializer(Layer.objects.all(), many=True).data),
     }
     return render(request, 'front.html', context)
