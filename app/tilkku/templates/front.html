@@ -31,7 +31,7 @@ if(localStorage.getItem('settings') == null) {
     background: none;
     box-shadow: none;
     font-weight: bold;
-    font-size: 2em;
+    font-size: 1.4em;
     -webkit-text-stroke: 1px black;
 }
 </style>
@@ -122,6 +122,31 @@ function map_set_layers() {
     }
 }
 map_set_layers();
+
+var lastZoom;
+map.on('zoomend', function() {
+  var zoom = map.getZoom();
+  if (zoom < 15 && (!lastZoom || lastZoom >= 15)) {
+    map.eachLayer(function(l) {
+      if (l.getTooltip) {
+        var toolTip = l.getTooltip();
+        if (toolTip) {
+          this.map.closeTooltip(toolTip);
+        }
+      }
+    });
+  } else if (zoom >= 15 && (!lastZoom || lastZoom < 15)) {
+    map.eachLayer(function(l) {
+      if (l.getTooltip) {
+        var toolTip = l.getTooltip();
+        if (toolTip) {
+          this.map.addLayer(toolTip);
+        }
+      }
+    });
+  }
+  lastZoom = zoom;
+})
 
 </script>
 {% include 'settings.html' %}
