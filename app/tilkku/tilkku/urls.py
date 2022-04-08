@@ -18,7 +18,7 @@ from django.contrib.auth.decorators import login_required
 from django.urls import path, include
 from django.views.generic import TemplateView
 from rest_framework import routers
-import main
+from tilkku import main
 
 router = routers.DefaultRouter()
 router.register(r'', main.views.Home)
