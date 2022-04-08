@@ -126,7 +126,7 @@ map_set_layers();
 var lastZoom;
 map.on('zoomend', function() {
   var zoom = map.getZoom();
-  if (zoom < 15 && (!lastZoom || lastZoom >= 15)) {
+  if (zoom < 16 && (!lastZoom || lastZoom >= 16)) {
     map.eachLayer(function(l) {
       if (l.getTooltip) {
         var toolTip = l.getTooltip();
@@ -135,7 +135,7 @@ map.on('zoomend', function() {
         }
       }
     });
-  } else if (zoom >= 15 && (!lastZoom || lastZoom < 15)) {
+  } else if (zoom >= 16 && (!lastZoom || lastZoom < 16)) {
     map.eachLayer(function(l) {
       if (l.getTooltip) {
         var toolTip = l.getTooltip();
