@@ -78,6 +78,9 @@ map_layers.forEach(function(layer) {
     }
 
     layer.areas.forEach(function(area) {
+        for(var i = 0; i < area.coordinates.length; i++) {
+            area.coordinates[i] = [area.coordinates[i][0], area.coordinates[i][1]];
+        }
         L.polygon(area.coordinates, style).addTo(layer.layer);
     });
     layer.markers.forEach(function(marker) {
