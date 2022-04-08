@@ -67,22 +67,20 @@ map.on("moveend", function() {
 var layers = {{ layers | safe }};
 console.log(layers);
 layers.forEach(function(layer) {
+    console.log(layer);
     layer.layer = L.FeatureGroup();
 
-    if(layer.style.opacity >= 0.8) {
-        layer.style.fillopacity = 1;
-    } else {
-        layer.style.fillopacity = layer.style.opacity + 0.2;
-    }
     var style = {
         stroke: layer.style.stroke,
         fill: layer.style.fill,
         opacity: layer.style.opacity,
-        fillOpacity: layer.style.fillopacity
+        fillOpacity: if(style.opacity >= 0.8) { 1 } else { style.opacity + 0.2 }
     }
 
+    console.log(style);
+
     layer.areas.forEach(function(area) {
-        L.polygon(area.coordinates, style).addTo(layer.layer);
+        var alayer = L.polygon(area.coordinates, style).addTo(layer.layer);
     });
 //    layer.markers.forEach(function(marker) {
 //        L.marker(marker.coordinates, style).addTo(layer.layer);
