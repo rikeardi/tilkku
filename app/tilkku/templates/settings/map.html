@@ -57,7 +57,7 @@ function map_select_layer() {
     if(settings.map.layers.includes(layer)) {
         settings.map.layers.splice(settings.map.layers.indexOf(layer), 1);
     } else {
-        settings.map.layers.push(layer);
+        settings.map.layers.push(parseInt(layer));
     }
     refresh_settings();
     map_set_layers();
