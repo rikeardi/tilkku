@@ -18,10 +18,10 @@ from django.contrib.auth.decorators import login_required
 from django.urls import path, include
 from django.views.generic import TemplateView
 from rest_framework import routers
-import main
+from main import views
 
 router = routers.DefaultRouter()
-router.register(r'', main.views.Home)
+router.register(r'', views.Home)
 
 
 urlpatterns = [
