@@ -1,5 +1,14 @@
 {% block content %}
 {% load static %}
+<style>
+.event-item {
+    cursor: pointer;
+}
+.input-item {
+    cursor: pointer;
+    font-weight: 400;
+}
+</style>
 <div class="content" style="height: calc(100% - 20px); overflow-y: clip;">
     <div id="events-event-box">
         <div class="event-item box p-2 mb-2 notification is-info">
@@ -31,19 +40,19 @@
     </div>
     <hr>
     <div id="events-input-box">
-        <div class="input-item box p-2 mb-2 notification is-info is-light" style="font-weight: 400;">
+        <div class="input-item box p-2 mb-2 notification is-info is-light">
             <p>Halossa 3 leiriläistä ripulissa</p>
         </div>
-        <div class="input-item box p-2 mb-2 notification is-info is-light" style="font-weight: 400;">
+        <div class="input-item box p-2 mb-2 notification is-info is-light">
             <p>Ruokarekka ajanut ojaan rahtijärventien alkupäässä. Tie poikki.</p>
         </div>
-        <div class="input-item box p-2 mb-2 notification is-info is-light" style="font-weight: 400;">
+        <div class="input-item box p-2 mb-2 notification is-info is-light">
             <p>Maa-ampiaispesä Hehkussa</p>
         </div>
-        <div class="input-item box p-2 mb-2 notification is-info is-light" style="font-weight: 400;">
+        <div class="input-item box p-2 mb-2 notification is-info is-light">
             <p>Iltaohjelmaesiintyjä myöhästyy</p>
         </div>
-        <div class="input-item box p-2 mb-2 notification is-info is-light" style="font-weight: 400;">
+        <div class="input-item box p-2 mb-2 notification is-info is-light">
             <p>Sähkökatko alueella klo 22-23</p>
         </div>
     </div>
@@ -52,6 +61,9 @@
 $(function() {
     $("#events-input-box").sortable({
         connectWith: ".event-item",
+    }).disableSelection();
+    $("#events-item-box").sortable({
+        connectWith: "#map",
     }).disableSelection();
 });
 </script>
