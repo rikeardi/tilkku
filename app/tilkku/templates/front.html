@@ -71,8 +71,8 @@ map_layers.forEach(function(layer) {
     layer.layer = L.featureGroup();
 
     var style = {
-        stroke: layer.style.stroke,
-        fill: layer.style.fill,
+        color: layer.style.stroke,
+        fillColor: layer.style.fill,
         opacity: layer.style.opacity,
         fillOpacity: layer.style.opacity + 0.2
     }
