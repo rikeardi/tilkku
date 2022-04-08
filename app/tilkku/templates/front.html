@@ -81,7 +81,10 @@ map_layers.forEach(function(layer) {
         for(var i = 0; i < area.coordinates.length; i++) {
             area.coordinates[i] = [area.coordinates[i][1], area.coordinates[i][0]];
         }
-        L.polygon(area.coordinates, style).addTo(layer.layer);
+        area_layer = L.polygon(area.coordinates, style);
+        area_layer.bindTooltip(area.name,{permanent: true, direction:"center"});
+        area_layer.addTo(layer.layer)
+
     });
 
     layer.markers.forEach(function(marker) {
