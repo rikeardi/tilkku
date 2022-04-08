@@ -83,11 +83,11 @@ map_layers.forEach(function(layer) {
         }
         L.polygon(area.coordinates, style).addTo(layer.layer);
     });
+
     layer.markers.forEach(function(marker) {
         L.marker(marker.coordinates, style).addTo(layer.layer);
     });
 });
-console.log(map_layers);
 
 var map_active_layers = [];
 function map_set_layers() {
@@ -97,14 +97,13 @@ function map_set_layers() {
 
     for(var i = 0; i < map_layers.length; i++) {
         if(settings.map.layers.includes(i)) {
-            console.log(map_layers[i].layer);
             map_active_layers.push(map_layers[i]);
             map_layers[i].layer.addTo(map);
         }
     }
-    console.log(map);
 }
 map_set_layers();
+
 </script>
 {% include 'settings.html' %}
 {% endblock %}
