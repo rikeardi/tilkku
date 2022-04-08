@@ -65,6 +65,26 @@ map.on("moveend", function () {
 });
 
 var layers = {{ layers | safe }};
+layers.forEach(function(layer) {
+    layer.layer = L.FeatureGroup();
+    if(layer.style.opacity >= 0.8) {
+        layer.style.fillopacity = 1;
+    } else {
+        layer.style.fillopacity = layer.style.opacity + 0.2;
+    }
+    var style = {
+        stroke: layer.style.stroke,
+        fill: layer.style.fill,
+        opacity: layer.style.opacity,
+        fillOpacity: layer.style.fillopacity,
+    };
+    layer.areas.forEach(function(area) {
+        L.polygon(area.coordinates, style).addTo(layer.layer);
+    });
+    layer.markers.forEach(function(marker) {
+        L.polygon(marker.coordinates, style).addTo(layer.layer);
+    });
+});
 console.log(layers);
 
 </script>
