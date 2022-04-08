@@ -68,7 +68,7 @@ var layers = {{ layers | safe }};
 console.log(layers);
 layers.forEach(function(layer) {
     console.log(layer);
-    layer.layer = L.FeatureGroup();
+    layer.layer = L.featureGroup();
 
     var style = {
         stroke: layer.style.stroke,
