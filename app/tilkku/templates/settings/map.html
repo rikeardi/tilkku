@@ -57,10 +57,9 @@ function map_select_bg() {
 function map_select_layers() {
     settings.map.layers = [];
     $("#settings-map-layers option:selected").each(function() {
-        settings.map.layers.push($(this).val());
+        settings.map.layers.push(parseInt($(this).val()));
     });
     refresh_settings();
-    console.log(settings);
     map_set_layers();
 }
 </script>
