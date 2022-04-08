@@ -1,7 +1,7 @@
 from django.core.serializers import serialize
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
-from rest_framework.renderers import JSONRenderer
+from rest_framework.renderers import JSONRenderer, TemplateHTMLRenderer
 
 from map.models import *
 from map.serializers import *
@@ -13,4 +13,6 @@ def home(request):
         'map_servers': serialize('json', MapServer.objects.all()),
         'layers': JSONRenderer().render(LayerSerializer(Layer.objects.all(), many=True).data),
     }
-    return render(request, 'front.html', context)
+    return TemplateHTMLRenderer().render(request, 'front.html', context)
+
+
