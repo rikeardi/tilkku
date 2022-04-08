@@ -18,12 +18,14 @@ from django.contrib.auth.decorators import login_required
 from django.urls import path, include
 from django.views.generic import TemplateView
 from rest_framework import routers
+import main
 
 router = routers.DefaultRouter()
+router.register(r'', main.views.Home)
 
 
 urlpatterns = [
-    path('', include('main.urls')),
+    path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('admin/', admin.site.urls),
 ]
