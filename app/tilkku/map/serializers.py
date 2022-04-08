@@ -27,7 +27,7 @@ class LayerSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Layer
-        fields = ['id', 'name', 'type']
+        fields = '__all__'
 
 
 class MapServerSerializer(serializers.ModelSerializer):
