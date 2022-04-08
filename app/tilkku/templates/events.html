@@ -48,16 +48,8 @@
     </div>
 </div>
 <script>
-    $(document).ready(function() {
-        $('#events-event-box').on('click', '.fa-info-circle', function() {
-            $(this).parent().parent().parent().find('.input-item').toggleClass('is-active');
-        });
-        $('#events-event-box').on('click', '.fa-flag', function() {
-            $(this).parent().parent().parent().find('.input-itembox').toggleClass('is-active');
-        });
-        $('#events-event-box').on('click', '.fa-check', function() {
-            $(this).parent().parent().parent().find('.input-itembox').toggleClass('is-active');
-        });
-    });
+$(document).ready(function() {
+    $(".input-item").sortable();
+});
 </script>
 {% endblock %}
