@@ -1,5 +1,5 @@
 from django.db import models
-from map import Marker
+from map.models import Marker
 
 
 class Event(models.Model):
