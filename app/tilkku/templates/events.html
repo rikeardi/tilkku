@@ -73,6 +73,30 @@ $(function() {
     $("#events-event-box").sortable({
         connectWith: "#map",
     }).disableSelection();
+
+    $(".event-item").droppable({
+        accept: ".input-item",
+        drop: function(event, ui) {
+            console.log(event);
+            console.log(ui);/*
+            var item = ui.draggable;
+            var event_id = $(this).attr("id");
+            var input_id = item.attr("id");
+            $.ajax({
+                url: "/tilkku/events/add_input",
+                type: "POST",
+                data: {
+                    event_id: event_id,
+                    input_id: input_id,
+                },
+                success: function(data) {
+                    if (data.success) {
+                        item.remove();
+                    }
+                }
+            });*/
+        }
+    });
 });
 </script>
 {% endblock %}
