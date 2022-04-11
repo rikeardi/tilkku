@@ -83,6 +83,8 @@ function map_set_scale() {
     }
 }
 
+map_set_scale();
+
 map.on("moveend", function() {
     settings.map.center = map.getCenter();
     settings.map.zoom = map.getZoom();
