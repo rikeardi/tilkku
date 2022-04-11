@@ -74,7 +74,33 @@ map.on("moveend", function() {
     refresh_settings();
 });
 
+function map_set_names() {
+  var zoom = map.getZoom();
+  if (zoom < 16 && (!lastZoom || lastZoom >= 16)) {
+    map.eachLayer(function(l) {
+      if (l.getTooltip) {
+        var toolTip = l.getTooltip();
+        if (toolTip) {
+          this.map.closeTooltip(toolTip);
+        }
+      }
+    });
+  } else if (zoom >= 16 && (!lastZoom || lastZoom < 16)) {
+    map.eachLayer(function(l) {
+      if (l.getTooltip) {
+        var toolTip = l.getTooltip();
+        if (toolTip) {
+          this.map.addLayer(toolTip);
+        }
+      }
+    });
+  }
+  lastZoom = zoom;
+}
+
 var map_layers = {{ layers | safe }};
+
+var lastZoom;
 
 map_layers.forEach(function(layer) {
     layer.layer = L.featureGroup();
@@ -99,15 +125,15 @@ map_layers.forEach(function(layer) {
         }
         area_layer = L.polygon(area.coordinates, style);
         area_layer.bindTooltip("<div style='color: " + layer.style.stroke + ";'>" + area.name + "</div>", tooltip_style);
-        area_layer.addTo(layer.layer)
-        if(map.getZoom() < 16) {
-            map.closeTooltip(area_layer);
-        }
+        area_layer.addTo(layer.layer);
     });
 
     layer.markers.forEach(function(marker) {
         L.marker(marker.coordinates, style).addTo(layer.layer);
     });
+
+    lastZoom = map.getZoom();
+    map_set_names();
 });
 
 var map_active_layers = [];
@@ -125,30 +151,9 @@ function map_set_layers() {
 }
 map_set_layers();
 
-var lastZoom;
 map.on('zoomend', function() {
-  var zoom = map.getZoom();
-  if (zoom < 16 && (!lastZoom || lastZoom >= 16)) {
-    map.eachLayer(function(l) {
-      if (l.getTooltip) {
-        var toolTip = l.getTooltip();
-        if (toolTip) {
-          this.map.closeTooltip(toolTip);
-        }
-      }
-    });
-  } else if (zoom >= 16 && (!lastZoom || lastZoom < 16)) {
-    map.eachLayer(function(l) {
-      if (l.getTooltip) {
-        var toolTip = l.getTooltip();
-        if (toolTip) {
-          this.map.addLayer(toolTip);
-        }
-      }
-    });
-  }
-  lastZoom = zoom;
-})
+  map_set_names();
+});
 
 </script>
 {% include 'settings.html' %}
