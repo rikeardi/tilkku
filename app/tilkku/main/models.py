@@ -5,7 +5,7 @@ from map.models import Marker
 class Event(models.Model):
     title = models.CharField(max_length=100)
     subtitle = models.CharField(max_length=300)
-    location = models.ForeignKey(map.Marker, on_delete=models.CASCADE)
+    location = models.ForeignKey(Marker, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title
