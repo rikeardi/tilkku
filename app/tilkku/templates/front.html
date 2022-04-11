@@ -74,6 +74,8 @@ map.on("moveend", function() {
     refresh_settings();
 });
 
+var lastZoom;
+
 function map_set_names() {
   var zoom = map.getZoom();
   if (zoom < 16 && (!lastZoom || lastZoom >= 16)) {
@@ -100,7 +102,6 @@ function map_set_names() {
 
 var map_layers = {{ layers | safe }};
 
-var lastZoom;
 
 map_layers.forEach(function(layer) {
     layer.layer = L.featureGroup();
