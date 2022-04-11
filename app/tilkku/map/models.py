@@ -51,3 +51,19 @@ class MapServer(models.Model):
 
     def __str__(self):
         return f'{self.name}'
+
+
+class SiteCategory(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return f'{self.name}'
+
+
+class Site(models.Model):
+    name = models.CharField(max_length=100)
+    category = models.ForeignKey(SiteCategory, on_delete=models.DO_NOTHING)
+    description = models.TextField()
+
+    def __str__(self):
+        return f'{self.name}'
