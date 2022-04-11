@@ -76,9 +76,10 @@ map_scale = L.control.scale({
 });
 
 function map_set_scale() {
-    map.scale.remove();
     if(settings.map.scale == 1) {
         map_scale.addTo(map);
+    } else {
+        map_scale.remove();
     }
 }
 
