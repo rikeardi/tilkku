@@ -12,6 +12,15 @@
                     </div>
                 </div>
             </div>
+            <div class="field">
+                <label class="label">Mittakaava</label>
+                <div class="control">
+                    <div class="select" style="width: 100%;">
+                        <label class="checkbox">
+                            <input type="checkbox" onchange='map_toggle_scale();'>Näkyvissä</label>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="column is-half">
@@ -34,6 +43,10 @@ $(document).ready(function() {
 
         if(settings.map.server == i) selected = " selected";
         $("#settings-map-bg").append("<option value='" + i + "'" + selected + ">" + server.name + "</option>");
+
+        if(settings.map.scale == 1) {
+            $("#settings-map-scale").prop("checked", true);
+        }
     }
 
     for(var i=0;i<map_layers.length;i++) {
@@ -60,6 +73,12 @@ function map_select_layer() {
     });
     refresh_settings();
     map_set_layers();
+}
+
+function map_toggle_scale() {
+    settings.map.scale = $("#settings-map-scale").is(":checked") ? 1 : 0;
+    refresh_settings();
+    map_set_scale();
 }
 
 </script>

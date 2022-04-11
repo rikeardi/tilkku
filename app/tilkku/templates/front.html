@@ -11,7 +11,8 @@ var settings = {
         },
         zoom: 15,
         server: 0,
-        layers: []
+        layers: [],
+        scale: 1
     }
 }
 
@@ -66,6 +67,19 @@ var map_background = map_servers[settings.map.server].layer.addTo(map);
 function map_set_bg() {
     map_background.remove();
     map_background = map_servers[settings.map.server].layer.addTo(map);
+}
+
+map_scale = L.control.scale({
+    imperial: false,
+    metric: true,
+    position: 'bottomleft'
+});
+
+function map_set_scale() {
+    map.scale.remove();
+    if(settings.map.scale == 1) {
+        map_scale.addTo(map);
+    }
 }
 
 map.on("moveend", function() {
