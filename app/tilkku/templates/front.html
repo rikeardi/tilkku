@@ -99,8 +99,10 @@ map_layers.forEach(function(layer) {
         }
         area_layer = L.polygon(area.coordinates, style);
         area_layer.bindTooltip("<div style='color: " + layer.style.stroke + ";'>" + area.name + "</div>", tooltip_style);
+        if(map.getZoom() < 16) {
+            area_layer.closeTooltip();
+        }
         area_layer.addTo(layer.layer)
-
     });
 
     layer.markers.forEach(function(marker) {
