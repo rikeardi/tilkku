@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 <script>
-var settings = {
+var default_settings = {
     menu: "visible",
     tool: "chat",
     map: {
@@ -20,11 +20,20 @@ function refresh_settings() {
     localStorage.setItem('settings', JSON.stringify(settings));
 }
 
+function compare_settings(settings) {
+    for(const [key, value] of Object.entries(default_settings)) {
+        console.log(key, value);
+    }
+}
+
 if(localStorage.getItem('settings') == null) {
+    settings = default_settings;
     refresh_settings();
 } else {
     settings = JSON.parse(localStorage.getItem('settings'));
+
 }
+
 </script>
 <style>
 .leaflet-tooltip {
