@@ -22,7 +22,6 @@ function refresh_settings() {
 
 function compare_objects(obj1, obj2) {
     for(const [key, value] of Object.entries(obj1)) {
-        console.log(typeof value);
         if(typeof value == "object") {
             compare_objects(obj1[key], obj2[key]);
         } else {
