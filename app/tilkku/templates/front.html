@@ -20,10 +20,18 @@ function refresh_settings() {
     localStorage.setItem('settings', JSON.stringify(settings));
 }
 
-function compare_settings(settings) {
-    for(const [key, value] of Object.entries(default_settings)) {
-        console.log(key, value);
+function compare_objects(obj1, obj2) {
+    for(const [key, value] of Object.entries(obj1)) {
+        if(obj1[key].type == "object") {
+            compare_objects(obj1[key], obj2[key]);
+        } else {
+            console.log(key, value);
+        }
     }
+}
+
+function compare_settings(settings) {
+    compare_objects(default_settings, settings);
 }
 
 if(localStorage.getItem('settings') == null) {
