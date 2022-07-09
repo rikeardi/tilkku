@@ -28,6 +28,7 @@ class Layer(models.Model):
 
 class Area(models.Model):
     name = models.CharField(max_length=200)
+    subtitle = models.CharField(max_length=300, blank=True, default='')
     layer = models.ForeignKey(Layer, related_name="areas", on_delete=models.DO_NOTHING)
     coordinates = models.JSONField()
 
@@ -62,6 +63,8 @@ class SiteCategory(models.Model):
 
 class Site(models.Model):
     name = models.CharField(max_length=100)
+    area = models.ForeignKey(Area, on_delete=models.DO_NOTHING, blank=True, null=True)
+    marker = models.ForeignKey(Marker, on_delete=models.DO_NOTHING, blank=True, null=True)
     category = models.ForeignKey(SiteCategory, on_delete=models.DO_NOTHING)
     description = models.TextField()
 
