@@ -1,6 +1,6 @@
 version: "3.9"
 services:
-  postgres:
+  tilkku_postgres:
     container_name: tilkku_postgres
     image: postgres
     environment:
@@ -11,12 +11,12 @@ services:
     volumes:
       - ./db/data:/var/lib/postgresql/data
 
-  redis:
+  tilkku_redis:
     container_name: tilkku_redis
     image: redis
     restart: unless-stopped
 
-  web:
+  tilkku_web:
     container_name: tilkku_web
     build: .
     ports:
@@ -25,7 +25,7 @@ services:
       POSTGRES_USER: ${DBUSER}
       POSTGRES_PASS: ${DBPASS}
       POSTGRES_DBNAME: ${DBNAME}
-      POSTGRES_HOST: postgres
+      POSTGRES_HOST: tilkku_postgres
       DJANGO_SUPERUSER_USERNAME: ${ADMIN_USER}
       DJANGO_SUPERUSER_EMAIL: ${ADMIN_EMAIL}
       DJANGO_SUPERUSER_PASSWORD: ${ADMIN_PASS}

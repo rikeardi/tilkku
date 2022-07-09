@@ -31,7 +31,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-CSRF_TRUSTED_ORIGINS = ['https://rikeardi.duckdns.org', 'https://reki.jamboree.fi']
+CSRF_TRUSTED_ORIGINS = ['https://rikeardi.duckdns.org']
 
 
 # Application definition
@@ -104,7 +104,7 @@ CHANNEL_LAYERS = {
    "default": {
       "BACKEND": "channels_redis.core.RedisChannelLayer",
       "CONFIG": {
-         "hosts": [("redis", 6379)],
+         "hosts": [("tilkku_redis", 6379)],
       },
    }
 }
