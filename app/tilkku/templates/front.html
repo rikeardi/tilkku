@@ -119,19 +119,8 @@ map.on("moveend", function() {
 var lastZoom;
 
 function map_set_names() {
-  if(!settings.map.names) {
-    map.eachLayer(function(l) {
-      if (l.getTooltip) {
-        var toolTip = l.getTooltip();
-        if(toolTip) {
-          this.map.closeTooltip(toolTip);
-        }
-      }
-    });
-    return;
-  }
   var zoom = map.getZoom();
-  if (zoom < 16 && (!lastZoom || lastZoom >= 16)) {
+  if ((zoom < 16 && (!lastZoom || lastZoom >= 16)) || !settings.map.names) {
     map.eachLayer(function(l) {
       if (l.getTooltip) {
         var toolTip = l.getTooltip();
@@ -140,7 +129,7 @@ function map_set_names() {
         }
       }
     });
-  } else if (zoom >= 16 && (!lastZoom || lastZoom < 16)) {
+  } else if (zoom >= 16 && (!lastZoom || lastZoom < 16) && settings.map.names) {
     map.eachLayer(function(l) {
       if (l.getTooltip) {
         var toolTip = l.getTooltip();
