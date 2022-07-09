@@ -50,6 +50,9 @@ $(document).ready(function() {
         if(settings.map.scale == 1) {
             $("#settings-map-scale").prop("checked", true);
         }
+        if(settings.map.names == 1) {
+            $("#settings-map-names").prop("checked", true);
+        }
     }
 
     for(var i=0;i<map_layers.length;i++) {
