@@ -18,6 +18,12 @@
                     <label class="checkbox"><input id="settings-map-scale" type="checkbox" onchange='map_toggle_scale();'> Näkyvissä</label>
                 </div>
             </div>
+            <div class="field">
+                <label class="label">Nimet</label>
+                <div class="control">
+                    <label class="checkbox"><input id="settings-map-names" type="checkbox" onchange='map_toggle_names();'> Näkyvissä</label>
+                </div>
+            </div>
         </div>
     </div>
     <div class="column is-half">
@@ -76,6 +82,12 @@ function map_toggle_scale() {
     settings.map.scale = $("#settings-map-scale").is(":checked") ? 1 : 0;
     refresh_settings();
     map_set_scale();
+}
+
+function map_toggle_names() {
+    settings.map.names = $("#settings-map-names").is(":checked") ? 1 : 0;
+    refresh_settings();
+    map_set_names();
 }
 
 </script>
