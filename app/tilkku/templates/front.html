@@ -121,7 +121,7 @@ var lastZoom;
 function map_set_names() {
   if(!settings.map.names) {
     map.eachLayer(function(l) {
-      if(l.getTooltip) {
+      if (l.getTooltip) {
         var toolTip = l.getTooltip();
         if(toolTip) {
           this.map.closeTooltip(toolTip);
