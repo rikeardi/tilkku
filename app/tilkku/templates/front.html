@@ -190,31 +190,9 @@ function load_layers() {
         }
     }
 }
-load_layers();
 
 function map_set_layers() {
     load_layers();
-    /*for(var i = 0; i < map_layers.length; i++) {
-        map_layers[i].layer.remove();
-    }
-
-    for(var i = 0; i < map_layers.length; i++) {
-        if(settings.map.layers.includes(i)) {
-            map_layers[i].layer.addTo(map);
-        } else {
-            console.log(map_layers[i].layer);
-            map_layers[i].layer.setStyle({
-                opacity: 0,
-                fillOpacity: 0
-            });
-            var tooltip = map_layers[i].layer.getTooltip();
-            if(tooltip) {
-                tooltip.remove();
-            }
-
-            map_layers[i].layer.addTo(map);
-        }
-    }/*
 }
 map_set_layers();
 
