@@ -87,9 +87,9 @@ function highlight_active(id) {
 }
 
 function highlight_passive(area) {
-    console.log(area.coordinates);
     area_layer = L.polygon(area.coordinates, site_highlight_style);
     area_layer.bindTooltip("<div style='color: #ff0000;'>" + area.name + "</div>", site_tooltip_style);
+    area_layer.options.type = "passive_highlight";
     area_layer.addTo(map);
     area_layer.on("click", function(e) {
         console.log(e.target.options);
@@ -122,6 +122,11 @@ function remove_highlight_active(id) {
 }
 
 function remove_highlight_passive() {
+    map.eachLayer(function(layer) {
+        if(layer.options.type == "passive_highlight") {
+            map.removeLayer(layer);
+        }
+    });
     map.removeLayer(site_highlight_layer);
 }
 
