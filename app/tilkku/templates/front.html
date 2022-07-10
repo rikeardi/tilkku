@@ -149,8 +149,9 @@ var map_highlighted_markers = [];
 function load_layers() {
     for(var i = 0; i < map_layers.length; i++) {
         var layer = map_layers[i];
+        layer.active = false;
         if(settings.map.layers.includes(i)) {
-            console.log("adding layer " + i);
+            layer.active = true;
             layer.layer = L.featureGroup();
 
             var style = {
@@ -188,8 +189,6 @@ function load_layers() {
 
             map_set_names();
         }
-        console.log(layer);
-        console.log(settings.map.layers);
     }
 }
 
