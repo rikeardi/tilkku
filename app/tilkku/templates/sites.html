@@ -39,6 +39,11 @@ $("#sites-site-search").on('keyup', function() {
 
 function show_site_area(id) {
     console.log(map_all_layers[id]);
-}
+    var highlight = {
+        color: '#ff0000',
+        opacity: 0.9,
+        fillOpacity: 0.9
+    };
+    map_all_layers[id].setStyle(highlight);
 </script>
 {% endblock %}
