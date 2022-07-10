@@ -24,8 +24,9 @@ function search_sites() {
                     mouseout = ' onmouseout="hide_site_area(' + data[i].area.id + ')"';
                 } else if(data[i].marker != null) {
                     mouseover = ' onmouseover="show_site_marker(' + data[i].marker.id + ')"';
+                    mouseout = ' onmouseout="hide_site_marker(' + data[i].marker.id + ')"';
                 }
-                var row = $('<tr' + mouseover + '>');
+                var row = $('<tr' + mouseover + mouseout + '>');
                 row.append($('<td>').text(data[i].name));
                 table.append(row);
             }
