@@ -57,7 +57,7 @@ function show_site_area(id) {
             if(layer.areas[i].id == id) {
                 var area = layer.areas[i];
                 if(area.active) {
-                    higlight_active(area.id);
+                    highlight_active(area.id);
                 } else {
                     highlight_passive(area);
                 }
@@ -90,7 +90,7 @@ function highlight_passive(area) {
         area.coordinates[i] = [area.coordinates[i][1], area.coordinates[i][0]];
     }
     area_layer = L.polygon(area.coordinates, polydata);
-    area_layer.bindTooltip("<div style='color: " + layer.style.stroke + ";'>" + area.name + "</div>", tooltip_style);
+    area_layer.bindTooltip("<div style='color: #ff0000;'>" + area.name + "</div>", tooltip_style);
     area_layer.addTo(site_highlight_layer);
     area_layer.on("click", function(e) {
         console.log(e.target.options);
