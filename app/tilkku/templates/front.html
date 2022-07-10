@@ -197,6 +197,10 @@ function map_set_layers() {
                 opacity: 0,
                 fillOpacity: 0
             });
+            var tooltip = map_layers[i].layer.getTooltip();
+            if(tooltip) {
+                map.closeTooltip(tooltip);
+            }
             map_active_layers.push(map_layers[i]);
 
             map_layers[i].layer.addTo(map);
