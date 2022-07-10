@@ -123,7 +123,7 @@ var lastZoom;
 function map_set_names() {
     var zoom = map.getZoom();
     map_layers.forEach(function(layer) {
-        console.log(zoom, layer.style.min_zoom, layer.style.max_zoom);
+
         if(layer.active) {
             layer.layer.eachLayer(function(layer2) {
                 var tooltip = layer2.getTooltip();
@@ -131,7 +131,7 @@ function map_set_names() {
                     this.map.closeTooltip(tooltip);
                 }
                 if(tooltip && layer.style.min_zoom <= zoom <= layer.style.max_zoom && settings.map.names) {
-                    console.log("tooltip");
+                    console.log(zoom, layer.style.min_zoom, layer.style.max_zoom);
                     this.map.addLayer(tooltip);
                 }
             });
