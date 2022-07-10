@@ -123,6 +123,7 @@ var lastZoom;
 function map_set_names() {
   var zoom = map.getZoom();
   map_layers.forEach(function(layer) {
+    console.log(layer);
     if(layer.active) {
         console.log(layer.min_zoom, layer.max_zoom);
     }
