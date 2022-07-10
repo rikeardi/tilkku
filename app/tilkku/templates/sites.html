@@ -43,7 +43,11 @@ function show_site_area(id) {
         opacity: 0.9,
         fillOpacity: 0.9
     };
-    console.log(map.layers);
+    map.eachLayer(function(layer) {
+        if(layer.options.id == id) {
+            layer.setStyle(highlight);
+        }
+    });
 }
 </script>
 {% endblock %}
