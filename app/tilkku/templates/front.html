@@ -145,11 +145,11 @@ function map_set_names() {
 var map_layers = {{ layers | safe }};
 var map_highlighted_areas = [];
 var map_highlighted_markers = [];
+var map_highlight_layer = L.featureGroup();
 
-function load_layers() {
+function map_load_layers() {
     for(var i = 0; i < map_layers.length; i++) {
         var layer = map_layers[i];
-        layer.active = false;
 
         var style = {
             color: layer.style.stroke,
@@ -165,13 +165,11 @@ function load_layers() {
         }
 
         if(settings.map.layers.includes(i)) {
-            layer.active = true;
             layer.layer = L.featureGroup();
 
             layer.areas.forEach(function(area) {
                 var polydata = style;
                 polydata.id = area.id;
-                polydata.active = true;
                 for(var i = 0; i < area.coordinates.length; i++) {
                     area.coordinates[i] = [area.coordinates[i][1], area.coordinates[i][0]];
                 }
@@ -181,10 +179,14 @@ function load_layers() {
                 area_layer.on("click", function(e) {
                     console.log(e.target.options);
                 });
+
+                area.active = true;
             });
 
             layer.markers.forEach(function(marker) {
                 L.marker(marker.coordinates, style).addTo(layer.layer);
+
+                marker.active = true;
             });
 
             layer.layer.addTo(map);
@@ -193,30 +195,57 @@ function load_layers() {
             layer.layer = L.featureGroup();
 
             layer.areas.forEach(function(area) {
-                var polydata = style;
-                polydata.id = area.id;
-                polydata.active = false;
-                for(var i = 0; i < area.coordinates.length; i++) {
-                    area.coordinates[i] = [area.coordinates[i][1], area.coordinates[i][0]];
-                }
-                area_layer = L.polygon(area.coordinates, polydata);
-                area_layer.bindTooltip("<div style='color: " + layer.style.stroke + ";'>" + area.name + "</div>", tooltip_style);
-                area_layer.addTo(layer.layer);
-                area_layer.on("click", function(e) {
-                    console.log(e.target.options);
-                });
+                area.active = false;
             });
 
             layer.markers.forEach(function(marker) {
-                L.marker(marker.coordinates, style).addTo(layer.layer);
+                marker.active = false;
             });
         }
+
         map_set_names();
     }
+
+    var highlight_style = {
+        color: "#ff0000",
+        fillColor: "#ff0000",
+        opacity: 0.9,
+        fillOpacity: 0.7
+    }
+
+    map_highlight_layer.eachLayer(function(l) {
+        l.remove();
+    });
+
+    map.removeLayer(map_highlight_layer);
+
+    for(var i = 0; i < map_highlighted_areas.length; i++) {
+        var polydata = highlight_style;
+        if(map_highlighted_areas[i].active) {
+            map.eachLayer(function(l) {
+                if(l.options.id == map_highlighted_areas[i].id) {
+                    l.setStyle(polydata);
+                }
+            });
+        } else {
+            polydata.id = area.id;
+            for(var i = 0; i < area.coordinates.length; i++) {
+                area.coordinates[i] = [area.coordinates[i][1], area.coordinates[i][0]];
+            }
+            area_layer = L.polygon(area.coordinates, polydata);
+            area_layer.bindTooltip("<div style='color: " + layer.style.stroke + ";'>" + area.name + "</div>", tooltip_style);
+            area_layer.addTo(layer.layer);
+            area_layer.on("click", function(e) {
+                console.log(e.target.options);
+            });
+        }
+    }
+
+    map_highlight_layer.addTo(map);
 }
 
 function map_set_layers() {
-    load_layers();
+    map_load_layers();
 }
 map_set_layers();
 

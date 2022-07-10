@@ -52,8 +52,13 @@ var highlight = {
 function show_site_area(id) {
     found = false;
     map_layers.forEach(function(layer) {
-        console.log(layer);
+        for(var i = 0; i < layer.areas.length; i++) {
+            if(layer.areas[i].id == id) {
+                map_highlighted_areas.push(layer.areas[i]);
+            }
+        }
     });
+    map_set_layers();
 }
 
 function hide_site_area(id) {
