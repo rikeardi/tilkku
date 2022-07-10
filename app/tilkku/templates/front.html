@@ -172,7 +172,6 @@ function map_load_layers() {
             opacity: layer.style.opacity + 0.2,
             permanent: true,
             direction: "center",
-            'font-size': layer.style.fontsize + "px",
         }
 
         if(settings.map.layers.includes(i)) {
@@ -182,7 +181,7 @@ function map_load_layers() {
                 var polydata = style;
                 polydata.id = area.id;
                 area_layer = L.polygon(area.coordinates, polydata);
-                area_layer.bindTooltip("<div style='color: " + layer.style.stroke + ";'>" + area.name + "</div>", tooltip_style);
+                area_layer.bindTooltip("<div style='color: " + layer.style.stroke + "; font-size: " + layer.style.font_size + "px'>" + area.name + "</div>", tooltip_style);
                 area_layer.addTo(layer.layer);
                 area_layer.on("click", function(e) {
                     console.log(e.target.options);
