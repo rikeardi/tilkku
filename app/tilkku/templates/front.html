@@ -181,8 +181,11 @@ function map_load_layers() {
             direction: "center",
         }
 
+        layer.active = false;
+
         if(settings.map.layers.includes(i)) {
             layer.layer = L.featureGroup();
+            layer.active = true;
 
             layer.areas.forEach(function(area) {
                 var polydata = style;
