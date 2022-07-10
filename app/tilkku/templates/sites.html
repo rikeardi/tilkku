@@ -11,8 +11,8 @@
     function search_sites() {
         var search = $('#sites-site-search').val();
         $.ajax({
-            url: '{{ url_for("sites.search") }}',
-            type: 'POST',
+            url: 'api/sites/' + search,
+            type: 'GET',
             data: {
                 search: search
             },

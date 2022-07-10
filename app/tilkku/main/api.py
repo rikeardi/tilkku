@@ -75,3 +75,11 @@ class SiteSerializer(serializers.ModelSerializer):
 class SiteViewSet(viewsets.ModelViewSet):
     queryset = Site.objects.all()
     serializer_class = SiteSerializer
+
+    def get_queryset(self):
+        queryset = Site.objects.all()
+        name = self.request.query_params.get('name', None)
+        if name is not None:
+            queryset = queryset.filter(name__icontains=name)
+
+        return queryset
