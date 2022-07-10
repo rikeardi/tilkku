@@ -221,7 +221,8 @@ function map_load_layers() {
 
     for(var i = 0; i < map_highlighted_areas.length; i++) {
         var polydata = highlight_style;
-        if(map_highlighted_areas[i].active) {
+        var area = map_highlighted_areas[i];
+        if(area.active) {
             map.eachLayer(function(l) {
                 if(l.options.id == map_highlighted_areas[i].id) {
                     l.setStyle(polydata);
