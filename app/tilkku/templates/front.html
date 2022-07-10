@@ -188,12 +188,13 @@ function load_layers() {
             });
 
             layer.layer.addTo(map);
-
-            map_set_names();
         } else {
             style.opacity = 0;
             style.fillOpacity = 0;
             tooltip_style.opacity = 0;
+
+            layer.active = false;
+            layer.layer = L.featureGroup();
 
             layer.areas.forEach(function(area) {
                 var polydata = style;
@@ -209,7 +210,14 @@ function load_layers() {
                     console.log(e.target.options);
                 });
             });
+
+            layer.markers.forEach(function(marker) {
+                L.marker(marker.coordinates, style).addTo(layer.layer);
+            });
+
+            layer.layer.addTo(map);
         }
+        map_set_names();
     }
 }
 
