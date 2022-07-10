@@ -70,7 +70,7 @@ function show_site_area(id) {
                         area.coordinates[i] = [area.coordinates[i][1], area.coordinates[i][0]];
                     }
                     area_layer = L.polygon(area.coordinates, polydata);
-                    area_layer.bindTooltip("<div style='color: " + layer.style.stroke + ";'>" + area.name + "</div>", tooltip_style);
+                    area_layer.bindTooltip("<div style='color: " + layer.style.stroke + ";'>" + area.name + "</div>", highlight);
                     area_layer.on("click", function(e) {
                         console.log(e.target.options);
                     });
