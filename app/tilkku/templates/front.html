@@ -184,6 +184,8 @@ function load_layers() {
                 L.marker(marker.coordinates, style).addTo(layer.layer);
             });
 
+            layer.layer.addTo(map);
+
             map_set_names();
         }
         console.log(layer);
