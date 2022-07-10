@@ -30,6 +30,8 @@ class LayerViewSet(viewsets.ModelViewSet):
 
 
 class AreaSerializer(serializers.ModelSerializer):
+    layer = LayerSerializer(read_only=True)
+
     class Meta:
         model = Area
         fields = ('id', 'name', 'subtitle', 'layer', 'coordinates')
