@@ -110,6 +110,7 @@ function hide_site_area(id) {
         for(var i = 0; i < layer.areas.length; i++) {
             if(layer.areas[i].id == id) {
                 var area = layer.areas[i];
+                console.log(area);
                 if(area.active) {
                     remove_highlight_active(area.id);
                 } else {
