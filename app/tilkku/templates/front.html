@@ -125,12 +125,12 @@ function map_set_names() {
     map_layers.forEach(function(layer) {
         console.log(layer);
         if(layer.active) {
-            if((zoom < layer.style.max_zoom && (!lastZoom || lastZoom >= layer.style.max_zoom)) || !setting.map.names) {
+            if((zoom < layer.style.max_zoom && (!lastZoom || lastZoom >= layer.style.max_zoom)) || !settings.map.names) {
                 var tooltip = layer.layer.getTooltip();
                 if(tooltip) {
                     this.map.closeTooltip(tooltip);
                 }
-            } else if(zoom >= layer.style.min_zoom && (!lastZoom || lastZoom < layer.style.min_zoom) || setting.map.names) {
+            } else if(zoom >= layer.style.min_zoom && (!lastZoom || lastZoom < layer.style.min_zoom) || settings.map.names) {
                 var tooltip = layer.layer.getTooltip();
                 if(tooltip) {
                     this.map.addLayer(toolTip);
