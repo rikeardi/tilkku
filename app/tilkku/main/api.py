@@ -40,6 +40,17 @@ class AreaViewSet(viewsets.ModelViewSet):
     serializer_class = AreaSerializer
 
 
+class MarkerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Marker
+        fields = ('id', 'name', 'layer', 'coordinates')
+
+
+class MarkerViewSet(viewsets.ModelViewSet):
+    queryset = Marker.objects.all()
+    serializer_class = MarkerSerializer
+
+
 class SiteCategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = SiteCategory
@@ -52,6 +63,9 @@ class SiteCategoryViewSet(viewsets.ModelViewSet):
 
 
 class SiteSerializer(serializers.ModelSerializer):
+    area = AreaSerializer(read_only=True)
+    category = SiteCategorySerializer(read_only=True)
+
     class Meta:
         model = Site
         fields = ('id', 'name', 'area', 'marker', 'category', 'description')
