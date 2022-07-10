@@ -106,6 +106,30 @@ function highlight_passive(area) {
 }
 
 function hide_site_area(id) {
+    map_layers.forEach(function(layer) {
+        for(var i = 0; i < layer.areas.length; i++) {
+            if(layer.areas[i].id == id) {
+                var area = layer.areas[i];
+                if(area.active) {
+                    remove_highlight_active(area.id);
+                } else {
+                    remove_highlight_passive(area);
+                }
+            }
+        }
+    });
+}
+
+function remove_highlight_active(id) {
+    map.foreachLayer(function(layer) {
+        if(layer.options.id == id) {
+            layer.setStyle(layer.options.originalStyle);
+        }
+    });
+}
+
+function remove_highlight_passive(area) {
+    map.removeLayer(site_highlight_layer);
 }
 
 function goto_site_area(id) {
