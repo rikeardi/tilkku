@@ -18,5 +18,10 @@ function search_sites() {
         }
     });
 }
+search_sites();
+
+$("#sites-site-search").on('keyup', function() {
+    search_sites();
+});
 </script>
 {% endblock %}
