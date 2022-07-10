@@ -151,10 +151,10 @@ function goto_active_area(id) {
     });
 }
 
-function goto_passive_area(id) {
-    highlight_passive(id);
+function goto_passive_area(area) {
+    highlight_passive(area);
     map.eachLayer(function(layer) {
-        if(layer.options.id == id) {
+        if(layer.options.id == area.id) {
             map.fitBounds(layer.getBounds());
         }
     });
