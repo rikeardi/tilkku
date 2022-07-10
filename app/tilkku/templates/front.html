@@ -152,6 +152,7 @@ function load_layers() {
     });
 
     for(var i = 0; i < map_layers.length; i++) {
+        layer = map_layers[i];
         if(settings.map.layers.includes(i)) {
             layer.layer = L.featureGroup();
 
