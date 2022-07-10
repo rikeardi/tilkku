@@ -134,9 +134,9 @@ function goto_site_area(id) {
             if(layer.areas[i].id == id) {
                 var area = layer.areas[i];
                 if(area.active) {
-                    goto_active(area.id);
+                    goto_active_area(area.id);
                 } else {
-                    goto_passive(area);
+                    goto_passive_area(area);
                 }
             }
         }
@@ -152,7 +152,12 @@ function goto_active_area(id) {
 }
 
 function goto_passive_area(id) {
-
+    highlight_passive(id);
+    map.eachLayer(function(layer) {
+        if(layer.options.id == id) {
+            map.fitBounds(layer.getBounds());
+        }
+    });
 }
 
 </script>
