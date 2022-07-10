@@ -39,13 +39,13 @@ $("#sites-site-search").on('keyup', function() {
     search_sites();
 });
 
-function show_site_area(id) {
-    var highlight = {
-        color: '#ff0000',
-        opacity: 0.9,
-        fillOpacity: 0.9
-    };
+var highlight = {
+    color: '#ff0000',
+    opacity: 0.9,
+    fillOpacity: 0.9
+};
 
+function show_site_area(id) {
     found = false;
     map.eachLayer(function(layer) {
         if(layer.options.id == id) {
@@ -64,11 +64,6 @@ function show_site_area(id) {
         map_layers.forEach(function(layer) {
             layer.areas.forEach(function(area) {
                 if(area.id == id) {
-                    area.layer.options.originalStyle = {
-                        color: area.layer.options.color,
-                        opacity: area.layer.options.opacity,
-                        fillOpacity: area.layer.options.fillOpacity
-                    };
                     area.layer.setStyle(highlight);
                     area.layer.addTo(map);
                 }
