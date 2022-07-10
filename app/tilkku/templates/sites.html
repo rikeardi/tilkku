@@ -65,7 +65,7 @@ function hide_site_area(id) {
     console.log(map_highlighted_areas, map_highlight_layer);
     map_highlight_layer.eachLayer(function(l) {
         if(l.options.id == id) {
-            l.remove();
+            map_highlight_layer.removeLayer(l);
         }
     });
     for(var i = 0; i < map_highlighted_areas.length; i++) {
