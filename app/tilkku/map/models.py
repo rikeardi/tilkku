@@ -15,7 +15,7 @@ class MapStyle(models.Model):
     min_zoom = models.IntegerField(default=5)
     max_zoom = models.IntegerField(default=16)
     font_size = models.IntegerField(default=18)
-    stroke_width = models.FloatField()
+    stroke_width = models.FloatField(default=2)
 
     class Meta:
         ordering = ['name']
