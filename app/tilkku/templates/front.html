@@ -194,7 +194,8 @@ function map_set_layers() {
         } else {
             console.log(map_layers[i].layer);
             map_layers[i].layer.setStyle({
-                opacity: 0.2
+                opacity: 0
+                fillOpacity: 0
             });
             map_active_layers.push(map_layers[i]);
 
