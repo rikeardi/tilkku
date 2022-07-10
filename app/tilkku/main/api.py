@@ -38,8 +38,21 @@ class AreaSerializer(serializers.ModelSerializer):
 
 
 class AreaViewSet(viewsets.ModelViewSet):
-    queryset = Area.objects.all()
+    queryset = Area.objects.all().order_by('name')
     serializer_class = AreaSerializer
+
+    def get_queryset(self):
+        queryset = Area.objects.all().order_by('name')
+
+        layer_id = self.request.query_params.get('layer_id', None)
+        if layer_id is not None:
+            queryset = queryset.filter(layer_id=layer_id)
+
+        layer = self.request.query_params.get('layer', None)
+        if layer is not None:
+            queryset = queryset.filter(layer__name=layer)
+
+        return queryset
 
 
 class MarkerSerializer(serializers.ModelSerializer):
