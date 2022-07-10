@@ -171,7 +171,8 @@ function map_load_layers() {
         var tooltip_style = {
             opacity: layer.style.opacity + 0.2,
             permanent: true,
-            direction: "center"
+            direction: "center",
+            font-size: layer.style.fontsize,
         }
 
         if(settings.map.layers.includes(i)) {
