@@ -130,7 +130,7 @@ function map_set_names() {
                 if(tooltip) {
                     this.map.closeTooltip(tooltip);
                 }
-                if(tooltip && layer.style.min_zoom <= zoom <= layer.style.max_zoom && settings.map.names) {
+                if(tooltip && zoom <= layer.style.min_zoom && zoom <= layer.style.max_zoom && settings.map.names) {
                     console.log(zoom, layer.style.min_zoom, layer.style.max_zoom);
                     this.map.addLayer(tooltip);
                 }
