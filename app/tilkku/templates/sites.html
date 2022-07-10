@@ -153,6 +153,7 @@ function goto_active_area(id) {
 
 function goto_passive_area(area) {
     map.eachLayer(function(layer) {
+        console.log(layer.options.id, area.id);
         if(layer.options.id == area.id) {
             map.fitBounds(layer.getBounds());
             return;
