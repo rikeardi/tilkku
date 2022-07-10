@@ -50,7 +50,6 @@ var highlight = {
 };
 
 function show_site_area(id) {
-    found = false;
     map_layers.forEach(function(layer) {
         for(var i = 0; i < layer.areas.length; i++) {
             if(layer.areas[i].id == id) {
@@ -64,6 +63,7 @@ function show_site_area(id) {
 function hide_site_area(id) {
     console.log(map_highlighted_areas, map_highlight_layer);
     map_highlight_layer.eachLayer(function(l) {
+        console.log(l);
         if(l.options.id == id) {
             map_highlight_layer.removeLayer(l);
         }
