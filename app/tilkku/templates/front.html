@@ -162,10 +162,15 @@ map_layers.forEach(function(layer) {
     }
 
     layer.areas.forEach(function(area) {
+        var polydata = style.clone();
+        polydata.id = area.id;
+        polydata.click = function(e) {
+            console.log(e);
+        }
         for(var i = 0; i < area.coordinates.length; i++) {
             area.coordinates[i] = [area.coordinates[i][1], area.coordinates[i][0]];
         }
-        area_layer = L.polygon(area.coordinates, style);
+        area_layer = L.polygon(area.coordinates, polydata);
         area_layer.bindTooltip("<div style='color: " + layer.style.stroke + ";'>" + area.name + "</div>", tooltip_style);
         area_layer.addTo(layer.layer);
     });

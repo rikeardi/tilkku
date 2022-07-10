@@ -18,7 +18,13 @@ function search_sites() {
             var table = $('#sites-site-table');
             table.html('');
             for (var i = 0; i < data.length; i++) {
-                var row = $('<tr>');
+                var keyup = '';
+                if(data[i].area != null) {
+                    keyup = ' keyup="show_site_area(' + data[i].area.id + ')"';
+                } else if(data[i].marker != null) {
+                    keyup = ' keyup="show_site_marker(' + data[i].marker.id + ')"';
+                }
+                var row = $('<tr' + keyup + '>');
                 row.append($('<td>').text(data[i].name));
                 table.append(row);
             }
@@ -30,5 +36,9 @@ search_sites();
 $("#sites-site-search").on('keyup', function() {
     search_sites();
 });
+
+function show_site_area(id) {
+
+}
 </script>
 {% endblock %}
