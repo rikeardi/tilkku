@@ -143,46 +143,58 @@ function map_set_names() {
 }
 
 var map_layers = {{ layers | safe }};
+var map_highlighted_areas = [];
+var map_highlighted_markers = [];
 
-map_layers.forEach(function(layer) {
-    layer.layer = L.featureGroup();
+function load_layers() {
+    map.eachLayer(function(l) {
+        map.removeLayer(l);
+    });
 
-    var style = {
-        color: layer.style.stroke,
-        fillColor: layer.style.fill,
-        opacity: layer.style.opacity + 0.2,
-        fillOpacity: layer.style.opacity
-    }
+    for(var i = 0; i < map_layers.length; i++) {
+        if(settings.map.layers.includes(i)) {
+            layer.layer = L.featureGroup();
 
-    var tooltip_style = {
-        opacity: layer.style.opacity + 0.2,
-        permanent: true,
-        direction: "center"
-    }
+            var style = {
+                color: layer.style.stroke,
+                fillColor: layer.style.fill,
+                opacity: layer.style.opacity + 0.2,
+                fillOpacity: layer.style.opacity
+            }
 
-    layer.areas.forEach(function(area) {
-        var polydata = style;
-        polydata.id = area.id;
-        for(var i = 0; i < area.coordinates.length; i++) {
-            area.coordinates[i] = [area.coordinates[i][1], area.coordinates[i][0]];
+            var tooltip_style = {
+                opacity: layer.style.opacity + 0.2,
+                permanent: true,
+                direction: "center"
+            }
+
+            layer.areas.forEach(function(area) {
+                var polydata = style;
+                polydata.id = area.id;
+                for(var i = 0; i < area.coordinates.length; i++) {
+                    area.coordinates[i] = [area.coordinates[i][1], area.coordinates[i][0]];
+                }
+                area_layer = L.polygon(area.coordinates, polydata);
+                area_layer.bindTooltip("<div style='color: " + layer.style.stroke + ";'>" + area.name + "</div>", tooltip_style);
+                area_layer.addTo(layer.layer);
+                area_layer.on("click", function(e) {
+                    console.log(e.target.options);
+                });
+            });
+
+            layer.markers.forEach(function(marker) {
+                L.marker(marker.coordinates, style).addTo(layer.layer);
+            });
+
+            map_set_names();
         }
-        area_layer = L.polygon(area.coordinates, polydata);
-        area_layer.bindTooltip("<div style='color: " + layer.style.stroke + ";'>" + area.name + "</div>", tooltip_style);
-        area_layer.addTo(layer.layer);
-        area_layer.on("click", function(e) {
-            console.log(e.target.options);
-        });
     });
-
-    layer.markers.forEach(function(marker) {
-        L.marker(marker.coordinates, style).addTo(layer.layer);
-    });
-
-    map_set_names();
-});
+}
+load_layers();
 
 function map_set_layers() {
-    for(var i = 0; i < map_layers.length; i++) {
+    load_layers();
+    /*for(var i = 0; i < map_layers.length; i++) {
         map_layers[i].layer.remove();
     }
 
@@ -197,14 +209,12 @@ function map_set_layers() {
             });
             var tooltip = map_layers[i].layer.getTooltip();
             if(tooltip) {
-                tooltip.setStyle({
-                    opacity: 0,
-                });
+                tooltip.remove();
             }
 
             map_layers[i].layer.addTo(map);
         }
-    }
+    }/*
 }
 map_set_layers();
 
