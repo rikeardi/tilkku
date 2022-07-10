@@ -188,7 +188,6 @@ function map_set_layers() {
 
     for(var i = 0; i < map_layers.length; i++) {
         if(settings.map.layers.includes(i)) {
-            map_active_layers.push(map_layers[i]);
             map_layers[i].layer.addTo(map);
         } else {
             console.log(map_layers[i].layer);
@@ -202,7 +201,6 @@ function map_set_layers() {
                     opacity: 0,
                 });
             }
-            map_active_layers.push(map_layers[i]);
 
             map_layers[i].layer.addTo(map);
         }
