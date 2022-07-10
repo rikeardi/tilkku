@@ -45,8 +45,11 @@ function show_site_area(id) {
         opacity: 0.9,
         fillOpacity: 0.9
     };
+
+    found = false;
     map.eachLayer(function(layer) {
         if(layer.options.id == id) {
+            found = true;
             console.log(layer);
             layer.options.originalStyle = {
                 color: layer.options.color,
@@ -56,12 +59,27 @@ function show_site_area(id) {
             layer.setStyle(highlight);
         }
     });
+
+    if(!found) {
+        map_layers.forEach(function(layer) {
+            layer.areas.forEach(function(area) {
+                if(area.id == id) {
+                    area.layer.options.originalStyle = {
+                        color: area.layer.options.color,
+                        opacity: area.layer.options.opacity,
+                        fillOpacity: area.layer.options.fillOpacity
+                    };
+                    area.layer.setStyle(highlight);
+                    area.layer.addTo(map);
+                }
+            });
+        });
+    }
 }
 
 function hide_site_area(id) {
     map.eachLayer(function(layer) {
         if(layer.options.id == id) {
-
             layer.setStyle(layer.options.originalStyle);
         }
     });
