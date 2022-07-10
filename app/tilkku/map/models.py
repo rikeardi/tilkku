@@ -13,6 +13,9 @@ class MapStyle(models.Model):
     fill = models.CharField(max_length=10)
     opacity = models.FloatField()
 
+    class Meta:
+        ordering = ['name']
+
     def __str__(self):
         return f'{self.name}'
 
@@ -21,6 +24,9 @@ class Layer(models.Model):
     name = models.CharField(max_length=100)
     type = models.CharField(max_length=2, choices=LayerType.choices, default=LayerType.AREA)
     style = models.ForeignKey(MapStyle, on_delete=models.DO_NOTHING)
+
+    class Meta:
+        ordering = ['name']
 
     def __str__(self):
         return f'{self.name}'
@@ -32,6 +38,9 @@ class Area(models.Model):
     layer = models.ForeignKey(Layer, related_name="areas", on_delete=models.DO_NOTHING)
     coordinates = models.JSONField()
 
+    class Meta:
+        ordering = ['name']
+
     def __str__(self):
         return f'{self.name}'
 
@@ -40,6 +49,9 @@ class Marker(models.Model):
     name = models.CharField(max_length=200)
     layer = models.ForeignKey(Layer, related_name="markers", on_delete=models.DO_NOTHING)
     coordinates = models.TextField()
+
+    class Meta:
+        ordering = ['name']
 
     def __str__(self):
         return f'{self.name}'
@@ -57,6 +69,9 @@ class MapServer(models.Model):
 class SiteCategory(models.Model):
     name = models.CharField(max_length=100)
 
+    class Meta:
+        ordering = ['name']
+
     def __str__(self):
         return f'{self.name}'
 
@@ -67,6 +82,9 @@ class Site(models.Model):
     marker = models.ForeignKey(Marker, on_delete=models.DO_NOTHING, blank=True, null=True)
     category = models.ForeignKey(SiteCategory, on_delete=models.DO_NOTHING)
     description = models.TextField(blank=True, default='')
+
+    class Meta:
+        ordering = ['name']
 
     def __str__(self):
         return f'{self.name}'
