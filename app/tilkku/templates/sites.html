@@ -14,7 +14,14 @@ function search_sites() {
         url: 'api/sites/?name=' + search + '/',
         type: 'GET',
         success: function(data) {
-            $('#sites-site-table').html(data);
+            console.log(data);
+            var table = $('#sites-site-table');
+            table.html('');
+            for (var i = 0; i < data.length; i++) {
+                var row = $('<tr>');
+                row.append($('<td>').text(data[i].name));
+                table.append(row);
+            }
         }
     });
 }
