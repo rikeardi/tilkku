@@ -45,6 +45,7 @@ function show_site_area(id) {
     };
     map.eachLayer(function(layer) {
         if(layer.options.id == id) {
+            console.log(layer);
             layer.setStyle(highlight);
         }
     });
