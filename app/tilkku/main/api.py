@@ -4,7 +4,7 @@ from datetime import datetime
 from django.db.models import Q
 from rest_framework import serializers, viewsets, generics
 from rest_framework.response import Response
-from .models import *
+from main.models import *
 
 
 class MapStyleSerializer(serializers.ModelSerializer):
