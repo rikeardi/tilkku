@@ -30,7 +30,7 @@ function search_sites() {
                              ' onmouseout="hide_site_marker(' + data[i].marker.id + ')"' +
                              ' onclick="goto_site_marker(' + data[i].marker.id + ')"';
                 }
-                var row = $('<tr style="cursor: pointer;" onclick="goto_site_area(' + data')"' + mouseover + mouseout + '>');
+                var row = $('<tr style="cursor: pointer;"' + events + '>');
                 row.append($('<td>').text(data[i].name));
                 table.append(row);
             }
