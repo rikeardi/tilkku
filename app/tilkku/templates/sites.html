@@ -62,6 +62,7 @@ function show_site_area(id) {
 }
 
 function hide_site_area(id) {
+    console.log(map_highlighted_areas, map_highlight_layer);
     map_highlight_layer.eachLayer(function(l) {
         if(l.options.id == id) {
             l.remove();
