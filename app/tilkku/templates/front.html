@@ -150,26 +150,28 @@ function load_layers() {
     for(var i = 0; i < map_layers.length; i++) {
         var layer = map_layers[i];
         layer.active = false;
+
+        var style = {
+            color: layer.style.stroke,
+            fillColor: layer.style.fill,
+            opacity: layer.style.opacity + 0.2,
+            fillOpacity: layer.style.opacity
+        }
+
+        var tooltip_style = {
+            opacity: layer.style.opacity + 0.2,
+            permanent: true,
+            direction: "center"
+        }
+
         if(settings.map.layers.includes(i)) {
             layer.active = true;
             layer.layer = L.featureGroup();
 
-            var style = {
-                color: layer.style.stroke,
-                fillColor: layer.style.fill,
-                opacity: layer.style.opacity + 0.2,
-                fillOpacity: layer.style.opacity
-            }
-
-            var tooltip_style = {
-                opacity: layer.style.opacity + 0.2,
-                permanent: true,
-                direction: "center"
-            }
-
             layer.areas.forEach(function(area) {
                 var polydata = style;
                 polydata.id = area.id;
+                polydata.active = true;
                 for(var i = 0; i < area.coordinates.length; i++) {
                     area.coordinates[i] = [area.coordinates[i][1], area.coordinates[i][0]];
                 }
@@ -188,6 +190,25 @@ function load_layers() {
             layer.layer.addTo(map);
 
             map_set_names();
+        } else {
+            style.opacity = 0;
+            style.fillOpacity = 0;
+            tooltip_style.opacity = 0;
+
+            layer.areas.forEach(function(area) {
+                var polydata = style;
+                polydata.id = area.id;
+                polydata.active = false;
+                for(var i = 0; i < area.coordinates.length; i++) {
+                    area.coordinates[i] = [area.coordinates[i][1], area.coordinates[i][0]];
+                }
+                area_layer = L.polygon(area.coordinates, polydata);
+                area_layer.bindTooltip("<div style='color: " + layer.style.stroke + ";'>" + area.name + "</div>", tooltip_style);
+                area_layer.addTo(layer.layer);
+                area_layer.on("click", function(e) {
+                    console.log(e.target.options);
+                });
+            });
         }
     }
 }
