@@ -122,6 +122,11 @@ var lastZoom;
 
 function map_set_names() {
   var zoom = map.getZoom();
+  map_layers.forEach(function(layer) {
+    if(layer.active) {
+        console.log(layer.min_zoom, layer.max_zoom);
+    }
+  });
   if ((zoom < 16 && (!lastZoom || lastZoom >= 16)) || !settings.map.names) {
     map.eachLayer(function(l) {
       if (l.getTooltip) {
