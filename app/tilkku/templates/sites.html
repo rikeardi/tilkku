@@ -8,18 +8,15 @@
 </div>
 
 <script>
-    function search_sites() {
-        var search = $('#sites-site-search').val();
-        $.ajax({
-            url: 'api/sites/' + search,
-            type: 'GET',
-            data: {
-                search: search
-            },
-            success: function(data) {
-                $('#sites-site-table').html(data);
-            }
-        });
-    }
+function search_sites() {
+    var search = $('#sites-site-search').val();
+    $.ajax({
+        url: 'api/sites/?name=' + search + '/',
+        type: 'GET',
+        success: function(data) {
+            $('#sites-site-table').html(data);
+        }
+    });
+}
 </script>
 {% endblock %}
