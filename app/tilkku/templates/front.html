@@ -192,6 +192,10 @@ function map_set_layers() {
         if(settings.map.layers.includes(i)) {
             map_active_layers.push(map_layers[i]);
             map_layers[i].layer.addTo(map);
+        } else {
+            map_layers[i].layer.hide();
+            map_active_layers.push(map_layers[i]);
+            map_layers[i].layer.addTo(map);
         }
     }
 }
