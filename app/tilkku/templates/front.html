@@ -146,6 +146,14 @@ function map_set_names() {
 
 var map_layers = {{ layers | safe }};
 
+map_layers.forEach(function(layer) {
+    layer.areas.forEach(function(area) {
+        for(var i = 0; i < area.coordinates.length; i++) {
+            area.coordinates[i] = [area.coordinates[i][1], area.coordinates[i][0]];
+        }
+    });
+});
+
 function map_load_layers() {
     for(var i = 0; i < map_layers.length; i++) {
         var layer = map_layers[i];
@@ -172,9 +180,6 @@ function map_load_layers() {
             layer.areas.forEach(function(area) {
                 var polydata = style;
                 polydata.id = area.id;
-                for(var i = 0; i < area.coordinates.length; i++) {
-                    area.coordinates[i] = [area.coordinates[i][1], area.coordinates[i][0]];
-                }
                 area_layer = L.polygon(area.coordinates, polydata);
                 area_layer.bindTooltip("<div style='color: " + layer.style.stroke + ";'>" + area.name + "</div>", tooltip_style);
                 area_layer.addTo(layer.layer);
