@@ -90,7 +90,6 @@ function highlight_passive(area) {
     map.removeLayer(site_highlight_layer);
 
     var polydata = site_highlight_style;
-    polydata.id = area.id;
     for(var i = 0; i < area.coordinates.length; i++) {
         area.coordinates[i] = [area.coordinates[i][1], area.coordinates[i][0]];
     }
