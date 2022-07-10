@@ -131,7 +131,6 @@ function map_set_names() {
                     this.map.closeTooltip(tooltip);
                 }
                 if(tooltip && zoom >= layer.style.min_zoom && zoom <= layer.style.max_zoom && settings.map.names) {
-                    console.log(zoom, layer.style.min_zoom, layer.style.max_zoom);
                     this.map.addLayer(tooltip);
                 }
             });
