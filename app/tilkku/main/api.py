@@ -64,6 +64,7 @@ class SiteCategoryViewSet(viewsets.ModelViewSet):
 
 class SiteSerializer(serializers.ModelSerializer):
     area = AreaSerializer(read_only=True)
+    marker = MarkerSerializer(read_only=True)
     category = SiteCategorySerializer(read_only=True)
 
     class Meta:
