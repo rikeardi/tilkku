@@ -22,13 +22,15 @@ function search_sites() {
             for (var i = 0; i < data.length; i++) {
                 var keyup = '';
                 if(data[i].area != null) {
-                    mouseover = ' onmouseover="show_site_area(' + data[i].area.id + ')"';
-                    mouseout = ' onmouseout="hide_site_area(' + data[i].area.id + ')"';
+                    events = ' onmouseover="show_site_area(' + data[i].area.id + ')"' +
+                             ' onmouseout="hide_site_area(' + data[i].area.id + ')"' +
+                             ' onclick="goto_site_area(' + data[i].area.id + ')"';
                 } else if(data[i].marker != null) {
-                    mouseover = ' onmouseover="show_site_marker(' + data[i].marker.id + ')"';
-                    mouseout = ' onmouseout="hide_site_marker(' + data[i].marker.id + ')"';
+                    events = ' onmouseover="show_site_marker(' + data[i].marker.id + ')"' +
+                             ' onmouseout="hide_site_marker(' + data[i].marker.id + ')"' +
+                             ' onclick="goto_site_marker(' + data[i].marker.id + ')"';
                 }
-                var row = $('<tr' + mouseover + mouseout + '>');
+                var row = $('<tr style="cursor: pointer;" onclick="goto_site_area(' + data')"' + mouseover + mouseout + '>');
                 row.append($('<td>').text(data[i].name));
                 table.append(row);
             }
@@ -69,6 +71,14 @@ function hide_site_area(id) {
     map.eachLayer(function(layer) {
         if(layer.options.id == id) {
             layer.setStyle(layer.options.originalStyle);
+        }
+    });
+}
+
+function goto_site_area(id) {
+    map.eachLayer(function(layer) {
+        if(layer.options.id == id) {
+            map.fitBounds(layer.getBounds());
         }
     });
 }
