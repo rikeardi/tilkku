@@ -12,6 +12,9 @@ class MapStyle(models.Model):
     stroke = models.CharField(max_length=10)
     fill = models.CharField(max_length=10)
     opacity = models.FloatField()
+    min_zoom = models.IntegerField(default=5)
+    max_zoom = models.IntegerField(default=16)
+    font_size = models.IntegerField(default=18)
 
     class Meta:
         ordering = ['name']
