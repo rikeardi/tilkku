@@ -88,7 +88,6 @@ function highlight_active(id) {
 
 function highlight_passive(area) {
     map.removeLayer(site_highlight_layer);
-    site_highlight_layer = L.featureGroup();
 
     var polydata = site_highlight_style;
     polydata.id = area.id;
@@ -97,12 +96,12 @@ function highlight_passive(area) {
     }
     area_layer = L.polygon(area.coordinates, polydata);
     area_layer.bindTooltip("<div style='color: #ff0000;'>" + area.name + "</div>", site_tooltip_style);
-    area_layer.addTo(site_highlight_layer);
+    area_layer.addTo(map);
     area_layer.on("click", function(e) {
         console.log(e.target.options);
     });
 
-    site_highlight_layer.addTo(map);
+    site_highlight_layer = area_layer;
 }
 
 function hide_site_area(id) {
@@ -114,7 +113,7 @@ function hide_site_area(id) {
                 if(area.active) {
                     remove_highlight_active(area.id);
                 } else {
-                    remove_highlight_passive(area);
+                    remove_highlight_passive();
                 }
             }
         }
@@ -129,7 +128,7 @@ function remove_highlight_active(id) {
     });
 }
 
-function remove_highlight_passive(area) {
+function remove_highlight_passive() {
     map.removeLayer(site_highlight_layer);
 }
 
