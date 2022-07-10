@@ -218,6 +218,81 @@ map.on('zoomend', function() {
     map_set_names();
 });
 
+var site_highlight_layer = L.featureGroup();
+
+var site_highlight_style = {
+    color: "#ff0000",
+    fillColor: "#ff0000",
+    opacity: 0.7,
+    fillOpacity: 0.5
+}
+
+var site_tooltip_style = {
+    opacity: 0.7,
+    permanent: true,
+    direction: "center"
+}
+
+function highlight_active(id) {
+    map.foreachLayer(function(layer) {
+        if(layer.options.id == id) {
+            layer.options.originalStyle = {
+                color: layer.options.color,
+                fillColor: layer.options.fillColor,
+                opacity: layer.options.opacity,
+                fillOpacity: layer.options.fillOpacity
+            };
+            layer.setStyle(site_highlight_style);
+        }
+    });
+}
+
+function highlight_passive(area) {
+    map.removeLayer(site_highlight_layer);
+    site_highlight_layer = L.featureGroup();
+
+    var polydata = site_highlight_style;
+    polydata.id = area.id;
+    for(var i = 0; i < area.coordinates.length; i++) {
+        area.coordinates[i] = [area.coordinates[i][1], area.coordinates[i][0]];
+    }
+    area_layer = L.polygon(area.coordinates, polydata);
+    area_layer.bindTooltip("<div style='color: #ff0000;'>" + area.name + "</div>", site_tooltip_style);
+    area_layer.addTo(site_highlight_layer);
+    area_layer.on("click", function(e) {
+        console.log(e.target.options);
+    });
+
+    site_highlight_layer.addTo(map);
+}
+
+function hide_site_area(id) {
+    map_layers.forEach(function(layer) {
+        for(var i = 0; i < layer.areas.length; i++) {
+            if(layer.areas[i].id == id) {
+                var area = layer.areas[i];
+                if(area.active) {
+                    remove_highlight_active(area.id);
+                } else {
+                    remove_highlight_passive(area);
+                }
+            }
+        }
+    });
+}
+
+function remove_highlight_active(id) {
+    map.foreachLayer(function(layer) {
+        if(layer.options.id == id) {
+            layer.setStyle(layer.options.originalStyle);
+        }
+    });
+}
+
+function remove_highlight_passive(area) {
+    map.removeLayer(site_highlight_layer);
+}
+
 </script>
 {% include 'settings.html' %}
 {% endblock %}
