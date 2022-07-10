@@ -189,10 +189,6 @@ function load_layers() {
 
             layer.layer.addTo(map);
         } else {
-            style.display = 'none';
-            style.fillOpacity = 0;
-            tooltip_style.opacity = 0;
-
             layer.active = false;
             layer.layer = L.featureGroup();
 
@@ -214,8 +210,6 @@ function load_layers() {
             layer.markers.forEach(function(marker) {
                 L.marker(marker.coordinates, style).addTo(layer.layer);
             });
-
-            layer.layer.addTo(map);
         }
         map_set_names();
     }
