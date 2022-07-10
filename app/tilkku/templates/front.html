@@ -149,9 +149,7 @@ var map_highlight_layer = L.featureGroup();
 
 function map_load_layers() {
     map.eachLayer(function(l) {
-        if(l.options.layer_id) {
-            map.removeLayer(l);
-        }
+        map.removeLayer(l);
     });
 
     for(var i = 0; i < map_layers.length; i++) {
