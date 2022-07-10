@@ -66,7 +66,7 @@ class Site(models.Model):
     area = models.ForeignKey(Area, on_delete=models.DO_NOTHING, blank=True, null=True)
     marker = models.ForeignKey(Marker, on_delete=models.DO_NOTHING, blank=True, null=True)
     category = models.ForeignKey(SiteCategory, on_delete=models.DO_NOTHING)
-    description = models.TextField()
+    description = models.TextField(blank=True, default='')
 
     def __str__(self):
         return f'{self.name}'
