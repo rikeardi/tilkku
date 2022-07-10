@@ -21,6 +21,7 @@ function search_sites() {
                 var keyup = '';
                 if(data[i].area != null) {
                     mouseover = ' onmouseover="show_site_area(' + data[i].area.id + ')"';
+                    mouseout = ' onmouseout="hide_site_area(' + data[i].area.id + ')"';
                 } else if(data[i].marker != null) {
                     mouseover = ' onmouseover="show_site_marker(' + data[i].marker.id + ')"';
                 }
@@ -46,9 +47,19 @@ function show_site_area(id) {
     map.eachLayer(function(layer) {
         if(layer.options.id == id) {
             console.log(layer);
+            layer.options.originalStyle = layer.options.style;
             layer.setStyle(highlight);
         }
     });
 }
+
+function hide_site_area(id) {
+    map.eachLayer(function(layer) {
+        if(layer.options.id == id) {
+            layer.setStyle(layer.options.originalStyle);
+        }
+    });
+}
+
 </script>
 {% endblock %}
