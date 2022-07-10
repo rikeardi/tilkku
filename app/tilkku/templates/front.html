@@ -181,10 +181,9 @@ map_layers.forEach(function(layer) {
     map_set_names();
 });
 
-var map_active_layers = [];
 function map_set_layers() {
-    for(var i = 0; i < map_active_layers.length; i++) {
-        map_active_layers[i].layer.remove();
+    for(var i = 0; i < map_layers.length; i++) {
+        map_layers[i].layer.remove();
     }
 
     for(var i = 0; i < map_layers.length; i++) {
@@ -199,7 +198,9 @@ function map_set_layers() {
             });
             var tooltip = map_layers[i].layer.getTooltip();
             if(tooltip) {
-                map.closeTooltip(tooltip);
+                tooltip.setStyle({
+                    opacity: 0,
+                });
             }
             map_active_layers.push(map_layers[i]);
 
