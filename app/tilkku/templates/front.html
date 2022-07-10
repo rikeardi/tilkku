@@ -162,7 +162,7 @@ map_layers.forEach(function(layer) {
     }
 
     layer.areas.forEach(function(area) {
-        var polydata = style.clone();
+        var polydata = style;
         polydata.id = area.id;
         polydata.click = function(e) {
             console.log(e);
