@@ -186,6 +186,7 @@ function map_set_layers() {
     for(var i = 0; i < map_active_layers.length; i++) {
         map_active_layers[i].layer.remove();
     }
+    console.log(map_layers, map_active_layers);
 
     for(var i = 0; i < map_layers.length; i++) {
         if(settings.map.layers.includes(i)) {
