@@ -51,17 +51,8 @@ var highlight = {
 
 function show_site_area(id) {
     found = false;
-    map.eachLayer(function(layer) {
-        if(layer.options.id == id) {
-            found = true;
-            layer.options.originalStyle = {
-                color: layer.options.color,
-                fillColor: layer.options.fillColor,
-                opacity: layer.options.opacity,
-                fillOpacity: layer.options.fillOpacity
-            };
-            layer.setStyle(highlight);
-        }
+    map_layers.forEach(function(layer) {
+        console.log(layer);
     });
 }
 
