@@ -16,7 +16,6 @@ function search_sites() {
         url: 'api/sites/?name=' + search,
         type: 'GET',
         success: function(data) {
-            console.log(data);
             var table = $('#sites-site-table');
             table.html('');
             for (var i = 0; i < data.length; i++) {
@@ -55,7 +54,6 @@ function show_site_area(id) {
     map.eachLayer(function(layer) {
         if(layer.options.id == id) {
             found = true;
-            console.log(layer);
             layer.options.originalStyle = {
                 color: layer.options.color,
                 fillColor: layer.options.fillColor,
