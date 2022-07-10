@@ -193,6 +193,7 @@ function map_set_layers() {
             map_layers[i].layer.addTo(map);
         } else {
             map_active_layers.push(map_layers[i]);
+            map_layers[i].layer.setDisplay(false);
             map_layers[i].layer.addTo(map);
             console.log(map_layers[i].layer);
         }
