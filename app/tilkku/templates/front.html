@@ -122,8 +122,8 @@ var lastZoom;
 
 function map_set_names() {
     var zoom = map.getZoom();
+    console.log(zoom);
     map_layers.forEach(function(layer) {
-        console.log(layer);
         if(layer.active) {
             if((zoom < layer.style.max_zoom && (!lastZoom || lastZoom >= layer.style.max_zoom)) || !settings.map.names) {
                 var tooltip = layer.layer.getTooltip();
