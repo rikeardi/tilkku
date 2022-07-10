@@ -147,12 +147,8 @@ var map_highlighted_areas = [];
 var map_highlighted_markers = [];
 
 function load_layers() {
-    map.eachLayer(function(l) {
-        map.removeLayer(l);
-    });
-
     for(var i = 0; i < map_layers.length; i++) {
-        layer = map_layers[i];
+        var layer = map_layers[i];
         if(settings.map.layers.includes(i)) {
             layer.layer = L.featureGroup();
 
