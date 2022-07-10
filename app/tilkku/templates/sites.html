@@ -42,31 +42,30 @@ $("#sites-site-search").on('keyup', function() {
     search_sites();
 });
 
-var highlight = {
-    color: '#ff0000',
-    fillColor: '#ff0000',
+var site_highlight_layer = L.featureGroup();
+
+var site_highlight_style = {
+    color: "#ff0000",
+    fillColor: "#ff0000",
     opacity: 0.9,
     fillOpacity: 0.7
-};
+}
 
 function show_site_area(id) {
+    map.removeLayer(site_highlight_layer);
+    site_highlight_layer = L.featureGroup();
+
     map_layers.forEach(function(layer) {
         for(var i = 0; i < layer.areas.length; i++) {
             if(layer.areas[i].id == id) {
-                map_highlighted_areas.push(layer.areas[i]);
+                var area = layer.areas[i];
+                console.log(area);
             }
         }
     });
-    map_set_layers();
 }
 
 function hide_site_area(id) {
-    for(var i = 0; i < map_highlighted_areas.length; i++) {
-        if(map_highlighted_areas[i].id == id) {
-            map_highlighted_areas.splice(i, 1);
-        }
-    }
-    map_set_layers();
 }
 
 function goto_site_area(id) {
