@@ -228,11 +228,15 @@ map.on('zoomend', function() {
     map_set_names();
 });
 
+var timer = null;
+
 function set_clock() {
     if(settings.clock == 1) {
         $("#clock").removeClass("is-hidden");
+        update_clock();
     } else {
         $("#clock").addClass("is-hidden");
+        timer = null;
     }
 }
 set_clock();
@@ -246,6 +250,7 @@ function update_clock() {
     var s = date.getSeconds();
     var time = d + "." + m + ". " + h + ":" + m + ":" + s;
     $("#time").html(time);
+    timer = setTimeout(update_clock, 500);
 }
 
 </script>
