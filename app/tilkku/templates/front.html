@@ -235,12 +235,13 @@ function map_load_layers() {
 
 function map_get_layer(id) {
     console.log(id);
+    var correct_layer = null;
     map.eachLayer(function(layer) {
         if(layer.options.id == id) {
-            return layer;
+            correct_layer = layer;
         }
     });
-    return null;
+    return correct_layer;
 }
 
 function map_set_layers() {
