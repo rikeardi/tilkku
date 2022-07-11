@@ -255,9 +255,11 @@ function open_area(id) {
     $.ajax({
         url: "api/sites/",
         type: "POST",
-        name: opened_area.name,
-        area: opened_area.id,
-        category: 8,
+        data: {
+            name: opened_area.name,
+            area: opened_area.id,
+            category: 8,
+        },
         headers: {
             "X-CSRFToken": csrf_token
         },
