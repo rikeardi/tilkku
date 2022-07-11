@@ -230,7 +230,11 @@ function topic_highlight(topic_id) {
             console.log(data);
             data.notes.forEach(function(note) {
                 if(note.site != null) {
-                    show_site_area(note.site.id);
+                    if(note.site.area != null) {
+                        show_site_area(note.site.area.id);
+                    } else if(note.site.marker != null) {
+                        show_site_marker(note.site.marker.id);
+                    }
                 }
             });
         }
