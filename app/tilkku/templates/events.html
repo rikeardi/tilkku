@@ -118,7 +118,7 @@ function get_events() {
                 topic_item.find(".topic-title").text(topic.name);
                 topic_item.find(".topic-description").text(topic.description);
                 topic_item.find(".topic-notes-count").text(topic.notes.length);
-                topic_item.find.(".fa-info-circle").click(function() {
+                topic_item.find(".fa-info-circle").click(function() {
                     topic_modal_open(topic.id);
                 });
                 topic_item.find(".fa-flag").click(function() {
