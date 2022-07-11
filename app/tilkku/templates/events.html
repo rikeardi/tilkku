@@ -222,21 +222,39 @@ function topic_modal_save() {
     });
 }
 
+var topic_highlight_layer = L.featureGroup().addTo(map);
+
+function highlight_marker(coords) {
+    coords.forEach(function(coord) {
+        var marker = L.marker(coord).addTo(topic_highlight_layer);
+    });
+    topic_highlight_layer.addLayer(marker);
+}
+
+function clear_highlights() {
+    topic_highlight_layer.clearLayers();
+}
+
 function topic_highlight(topic_id) {
     $.ajax({
         url: "api/topics/" + topic_id + "/",
         type: "GET",
         success: function(data) {
             console.log(data);
+            var highlights = [];
             data.notes.forEach(function(note) {
                 if(note.site != null) {
                     if(note.site.area != null) {
-                        show_site_area(note.site.area.id);
+                        highlights.push(note.site.area.coordinates);
                     } else if(note.site.marker != null) {
-                        show_site_marker(note.site.marker.id);
+                        highlights.push(note.site.marker.coordinates);
                     }
                 }
             });
+            highlight_marker(highlights);
+            setTimeout(function() {
+                clear_highlights();
+            }, 10000);
         }
     });
 }
