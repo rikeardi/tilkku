@@ -197,7 +197,12 @@ function map_load_layers() {
             });
 
             layer.markers.forEach(function(marker) {
-                L.marker(marker.coordinates, style).addTo(layer.layer);
+                var marker_layer = L.marker(marker.coordinates, style)
+                marker_layer.bindTooltip("<div style='color: " + layer.style.stroke + "; font-size: " + layer.style.font_size + "px'>" + area.name + "</div>", tooltip_style);
+                marker_layer.addTo(layer.layer);
+                marker_layer.on("click", function(e) {
+                    console.log(e.target.options);
+                });
 
                 marker.active = true;
             });
