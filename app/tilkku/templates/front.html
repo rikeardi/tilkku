@@ -137,9 +137,6 @@ function map_set_names() {
                 if(tooltip && zoom >= layer.style.min_zoom && zoom <= layer.style.max_zoom && settings.map.names) {
                     this.map.addLayer(tooltip);
                 }
-
-                var marker = layer2.getMarker();
-                console.log(marker);
             });
 
         }
@@ -180,6 +177,10 @@ function map_load_layers() {
             direction: "center",
         }
 
+        var marker_style = {
+            opacity: 0,
+        }
+
         layer.active = false;
 
         if(settings.map.layers.includes(i)) {
@@ -200,7 +201,7 @@ function map_load_layers() {
             });
 
             layer.markers.forEach(function(marker) {
-                var marker_layer = L.marker(marker.coordinates, style)
+                var marker_layer = L.marker(marker.coordinates, marker_style)
                 marker_layer.bindTooltip("<div style='color: " + layer.style.stroke + "; font-size: " + layer.style.font_size + "px'>" + marker.name + "</div>", tooltip_style);
                 marker_layer.addTo(layer.layer);
                 marker_layer.on("click", function(e) {
