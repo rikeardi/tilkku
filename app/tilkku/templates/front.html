@@ -151,6 +151,11 @@ map_layers.forEach(function(layer) {
             area.coordinates[i] = [area.coordinates[i][1], area.coordinates[i][0]];
         }
     });
+    layer.markers.forEach(function(marker) {
+        for(var i = 0; i < marker.coordinates.length; i++) {
+            marker.coordinates[i] = [marker.coordinates[i][1], marker.coordinates[i][0]];
+        }
+    });
 });
 
 function map_load_layers() {
