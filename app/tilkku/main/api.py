@@ -153,6 +153,13 @@ class NoteViewSet(viewsets.ModelViewSet):
         instance = Note.objects.create(message=request.data.get('message'),
                                           user=request.user)
         instance.save()
+
+        topic_id = request.data.get('topic')
+        if topic_id:
+            topic = Topic.objects.get(id=topic_id)
+            topic.notes.add(instance)
+            topic.save()
+
         return Response(NoteSerializer(instance).data)
 
 

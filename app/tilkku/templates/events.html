@@ -151,6 +151,7 @@ function new_topic_modal_save() {
     });
 }
 
+var opened_topic_id = null;
 function topic_modal_open(topic_id) {
     $("#topic-modal").addClass("is-active");
     $.ajax({
@@ -158,6 +159,7 @@ function topic_modal_open(topic_id) {
         type: "GET",
         success: function(data) {
             console.log(data);
+            opened_topic_id = topic_id;
             $("#topic-modal-name").text(data.name);
             $("#topic-modal-description").text(data.description);
             $("#topic-modal-notes").html("");
@@ -175,20 +177,20 @@ function topic_modal_close() {
 }
 
 function topic_modal_save() {
-    var topic_id = $("#topic-modal").attr("id");
     var message = $("#topic-modal-new-note").val();
     $.ajax({
         url: "api/notes/",
         type: "POST",
         data: {
-            message: message
+            message: message,
+            topic: opened_topic_id
         },
         headers: {
             "X-CSRFToken": csrf_token
         },
         success: function(data) {
             topic_modal_close();
-            topic_modal_open(topic_id);
+            topic_modal_open(opened_topic_id);
         }
     });
 }
