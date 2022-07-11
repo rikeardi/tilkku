@@ -109,7 +109,6 @@ function get_events() {
         url: "api/topics/?status=OP",
         type: "GET",
         success: function(data) {
-            console.log(data);
             $("#events-topic-box").html("");
             data.forEach(function(topic) {
                 var topic_item = $("#topic-template").clone();
@@ -140,7 +139,7 @@ function get_events() {
 }
 get_events();
 
-var event_timer = setInterval(get_events, 10000);
+var event_timer = setInterval(get_events, 30000);
 
 function new_topic_modal_open() {
     $("#new-topic-modal").addClass("is-active");
@@ -167,6 +166,7 @@ function new_topic_modal_save() {
             new_topic_modal_close();
             $("#new-topic-modal-name").val("");
             $("#new-topic-modal-description").val("");
+            get_events();
             topic_modal_open(data.id);
         }
     });
