@@ -11,7 +11,7 @@
 </style>
 
 <div class="content">
-    <button class="button is-small"><i class="fa fa-plus" title="Lisää" onclick="topic_modal_open();"></i></button>
+    <button class="button is-small"><i class="fa fa-plus" title="Lisää" onclick="new_topic_modal_open();"></i></button>
 </div>
 
 <div class="content" style="height: calc(100% - 20px); overflow-y: clip;">
@@ -37,32 +37,54 @@
     </div>
 </div>
 
-<div id="topic-modal" class="modal">
+<div id="new-topic-modal" class="modal">
     <div class="modal-background"></div>
     <div class="modal-card">
         <header class="modal-card-head">
             <p class="modal-card-title">Aiheen lisäys</p>
-            <button class="delete" aria-label="close" onclick="topic_modal_close();"></button>
+            <button class="delete" aria-label="close" onclick="new_topic_modal_close();"></button>
         </header>
         <section class="modal-card-body">
             <div class="field">
                 <label class="label">Otsikko</label>
                 <div class="control">
-                    <input class="input" type="text" id="topic-modal-name">
+                    <input class="input" type="text" id="new-topic-modal-name">
                 </div>
             </div>
             <div class="field">
                 <label class="label">Kuvaus</label>
                 <div class="control">
-                    <textarea class="textarea" id="topic-modal-description"></textarea>
+                    <textarea class="textarea" id="new-topic-modal-description"></textarea>
                 </div>
+        </section>
+        <footer class="modal-card-foot">
+            <button class="button is-primary" onclick="new_topic_modal_save();">Tallenna</button>
+            <button class="button" onclick="new_topic_modal_close();">Peruuta</button>
+        </footer>
+    </div>
+</div>
+
+<div id="topic-modal" class="modal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+        <header class="modal-card-head">
+            <p class="modal-card-title" id="topic-modal-name"></p>
+            <button class="delete" aria-label="close" onclick="topic_modal_close();"></button>
+        </header>
+        <section class="modal-card-body">
+            <div class="field">
+                <div class="control">
+                    <p id="topic-modal-description"></p>
+                </div>
+            </div>
+            <div class="content" id="topic-modal-notes">
+            </div>
         </section>
         <footer class="modal-card-foot">
             <button class="button is-primary" onclick="topic_modal_save();">Tallenna</button>
             <button class="button" onclick="topic_modal_close();">Peruuta</button>
         </footer>
     </div>
-</div>
 
 <script>
 
@@ -79,6 +101,9 @@ function get_events() {
                 topic_item.find(".topic-title").text(topic.name);
                 topic_item.find(".topic-description").text(topic.description);
                 topic_item.find(".topic-notes-count").text(topic.notes.length);
+                topic_item.on("click", function() {
+                    topic_modal_open(topic.id);
+                });
                 $("#events-topic-box").append(topic_item);
             });
         }
@@ -88,17 +113,17 @@ get_events();
 
 var event_timer = setInterval(get_events, 10000);
 
-function topic_modal_open() {
-    $("#topic-modal").addClass("is-active");
+function new_topic_modal_open() {
+    $("#new-topic-modal").addClass("is-active");
 }
 
-function topic_modal_close() {
-    $("#topic-modal").removeClass("is-active");
+function new_topic_modal_close() {
+    $("#new-topic-modal").removeClass("is-active");
 }
 
-function topic_modal_save() {
-    var name = $("#topic-modal-name").val();
-    var description = $("#topic-modal-description").val();
+function new_topic_modal_save() {
+    var name = $("#new-topic-modal-name").val();
+    var description = $("#new-topic-modal-description").val();
     $.ajax({
         url: "api/topics/",
         type: "POST",
@@ -111,8 +136,27 @@ function topic_modal_save() {
         },
         success: function(data) {
             console.log(data);
-            topic_modal_close();
+            new_topic_modal_close();
             get_events();
+        }
+    });
+}
+
+function topic_modal_open(topic_id) {
+    $("#topic-modal").addClass("is-active");
+    $.ajax({
+        url: "api/topics/" + topic_id + "/",
+        type: "GET",
+        success: function(data) {
+            console.log(data);
+            $("#topic-modal-name").text(data.name);
+            $("#topic-modal-description").text(data.description);
+            $("#topic-modal-notes").html("");
+            data.notes.forEach(function(note) {
+                var note_item = $("<div class='note-item box p-2 mb-2 notification'></div>");
+                note_item.text(note.message);
+                $("#topic-modal-notes").append(note_item);
+            });
         }
     });
 }
