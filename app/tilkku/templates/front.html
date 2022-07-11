@@ -231,7 +231,6 @@ map.on('zoomend', function() {
 function set_clock() {
     if(settings.clock == 1) {
         $("#clock").removeClass("is-hidden");
-        $("#time").text(moment().format("HH:mm"));
     } else {
         $("#clock").addClass("is-hidden");
     }
@@ -239,7 +238,14 @@ function set_clock() {
 set_clock();
 
 function update_clock() {
-
+    var date = new Date();
+    var d = date.getDay();
+    var m = date.getMonth() + 1;
+    var h = date.getHours();
+    var m = date.getMinutes();
+    var s = date.getSeconds();
+    var time = d + "." + m + ". " + h + ":" + m + ":" + s;
+    $("#time").html(time);
 }
 
 </script>
