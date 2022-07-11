@@ -247,7 +247,8 @@ function topic_highlight(topic_id) {
             data.notes.forEach(function(note) {
                 if(note.site != null) {
                     if(note.site.area != null) {
-                        highlights.push(note.site.area.coordinates);
+                        var layer = map_get_layer(note.site.area.id);
+                        highlights.push(layer.getBounds());
                     } else if(note.site.marker != null) {
                         highlights.push(note.site.marker.coordinates);
                     }
