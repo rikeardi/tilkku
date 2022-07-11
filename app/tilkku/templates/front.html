@@ -137,6 +137,9 @@ function map_set_names() {
                 if(tooltip && zoom >= layer.style.min_zoom && zoom <= layer.style.max_zoom && settings.map.names) {
                     this.map.addLayer(tooltip);
                 }
+
+                var marker = layer2.getMarker();
+                console.log(marker);
             });
 
         }
