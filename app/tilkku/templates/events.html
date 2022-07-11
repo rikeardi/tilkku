@@ -250,6 +250,11 @@ function topic_open_site(site) {
 $("#topic-modal-location").autocomplete({
     source: "api/sites/",
     minLength: 2,
+    term: function(term) {
+        return {
+            name: term
+        };
+    },
     select: function(event, ui) {
         $("#topic-modal-location").val(ui.item.label);
         return false;
