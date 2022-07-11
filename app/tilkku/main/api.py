@@ -10,7 +10,7 @@ from map.models import *
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = 'auth.User'
+        model = auth.User
         fields = ('id', 'first_name', 'last_name', 'email')
 
 
