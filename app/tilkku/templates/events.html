@@ -85,5 +85,7 @@ function get_events() {
 }
 get_events();
 
+var event_timer = setInterval(get_events, 10000);
+
 </script>
 {% endblock %}
