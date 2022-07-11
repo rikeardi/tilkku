@@ -227,7 +227,11 @@ function topic_modal_save() {
 var topic_highlight_layer = L.featureGroup();
 
 function topic_open_site(site) {
-    console.log(site);
+    if(site.area) {
+        open_area(site.area.id);
+    } else if(site.marker) {
+        //open_marker(site.marker.id);
+    }
 }
 
 </script>
