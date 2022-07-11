@@ -151,8 +151,7 @@ class NoteViewSet(viewsets.ModelViewSet):
 
     def create(self, request, *args, **kwargs):
         instance = Note.objects.create(message=request.data.get('message'),
-                                          user=request.user,
-                                          site=Site.objects.get(id=request.data.get('site')))
+                                          user=request.user)
         instance.save()
         return Response(NoteSerializer(instance).data)
 

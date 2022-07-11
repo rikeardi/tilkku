@@ -66,7 +66,7 @@
 
 <div id="topic-modal" class="modal">
     <div class="modal-background"></div>
-    <div class="modal-card">
+    <div class="modal-card" style="height: 90%;">
         <header class="modal-card-head">
             <p class="modal-card-title" id="topic-modal-name"></p>
             <button class="delete" aria-label="close" onclick="topic_modal_close();"></button>
@@ -77,12 +77,22 @@
                     <p id="topic-modal-description"></p>
                 </div>
             </div>
+        </section>
+        <section class="modal-card-body" style="overflow: auto;">
             <div class="content" id="topic-modal-notes">
             </div>
         </section>
+        <section class="modal-card-body">
+            <div class="field">
+                <label class="label">Uusi merkintä</label>
+                <div class="control">
+                    <textarea class="textarea" id="topic-modal-new-note"></textarea>
+                </div>
+            </div>
+        </section>
         <footer class="modal-card-foot">
-            <button class="button is-primary" onclick="topic_modal_save();">Tallenna</button>
-            <button class="button" onclick="topic_modal_close();">Peruuta</button>
+            <button class="button is-primary" onclick="topic_modal_save();">Lisää</button>
+            <button class="button" onclick="topic_modal_close();">Sulje</button>
         </footer>
     </div>
 
@@ -135,9 +145,8 @@ function new_topic_modal_save() {
             "X-CSRFToken": csrf_token
         },
         success: function(data) {
-            console.log(data);
             new_topic_modal_close();
-            get_events();
+            topic_modal_open(data.id);
         }
     });
 }
@@ -163,6 +172,25 @@ function topic_modal_open(topic_id) {
 
 function topic_modal_close() {
     $("#topic-modal").removeClass("is-active");
+}
+
+function topic_modal_save() {
+    var topic_id = $("#topic-modal").attr("id");
+    var message = $("#topic-modal-new-note").val();
+    $.ajax({
+        url: "api/notes/",
+        type: "POST",
+        data: {
+            message: message
+        },
+        headers: {
+            "X-CSRFToken": csrf_token
+        },
+        success: function(data) {
+            topic_modal_close();
+            topic_modal_open(topic_id);
+        }
+    });
 }
 
 </script>
