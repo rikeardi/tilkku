@@ -7,6 +7,11 @@ class LayerType(models.TextChoices):
     MARKER = 'MA', 'Merkintä'
 
 
+class TopicStatus(models.TextChoices):
+    OPEN = 'OP', 'Avoin'
+    CLOSED = 'CL', 'Suljettu'
+
+
 class MapStyle(models.Model):
     name = models.CharField(max_length=50)
     stroke = models.CharField(max_length=10)
@@ -86,6 +91,33 @@ class Site(models.Model):
     marker = models.ForeignKey(Marker, on_delete=models.DO_NOTHING, blank=True, null=True)
     category = models.ForeignKey(SiteCategory, on_delete=models.DO_NOTHING)
     description = models.TextField(blank=True, default='')
+
+    class Meta:
+        ordering = ['name']
+
+    def __str__(self):
+        return f'{self.name}'
+
+
+class Message(models.Model):
+    topic = models.CharField(max_length=200)
+    message = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    site = models.ForeignKey(Site, on_delete=models.DO_NOTHING, blank=True, null=True)
+
+    class Meta:
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f'{self.topic}'
+
+
+class Topic(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.TextField(blank=True, default='')
+    status = models.CharField(max_length=100, choices=TopicStatus.choices, default=TopicStatus.OPEN)
+    messages = models.ManyToManyField(Message, blank=True)
 
     class Meta:
         ordering = ['name']

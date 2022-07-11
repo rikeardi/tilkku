@@ -1,10 +1,22 @@
 import json
 from datetime import datetime
 
+from django.contrib import auth
 from django.db.models import Q
 from rest_framework import serializers, viewsets, generics
 from rest_framework.response import Response
 from map.models import *
+
+
+class UserSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = 'auth.User'
+        fields = ('id', 'first_name', 'last_name', 'email')
+
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = auth.get_user_model().objects.all()
+    serializer_class = UserSerializer
 
 
 class MapStyleSerializer(serializers.ModelSerializer):
@@ -115,3 +127,45 @@ class SiteViewSet(viewsets.ModelViewSet):
 
         instance.save()
         return Response(SiteSerializer(instance).data)
+
+
+class MessageSerializer(serializers.ModelSerializer):
+    site = SiteSerializer(read_only=True)
+
+    class Meta:
+        model = Message
+        fields = ('id', 'topic', 'message', 'created_at', 'user', 'site')
+
+
+class MessageViewSet(viewsets.ModelViewSet):
+    queryset = Message.objects.all()
+    serializer_class = MessageSerializer
+
+    def get_queryset(self):
+        queryset = Message.objects.all()
+        site_id = self.request.query_params.get('site_id', None)
+        if site_id is not None:
+            queryset = queryset.filter(site_id=site_id)
+
+        return queryset
+
+    def create(self, request, *args, **kwargs):
+        instance = Message.objects.create(topic=request.data.get('topic'),
+                                          message=request.data.get('message'),
+                                          user=request.user,
+                                          site=Site.objects.get(id=request.data.get('site')))
+        instance.save()
+        return Response(MessageSerializer(instance).data)
+
+
+class TopicSerializer(serializers.ModelSerializer):
+    messages = MessageSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Topic
+        fields = ('id', 'name', 'description', 'status', 'messages')
+
+
+class TopicViewSet(viewsets.ModelViewSet):
+    queryset = Topic.objects.all()
+    serializer_class = TopicSerializer
