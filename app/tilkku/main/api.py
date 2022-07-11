@@ -15,7 +15,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class UserViewSet(viewsets.ModelViewSet):
-    queryset = auth.get_user_model().objects.all()
+    queryset = User.objects.all()
     serializer_class = UserSerializer
 
 
