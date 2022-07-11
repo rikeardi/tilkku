@@ -72,10 +72,14 @@ function get_events() {
         success: function(data) {
             console.log(data);
             $("#events-topic-box").html("");
-            console.log(data);
-            var topic_template = $("#topic-template").clone();
-
-            $("#events-event-box").html(topic_template);
+            data.forEach(function(topic) {
+                var topic_item = $("#topic-template").clone();
+                topic_item.attr("id", topic.id);
+                topic_item.find(".topic-title").text(topic.name);
+                topic_item.find(".topic-description").text(topic.description);
+                topic_item.find(".topic-notes-count").text(topic.notes.length);
+                $("#events-topic-box").append(topic_item);
+            });
         }
     });
 }
