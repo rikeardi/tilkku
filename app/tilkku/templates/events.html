@@ -70,13 +70,12 @@ function get_events() {
         url: "api/topics/?status=OP",
         type: "GET",
         success: function(data) {
-            if (data.success) {
-                $("#events-topic-box").html("");
-                console.log(data);
-                var topic_template = $("#topic-template").clone();
+            console.log(data);
+            $("#events-topic-box").html("");
+            console.log(data);
+            var topic_template = $("#topic-template").clone();
 
-                $("#events-event-box").html(topic_template);
-            }
+            $("#events-event-box").html(topic_template);
         }
     });
 }
