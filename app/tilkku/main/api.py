@@ -134,7 +134,7 @@ class MessageSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Message
-        fields = ('id', 'topic', 'message', 'created_at', 'user', 'site')
+        fields = ('id', 'header', 'message', 'created_at', 'user', 'site')
 
 
 class MessageViewSet(viewsets.ModelViewSet):
@@ -150,7 +150,7 @@ class MessageViewSet(viewsets.ModelViewSet):
         return queryset
 
     def create(self, request, *args, **kwargs):
-        instance = Message.objects.create(topic=request.data.get('topic'),
+        instance = Message.objects.create(header=request.data.get('header'),
                                           message=request.data.get('message'),
                                           user=request.user,
                                           site=Site.objects.get(id=request.data.get('site')))
