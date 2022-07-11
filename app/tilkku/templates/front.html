@@ -251,7 +251,7 @@ function open_area(id) {
     $.ajax({
         url: "api/sites/",
         type: "POST",
-        name: area.name,
+        name: opened_area.name,
         category: 8,
         success: function(data) {
             console.log(data);
