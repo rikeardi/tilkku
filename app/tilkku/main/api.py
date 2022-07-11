@@ -134,7 +134,7 @@ class NoteSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Note
-        fields = ('id', 'header', 'message', 'created_at', 'user', 'site')
+        fields = ('id', 'message', 'created_at', 'user', 'site')
 
 
 class NoteViewSet(viewsets.ModelViewSet):
@@ -150,8 +150,7 @@ class NoteViewSet(viewsets.ModelViewSet):
         return queryset
 
     def create(self, request, *args, **kwargs):
-        instance = Note.objects.create(header=request.data.get('header'),
-                                          message=request.data.get('message'),
+        instance = Note.objects.create(message=request.data.get('message'),
                                           user=request.user,
                                           site=Site.objects.get(id=request.data.get('site')))
         instance.save()
