@@ -98,3 +98,7 @@ class SiteViewSet(viewsets.ModelViewSet):
             queryset = queryset.filter(name__icontains=name)
 
         return queryset
+
+    def create(self, request, *args, **kwargs):
+        instance = Site.objects.create(name=request.data.get('name'), site_category_id=request.data.get('category'))
+        return Response(SiteSerializer(instance).data)

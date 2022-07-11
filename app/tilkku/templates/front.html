@@ -238,6 +238,27 @@ map.on('zoomend', function() {
     map_set_names();
 });
 
+var opened_area = null;
+
+function open_area(id) {
+    map_layers.forEach(function(layer) {
+        layer.areas.forEach(function(area) {
+            if(area.id == id) {
+                opened_area = area;
+            }
+        });
+    });
+    $.ajax({
+        url: "api/sites/",
+        type: "POST",
+        name: area.name,
+        category: 8,
+        success: function(data) {
+            console.log(data);
+        }
+    });
+}
+
 </script>
 {% include 'settings.html' %}
 {% endblock %}
