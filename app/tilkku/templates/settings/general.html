@@ -14,6 +14,12 @@
 </div>
 <script>
 
+$(document).ready(function() {
+    if(settings.clock == 1) {
+        $("#settings-clock").prop("checked", true);
+    }
+});
+
 function toggle_clock() {
     settings.clock = $("#settings-clock").is(":checked") ? 1 : 0;
     refresh_settings();
