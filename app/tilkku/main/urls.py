@@ -14,7 +14,7 @@ router.register(r'markers', api.MarkerViewSet)
 router.register(r'sitecategories', api.SiteCategoryViewSet)
 router.register(r'sites', api.SiteViewSet)
 router.register(r'users', api.UserViewSet)
-router.register(r'messages', api.MessageViewSet)
+router.register(r'notes', api.NoteViewSet)
 router.register(r'topics', api.TopicViewSet)
 
 app_name = 'main'
