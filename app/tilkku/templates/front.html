@@ -152,9 +152,7 @@ map_layers.forEach(function(layer) {
         }
     });
     layer.markers.forEach(function(marker) {
-        for(var i = 0; i < marker.coordinates.length; i++) {
-            marker.coordinates[i] = [marker.coordinates[i][1], marker.coordinates[i][0]];
-        }
+        marker.coordinates = [marker.coordinates[1], marker.coordinates[0]];
     });
 });
 
