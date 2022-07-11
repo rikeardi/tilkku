@@ -100,7 +100,17 @@ class SiteViewSet(viewsets.ModelViewSet):
         return queryset
 
     def create(self, request, *args, **kwargs):
-        area = Area.objects.get(id=request.data['area'])
-        instance = Site.objects.create(name=request.data.get('name'), site_category_id=request.data.get('category'),
-                                       area=area)
+        instance = Site.objects.create(name=request.data.get('name'), site_category_id=request.data.get('category'))
+
+        area_id = request.data.get('area')
+        if area_id:
+            area = Area.objects.get(id=area_id)
+            instance.area = area
+
+        marker_id = request.data.get('marker')
+        if marker_id:
+            marker = Marker.objects.get(id=marker_id)
+            instance.marker = marker
+
+        instance.save()
         return Response(SiteSerializer(instance).data)
