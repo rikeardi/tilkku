@@ -229,7 +229,7 @@ map.on('zoomend', function() {
 });
 
 function set_clock() {
-    if(settings.clock) {
+    if(settings.clock == 1) {
         $("#clock").removeClass("is-hidden");
         $("#time").text(moment().format("HH:mm"));
     } else {
