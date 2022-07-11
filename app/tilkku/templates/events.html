@@ -249,11 +249,7 @@ function topic_open_site(site) {
 
 $("#topic-modal-location").autocomplete({
     source: "api/sites/",
-    minLength: 2,
-    select: function(event, ui) {
-        $("#topic-modal-location").val(ui.item.label);
-        return false;
-    }
+    minLength: 2
 });
 
 </script>
