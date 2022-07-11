@@ -169,3 +169,12 @@ class TopicSerializer(serializers.ModelSerializer):
 class TopicViewSet(viewsets.ModelViewSet):
     queryset = Topic.objects.all()
     serializer_class = TopicSerializer
+
+    def get_queryset(self):
+        queryset = Topic.objects.all()
+
+        status = self.request.query_params.get('status', None)
+        if status is not None:
+            queryset = queryset.filter(status=status)
+
+        return queryset
