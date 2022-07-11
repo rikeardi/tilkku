@@ -249,7 +249,9 @@ function topic_highlight(topic_id) {
                     if(note.site.area != null) {
                         var layer = map_get_layer(note.site.area.id);
                         console.log(layer);
-                        highlights.push(layer.getCenter());
+                        if(layer != null) {
+                            highlights.push(layer.getBounds().getCenter());
+                        }
                     } else if(note.site.marker != null) {
                         highlights.push(note.site.marker.coordinates);
                     }
