@@ -129,20 +129,20 @@ class SiteViewSet(viewsets.ModelViewSet):
         return Response(SiteSerializer(instance).data)
 
 
-class MessageSerializer(serializers.ModelSerializer):
+class NoteSerializer(serializers.ModelSerializer):
     site = SiteSerializer(read_only=True)
 
     class Meta:
-        model = Message
+        model = Note
         fields = ('id', 'header', 'message', 'created_at', 'user', 'site')
 
 
-class MessageViewSet(viewsets.ModelViewSet):
-    queryset = Message.objects.all()
+class NoteViewSet(viewsets.ModelViewSet):
+    queryset = Note.objects.all()
     serializer_class = MessageSerializer
 
     def get_queryset(self):
-        queryset = Message.objects.all()
+        queryset = Note.objects.all()
         site_id = self.request.query_params.get('site_id', None)
         if site_id is not None:
             queryset = queryset.filter(site_id=site_id)
@@ -150,20 +150,20 @@ class MessageViewSet(viewsets.ModelViewSet):
         return queryset
 
     def create(self, request, *args, **kwargs):
-        instance = Message.objects.create(header=request.data.get('header'),
+        instance = Note.objects.create(header=request.data.get('header'),
                                           message=request.data.get('message'),
                                           user=request.user,
                                           site=Site.objects.get(id=request.data.get('site')))
         instance.save()
-        return Response(MessageSerializer(instance).data)
+        return Response(NoteSerializer(instance).data)
 
 
 class TopicSerializer(serializers.ModelSerializer):
-    messages = MessageSerializer(many=True, read_only=True)
+    notes = NoteSerializer(many=True, read_only=True)
 
     class Meta:
         model = Topic
-        fields = ('id', 'name', 'description', 'status', 'messages')
+        fields = ('id', 'name', 'description', 'status', 'notes')
 
 
 class TopicViewSet(viewsets.ModelViewSet):
