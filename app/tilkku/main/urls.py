@@ -10,6 +10,7 @@ router = routers.DefaultRouter()
 router.register(r'mapstyles', api.MapStyleViewSet)
 router.register(r'layers', api.LayerViewSet)
 router.register(r'areas', api.AreaViewSet)
+router.register(r'markers', api.MarkerViewSet)
 router.register(r'sitecategories', api.SiteCategoryViewSet)
 router.register(r'sites', api.SiteViewSet)
 
