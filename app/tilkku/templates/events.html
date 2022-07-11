@@ -222,13 +222,14 @@ function topic_modal_save() {
     });
 }
 
-var topic_highlight_layer = L.featureGroup().addTo(map);
+var topic_highlight_layer = L.featureGroup();
 
 function highlight_marker(coords) {
     coords.forEach(function(coord) {
         var marker = L.marker(coord).addTo(topic_highlight_layer);
         marker.addTo(topic_highlight_layer);
     });
+    topic_highlight_layer.addTo(map);
 }
 
 function clear_highlights() {
