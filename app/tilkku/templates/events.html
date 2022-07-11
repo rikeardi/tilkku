@@ -233,7 +233,7 @@ function highlight_marker(coords) {
 }
 
 function clear_highlights() {
-    topic_highlight_layer.remove();
+    map.removeLayer(topic_highlight_layer);
 }
 
 function topic_highlight(topic_id) {
