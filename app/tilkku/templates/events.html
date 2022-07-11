@@ -9,10 +9,16 @@
     font-weight: 400;
 }
 </style>
+
+<div class="content">
+    <button class="button is-small"><i class="fa fa-plus"></i></button>
+</div>
+
 <div class="content" style="height: calc(100% - 20px); overflow-y: clip;">
     <div id="events-topic-box" style="height: calc(100% - 32px); overflow: auto;">
     </div>
 </div>
+
 <div id="topic-template" class="topic-item box p-2 mb-2 notification is-info">
     <div class="columns">
         <div class="column is-1 is-size-7">
@@ -28,6 +34,33 @@
             <i class="fa fa-clipboard-list" title="Merkintöjä"></i>
             <p class="topic-notes-count"></p>
         </div>
+    </div>
+</div>
+
+<div id="topic-modal" class="modal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+        <header class="modal-card-head">
+            <p class="modal-card-title">Aiheen lisäys</p>
+            <button class="delete" aria-label="close" onclick="topic_modal_close();"></button>
+        </header>
+        <section class="modal-card-body">
+            <div class="field">
+                <label class="label">Otsikko</label>
+                <div class="control">
+                    <input class="input" type="text" id="topic-modal-name">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Kuvaus</label>
+                <div class="control">
+                    <textarea class="textarea" id="topic-modal-description"></textarea>
+                </div>
+        </section>
+        <footer class="modal-card-foot">
+            <button class="button is-primary" onclick="topic_modal_save();">Tallenna</button>
+            <button class="button" onclick="topic_modal_close();">Peruuta</button>
+        </footer>
     </div>
 </div>
 

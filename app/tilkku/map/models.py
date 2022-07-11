@@ -124,3 +124,16 @@ class Topic(models.Model):
 
     def __str__(self):
         return f'{self.name}'
+
+
+class Contact(models.Model):
+    name = models.CharField(max_length=100)
+    title = models.CharField(max_length=100)
+    email = models.EmailField()
+    phone = models.CharField(max_length=100)
+
+    class Meta:
+        ordering = ['name']
+
+    def __str__(self):
+        return f'{self.title} {self.name}'
