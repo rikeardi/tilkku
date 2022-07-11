@@ -12,7 +12,7 @@ from map.serializers import *
 def home(request):
     context = {
         'map_servers': json.dumps(MapServerSerializer(MapServer.objects.all(), many=True).data),
-        'layers': json.dumps(LayerSerializer(Layer.objects.all(), many=True).data),
+        'layers': json.dumps(LayerSerializer(Layer.objects.all().order_by('id'), many=True).data),
     }
     return render(request, 'front.html', context)
 

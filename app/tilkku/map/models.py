@@ -29,6 +29,9 @@ class Layer(models.Model):
     type = models.CharField(max_length=2, choices=LayerType.choices, default=LayerType.AREA)
     style = models.ForeignKey(MapStyle, on_delete=models.DO_NOTHING)
 
+    class Meta:
+        ordering = ['name']
+
     def __str__(self):
         return f'{self.name}'
 
