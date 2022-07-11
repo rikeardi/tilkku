@@ -10,61 +10,27 @@
 }
 </style>
 <div class="content" style="height: calc(100% - 20px); overflow-y: clip;">
-    <div id="events-event-box">
-        <div class="event-item box p-2 mb-2 notification is-info">
-            <div class="columns">
-                <div class="column is-1 is-size-7">
-                    <i class="fa fa-info-circle" style="cursor:pointer" title="Lisätiedot"></i>
-                    <i class="fa fa-flag" style="cursor:pointer" title="Sijainti"></i>
-                    <i class="fa fa-check" style="cursor:pointer" title="Kuittaa"></i>
-                </div>
-                <div class="column">
-                    <h1 class="title is-5">Puurokattilakeissi</h1>
-                    <h2 class="subtitle is-7">Keittiöllä kaatunut puurokattila keittäjän syliin</h2>
-                </div>
-                <div class="column is-1 is-size-7 m-1" style="text-align: center;">
-                    <i class="fa fa-clipboard-list" title="Merkintöjä"></i>
-                    <p>3</p>
-                </div>
-            </div>
-        </div>
-        <div class="event-item box p-2 mb-2 notification is-info">
-            <div class="columns">
-                <div class="column is-1 is-size-7">
-                    <i class="fa fa-info-circle" style="cursor:pointer" title="Lisätiedot"></i>
-                    <i class="fa fa-flag" style="cursor:pointer" title="Sijainti"></i>
-                    <i class="fa fa-check" style="cursor:pointer" title="Kuittaa"></i>
-                </div>
-                <div class="column">
-                    <h1 class="title is-5">Saunapalo</h1>
-                    <h2 class="subtitle is-7">Rantasaunan tulipalo</h2>
-                </div>
-                <div class="column is-1 is-size-7 m-1" style="text-align: center;">
-                    <i class="fa fa-clipboard-list" title="Merkintöjä"></i>
-                    <p>11</p>
-                </div>
-            </div>
-        </div>
+    <div id="events-topic-box" style="height: calc(100% - 32px); overflow: auto;">
     </div>
-    <hr>
-    <div id="events-input-box">
-        <div class="input-item box p-2 mb-2 notification is-info is-light">
-            <p>Halossa 3 leiriläistä ripulissa</p>
+</div>
+<div id="topic-template" class="topic-item box p-2 mb-2 notification is-info">
+    <div class="columns">
+        <div class="column is-1 is-size-7">
+            <i class="fa fa-info-circle" style="cursor:pointer" title="Lisätiedot"></i>
+            <i class="fa fa-flag" style="cursor:pointer" title="Sijainti"></i>
+            <i class="fa fa-check" style="cursor:pointer" title="Kuittaa"></i>
         </div>
-        <div class="input-item box p-2 mb-2 notification is-info is-light">
-            <p>Ruokarekka ajanut ojaan rahtijärventien alkupäässä. Tie poikki.</p>
+        <div class="column">
+            <h1 class="topic-title title is-5"></h1>
+            <h2 class="topic-description subtitle is-7"></h2>
         </div>
-        <div class="input-item box p-2 mb-2 notification is-info is-light">
-            <p>Maa-ampiaispesä Hehkussa</p>
-        </div>
-        <div class="input-item box p-2 mb-2 notification is-info is-light">
-            <p>Iltaohjelmaesiintyjä myöhästyy</p>
-        </div>
-        <div class="input-item box p-2 mb-2 notification is-info is-light">
-            <p>Sähkökatko alueella klo 22-23</p>
+        <div class="column is-1 is-size-7 m-1" style="text-align: center;">
+            <i class="fa fa-clipboard-list" title="Merkintöjä"></i>
+            <p class="topic-notes-count"></p>
         </div>
     </div>
 </div>
+
 <script>
 $(function() {
     $("#events-input-box").sortable({
@@ -98,5 +64,21 @@ $(function() {
         }
     });
 });
+
+function get_events() {
+    $.ajax({
+        url: "api/topics/?status=OP",
+        type: "GET",
+        success: function(data) {
+            if (data.success) {
+                $("#events-topic-box").html("");
+                console.log(data);
+                var topic_template = $("#topic-template").clone();
+
+                $("#events-event-box").html(topic_template);
+            }
+        }
+    });
+}
 </script>
 {% endblock %}
