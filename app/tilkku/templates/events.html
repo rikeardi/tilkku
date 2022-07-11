@@ -252,9 +252,11 @@ function topic_open_site(site) {
     }
 }
 
-$("#topic-modal-location").autocomplete({
-    source: "api/sites/",
-    minLength: 2
+$(function() {
+    $("#topic-modal-location").autocomplete({
+        source: "api/sites/",
+        minLength: 2
+    });
 });
 
 </script>
