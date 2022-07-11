@@ -198,7 +198,7 @@ function map_load_layers() {
 
             layer.markers.forEach(function(marker) {
                 var marker_layer = L.marker(marker.coordinates, style)
-                marker_layer.bindTooltip("<div style='color: " + layer.style.stroke + "; font-size: " + layer.style.font_size + "px'>" + area.name + "</div>", tooltip_style);
+                marker_layer.bindTooltip("<div style='color: " + layer.style.stroke + "; font-size: " + layer.style.font_size + "px'>" + marker.name + "</div>", tooltip_style);
                 marker_layer.addTo(layer.layer);
                 marker_layer.on("click", function(e) {
                     console.log(e.target.options);
