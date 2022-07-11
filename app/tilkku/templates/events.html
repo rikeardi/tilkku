@@ -97,7 +97,7 @@
 </div>
 
 <div class='note-item box p-2 mb-2 notification is-success is-hidden' id="note-item-template">
-    <p class="m-0" style="font-size: 0.6rem;"><span class="note-user-name"></span> - <span class="note-datetime"></span><i class="fa fa-flag" style="cursor:pointer; float: right;" title="Sijainti"></i></p>
+    <p class="m-0" style="font-size: 0.6rem;"><span class="note-user-name"></span> - <span class="note-datetime"></span><i class="fa fa-flag is-hidden" style="cursor:pointer; float: right;" title="Sijainti"></i></p>
     <p class="note-text m-0"></p>
 </div>
 
@@ -187,6 +187,12 @@ function topic_modal_open(topic_id) {
                 var note_date = new Date(note.created_at);
                 note_item.find(".note-datetime").text(note_date.toLocaleString());
                 note_item.find(".note-text").text(note.message);
+                if(note.site) {
+                    note_item.find(".fa-flag").removeClass("is-hidden");
+                    note_item.find(".fa-flag").click(function() {
+                        topic_open_site(note.site);
+                    });
+                }
                 $("#topic-modal-notes").append(note_item);
             });
             $("#topic-modal-new-note").val("");
@@ -220,45 +226,8 @@ function topic_modal_save() {
 
 var topic_highlight_layer = L.featureGroup();
 
-function highlight_marker(coords) {
-    console.log(coords);
-    coords.forEach(function(coord) {
-        var marker = L.marker(coord).addTo(topic_highlight_layer);
-        marker.addTo(topic_highlight_layer);
-    });
-    topic_highlight_layer.addTo(map);
-}
-
-function clear_highlights() {
-    map.removeLayer(topic_highlight_layer);
-}
-
-function topic_highlight(topic_id) {
-    $.ajax({
-        url: "api/topics/" + topic_id + "/",
-        type: "GET",
-        success: function(data) {
-            console.log(data);
-            var highlights = [];
-            data.notes.forEach(function(note) {
-                if(note.site != null) {
-                    if(note.site.area != null) {
-                        var layer = map_get_layer(note.site.area.id);
-                        console.log(layer);
-                        if(layer != null) {
-                            highlights.push(layer.getBounds().getCenter());
-                        }
-                    } else if(note.site.marker != null) {
-                        highlights.push(note.site.marker.coordinates);
-                    }
-                }
-            });
-            highlight_marker(highlights);
-            setTimeout(function() {
-                clear_highlights();
-            }, 10000);
-        }
-    });
+function topic_open_site(site) {
+    console.log(site);
 }
 
 </script>
