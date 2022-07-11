@@ -23,7 +23,6 @@
     <div class="columns">
         <div class="column is-1 is-size-7">
             <i class="fa fa-info-circle" style="cursor:pointer" title="Lisätiedot"></i>
-            <i class="fa fa-flag" style="cursor:pointer" title="Sijainti"></i>
             <i class="fa fa-check" style="cursor:pointer" title="Kuittaa"></i>
         </div>
         <div class="column">
@@ -98,7 +97,7 @@
 </div>
 
 <div class='note-item box p-2 mb-2 notification is-success is-hidden' id="note-item-template">
-    <p class="m-0" style="font-size: 0.6rem;"><span class="note-user-name"></span> - <span class="note-datetime"></span></p>
+    <p class="m-0" style="font-size: 0.6rem;"><span class="note-user-name"></span> - <span class="note-datetime"></span><i class="fa fa-flag" style="cursor:pointer; float: right;" title="Sijainti"></i></p>
     <p class="note-text m-0"></p>
 </div>
 
@@ -122,9 +121,6 @@ function get_events() {
                 topic_item.find(".topic-notes-count").text(topic.notes.length);
                 topic_item.find(".fa-info-circle").click(function() {
                     topic_modal_open(topic.id);
-                });
-                topic_item.find(".fa-flag").click(function() {
-                    topic_highlight(topic.id);
                 });
                 topic_item.find(".fa-check").click(function() {
                     topic_accept_open(topic.id);
