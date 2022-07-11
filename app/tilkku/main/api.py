@@ -1,7 +1,7 @@
 import json
 from datetime import datetime
 
-from django.contrib import auth
+from django.contrib.auth.models import User
 from django.db.models import Q
 from rest_framework import serializers, viewsets, generics
 from rest_framework.response import Response
@@ -10,7 +10,7 @@ from map.models import *
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = auth.User
+        model = User
         fields = ('id', 'first_name', 'last_name', 'email')
 
 
