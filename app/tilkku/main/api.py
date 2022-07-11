@@ -100,5 +100,7 @@ class SiteViewSet(viewsets.ModelViewSet):
         return queryset
 
     def create(self, request, *args, **kwargs):
-        instance = Site.objects.create(name=request.data.get('name'), site_category_id=request.data.get('category'))
+        area = Area.objects.get(id=request.data['area'])
+        instance = Site.objects.create(name=request.data.get('name'), site_category_id=request.data.get('category'),
+                                       area=area)
         return Response(SiteSerializer(instance).data)

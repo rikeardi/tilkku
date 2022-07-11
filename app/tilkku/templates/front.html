@@ -252,6 +252,7 @@ function open_area(id) {
         url: "api/sites/",
         type: "POST",
         name: opened_area.name,
+        area: opened_area.id,
         category: 8,
         success: function(data) {
             console.log(data);
