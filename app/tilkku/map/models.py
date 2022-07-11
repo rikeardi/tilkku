@@ -99,7 +99,7 @@ class Site(models.Model):
         return f'{self.name}'
 
 
-class Message(models.Model):
+class Note(models.Model):
     header = models.CharField(max_length=200)
     message = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
@@ -117,7 +117,7 @@ class Topic(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True, default='')
     status = models.CharField(max_length=100, choices=TopicStatus.choices, default=TopicStatus.OPEN)
-    messages = models.ManyToManyField(Message, blank=True)
+    notes = models.ManyToManyField(Note, blank=True)
 
     class Meta:
         ordering = ['name']
