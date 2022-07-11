@@ -248,22 +248,11 @@ function topic_open_site(site) {
 }
 
 $("#topic-modal-location").autocomplete({
-    source: function(request, response) {
-        $.ajax({
-            url: "api/sites/",
-            type: "GET",
-            data: {
-                name: request.term
-            },
-            success: function(data) {
-                response(data.map(function(site) {
-                    return {
-                        label: site.name,
-                        value: site.id
-                    };
-                }));
-            }
-        });
+    source: "api/sites/",
+    minLength: 2,
+    select: function(event, ui) {
+        $("#topic-modal-location").val(ui.item.label);
+        return false;
     }
 });
 
