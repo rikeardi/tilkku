@@ -139,7 +139,7 @@ class NoteSerializer(serializers.ModelSerializer):
 
 class NoteViewSet(viewsets.ModelViewSet):
     queryset = Note.objects.all()
-    serializer_class = MessageSerializer
+    serializer_class = NoteSerializer
 
     def get_queryset(self):
         queryset = Note.objects.all()
