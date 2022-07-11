@@ -66,11 +66,9 @@ var map = null;
 </style>
 <div id="map" style="width: 100%; height: 100%; position: fixed; top: 0; left: 0;"></div>
 <div class="columns" style="height: 100%; margin: 0px;">
-    <div class="column" style="width: auto; min-width: 66%; z-index: 1;">
+    <div class="column" style="width: auto; min-width: 66%;">
         <div style="width: 100px; float: left; margin-left: 42px;">
-            <div id="clock" class="box p-2 has-text-centered is-hidden">
-                <h3 class="title is-5" id="time"></h3>
-            </div>
+            {% include 'clock.html' %}
         </div>
         <div style="width: 32px; float: right;">
             {% include 'toolbox.html' %}
@@ -227,31 +225,6 @@ map_set_layers();
 map.on('zoomend', function() {
     map_set_names();
 });
-
-var timer = null;
-
-function set_clock() {
-    if(settings.clock == 1) {
-        $("#clock").removeClass("is-hidden");
-        update_clock();
-    } else {
-        $("#clock").addClass("is-hidden");
-        timer = null;
-    }
-}
-set_clock();
-
-function update_clock() {
-    var date = new Date();
-    var d = date.getDate();
-    var mo = date.getMonth() + 1;
-    var h = date.getHours();
-    var m = "0" + date.getMinutes();
-    var s = "0" + date.getSeconds();
-    var time = d + "." + mo + ". " + h + ":" + m.substr(-2) + ":" + s.substr(-2);
-    $("#time").html(time);
-    timer = setTimeout(update_clock, 250);
-}
 
 </script>
 {% include 'settings.html' %}

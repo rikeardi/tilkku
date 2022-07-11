@@ -1,0 +1,31 @@
+{% block content %}
+<div id="clock" class="box p-2 has-text-centered is-hidden">
+    <h3 class="title is-5" id="time"></h3>
+</div>
+<script>
+var timer = null;
+
+function set_clock() {
+    if(settings.clock == 1) {
+        $("#clock").removeClass("is-hidden");
+        update_clock();
+    } else {
+        $("#clock").addClass("is-hidden");
+        timer = null;
+    }
+}
+set_clock();
+
+function update_clock() {
+    var date = new Date();
+    var d = date.getDate();
+    var mo = date.getMonth() + 1;
+    var h = date.getHours();
+    var m = "0" + date.getMinutes();
+    var s = "0" + date.getSeconds();
+    var time = d + "." + mo + ". " + h + ":" + m.substr(-2) + ":" + s.substr(-2);
+    $("#time").html(time);
+    timer = setTimeout(update_clock, 250);
+}
+</script>
+{% endblock %}
