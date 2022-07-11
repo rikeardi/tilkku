@@ -27,7 +27,7 @@
             <i class="fa fa-check" style="cursor:pointer" title="Kuittaa"></i>
         </div>
         <div class="column">
-            <h1 class="topic-title title is-5"></h1>
+            <h1 class="topic-title title is-5" style="cursor:pointer"></h1>
             <h2 class="topic-description subtitle is-7"></h2>
         </div>
         <div class="column is-1 is-size-7 m-1" style="text-align: center;">
@@ -218,6 +218,21 @@ function topic_modal_save() {
         success: function(data) {
             topic_modal_close();
             topic_modal_open(opened_topic_id);
+        }
+    });
+}
+
+function topic_highlight(topic_id) {
+    $.ajax({
+        url: "api/topics/" + topic_id + "/",
+        type: "GET",
+        success: function(data) {
+            console.log(data);
+            data.notes.forEach(function(note) {
+                if(note.site != null) {
+                    show_site_area(note.site.id);
+                }
+            });
         }
     });
 }

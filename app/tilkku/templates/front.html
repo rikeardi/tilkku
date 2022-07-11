@@ -233,6 +233,15 @@ function map_load_layers() {
     }
 }
 
+function map_get_layer(id) {
+    for(var i = 0; i < map_layers.length; i++) {
+        if(map_layers[i].id == id) {
+            return map_layers[i];
+        }
+    }
+    return null;
+}
+
 function map_set_layers() {
     map_load_layers();
 }
