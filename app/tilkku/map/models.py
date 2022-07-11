@@ -109,7 +109,7 @@ class Note(models.Model):
         ordering = ['-created_at']
 
     def __str__(self):
-        return f'{self.topic}'
+        return f'{self.message}'
 
 
 class Topic(models.Model):
