@@ -227,8 +227,8 @@ var topic_highlight_layer = L.featureGroup().addTo(map);
 function highlight_marker(coords) {
     coords.forEach(function(coord) {
         var marker = L.marker(coord).addTo(topic_highlight_layer);
+        marker.addTo(topic_highlight_layer);
     });
-    topic_highlight_layer.addLayer(marker);
 }
 
 function clear_highlights() {
