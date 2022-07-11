@@ -52,7 +52,7 @@ class Area(models.Model):
 class Marker(models.Model):
     name = models.CharField(max_length=200)
     layer = models.ForeignKey(Layer, related_name="markers", on_delete=models.DO_NOTHING)
-    coordinates = models.TextField()
+    coordinates = models.JSONField()
 
     class Meta:
         ordering = ['name']
