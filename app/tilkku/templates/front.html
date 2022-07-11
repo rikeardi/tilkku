@@ -234,6 +234,7 @@ function map_load_layers() {
 }
 
 function map_get_layer(id) {
+    console.log(id);
     map.eachLayer(function(layer) {
         if(layer.options.id == id) {
             return layer;
