@@ -243,12 +243,12 @@ set_clock();
 
 function update_clock() {
     var date = new Date();
-    var d = date.getDay();
-    var m = date.getMonth() + 1;
+    var d = date.getDate();
+    var m = parseInt(date.getMonth()) + 1;
     var h = date.getHours();
-    var m = date.getMinutes();
-    var s = date.getSeconds();
-    var time = d + "." + m + ". " + h + ":" + m + ":" + s;
+    var m = "0" + date.getMinutes();
+    var s = "0" + date.getSeconds();
+    var time = d + "." + m + ". " + h + ":" + m.substr(-2) + ":" + s.substr(-2);
     $("#time").html(time);
     timer = setTimeout(update_clock, 500);
 }
