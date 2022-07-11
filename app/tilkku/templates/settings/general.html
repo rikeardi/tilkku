@@ -6,7 +6,7 @@
             <div class="field">
                 <label class="label">Kello</label>
                 <div class="control">
-                    <label class="checkbox"><input id="settings-clock" type="checkbox" onchange='map_toggle_clock();'> Näkyvissä</label>
+                    <label class="checkbox"><input id="settings-clock" type="checkbox" onchange='toggle_clock();'> Näkyvissä</label>
                 </div>
             </div>
         </div>
@@ -14,7 +14,7 @@
 </div>
 <script>
 
-function map_toggle_clock() {
+function toggle_clock() {
     settings.clock = $("#settings-clock").is(":checked") ? 1 : 0;
     refresh_settings();
     set_clock();
