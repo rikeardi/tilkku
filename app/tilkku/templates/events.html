@@ -11,7 +11,7 @@
 </style>
 
 <div class="content">
-    <button class="button is-small"><i class="fa fa-plus"></i></button>
+    <button class="button is-small"><i class="fa fa-plus" title="Lisää" onclick="topic_modal_open();"></i></button>
 </div>
 
 <div class="content" style="height: calc(100% - 20px); overflow-y: clip;">
@@ -65,38 +65,6 @@
 </div>
 
 <script>
-$(function() {
-    $("#events-input-box").sortable({
-        connectWith: ".event-item",
-    }).disableSelection();
-    $("#events-event-box").sortable({
-        connectWith: "#map",
-    }).disableSelection();
-
-    $(".event-item").droppable({
-        accept: ".input-item",
-        drop: function(event, ui) {
-            console.log(event);
-            console.log(ui);/*
-            var item = ui.draggable;
-            var event_id = $(this).attr("id");
-            var input_id = item.attr("id");
-            $.ajax({
-                url: "/tilkku/events/add_input",
-                type: "POST",
-                data: {
-                    event_id: event_id,
-                    input_id: input_id,
-                },
-                success: function(data) {
-                    if (data.success) {
-                        item.remove();
-                    }
-                }
-            });*/
-        }
-    });
-});
 
 function get_events() {
     $.ajax({
@@ -119,6 +87,35 @@ function get_events() {
 get_events();
 
 var event_timer = setInterval(get_events, 10000);
+
+function topic_modal_open() {
+    $("#topic-modal").addClass("is-active");
+}
+
+function topic_modal_close() {
+    $("#topic-modal").removeClass("is-active");
+}
+
+function topic_modal_save() {
+    var name = $("#topic-modal-name").val();
+    var description = $("#topic-modal-description").val();
+    $.ajax({
+        url: "api/topics/",
+        type: "POST",
+        data: {
+            name: name,
+            description: description
+        },
+        headers: {
+            "X-CSRFToken": csrf_token
+        },
+        success: function(data) {
+            console.log(data);
+            topic_modal_close();
+            get_events();
+        }
+    });
+}
 
 </script>
 {% endblock %}
