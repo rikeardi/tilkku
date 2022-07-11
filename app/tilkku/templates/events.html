@@ -228,7 +228,7 @@ var topic_highlight_layer = L.featureGroup();
 
 function topic_open_site(site) {
     if(site.area) {
-        open_area(site.area.id);
+        show_site_area(site.area.id);
     } else if(site.marker) {
         //open_marker(site.marker.id);
     }
