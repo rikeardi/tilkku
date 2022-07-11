@@ -109,6 +109,10 @@ class SiteViewSet(viewsets.ModelViewSet):
         if name is not None:
             queryset = queryset.filter(name__icontains=name)
 
+        term = self.request.query_params.get('term', None)
+        if term is not None:
+            queryset = queryset.filter(name__icontains=term)
+
         return queryset
 
     def create(self, request, *args, **kwargs):
