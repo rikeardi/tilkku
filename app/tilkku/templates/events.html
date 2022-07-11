@@ -177,8 +177,7 @@ function topic_modal_open(topic_id) {
                 note_item.find(".note-user-name").text(note.user.first_name + " " + note.user.last_name);
                 var note_date = new Date(note.created_at);
                 note_item.find(".note-datetime").text(note_date.toLocaleString());
-                note_item.find(".note-text").text(note.text);
-                note_item.text(note.message);
+                note_item.find(".note-text").text(note.message);
                 $("#topic-modal-notes").append(note_item);
             });
             $("#topic-modal-new-note").val("");
