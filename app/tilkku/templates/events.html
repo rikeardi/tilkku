@@ -31,7 +31,7 @@
             <h2 class="topic-description subtitle is-7"></h2>
         </div>
         <div class="column is-1 is-size-7 m-1" style="text-align: center;">
-            <i class="fa fa-clipboard-list" title="Merkintöjä"></i>
+            <i class="fa fa-clipboard-list" style="cursor:pointer" title="Merkintöjä"></i>
             <p class="topic-notes-count"></p>
         </div>
     </div>
@@ -116,6 +116,9 @@ function get_events() {
                 topic_item.removeClass("is-hidden");
                 topic_item.attr("id", topic.id);
                 topic_item.find(".topic-title").text(topic.name);
+                topic_item.find(".topic-title").click(function() {
+                    topic_modal_open(topic.id);
+                });
                 topic_item.find(".topic-description").text(topic.description);
                 topic_item.find(".topic-notes-count").text(topic.notes.length);
                 topic_item.find(".fa-info-circle").click(function() {
