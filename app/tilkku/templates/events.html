@@ -230,6 +230,10 @@ function topic_open_site(site) {
     if(site.area) {
         topic_modal_close();
         goto_site_area(site.area.id);
+        show_site_area(site.area.id);
+        setTimeout(function() {
+            hide_site_area(site.area.id);
+        }, 5000);
     } else if(site.marker) {
         //open_marker(site.marker.id);
     }
