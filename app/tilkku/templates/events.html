@@ -95,6 +95,13 @@
             <button class="button" onclick="topic_modal_close();">Sulje</button>
         </footer>
     </div>
+</div>
+
+<div class='note-item box p-2 mb-2 notification is-hidden' id="note-item-template">
+    <p class="is-small"><span class="note-user-name"></span> - <span class="note-datetime"></span></p>
+    <hr>
+    <p class="note-text"></p>
+</div>
 
 <script>
 
@@ -166,7 +173,11 @@ function topic_modal_open(topic_id) {
             $("#topic-modal-description").text(data.description);
             $("#topic-modal-notes").html("");
             data.notes.forEach(function(note) {
-                var note_item = $("<div class='note-item box p-2 mb-2 notification'></div>");
+                var note_item = $("#note-item-template").clone();
+                note_item.find(".note-user-name").text(note.user.first_name + " " + note.user.last_name);
+                var note_date = new Date(note.created_at);
+                note_item.find(".note-datetime").text(note_date.toLocaleString());
+                note_item.find(".note-text").text(note.text);
                 note_item.text(note.message);
                 $("#topic-modal-notes").append(note_item);
             });

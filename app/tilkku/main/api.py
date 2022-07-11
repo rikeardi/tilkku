@@ -131,6 +131,7 @@ class SiteViewSet(viewsets.ModelViewSet):
 
 class NoteSerializer(serializers.ModelSerializer):
     site = SiteSerializer(read_only=True)
+    user = UserSerializer(read_only=True)
 
     class Meta:
         model = Note
