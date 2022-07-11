@@ -80,7 +80,11 @@ var map = null;
         </div>
     </div>
 </div>
+
+{% csrf_token %}
 <script>
+const csrf_token = document.querySelector('[name="csrfmiddlewaretoken"]').value;
+
 var home = [61.205, 25.130];
 var home_zoom = 15;
 map = L.map('map').setView(settings.map.center, settings.map.zoom);
@@ -254,6 +258,9 @@ function open_area(id) {
         name: opened_area.name,
         area: opened_area.id,
         category: 8,
+        headers: {
+            "X-CSRFToken": csrf_token
+        },
         success: function(data) {
             console.log(data);
         }
