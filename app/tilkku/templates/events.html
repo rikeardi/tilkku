@@ -255,7 +255,11 @@ function topic_open_site(site) {
 $(function() {
     $("#topic-modal-location").autocomplete({
         source: "api/sites/",
-        minLength: 2
+        minLength: 2,
+        select: function(event, ui) {
+            $("#topic-modal-location").val(ui.item.id);
+            return false;
+        }
     });
 });
 
