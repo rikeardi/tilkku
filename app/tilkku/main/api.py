@@ -172,6 +172,14 @@ class SiteViewSet(viewsets.ModelViewSet):
         instance.save()
         return Response(SiteSerializer(instance).data)
 
+    def update(self, request, *args, **kwargs):
+        instance = Site.objects.get(id=request.data.get('id'))
+        contact = Contact.objects.get(id=request.data.get('contact'))
+        instance.contacts.add(contact)
+
+        instance.save()
+        return Response(SiteSerializer(instance).data)
+
 
 class NoteSerializer(serializers.ModelSerializer):
     site = SiteSerializer(read_only=True)
