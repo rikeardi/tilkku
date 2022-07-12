@@ -189,7 +189,8 @@ class NoteViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         queryset = Note.objects.all()
-        site_id = self.request.query_params.get('site_id', None)
+
+        site_id = self.request.query_params.get('site', None)
         if site_id is not None:
             queryset = queryset.filter(site_id=site_id)
 

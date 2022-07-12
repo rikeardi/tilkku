@@ -98,11 +98,26 @@ class Contact(models.Model):
         return f'{self.title} {self.name}'
 
 
+class Site(models.Model):
+    name = models.CharField(max_length=100)
+    area = models.ForeignKey(Area, on_delete=models.DO_NOTHING, blank=True, null=True)
+    marker = models.ForeignKey(Marker, on_delete=models.DO_NOTHING, blank=True, null=True)
+    category = models.ForeignKey(SiteCategory, on_delete=models.DO_NOTHING)
+    description = models.TextField(blank=True, default='')
+    contacts = models.ManyToManyField(Contact, blank=True)
+
+    class Meta:
+        ordering = ['name']
+
+    def __str__(self):
+        return f'{self.name}'
+
+
 class Note(models.Model):
     message = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
-    note_site = models.ForeignKey('Site', on_delete=models.DO_NOTHING, blank=True, null=True)
+    site = models.ForeignKey(Site, on_delete=models.DO_NOTHING, blank=True, null=True)
 
     class Meta:
         ordering = ['-created_at']
@@ -123,18 +138,3 @@ class Topic(models.Model):
     def __str__(self):
         return f'{self.name}'
 
-
-class Site(models.Model):
-    name = models.CharField(max_length=100)
-    area = models.ForeignKey(Area, on_delete=models.DO_NOTHING, blank=True, null=True)
-    marker = models.ForeignKey(Marker, on_delete=models.DO_NOTHING, blank=True, null=True)
-    category = models.ForeignKey(SiteCategory, on_delete=models.DO_NOTHING)
-    description = models.TextField(blank=True, default='')
-    contacts = models.ManyToManyField(Contact, blank=True)
-    notes = models.ManyToManyField(Note, blank=True)
-
-    class Meta:
-        ordering = ['name']
-
-    def __str__(self):
-        return f'{self.name}'
