@@ -111,7 +111,8 @@ function site_select_contact(contact_id) {
             "X-CSRFToken": csrf_token
         },
         success: function(data) {
-            console.log(data);
+            opened_site = data;
+            load_site_modal();
         }
     });
     $("#site-contact-input").val("");
