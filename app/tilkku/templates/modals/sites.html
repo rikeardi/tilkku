@@ -102,7 +102,7 @@ $("#site-contact-input").keyup(function(e) {
 
 function site_select_contact(contact_id) {
     $.ajax({
-        url: "api/sites/" + opened_site_id,
+        url: "api/sites/" + opened_site.id,
         type: "PATCH",
         data: {
             contact: contact_id,
