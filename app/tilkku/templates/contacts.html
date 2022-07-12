@@ -13,75 +13,8 @@
     </div>
 </div>
 
-<div class="modal" id="new-contact-modal">
-    <div class="modal-background"></div>
-    <div class="modal-card">
-        <header class="modal-card-head">
-            <p class="modal-card-title">Uusi yhteystieto</p>
-            <button class="delete" aria-label="close" onclick="new_contact_modal_close();"></button>
-        </header>
-        <section class="modal-card-body">
-            <div class="field">
-                <label class="label">Nimi</label>
-                <div class="control">
-                    <input class="input" type="text" id="new-contact-name">
-                </div>
-            </div>
-            <div class="field">
-                <label class="label">Sähköposti</label>
-                <div class="control">
-                    <input class="input" type="text" id="new-contact-email">
-                </div>
-            </div>
-            <div class="field">
-                <label class="label">Puhelin</label>
-                <div class="control">
-                    <input class="input" type="text" id="new-contact-phone">
-                </div>
-            </div>
-            <div class="field">
-                <label class="label">Tehtävä</label>
-                <div class="control">
-                    <input class="input" type="text" id="new-contact-title">
-                </div>
-            </div>
-        </section>
-        <section class="modal-card-foot">
-            <button class="button is-success" onclick="new_contact_save();">Tallenna</button>
-            <button class="button" onclick="new_contact_modal_close();">Peruuta</button>
-        </section>
-    </div>
-</div>
-
-<div class="modal" id="contact-modal">
-    <div class="modal-background"></div>
-    <div class="modal-card">
-        <header class="modal-card-head">
-            <p class="modal-card-title">Yhteystieto</p>
-            <button class="delete" aria-label="close" onclick="contact_modal_close();"></button>
-        </header>
-        <section class="modal-card-body">
-            <div class="field">
-                <label class="label">Nimi</label>
-                <p id="contact-modal-name"></p>
-            </div>
-            <div class="field">
-                <label class="label">Sähköposti</label>
-                <p id="contact-email"></p>
-            </div>
-            <div class="field">
-                <label class="label">Puhelin</label>
-                <p id="contact-phone"></p>
-            </div>
-            <div class="field">
-                <label class="label">Tehtävä</label>
-                <p id="contact-title"></p>
-            </div>
-        </section>
-    </div>
-</div>
-
 <script>
+
 function search_contacts() {
     var search = $('#contacts-search').val();
     $.ajax({
@@ -104,61 +37,6 @@ search_contacts();
 $("#contacts-search").on('keyup', function() {
     search_contacts();
 });
-
-function new_contact_modal_open() {
-    $('#new-contact-modal').addClass('is-active');
-    $("#new-contact-name").val('');
-    $("#new-contact-email").val('');
-    $("#new-contact-phone").val('');
-    $("#new-contact-title").val('');
-    $("#new-contact-name").focus();
-}
-
-function new_contact_modal_close() {
-    $('#new-contact-modal').removeClass('is-active');
-}
-
-function new_contact_save() {
-    var name = $('#new-contact-name').val();
-    var email = $('#new-contact-email').val();
-    var phone = $('#new-contact-phone').val();
-    var title = $('#new-contact-title').val();
-    $.ajax({
-        url: 'api/contacts/',
-        type: 'POST',
-        data: {
-            name: name,
-            email: email,
-            phone: phone,
-            title: title,
-        },
-        headers: {
-            "X-CSRFToken": csrf_token
-        },
-        success: function(data) {
-            new_contact_modal_close();
-            search_contacts();
-        }
-    });
-}
-
-function contact_modal_open(id) {
-    $.ajax({
-        url: 'api/contacts/' + id + '/',
-        type: 'GET',
-        success: function(data) {
-            $('#contact-modal-name').text(data.name);
-            $('#contact-email').html('<a href="mailto:' + data.email + '">' + data.email + '</a>');
-            $('#contact-phone').html('<a href="tel:' + data.phone + '">' + data.phone + '</a>');
-            $('#contact-title').text(data.title);
-            $('#contact-modal').addClass('is-active');
-        }
-    });
-}
-
-function contact_modal_close() {
-    $('#contact-modal').removeClass('is-active');
-}
 
 </script>
 {% endblock %}
