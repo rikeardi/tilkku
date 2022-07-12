@@ -89,14 +89,47 @@ class SiteCategoryViewSet(viewsets.ModelViewSet):
     serializer_class = SiteCategorySerializer
 
 
+class ContactSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Contact
+        fields = ('id', 'name', 'title', 'email', 'phone')
+
+
+class ContactViewSet(viewsets.ModelViewSet):
+    queryset = Contact.objects.all()
+    serializer_class = ContactSerializer
+
+    def get_queryset(self):
+        queryset = Contact.objects.all()
+
+        name = self.request.query_params.get('name', None)
+        if name is not None:
+            queryset = queryset.filter(name__icontains=name)
+
+        term = self.request.query_params.get('term', None)
+        if term is not None:
+            queryset = queryset.filter(Q(name__icontains=term) | Q(title__icontains=term) | Q(email__icontains=term) | Q(phone__icontains=term))
+
+        return queryset
+
+    def create(self, request, *args, **kwargs):
+        instance = Contact.objects.create(name=request.data.get('name'),
+                                          title=request.data.get('title'),
+                                          email=request.data.get('email'),
+                                          phone=request.data.get('phone'))
+        instance.save()
+        return Response(ContactSerializer(instance).data)
+
+
 class SiteSerializer(serializers.ModelSerializer):
     area = AreaSerializer(read_only=True)
     marker = MarkerSerializer(read_only=True)
     category = SiteCategorySerializer(read_only=True)
+    contacts = ContactSerializer(many=True, read_only=True)
 
     class Meta:
         model = Site
-        fields = ('id', 'name', 'area', 'marker', 'category', 'description', 'contacts', 'notes')
+        fields = ('id', 'name', 'area', 'marker', 'category', 'description', 'contacts')
 
 
 class SiteViewSet(viewsets.ModelViewSet):
@@ -207,35 +240,3 @@ class TopicViewSet(viewsets.ModelViewSet):
         instance.status = request.data.get('status')
         instance.save()
         return Response(TopicSerializer(instance).data)
-
-
-class ContactSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Contact
-        fields = ('id', 'name', 'title', 'email', 'phone')
-
-
-class ContactViewSet(viewsets.ModelViewSet):
-    queryset = Contact.objects.all()
-    serializer_class = ContactSerializer
-
-    def get_queryset(self):
-        queryset = Contact.objects.all()
-
-        name = self.request.query_params.get('name', None)
-        if name is not None:
-            queryset = queryset.filter(name__icontains=name)
-
-        term = self.request.query_params.get('term', None)
-        if term is not None:
-            queryset = queryset.filter(Q(name__icontains=term) | Q(title__icontains=term) | Q(email__icontains=term) | Q(phone__icontains=term))
-
-        return queryset
-
-    def create(self, request, *args, **kwargs):
-        instance = Contact.objects.create(name=request.data.get('name'),
-                                          title=request.data.get('title'),
-                                          email=request.data.get('email'),
-                                          phone=request.data.get('phone'))
-        instance.save()
-        return Response(ContactSerializer(instance).data)
