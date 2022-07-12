@@ -199,3 +199,11 @@ class ContactSerializer(serializers.ModelSerializer):
 class ContactViewSet(viewsets.ModelViewSet):
     queryset = Contact.objects.all()
     serializer_class = ContactSerializer
+
+    def create(self, request, *args, **kwargs):
+        instance = Contact.objects.create(name=request.data.get('name'),
+                                          title=request.data.get('title'),
+                                          email=request.data.get('email'),
+                                          phone=request.data.get('phone'))
+        instance.save()
+        return Response(ContactSerializer(instance).data)

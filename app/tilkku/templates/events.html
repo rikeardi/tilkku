@@ -90,14 +90,12 @@
             </div>
             <div class="field">
                 <label class="label">Paikkatieto</label>
-                <div class="control ui-widget">
-                    <input class="input ui-autocomplete-input" type="text" id="topic-modal-location">
+                <div class="control">
+                    <input class="input" type="text" id="topic-modal-location">
                 </div>
-                <ul id="topic-modal-location-autocomplete"
-                    class="list is-hidden ui-menu ui-widget ui-widget-content ui-autocomplete ui-front"
-                    unselectable="on"
-                    style="display: none;">
-                </ul>
+                <div id="topic-modal-location-autocomplete" class="dropdown-content">
+
+                </div>
             </div>
         </section>
         <footer class="modal-card-foot">
@@ -251,6 +249,23 @@ function topic_open_site(site) {
         //open_marker(site.marker.id);
     }
 }
+
+$("#topic-modal-location").keyup(function(e) {
+    var query = $("#topic-modal-location").val();
+    if(query.length >= 2) {
+        $.ajax({
+            url: "api/sites/?name=" + query,
+            type: "GET",
+            success: function(data) {
+                $("#topic-modal-location-autocomplete").html("");
+                data.forEach(function(site) {
+                    var site_item = "<div class='dropdown-item'>" + site.name + "</div>";
+                    $("#topic-modal-location-autocomplete").append(site_item);
+                });
+            }
+        });
+    }
+});
 
 </script>
 {% endblock %}
