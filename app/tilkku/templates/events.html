@@ -105,5 +105,11 @@ function topic_accept_open(topic_id) {
     });
 }
 
+$(document).ready(function() {
+    if(location_query.events) {
+        topic_modal_open(location_query.events);
+    }
+});
+
 </script>
 {% endblock %}
