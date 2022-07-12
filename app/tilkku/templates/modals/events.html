@@ -164,6 +164,9 @@ function topic_modal_open(topic_id) {
 function topic_modal_close() {
     $(".topic-input").val("");
     $("#topic-modal").removeClass("is-active");
+    if(location_query["events"]) {
+        location_href = window.location.origin;
+    }
 }
 
 function topic_modal_save() {
