@@ -179,5 +179,17 @@ function goto_passive_area(area) {
     }, 2000);
 }
 
+function open_site_modal(id) {
+    $.ajax({
+        url: 'api/sites/' + id,
+        type: 'GET',
+        success: function(data) {
+            $('#site-modal-title').text(data.name);
+            $('#site-name').val(data.name);
+            $('#site-modal').addClass('is-active');
+        }
+    });
+}
+
 </script>
 {% endblock %}
