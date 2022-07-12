@@ -184,8 +184,8 @@ function open_site_modal(area_id, marker_id) {
         url: 'api/sites/?area=' + area_id + '&marker=' + marker_id,
         type: 'GET',
         success: function(data) {
-            $('#site-modal-title').text(data.name);
-            $('#site-name').val(data.name);
+            $('#site-modal-title').text(data[0].name);
+            $('#site-name').val(data[0].name);
             $('#site-modal').addClass('is-active');
         }
     });
