@@ -31,7 +31,7 @@ class UserViewSet(viewsets.ModelViewSet):
             instance.set_password(password)
             instance.save()
 
-        return Response(serializer.data)
+        return Response(UserSerializer(instance).data)
 
 
 class MapStyleSerializer(serializers.ModelSerializer):
