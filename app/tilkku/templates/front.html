@@ -4,7 +4,7 @@
 <script>
 const csrf_token = document.querySelector('[name="csrfmiddlewaretoken"]').value;
 
-var location_query = null;
+var location_query = {};
 location.search.split('?')[1].split('&').forEach(function(item) {
     var key = item.split('=')[0];
     var value = item.split('=')[1];
