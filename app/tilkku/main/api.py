@@ -173,7 +173,7 @@ class SiteViewSet(viewsets.ModelViewSet):
         return Response(SiteSerializer(instance).data)
 
     def update(self, request, *args, **kwargs):
-        instance = Site.objects.get(id=request.data.get('id'))
+        instance = self.get_object()
         contact = Contact.objects.get(id=request.data.get('contact'))
         instance.contacts.add(contact)
 
