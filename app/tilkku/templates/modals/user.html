@@ -76,6 +76,9 @@ function user_edit_modal_save() {
             password: password,
             password2: password_confirm
         },
+        headers: {
+            'X-CSRFToken': csrf_token,
+        },
         success: function(data) {
             if(data.success) {
                 user_edit_modal_close();
