@@ -126,10 +126,10 @@ class Topic(models.Model):
 
 
 class Contact(models.Model):
-    name = models.CharField(max_length=100)
-    title = models.CharField(max_length=100)
-    email = models.EmailField()
-    phone = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, blank=True, default='')
+    title = models.CharField(max_length=100, blank=True, default='')
+    email = models.EmailField(blank=True, default='')
+    phone = models.CharField(max_length=100, blank=True, default='')
 
     class Meta:
         ordering = ['name']
