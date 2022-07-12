@@ -113,6 +113,13 @@ class SiteViewSet(viewsets.ModelViewSet):
         if term is not None:
             queryset = queryset.filter(name__icontains=term)
 
+        area_id = self.request.query_params.get('area', None)
+        marker_id = self.request.query_params.get('marker', None)
+        if area_id is not None:
+            queryset = queryset.filter(area_id=area_id)
+        elif marker_id is not None:
+            queryset = queryset.filter(marker_id=marker_id)
+
         return queryset
 
     def create(self, request, *args, **kwargs):
