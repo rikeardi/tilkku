@@ -131,7 +131,7 @@ class Site(models.Model):
     category = models.ForeignKey(SiteCategory, on_delete=models.DO_NOTHING)
     description = models.TextField(blank=True, default='')
     contacts = models.ManyToManyField(Contact, blank=True)
-    notes = models.ManyToManyField(Note, related_name='note_site', blank=True)
+    notes = models.ManyToManyField(Note, blank=True)
 
     class Meta:
         ordering = ['name']
