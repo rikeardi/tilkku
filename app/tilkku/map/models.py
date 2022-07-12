@@ -115,7 +115,7 @@ class Topic(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True, default='')
     status = models.CharField(max_length=100, choices=TopicStatus.choices, default=TopicStatus.OPEN)
-    notes = models.ManyToManyField(Note, related_name='note_site', blank=True)
+    notes = models.ManyToManyField(Note, blank=True)
 
     class Meta:
         ordering = ['name']
@@ -131,7 +131,7 @@ class Site(models.Model):
     category = models.ForeignKey(SiteCategory, on_delete=models.DO_NOTHING)
     description = models.TextField(blank=True, default='')
     contacts = models.ManyToManyField(Contact, blank=True)
-    notes = models.ManyToManyField(Note, blank=True)
+    notes = models.ManyToManyField(Note, related_name='note_site', blank=True)
 
     class Meta:
         ordering = ['name']
