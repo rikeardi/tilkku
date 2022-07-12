@@ -208,11 +208,12 @@ function open_site_modal(area_id, marker_id) {
                 url: 'api/notes/?site=' + data[0].id,
                 type: 'GET',
                 success: function(data) {
+                    console.log(data);
                     data.forEach(function(note) {
                         var row = $('<tr>');
                         var note_date = new Date(note.created_at);
                         row.append($('<td>').html('<small>' + note_date.toLocaleString() + '</small>'));
-                        row.append($('<td>').text(note.text));
+                        row.append($('<td>').text(note.message));
                         $('#site-notes-table').append(row);
                     });
                 }
