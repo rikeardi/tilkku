@@ -18,7 +18,6 @@
                 </table>
                 <div id="site-new-contact" class="is-hidden">
                     <input class="input" id="site-contact-input" type="text" placeholder="Yhteyshenkilö..." autocomplete="no">
-                    <input type="hidden" id="site-contact-id">
                     <div id="site-contact-autocomplete" class="dropdown-content" style="position: fixed; z-index: 1;">
                     </div>
                 </div>
@@ -33,35 +32,41 @@
 
 <script>
 
+var opened_site = null;
 function open_site_modal(area_id, marker_id) {
     $.ajax({
         url: 'api/sites/?area=' + area_id + '&marker=' + marker_id,
         type: 'GET',
         success: function(data) {
-            $('#site-modal-title').text(data[0].name);
-            $('#site-modal-type').text(data[0].category.name);
-            $('#site-contact-table').html('');
-            data[0].contacts.forEach(function(contact) {
+            opened_site = data[0];
+            load_site_modal();
+        }
+    });
+}
+
+function load_site_modal() {
+    $('#site-modal-title').text(opened_site.name);
+    $('#site-modal-type').text(opened_site.category.name);
+    $('#site-contact-table').html('');
+    opened_site.contacts.forEach(function(contact) {
+        var row = $('<tr>');
+        row.append($('<td>').text(contact.name));
+        row.append($('<td>').html('<a href="mailto:' + contact.email + '">' + contact.email + '</a>'));
+        row.append($('<td>').html('<a href="tel:' + contact.phone + '">' + contact.phone + '</a>'));
+        $('#site-contact-table').append(row);
+    });
+    $('#site-notes-table').html('');
+    $('#site-modal').addClass('is-active');
+    $.ajax({
+        url: 'api/notes/?site=' + opened_site.id,
+        type: 'GET',
+        success: function(data) {
+            data.forEach(function(note) {
                 var row = $('<tr>');
-                row.append($('<td>').text(contact.name));
-                row.append($('<td>').html('<a href="mailto:' + contact.email + '">' + contact.email + '</a>'));
-                row.append($('<td>').html('<a href="tel:' + contact.phone + '">' + contact.phone + '</a>'));
-                $('#site-contact-table').append(row);
-            });
-            $('#site-notes-table').html('');
-            $('#site-modal').addClass('is-active');
-            $.ajax({
-                url: 'api/notes/?site=' + data[0].id,
-                type: 'GET',
-                success: function(data) {
-                    data.forEach(function(note) {
-                        var row = $('<tr>');
-                        var note_date = new Date(note.created_at);
-                        row.append($('<td>').html('<small>' + note_date.toLocaleString() + '</small>'));
-                        row.append($('<td>').text(note.message));
-                        $('#site-notes-table').append(row);
-                    });
-                }
+                var note_date = new Date(note.created_at);
+                row.append($('<td>').html('<small>' + note_date.toLocaleString() + '</small>'));
+                row.append($('<td>').text(note.message));
+                $('#site-notes-table').append(row);
             });
         }
     });
@@ -85,20 +90,33 @@ $("#site-contact-input").keyup(function(e) {
             success: function(data) {
                 $("#site-contact-autocomplete").html("");
                 data.forEach(function(contact) {
-                    var contact_item = "<div class='dropdown-item' style='cursor:pointer;' onclick='site_select_contact(" + contact.id + ", \"" + contact.name + "\");'>" + contact.name + "</div>";
+                    var contact_item = "<div class='dropdown-item' style='cursor:pointer;' onclick='site_select_contact(" + contact.id + ");'>" + contact.name + "</div>";
                     $("#site-contact-autocomplete").append(contact_item);
                 });
             }
         });
     } else {
-        $("#topic-modal-location-autocomplete").html("");
+        $("#site-contact-autocomplete").html("");
     }
 });
 
-function site_select_contact(contact_id, contact_name) {
-    $("#site-contact-input").val(contact_name);
+function site_select_contact(contact_id) {
+    $.ajax({
+        url: "api/sites/" + opened_site_id,
+        type: "PATCH",
+        data: {
+            contact: contact_id,
+        },
+        headers: {
+            'X-CSRF-TOKEN': csrf-token,
+        },
+        success: function(data) {
+            console.log(data);
+        }
+    });
+    $("#site-contact-input").val("");
+    $('#site-new-contact').addClass('is-hidden');
     $("#site-contact-autocomplete").html("");
-    $("#site-contact-id").val(contact_id);
 }
 
 </script>
