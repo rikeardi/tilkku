@@ -5,11 +5,13 @@
 const csrf_token = document.querySelector('[name="csrfmiddlewaretoken"]').value;
 
 var location_query = {};
-location.search.split('?')[1].split('&').forEach(function(item) {
-    var key = item.split('=')[0];
-    var value = item.split('=')[1];
-    location_query[key] = value;
-});
+if(location.search) {
+    location.search.split('?')[1].split('&').forEach(function(item) {
+        var key = item.split('=')[0];
+        var value = item.split('=')[1];
+        location_query[key] = value;
+    });
+}
 
 var default_settings = {
     menu: "visible",
