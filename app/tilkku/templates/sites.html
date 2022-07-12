@@ -23,12 +23,12 @@
             </div>
             <div class="field">
                 <label class="label">Yhteyshenkilöt</label>
-                <div id="site-modal-contacts" class="control">
-                </div>
+                <table id="site-contact-table" class="table">
+                </table>
             </div>
             <div class="field">
                 <label class="label">Liittyvät viestit</label>
-                <div id="site-modal-notes" class="control"></div>
+                <table id="site-notes-table" class="control"></table>
             </div>
         </section>
     </div>
@@ -193,13 +193,28 @@ function open_site_modal(area_id, marker_id) {
         success: function(data) {
             console.log(data);
             $('#site-modal-title').text(data[0].name);
-            $('#site-name').val(data[0].name);
+            $('#site-modal-type').text(data[0].category.name);
+            $('#site-contact-table').html('');
+            data[0].contacts.forEach(function(contact) {
+                var row = $('<tr>');
+                row.append($('<td>').text(contact.name));
+                row.append($('<td>').html('<a href="mailto:' + contact.email + '">' + contact.email + '</a>'));
+                row.append($('<td>').html('<a href="tel:' + contact.phone + '">' + contact.phone + '</a>'));
+                $('#site-contact-table').append(row);
+            });
+            $('#site-notes-table').html('');
             $('#site-modal').addClass('is-active');
             $.ajax({
                 url: 'api/notes/?site=' + data[0].id,
                 type: 'GET',
                 success: function(data) {
-                    console.log(data);
+                    data.forEach(function(note) {
+                        var row = $('<tr>');
+                        var note_date = new Date(note.created_at);
+                        row.append($('<td>').html('<small>' + note_date.toLocaleString() + '</small>'));
+                        row.append($('<td>').text(note.text));
+                        $('#site-notes-table').append(row);
+                    });
                 }
             });
         }
