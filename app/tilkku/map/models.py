@@ -102,7 +102,7 @@ class Note(models.Model):
     message = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
-    site = models.ForeignKey('Site', related_name='note_site', on_delete=models.DO_NOTHING, blank=True, null=True)
+    site = models.ForeignKey('Site', on_delete=models.DO_NOTHING, blank=True, null=True)
 
     class Meta:
         ordering = ['-created_at']
@@ -115,7 +115,7 @@ class Topic(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True, default='')
     status = models.CharField(max_length=100, choices=TopicStatus.choices, default=TopicStatus.OPEN)
-    notes = models.ManyToManyField(Note, blank=True)
+    notes = models.ManyToManyField(Note, related_name='site_notes', blank=True)
 
     class Meta:
         ordering = ['name']
