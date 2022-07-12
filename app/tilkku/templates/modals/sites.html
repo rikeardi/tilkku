@@ -11,10 +11,17 @@
                 <label class="label">Tyyppi</label>
                 <p id="site-modal-type" class="control"></p>
             </div>
-            <div class="field">
+            <div class="field" style="position: relative;">
                 <label class="label">Yhteyshenkilöt</label>
+                <button class="button is-small" onclick="site_modal_contact_add();">Lisää</button>
                 <table id="site-contact-table" class="table">
                 </table>
+                <div id="site-new-contact" class="is-hidden">
+                    <input class="input" id="site-contact-input" type="text" placeholder="Yhteyshenkilö..." autocomplete="no">
+                    <input type="hidden" id="site-contact-id">
+                    <div id="site-contact-autocomplete" class="dropdown-content" style="position: fixed; z-index: 1;">
+                    </div>
+                </div>
             </div>
             <div class="field">
                 <label class="label">Liittyvät viestit</label>
@@ -31,7 +38,6 @@ function open_site_modal(area_id, marker_id) {
         url: 'api/sites/?area=' + area_id + '&marker=' + marker_id,
         type: 'GET',
         success: function(data) {
-            console.log(data);
             $('#site-modal-title').text(data[0].name);
             $('#site-modal-type').text(data[0].category.name);
             $('#site-contact-table').html('');
@@ -48,7 +54,6 @@ function open_site_modal(area_id, marker_id) {
                 url: 'api/notes/?site=' + data[0].id,
                 type: 'GET',
                 success: function(data) {
-                    console.log(data);
                     data.forEach(function(note) {
                         var row = $('<tr>');
                         var note_date = new Date(note.created_at);
@@ -64,6 +69,31 @@ function open_site_modal(area_id, marker_id) {
 
 function site_modal_close() {
     $('#site-modal').removeClass('is-active');
+}
+
+$("#site-contact-input").keyup(function(e) {
+    var query = $("#site-contact-input").val();
+    if(query.length >= 2) {
+        $.ajax({
+            url: "api/contacts/?term=" + query,
+            type: "GET",
+            success: function(data) {
+                $("#site-contact-autocomplete").html("");
+                data.forEach(function(contact) {
+                    var contact_item = "<div class='dropdown-item' style='cursor:pointer;' onclick='site_select_contact(" + contact.id + ", \"" + contact.name + "\");'>" + contact.name + "</div>";
+                    $("#site-contact-autocomplete").append(contact_item);
+                });
+            }
+        });
+    } else {
+        $("#topic-modal-location-autocomplete").html("");
+    }
+});
+
+function site_select_contact(contact_id, contact_name) {
+    $("#site-contact-input").val(contact_name);
+    $("#site-contact-autocomplete").html("");
+    $("#site-contact-id").val(contact_id);
 }
 
 </script>
