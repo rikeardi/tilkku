@@ -53,6 +53,34 @@
     </div>
 </div>
 
+<div class="modal" id="contact-modal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+        <header class="modal-card-head">
+            <p class="modal-card-title">Yhteystieto</p>
+            <button class="delete" aria-label="close" onclick="contact_modal_close();"></button>
+        </header>
+        <section class="modal-card-body">
+            <div class="field">
+                <label class="label">Nimi</label>
+                <p id="contact-modal-name"></p>
+            </div>
+            <div class="field">
+                <label class="label">Sähköposti</label>
+                <p id="contact-email"></p>
+            </div>
+            <div class="field">
+                <label class="label">Puhelin</label>
+                <p id="contact-phone"></p>
+            </div>
+            <div class="field">
+                <label class="label">Tehtävä</label>
+                <p id="contact-title"></p>
+            </div>
+        </section>
+    </div>
+</div>
+
 <script>
 function search_contacts() {
     var search = $('#contacts-search').val();
@@ -63,7 +91,7 @@ function search_contacts() {
             var table = $('#contacts-table');
             table.html('');
             for (var i = 0; i < data.length; i++) {
-                var events = '';
+                var events = ' onclick="contact_modal_open(' + data[i].id + ');"';
                 var row = $('<tr style="cursor: pointer;"' + events + '>');
                 row.append($('<td>').text(data[i].title + " " + data[i].name));
                 table.append(row);
@@ -105,6 +133,20 @@ function new_contact_save() {
         success: function(data) {
             new_contact_modal_close();
             search_contacts();
+        }
+    });
+}
+
+function contact_modal_open(id) {
+    $.ajax({
+        url: 'api/contacts/' + id + '/',
+        type: 'GET',
+        success: function(data) {
+            $('#contact-modal-name').text(data.name);
+            $('#contact-email').html('<a href="mailto:' + data.email + '">' + data.email + '</a>');
+            $('#contact-phone').html('<a href="tel:' + data.phone + '">' + data.phone + '</a>');
+            $('#contact-title').text(data.title);
+            $('#contact-modal').addClass('is-active');
         }
     });
 }
