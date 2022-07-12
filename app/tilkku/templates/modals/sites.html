@@ -74,6 +74,9 @@ function load_site_modal() {
 
 function site_modal_close() {
     $('#site-modal').removeClass('is-active');
+    if(location_query["site"]) {
+        location.href = window.location.origin;
+    }
 }
 
 function site_modal_contact_add() {

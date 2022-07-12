@@ -161,5 +161,18 @@ function goto_passive_area(area) {
     }, 2000);
 }
 
+$(document).ready(function() {
+    if(location_query.site) {
+        $.ajax({
+        url: '/api/sites/' + location_query.site + '/',
+        type: 'GET',
+        success: function(data) {
+            opened_site = data;
+            load_site_modal();
+        }
+    });
+    }
+});
+
 </script>
 {% endblock %}
