@@ -174,12 +174,12 @@ class SiteViewSet(viewsets.ModelViewSet):
 
 
 class NoteSerializer(serializers.ModelSerializer):
-    site = SiteSerializer(read_only=True)
+    note_site = SiteSerializer(read_only=True)
     user = UserSerializer(read_only=True)
 
     class Meta:
         model = Note
-        fields = ('id', 'message', 'created_at', 'user', 'site')
+        fields = ('id', 'message', 'created_at', 'user', 'note_site')
 
 
 class NoteViewSet(viewsets.ModelViewSet):
