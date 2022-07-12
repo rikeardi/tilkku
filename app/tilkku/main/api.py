@@ -195,6 +195,12 @@ class TopicViewSet(viewsets.ModelViewSet):
 
         return queryset
 
+    def update(self, request, *args, **kwargs):
+        instance = self.get_object()
+        instance.status = request.data.get('status')
+        instance.save()
+        return Response(TopicSerializer(instance).data)
+
 
 class ContactSerializer(serializers.ModelSerializer):
     class Meta:

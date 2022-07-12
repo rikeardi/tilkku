@@ -278,5 +278,23 @@ function note_select_site(site_id, site_name) {
     $("#topic-modal-location-id").val(site_id);
 }
 
+function topic_accept_open(topic_id) {
+    messages_confirm("Kuittaa valmiiksi", "Haluatko varmasti sulkea tämän aiheen?", function() {
+        $.ajax({
+            url: "api/topics/" + topic_id + "/",
+            type: "PATCH",
+            data: {
+                status: "CLOSED",
+            },
+            headers: {
+                "X-CSRFToken": csrf_token
+            },
+            success: function(data) {
+                get_events();
+            }
+        });
+    });
+}
+
 </script>
 {% endblock %}

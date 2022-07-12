@@ -1,12 +1,42 @@
 {% block messages %}
-{% if messages %}
-{% for message in messages %}
-<div{% if message.tags %} class="w3-panel w3-red w3-border w3-small w3-round w3-card {{ message.tags }}"{% endif %}><h4>
-    {{ message.tags|title }}</h4><p>{{ message }}</p></div>
-{% endfor %}
-{% endif %}
+
+<div class="modal" id="messages-confirm-modal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+        <header class="modal-card-head">
+            <p class="modal-card-title" id="messages-confirm-title"></p>
+            <button class="delete" aria-label="close" onclick="messages_confirm_modal_close();"></button>
+        </header>
+        <section class="modal-card-body">
+            <p id="messages-confirm-question"></p>
+        </section>
+        <section class="modal-card-foot">
+            <button class="button is-success" onclick="messages_confirm_accept();">Kyllä</button>
+            <button class="button" onclick="messages_confirm_modal_close();">Peruuta</button>
+        </section>
+    </div>
+</div>
+
 <script>
-  $("#messages div").delay(2000).fadeOut('slow')
+
+var messages_confirm_callback = null;
+
+function messages_confirm(title, question, callback) {
+    $('#messages-confirm-title').text(title);
+    $('#messages-confirm-question').text(question);
+    $('#messages-confirm-modal').addClass('is-active');
+    messages_confirm_callback = callback;
+}
+
+function messages_confirm_modal_close() {
+    $('#messages-confirm-modal').removeClass('is-active');
+}
+
+function messages_confirm_accept() {
+    messages_confirm_callback();
+    messages_confirm_modal_close();
+}
+
 </script>
 {% endblock %}
 
