@@ -20,9 +20,17 @@ class UserViewSet(viewsets.ModelViewSet):
 
     def update(self, request, *args, **kwargs):
         instance = self.get_object()
-        serializer = self.get_serializer(instance, data=request.data)
-        serializer.is_valid(raise_exception=True)
-        self.perform_update(serializer)
+        instance.first_name = request.data.get('first_name')
+        instance.last_name = request.data.get('last_name')
+        instance.email = request.data.get('email')
+        instance.save()
+
+        password = request.data.get('password')
+        password2 = request.data.get('password2')
+        if password and password2 and password == password2:
+            instance.set_password(password)
+            instance.save()
+
         return Response(serializer.data)
 
 
