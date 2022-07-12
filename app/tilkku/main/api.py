@@ -126,11 +126,10 @@ class SiteSerializer(serializers.ModelSerializer):
     marker = MarkerSerializer(read_only=True)
     category = SiteCategorySerializer(read_only=True)
     contacts = ContactSerializer(many=True, read_only=True)
-    notes = serializers.StringRelatedField(many=True, read_only=True)
 
     class Meta:
         model = Site
-        fields = ('id', 'name', 'area', 'marker', 'category', 'description', 'contacts', 'notes')
+        fields = ('id', 'name', 'area', 'marker', 'category', 'description', 'contacts')
 
 
 class SiteViewSet(viewsets.ModelViewSet):
@@ -175,12 +174,12 @@ class SiteViewSet(viewsets.ModelViewSet):
 
 
 class NoteSerializer(serializers.ModelSerializer):
-    note_site = SiteSerializer(read_only=True)
+    site = SiteSerializer(read_only=True)
     user = UserSerializer(read_only=True)
 
     class Meta:
         model = Note
-        fields = ('id', 'message', 'created_at', 'user', 'note_site')
+        fields = ('id', 'message', 'created_at', 'user', 'site')
 
 
 class NoteViewSet(viewsets.ModelViewSet):
