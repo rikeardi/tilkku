@@ -212,6 +212,19 @@ class ContactViewSet(viewsets.ModelViewSet):
     queryset = Contact.objects.all()
     serializer_class = ContactSerializer
 
+    def get_queryset(self):
+        queryset = Contact.objects.all()
+
+        name = self.request.query_params.get('name', None)
+        if name is not None:
+            queryset = queryset.filter(name__icontains=name)
+
+        term = self.request.query_params.get('term', None)
+        if term is not None:
+            queryset = queryset.filter(Q(name__icontains=term) || Q(title__icontains=term) || Q(email__icontains=term) || Q(phone__icontains=term))
+
+        return queryset
+
     def create(self, request, *args, **kwargs):
         instance = Contact.objects.create(name=request.data.get('name'),
                                           title=request.data.get('title'),

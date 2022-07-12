@@ -57,7 +57,7 @@
 function search_contacts() {
     var search = $('#contacts-search').val();
     $.ajax({
-        url: 'api/contacts/?name=' + search,
+        url: 'api/contacts/?term=' + search,
         type: 'GET',
         success: function(data) {
             var table = $('#contacts-table');
