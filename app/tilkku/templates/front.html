@@ -4,7 +4,14 @@
 <script>
 const csrf_token = document.querySelector('[name="csrfmiddlewaretoken"]').value;
 
-console.log(location.search.split('?')[1].split('&'));
+var location_query = null;
+location.search.split('?')[1].split('&').forEach(function(item) {
+    var key = item.split('=')[0];
+    var value = item.split('=')[1];
+    location_query[key] = value;
+});
+
+console.log(location_query);
 
 var default_settings = {
     menu: "visible",
