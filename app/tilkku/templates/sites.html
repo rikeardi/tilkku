@@ -204,19 +204,19 @@ function open_site_modal(area_id, marker_id) {
             });
             $('#site-notes-table').html('');
             $('#site-modal').addClass('is-active');
-            $.ajax({
-                url: 'api/notes/?site=' + data[0].id,
-                type: 'GET',
-                success: function(data) {
-                    data.forEach(function(note) {
-                        var row = $('<tr>');
-                        var note_date = new Date(note.created_at);
-                        row.append($('<td>').html('<small>' + note_date.toLocaleString() + '</small>'));
-                        row.append($('<td>').text(note.text));
-                        $('#site-notes-table').append(row);
-                    });
-                }
-            });
+//            $.ajax({
+//                url: 'api/notes/?site=' + data[0].id,
+//                type: 'GET',
+//                success: function(data) {
+//                    data.forEach(function(note) {
+//                        var row = $('<tr>');
+//                        var note_date = new Date(note.created_at);
+//                        row.append($('<td>').html('<small>' + note_date.toLocaleString() + '</small>'));
+//                        row.append($('<td>').text(note.text));
+//                        $('#site-notes-table').append(row);
+//                    });
+//                }
+//            });
         }
     });
 }
