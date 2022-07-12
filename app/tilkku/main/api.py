@@ -188,7 +188,7 @@ class NoteSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Note
-        fields = ('id', 'message', 'created_at', 'user', 'site', 'topic')
+        fields = ('id', 'message', 'created_at', 'user', 'site', 'topic', 'link')
 
 
 class NoteViewSet(viewsets.ModelViewSet):
