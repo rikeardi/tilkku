@@ -67,7 +67,7 @@ function user_edit_modal_save() {
         return;
     }
     $.ajax({
-        url: 'api/user/' + {{ user.id }},
+        url: 'api/users/' + {{ user.id }} + '/',
         type: 'PATCH',
         data: {
             firstname: firstname,
