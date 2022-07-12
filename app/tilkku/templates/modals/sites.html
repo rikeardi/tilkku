@@ -4,7 +4,8 @@
     <div class="modal-card">
         <header class="modal-card-head">
             <p class="modal-card-title" id="site-modal-title"></p>
-            <button class="delete" aria-label="close" onclick="site_modal_close();"></button>
+            <button class="button is-small" id="site-link-btn">Kopioi linkki</button>
+            <button class="delete" aria-label="close" onclick="site_modal_close();" style="margin-left: 15px;"></button>
         </header>
         <section class="modal-card-body">
             <div class="field">
@@ -54,6 +55,9 @@ function load_site_modal() {
         row.append($('<td>').html('<a href="mailto:' + contact.email + '">' + contact.email + '</a>'));
         row.append($('<td>').html('<a href="tel:' + contact.phone + '">' + contact.phone + '</a>'));
         $('#site-contact-table').append(row);
+    });
+    $("#site-link-btn").click(function() {
+        navigator.clipboard.writeText(window.location.origin + "?site=" + opened_site.id);
     });
     $('#site-notes-table').html('');
     $('#site-modal').addClass('is-active');
