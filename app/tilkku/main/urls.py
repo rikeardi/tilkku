@@ -16,6 +16,7 @@ router.register(r'sites', api.SiteViewSet)
 router.register(r'users', api.UserViewSet)
 router.register(r'notes', api.NoteViewSet)
 router.register(r'topics', api.TopicViewSet)
+router.register(r'contacts', api.ContactViewSet)
 
 app_name = 'main'
 urlpatterns = [

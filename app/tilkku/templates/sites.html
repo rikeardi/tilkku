@@ -19,7 +19,7 @@ function search_sites() {
             var table = $('#sites-site-table');
             table.html('');
             for (var i = 0; i < data.length; i++) {
-                var keyup = '';
+                var events = '';
                 if(data[i].area != null) {
                     events = ' onmouseover="show_site_area(' + data[i].area.id + ')"' +
                              ' onmouseout="hide_site_area(' + data[i].area.id + ')"' +

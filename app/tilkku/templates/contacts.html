@@ -1,0 +1,37 @@
+{% block content %}
+<div class="content" style="height: calc(100% - 20px); overflow-y: clip;">
+    <div>
+        <input id="contacts-search" class="input is-small" type="text" placeholder="Hae...">
+    </div>
+    <div id="contacts-box" style="overflow: auto; height: calc(100% - 32px);">
+        <table id="contacts-table" class="table is-striped">
+        </table>
+    </div>
+</div>
+
+<script>
+function search_contacts() {
+    var search = $('#contacts-search').val();
+    $.ajax({
+        url: 'api/contacts/?name=' + search,
+        type: 'GET',
+        success: function(data) {
+            var table = $('#contacts-table');
+            table.html('');
+            for (var i = 0; i < data.length; i++) {
+                var events = '';
+                var row = $('<tr style="cursor: pointer;"' + events + '>');
+                row.append($('<td>').text(data[i].title + " " + data[i].name));
+                table.append(row);
+            }
+        }
+    });
+}
+search_contacts();
+
+$("#contacts-search").on('keyup', function() {
+    search_contacts();
+});
+
+</script>
+{% endblock %}
