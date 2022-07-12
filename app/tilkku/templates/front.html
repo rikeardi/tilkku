@@ -264,7 +264,7 @@ function open_area(id) {
             }
         });
     });
-    open_site_modal(opened_area.id);
+    open_site_modal(opened_area.id, null);
     console.log(opened_area);
 }
 
@@ -278,7 +278,7 @@ function open_marker(id) {
             }
         });
     });
-    open_site_modal(opened_marker.id);
+    open_site_modal(null, opened_marker.id);
     console.log(opened_marker);
 }
 
