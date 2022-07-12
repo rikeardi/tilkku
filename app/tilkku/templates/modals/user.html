@@ -1,0 +1,91 @@
+{% block content %}
+
+<div class="modal" id="user-edit-modal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+        <header class="modal-card-head">
+            <p class="modal-card-title">Käyttäjän muokkaus</p>
+            <button class="delete" aria-label="close" onclick="user_edit_modal_close();"></button>
+        </header>
+        <section class="modal-card-body">
+            <div class="field">
+                <label class="label">Etunimi</label>
+                <div class="control">
+                    <input class="input" type="text" id="user-edit-modal-firstname" value="{{ user.first_name }}">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Sukunimi</label>
+                <div class="control">
+                    <input class="input" type="text" id="user-edit-modal-lastname" value="{{ user.last_name }}">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Sähköposti</label>
+                <div class="control">
+                    <input class="input" type="text" id="user-edit-modal-email" value="{{ user.email }}">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Salasana</label>
+                <div class="control">
+                    <input class="input" type="password" id="user-edit-modal-password">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Salasana uudestaan</label>
+                <div class="control">
+                    <input class="input" type="password" id="user-edit-modal-password-confirm">
+                </div>
+            </div>
+        </section>
+        <footer class="modal-card-foot">
+            <button class="button is-primary" onclick="user_edit_modal_save();">Tallenna</button>
+            <button class="button" onclick="user_edit_modal_close();">Peruuta</button>
+        </footer>
+    </div>
+</div>
+
+<script>
+
+function user_edit_modal_open() {
+    $('#user-edit-modal').addClass('is-active');
+}
+
+function user_edit_modal_close() {
+    $('#user-edit-modal').removeClass('is-active');
+}
+
+function user_edit_modal_save() {
+    var firstname = $('#user-edit-modal-firstname').val();
+    var lastname = $('#user-edit-modal-lastname').val();
+    var email = $('#user-edit-modal-email').val();
+    var password = $('#user-edit-modal-password').val();
+    var password_confirm = $('#user-edit-modal-password-confirm').val();
+    if(password != password_confirm) {
+        alert('Salasanat eivät täsmää!');
+        return;
+    }
+    $.ajax({
+        url: '{{ url_for('user_edit') }}',
+        type: 'POST',
+        data: {
+            firstname: firstname,
+            lastname: lastname,
+            email: email,
+            password: password,
+            password_confirm: password_confirm
+        },
+        success: function(data) {
+            if(data.success) {
+                user_edit_modal_close();
+                window.location.reload();
+            } else {
+                alert(data.message);
+            }
+        }
+    });
+}
+
+</script>
+{% endblock %}
