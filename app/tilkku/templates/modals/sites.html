@@ -71,6 +71,11 @@ function site_modal_close() {
     $('#site-modal').removeClass('is-active');
 }
 
+function site_modal_contact_add() {
+    $('#site-new-contact').removeClass('is-hidden');
+    $('#site-contact-input').focus();
+}
+
 $("#site-contact-input").keyup(function(e) {
     var query = $("#site-contact-input").val();
     if(query.length >= 2) {
