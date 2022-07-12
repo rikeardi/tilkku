@@ -9,6 +9,24 @@
     </div>
 </div>
 
+<div class="modal" id="site-modal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+        <header class="modal-card-head">
+            <p class="modal-card-title" id="site-modal-title"></p>
+            <button class="delete" aria-label="close" onclick="site_modal_close();"></button>
+        </header>
+        <section class="modal-card-body">
+            <div class="field">
+                <label class="label">Nimi</label>
+                <div class="control">
+                    <input class="input" type="text" id="site-name">
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
 <script>
 function search_sites() {
     var search = $('#sites-site-search').val();

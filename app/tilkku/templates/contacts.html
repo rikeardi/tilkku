@@ -107,6 +107,10 @@ $("#contacts-search").on('keyup', function() {
 
 function new_contact_modal_open() {
     $('#new-contact-modal').addClass('is-active');
+    $("#new-contact-name").val('');
+    $("#new-contact-email").val('');
+    $("#new-contact-phone").val('');
+    $("#new-contact-title").val('');
 }
 
 function new_contact_modal_close() {
