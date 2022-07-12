@@ -129,7 +129,7 @@ function topic_modal_open(topic_id) {
             $("#topic-modal-name").text(data.name);
             $("#topic-modal-description").text(data.description);
             $("#topic-link-btn").click(function() {
-                window.clipboardData.setData("Text", "https://rikeardi.duckdns.org/?events=" + topic_id);
+                navigator.clipboard.writeText(window.location.origin + "?events=" + topic_id);
             });
             $("#topic-modal-notes").html("");
             data.notes.forEach(function(note) {
