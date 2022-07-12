@@ -198,7 +198,7 @@ function map_load_layers() {
                 area_layer.bindTooltip("<div style='color: " + layer.style.stroke + "; font-size: " + layer.style.font_size + "px'>" + area.name + "</div>", tooltip_style);
                 area_layer.addTo(layer.layer);
                 area_layer.on("click", function(e) {
-                    //open_area(e.target.options.id);
+                    open_area(e.target.options.id);
                 });
 
                 area.active = true;
@@ -209,7 +209,7 @@ function map_load_layers() {
                 marker_layer.bindTooltip("<div style='color: " + layer.style.stroke + "; font-size: " + layer.style.font_size + "px'>" + marker.name + "</div>", tooltip_style);
                 marker_layer.addTo(layer.layer);
                 marker_layer.on("click", function(e) {
-                    console.log(e.target.options);
+                    open_marker(e.target.options.id);
                 });
 
                 marker.active = true;
@@ -263,21 +263,20 @@ function open_area(id) {
             }
         });
     });
-    $.ajax({
-        url: "api/sites/",
-        type: "POST",
-        data: {
-            name: opened_area.name,
-            area: opened_area.id,
-            category: 10,
-        },
-        headers: {
-            "X-CSRFToken": csrf_token
-        },
-        success: function(data) {
-            console.log(data);
-        }
+    console.log(opened_area);
+}
+
+var opened_marker = null;
+
+function open_marker(id) {
+    map_layers.forEach(function(layer) {
+        layer.markers.forEach(function(marker) {
+            if(marker.id == id) {
+                opened_marker = marker;
+            }
+        });
     });
+    console.log(opened_marker);
 }
 
 </script>
