@@ -221,7 +221,7 @@ class ContactViewSet(viewsets.ModelViewSet):
 
         term = self.request.query_params.get('term', None)
         if term is not None:
-            queryset = queryset.filter(Q(name__icontains=term) || Q(title__icontains=term) || Q(email__icontains=term) || Q(phone__icontains=term))
+            queryset = queryset.filter(Q(name__icontains=term) | Q(title__icontains=term) | Q(email__icontains=term) | Q(phone__icontains=term))
 
         return queryset
 
