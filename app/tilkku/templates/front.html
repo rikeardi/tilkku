@@ -81,6 +81,8 @@ var map = null;
     </div>
 </div>
 
+{% include 'modals.html' %}
+
 {% csrf_token %}
 <script>
 const csrf_token = document.querySelector('[name="csrfmiddlewaretoken"]').value;
