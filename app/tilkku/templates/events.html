@@ -201,6 +201,8 @@ function topic_modal_open(topic_id) {
                     note_item.find(".fa-flag").click(function() {
                         topic_open_site(note.site);
                     });
+                } else {
+                    note_item.find(".fa-flag").addClass("is-hidden");
                 }
                 $("#topic-modal-notes").append(note_item);
             });
