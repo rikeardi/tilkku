@@ -126,10 +126,11 @@ class SiteSerializer(serializers.ModelSerializer):
     marker = MarkerSerializer(read_only=True)
     category = SiteCategorySerializer(read_only=True)
     contacts = ContactSerializer(many=True, read_only=True)
+    notes = serializers.StringRelatedField(many=True, read_only=True)
 
     class Meta:
         model = Site
-        fields = ('id', 'name', 'area', 'marker', 'category', 'description', 'contacts')
+        fields = ('id', 'name', 'area', 'marker', 'category', 'description', 'contacts', 'notes')
 
 
 class SiteViewSet(viewsets.ModelViewSet):
