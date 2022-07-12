@@ -16,3 +16,11 @@ def home(request):
     }
     return render(request, 'front.html', context)
 
+@login_required
+def events(request, id):
+    context = {
+        'map_servers': json.dumps(MapServerSerializer(MapServer.objects.all(), many=True).data),
+        'layers': json.dumps(LayerSerializer(Layer.objects.all().order_by('id'), many=True).data),
+        'location_query': {'events': id},
+    }
+    return render(request, 'front.html', context)

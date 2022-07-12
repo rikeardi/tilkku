@@ -21,6 +21,7 @@ router.register(r'contacts', api.ContactViewSet)
 app_name = 'main'
 urlpatterns = [
     path('', views.home, name='home'),
+    path('events/{id}/', views.events, name='events'),
     path('api/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('accounts/login/', django.contrib.auth.views.LoginView.as_view(authentication_form=forms.LoginForm), name='login'),
