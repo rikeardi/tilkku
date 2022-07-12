@@ -96,7 +96,7 @@ class SiteSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Site
-        fields = ('id', 'name', 'area', 'marker', 'category', 'description')
+        fields = ('id', 'name', 'area', 'marker', 'category', 'description', 'contacts', 'notes')
 
 
 class SiteViewSet(viewsets.ModelViewSet):

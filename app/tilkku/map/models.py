@@ -91,6 +91,7 @@ class Site(models.Model):
     marker = models.ForeignKey(Marker, on_delete=models.DO_NOTHING, blank=True, null=True)
     category = models.ForeignKey(SiteCategory, on_delete=models.DO_NOTHING)
     description = models.TextField(blank=True, default='')
+    contacts = models.ManyToManyField('tilkku.Contact', blank=True)
 
     class Meta:
         ordering = ['name']
