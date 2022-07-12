@@ -32,6 +32,7 @@
     <div class="modal-card" style="height: 94%;">
         <header class="modal-card-head">
             <p class="modal-card-title" id="topic-modal-name"></p>
+            <button class="button is-small" id="topic-link-btn">Kopioi linkki</button>
             <button class="delete" aria-label="close" onclick="topic_modal_close();"></button>
         </header>
         <section class="modal-card-body p-2">
@@ -127,6 +128,9 @@ function topic_modal_open(topic_id) {
             opened_topic_id = topic_id;
             $("#topic-modal-name").text(data.name);
             $("#topic-modal-description").text(data.description);
+            $("#topic-link-btn").click(function() {
+                window.clipboardData.setData("Text", "https://rikeardi.duckdns.org/?events=" + topic_id);
+            });
             $("#topic-modal-notes").html("");
             data.notes.forEach(function(note) {
                 var note_item = $("#note-item-template").clone();
