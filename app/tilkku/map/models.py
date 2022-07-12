@@ -102,7 +102,7 @@ class Note(models.Model):
     message = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
-    site = models.ForeignKey('Site', on_delete=models.DO_NOTHING, blank=True, null=True)
+    site = models.ForeignKey('Site', related_name='note_site', on_delete=models.DO_NOTHING, blank=True, null=True)
 
     class Meta:
         ordering = ['-created_at']
