@@ -1,22 +1,22 @@
 {% block content %}
 <div class="tabs is-boxed is-small" style="margin-bottom: 0px;">
     <ul>
-        <li id="tools-menu-events" class="tools-menu">
+        <li id="tools-menu-events" class="tools-menu is-active">
             <a href="#" onclick="tools_select('events')">
                 <span class="icon"><i class="fas fa-book"></i></span>
-                <span>Tapahtumat</span>
+                <span class="tools-menu-text" id="tools-event-text">Tapahtumat</span>
             </a>
         </li>
-        <li id="tools-menu-chat" class="tools-menu is-active">
+        <li id="tools-menu-chat" class="tools-menu">
             <a href="#" onclick="tools_select('chat')">
                 <span class="icon"><i class="fas fa-comments"></i></span>
-                <span>Keskustelu</span>
+                <span class="tools-menu-text" id="tools-chat-text">Keskustelu</span>
             </a>
         </li>
         <li id="tools-menu-sites" class="tools-menu">
             <a href="#" onclick="tools_select('sites')">
                 <span class="icon"><i class="fas fa-thumbtack"></i></span>
-                <span>Paikat</span>
+                <span class="tools-menu-text" id="tools-sites-text">Paikat</span>
             </a>
         </li>
     </ul>
@@ -37,7 +37,9 @@
 function tools_select(tool) {
     $(".tools-menu").removeClass('is-active');
     $(".tools-box").hide();
+    $(".tools-menu-text").addClass('is-hidden');
     $("#tools-menu-" + tool).addClass('is-active');
+    $("#tools-" + tool + "-text").removeClass('is-hidden');
     $("#tools-" + tool).show();
     $("#front-" + tool + "-btn").removeClass("newmsg");
     settings.tool = tool;
