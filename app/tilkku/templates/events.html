@@ -216,14 +216,15 @@ function topic_modal_close() {
 
 function topic_modal_save() {
     var message = $("#topic-modal-new-note").val();
-    var site = $("#topic-modal-location").val();
+    var site = $("#topic-modal-location-id").val();
     console.log(site);
     $.ajax({
         url: "api/notes/",
         type: "POST",
         data: {
             message: message,
-            topic: opened_topic_id
+            topic: opened_topic_id,
+            site: site
         },
         headers: {
             "X-CSRFToken": csrf_token
