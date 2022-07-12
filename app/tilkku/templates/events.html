@@ -94,7 +94,7 @@
                     <input class="input" type="text" id="topic-modal-location">
                     <input type="hidden" id="topic-modal-location-id">
                 </div>
-                <div id="topic-modal-location-autocomplete" class="dropdown-content" style="position: fixed;">
+                <div id="topic-modal-location-autocomplete" class="dropdown-content" style="position: fixed; z-index: 1;">
                 </div>
             </div>
         </section>
@@ -259,7 +259,7 @@ $("#topic-modal-location").keyup(function(e) {
             success: function(data) {
                 $("#topic-modal-location-autocomplete").html("");
                 data.forEach(function(site) {
-                    var site_item = "<div class='dropdown-item' style='cursor:pointer;' onclick='note_select_site(" + site + ");'>" + site.name + "</div>";
+                    var site_item = "<div class='dropdown-item' style='cursor:pointer;' onclick='note_select_site(" + site.id + ", " + site.name + ");'>" + site.name + "</div>";
                     $("#topic-modal-location-autocomplete").append(site_item);
                 });
             }
@@ -269,10 +269,10 @@ $("#topic-modal-location").keyup(function(e) {
     }
 });
 
-function note_select_site(site) {
-    $("#topic-modal-location").val(site.name);
+function note_select_site(site_id, site_name) {
+    $("#topic-modal-location").val(site_name);
     $("#topic-modal-location-autocomplete").html("");
-    $("#topic-modal-location-id").val(site.id);
+    $("#topic-modal-location-id").val(site_id);
 }
 
 </script>
