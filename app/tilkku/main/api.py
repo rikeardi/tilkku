@@ -209,6 +209,11 @@ class NoteViewSet(viewsets.ModelViewSet):
                                           user=request.user)
         instance.save()
 
+        link = request.data.get('link')
+        if link:
+            instance.link = link
+            instance.save()
+
         topic_id = request.data.get('topic')
         if topic_id:
             topic = Topic.objects.get(id=topic_id)

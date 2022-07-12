@@ -49,16 +49,22 @@
             <div class="field">
                 <label class="label">Uusi merkintä</label>
                 <div class="control">
-                    <textarea class="textarea is-small" rows="2" id="topic-modal-new-note"></textarea>
+                    <textarea class="textarea is-small topic-input" rows="2" id="topic-modal-new-note"></textarea>
                 </div>
             </div>
             <div class="field" style="position: relative;">
                 <label class="label">Paikkatieto</label>
                 <div class="control">
-                    <input class="input is-small" type="text" id="topic-modal-location" autocomplete="no">
-                    <input type="hidden" id="topic-modal-location-id">
+                    <input class="input is-small topic-input" type="text" id="topic-modal-location" autocomplete="no">
+                    <input class="topic-input" type="hidden" id="topic-modal-location-id">
                 </div>
                 <div id="topic-modal-location-autocomplete" class="dropdown-content" style="position: fixed; z-index: 1;">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Linkki</label>
+                <div class="control">
+                    <input class="input is-small topic-input" type="text" id="topic-modal-link">
                 </div>
             </div>
         </section>
@@ -70,7 +76,7 @@
 </div>
 
 <div class='note-item box p-2 mb-2 notification is-success is-hidden' id="note-item-template">
-    <p class="m-0" style="font-size: 0.6rem;"><span class="note-user-name"></span> - <span class="note-datetime"></span><i class="fa fa-flag is-hidden" style="cursor:pointer; float: right;" title="Sijainti"></i></p>
+    <p class="m-0" style="font-size: 0.6rem;"><span class="note-user-name"></span> - <span class="note-datetime"></span><i class="fa fa-flag is-hidden" style="cursor:pointer; float: right;" title="Sijainti"></i><a class="note-link" style="float: right;" target="_blank"></a></p>
     <p class="note-text m-0"></p>
 </div>
 
@@ -134,6 +140,12 @@ function topic_modal_open(topic_id) {
                 } else {
                     note_item.find(".fa-flag").addClass("is-hidden");
                 }
+                if(note.link) {
+                    note_item.find(".note-link").attr("href", note.link);
+                    note_item.find(".note-link").text("Linkki");
+                } else {
+                    note_item.find(".note-link").remove();
+                }
                 $("#topic-modal-notes").append(note_item);
             });
             $("#topic-modal-new-note").val("");
@@ -143,12 +155,14 @@ function topic_modal_open(topic_id) {
 }
 
 function topic_modal_close() {
+    $(".topic-input").val("");
     $("#topic-modal").removeClass("is-active");
 }
 
 function topic_modal_save() {
     var message = $("#topic-modal-new-note").val();
     var site = $("#topic-modal-location-id").val();
+    var link = $("#topic-modal-link").val();
     console.log(site);
     $.ajax({
         url: "api/notes/",
@@ -156,7 +170,8 @@ function topic_modal_save() {
         data: {
             message: message,
             topic: opened_topic_id,
-            site: site
+            site: site,
+            link: link,
         },
         headers: {
             "X-CSRFToken": csrf_token

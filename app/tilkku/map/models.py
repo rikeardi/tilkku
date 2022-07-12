@@ -118,6 +118,7 @@ class Note(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     site = models.ForeignKey(Site, on_delete=models.DO_NOTHING, blank=True, null=True)
+    link = models.CharField(max_length=500, blank=True, default='')
 
     class Meta:
         ordering = ['-created_at']
