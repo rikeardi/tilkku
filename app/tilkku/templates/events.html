@@ -88,13 +88,13 @@
                     <textarea class="textarea" rows="2" id="topic-modal-new-note"></textarea>
                 </div>
             </div>
-            <div class="field">
+            <div class="field" style="position: relative;">
                 <label class="label">Paikkatieto</label>
                 <div class="control">
                     <input class="input" type="text" id="topic-modal-location">
+                    <input type="hidden" id="topic-modal-location-id">
                 </div>
-                <div id="topic-modal-location-autocomplete" class="dropdown-content">
-
+                <div id="topic-modal-location-autocomplete" class="dropdown-content" style="position: fixed;">
                 </div>
             </div>
         </section>
@@ -259,13 +259,21 @@ $("#topic-modal-location").keyup(function(e) {
             success: function(data) {
                 $("#topic-modal-location-autocomplete").html("");
                 data.forEach(function(site) {
-                    var site_item = "<div class='dropdown-item'>" + site.name + "</div>";
+                    var site_item = "<div class='dropdown-item' style='cursor:pointer;' onclick='note_select_site(" + site + ");'>" + site.name + "</div>";
                     $("#topic-modal-location-autocomplete").append(site_item);
                 });
             }
         });
+    } else {
+        $("#topic-modal-location-autocomplete").html("");
     }
 });
+
+function note_select_site(site) {
+    $("#topic-modal-location").val(site.name);
+    $("#topic-modal-location-autocomplete").html("");
+    $("#topic-modal-location-id").val(site.id);
+}
 
 </script>
 {% endblock %}
