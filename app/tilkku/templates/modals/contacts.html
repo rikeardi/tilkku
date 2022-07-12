@@ -89,7 +89,7 @@ function new_contact_save() {
     var phone = $('#new-contact-phone').val();
     var title = $('#new-contact-title').val();
     $.ajax({
-        url: 'api/contacts/',
+        url: '/api/contacts/',
         type: 'POST',
         data: {
             name: name,
@@ -109,7 +109,7 @@ function new_contact_save() {
 
 function contact_modal_open(id) {
     $.ajax({
-        url: 'api/contacts/' + id + '/',
+        url: '/api/contacts/' + id + '/',
         type: 'GET',
         success: function(data) {
             $('#contact-modal-name').text(data.name);

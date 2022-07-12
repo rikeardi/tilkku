@@ -40,7 +40,7 @@
 
 function get_events() {
     $.ajax({
-        url: "api/topics/?status=OP",
+        url: "/api/topics/?status=OP",
         type: "GET",
         success: function(data) {
             $("#events-topic-box").html("");
@@ -90,7 +90,7 @@ function topic_open_site(site) {
 function topic_accept_open(topic_id) {
     messages_confirm("Kuittaa valmiiksi", "Haluatko varmasti sulkea tämän aiheen?", function() {
         $.ajax({
-            url: "api/topics/" + topic_id + "/",
+            url: "/api/topics/" + topic_id + "/",
             type: "PATCH",
             data: {
                 status: "CLOSED",

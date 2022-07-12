@@ -35,7 +35,7 @@
 var opened_site = null;
 function open_site_modal(area_id, marker_id) {
     $.ajax({
-        url: 'api/sites/?area=' + area_id + '&marker=' + marker_id,
+        url: '/api/sites/?area=' + area_id + '&marker=' + marker_id,
         type: 'GET',
         success: function(data) {
             opened_site = data[0];
@@ -58,7 +58,7 @@ function load_site_modal() {
     $('#site-notes-table').html('');
     $('#site-modal').addClass('is-active');
     $.ajax({
-        url: 'api/notes/?site=' + opened_site.id,
+        url: '/api/notes/?site=' + opened_site.id,
         type: 'GET',
         success: function(data) {
             data.forEach(function(note) {
@@ -85,7 +85,7 @@ $("#site-contact-input").keyup(function(e) {
     var query = $("#site-contact-input").val();
     if(query.length >= 2) {
         $.ajax({
-            url: "api/contacts/?term=" + query,
+            url: "/api/contacts/?term=" + query,
             type: "GET",
             success: function(data) {
                 $("#site-contact-autocomplete").html("");
@@ -102,7 +102,7 @@ $("#site-contact-input").keyup(function(e) {
 
 function site_select_contact(contact_id) {
     $.ajax({
-        url: "api/sites/" + opened_site.id + "/",
+        url: "/api/sites/" + opened_site.id + "/",
         type: "PATCH",
         data: {
             contact: contact_id,

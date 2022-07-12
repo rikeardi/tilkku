@@ -98,7 +98,7 @@ function new_topic_modal_save() {
     var name = $("#new-topic-modal-name").val();
     var description = $("#new-topic-modal-description").val();
     $.ajax({
-        url: "api/topics/",
+        url: "/api/topics/",
         type: "POST",
         data: {
             name: name,
@@ -121,7 +121,7 @@ var opened_topic_id = null;
 function topic_modal_open(topic_id) {
     $("#topic-modal").addClass("is-active");
     $.ajax({
-        url: "api/topics/" + topic_id + "/",
+        url: "/api/topics/" + topic_id + "/",
         type: "GET",
         success: function(data) {
             console.log(data);
@@ -172,7 +172,7 @@ function topic_modal_save() {
     var link = $("#topic-modal-link").val();
     console.log(site);
     $.ajax({
-        url: "api/notes/",
+        url: "/api/notes/",
         type: "POST",
         data: {
             message: message,
@@ -194,7 +194,7 @@ $("#topic-modal-location").keyup(function(e) {
     var query = $("#topic-modal-location").val();
     if(query.length >= 2) {
         $.ajax({
-            url: "api/sites/?name=" + query,
+            url: "/api/sites/?name=" + query,
             type: "GET",
             success: function(data) {
                 $("#topic-modal-location-autocomplete").html("");
