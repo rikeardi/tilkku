@@ -165,6 +165,12 @@ class NoteViewSet(viewsets.ModelViewSet):
             topic.notes.add(instance)
             topic.save()
 
+        site_id = request.data.get('site')
+        if site_id:
+            site = Site.objects.get(id=site_id)
+            instance.site = site
+            instance.save()
+
         return Response(NoteSerializer(instance).data)
 
 
