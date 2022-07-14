@@ -29,7 +29,7 @@ function update_weather() {
             var wind = info.data.instant.details.wind_speed;
             var wind_dir = info.data.instant.details.wind_from_direction;
             var humidity = info.data.instant.details.relative_humidity;
-            var symbol = info.data.next_1_hour.summary.symbol_code;
+            var symbol = info.data.next_1_hours.summary.symbol_code;
 
             var row = "<tr>";
             row += "<td>" + time.toLocaleTimeString() + "</td>";
