@@ -37,7 +37,7 @@ function update_weather() {
             row += "<td>" + wind + " m/s</td>";
             row += "<td>" + wind_dir + "</td>";
             row += "<td>" + humidity + " %</td>";
-            row += "<td><img src='" + static("tilkku/img/weather/" + symbol + ".png") + "'></td>";
+            row += "<td><img src='{{ static 'img/weather' }}" + symbol + ".png'></td>";
             row += "</tr>";
             $("#weather-table").append(row);
         });
