@@ -55,7 +55,7 @@ function update_weather() {
             row += "<td>" + wind + " m/s</td>";
             row += "<td>" + wind_dir + "</td>";
             row += "<td>" + humidity + " %</td>";
-            row += "<td><img src='.png'></td>";
+            row += "<td><i class='" + symbol + "'></i>></td>";
             row += "</tr>";
             $("#weather-table").append(row);
         });
