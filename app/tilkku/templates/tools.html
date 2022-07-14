@@ -25,6 +25,12 @@
                 <span class="tools-menu-text" id="tools-contacts-text">Yhteystiedot</span>
             </a>
         </li>
+        <li id="tools-menu-weather" class="tools-menu">
+            <a href="#" onclick="tools_select('weather')">
+                <span class="icon"><i class="fas fa-sun"></i></span>
+                <span class="tools-menu-text" id="tools-weather-text">Säätiedot</span>
+            </a>
+        </li>
     </ul>
 </div>
 <div class="content p-4" id="tools-content" style="height: calc(100% - 30px);">
@@ -39,6 +45,9 @@
     </div>
     <div id="tools-contacts" class="tools-box" style="height: 100%; display: none;">
         {% include 'contacts.html' %}
+    </div>
+    <div id="tools-weather" class="tools-box" style="height: 100%; display: none;">
+        {% include 'weather.html' %}
     </div>
 </div>
 
