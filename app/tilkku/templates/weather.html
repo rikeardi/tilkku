@@ -14,6 +14,24 @@ function weather_get_wind() {
 
 }
 
+function weather_get_symbol(code) {
+    switch(code) {
+        case: "clearsky_day":
+            return "fas fa-sun";
+        case: "clearsky_night":
+            return "fas fa-moon";
+        case: "cloudy":
+            return "fas fa-cloud";
+        case: "cloudy_day":
+            return "fas fa-cloud-sun";
+        case: "cloudy_night":
+            return "fas fa-cloud-moon";
+        case: "rain":
+            return "fas fa-cloud-showers-heavy";
+
+    }
+}
+
 function update_weather() {
     var url = "https://api.met.no/weatherapi/locationforecast/2.0/compact.json";
     url += "?lat=" + map.getCenter().lat;
@@ -29,7 +47,7 @@ function update_weather() {
             var wind = info.data.instant.details.wind_speed;
             var wind_dir = info.data.instant.details.wind_from_direction;
             var humidity = info.data.instant.details.relative_humidity;
-            var symbol = info.data.next_1_hours.summary.symbol_code;
+            var symbol = weather_get_symbol(info.data.next_1_hours.summary.symbol_code);
 
             var row = "<tr>";
             row += "<td>" + time.toLocaleTimeString() + "</td>";
@@ -37,7 +55,7 @@ function update_weather() {
             row += "<td>" + wind + " m/s</td>";
             row += "<td>" + wind_dir + "</td>";
             row += "<td>" + humidity + " %</td>";
-            row += "<td><img src='{{ static 'img/weather' }}" + symbol + ".png'></td>";
+            row += "<td><img src='.png'></td>";
             row += "</tr>";
             $("#weather-table").append(row);
         });
