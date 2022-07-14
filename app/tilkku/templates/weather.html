@@ -24,7 +24,7 @@ function update_weather() {
     });
 }
 
-var weather_timeout = timeout(update_weather, 60000);
+var weather_timeout = setTimeout(update_weather, 1000);
 
 </script>
 {% endblock %}
