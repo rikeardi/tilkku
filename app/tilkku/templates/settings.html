@@ -2,7 +2,7 @@
 {% load static %}
 <div class="modal" id="settings-modal">
     <div class="modal-background"></div>
-    <div class="modal-content" style="overflow: none;">
+    <div class="modal-content" style="overflow: hidden;">
         <div class="box" style="text-align: center;">
             <h1>Asetukset</h1>
         </div>
@@ -44,16 +44,16 @@
                 </ul>
             </div>
             <div class="content p-0" style="height: 93%; overflow: none;">
-                <div id="settings-general" class="settings-box" style="height: 100%;">
+                <div id="settings-general" class="settings-box" style="height: 100%; overflow: auto;">
                     {% include 'settings/general.html' %}
                 </div>
-                <div id="settings-map" class="settings-box" style="height: 100%; display: none;">
+                <div id="settings-map" class="settings-box" style="height: 100%; display: none; overflow: auto;">
                     {% include 'settings/map.html' %}
                 </div>
-                <div id="settings-events" class="settings-box" style="height: 100%; display: none;">
+                <div id="settings-events" class="settings-box" style="height: 100%; display: none; overflow: auto;">
                     {% include 'settings/events.html' %}
                 </div>
-                <div id="settings-sites" class="settings-box" style="height: 100%; display: none;">
+                <div id="settings-sites" class="settings-box" style="height: 100%; display: none; overflow: auto;">
                     {% include 'settings/sites.html' %}
                 </div>
             </div>
