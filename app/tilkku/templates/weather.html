@@ -18,8 +18,8 @@ function update_weather() {
     $.getJSON(url, function(data) {
         console.log(data);
         $("#weather-table").empty();
-        $.each(data, function(key, value) {
-            $("#weather-table").append("<tr><td>" + key + "</td><td>" + value + "</td></tr>");
+        data.properties.timeseries.forEach(function(info) {
+            console.log(info);
         });
     });
 }
