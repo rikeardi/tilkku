@@ -10,6 +10,10 @@
 
 <script>
 
+function weather_get_wind() {
+
+}
+
 function update_weather() {
     var url = "https://api.met.no/weatherapi/locationforecast/2.0/compact.json";
     url += "?lat=" + map.getCenter().lat;
@@ -20,6 +24,22 @@ function update_weather() {
         $("#weather-table").empty();
         data.properties.timeseries.forEach(function(info) {
             console.log(info);
+            var time = new Date(info.time);
+            var temp = info.instant.details.air_temperature;
+            var wind = info.instant.details.wind_speed;
+            var wind_dir = info.instant.details.wind_from_direction;
+            var humidity = info.instant.details.relative_humidity;
+            var symbol = info.next_1_hour.summary.symbol_code;
+
+            var row = "<tr>";
+            row += "<td>" + time.toLocaleTimeString() + "</td>";
+            row += "<td>" + temp + " &deg;C</td>";
+            row += "<td>" + wind + " m/s</td>";
+            row += "<td>" + wind_dir + "</td>";
+            row += "<td>" + humidity + " %</td>";
+            row += "<td><img src='" + static("tilkku/img/weather/" + symbol + ".png") + "'></td>";
+            row += "</tr>";
+            $("#weather-table").append(row);
         });
     });
 }
