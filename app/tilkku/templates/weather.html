@@ -124,7 +124,6 @@ function update_weather() {
     url += "&lon=" + map.getCenter().lng;
     url += "&altitude=129";
     $.getJSON(url, function(data) {
-        console.log(data);
         $("#weather-table").empty();
         for(var i = 0; i < 24; i++) {
             var info = data.properties.timeseries[i];
