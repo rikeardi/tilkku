@@ -11,10 +11,10 @@
 <script>
 
 function update_weather() {
-    var url = "https://api.met.no/weatherapi/locationforecast/2.0/complete.json?lat=61.204784&lon=25.120637&altitude=129";
-    url += "lat=" + map.getCenter().lat;
-    url += "lon=" + map.getCenter().lng;
-    url += "altitude=129";
+    var url = "https://api.met.no/weatherapi/locationforecast/2.0/complete.json";
+    url += "?lat=" + map.getCenter().lat;
+    url += "&lon=" + map.getCenter().lng;
+    url += "&altitude=129";
     $.getJSON(url, function(data) {
         console.log(data);
         $("#weather-table").empty();
