@@ -126,7 +126,8 @@ function update_weather() {
     $.getJSON(url, function(data) {
         console.log(data);
         $("#weather-table").empty();
-        data.properties.timeseries.forEach(function(info) {
+        for(var i = 0; i < 24; i++) {
+            var info = data.properties.timeseries[i];
             var info_time = new Date(info.time);
             var time = info_time.getHours() + ":" + ("0" + info_time.getMinutes()).slice(-2);
             var temp = info.data.instant.details.air_temperature;
