@@ -16,19 +16,89 @@ function weather_get_wind() {
 
 function weather_get_symbol(code) {
     switch(code) {
-        case "clearsky_day":
-            return "fas fa-sun";
-        case "clearsky_night":
-            return "fas fa-moon";
-        case "cloudy":
-            return "fas fa-cloud";
-        case "cloudy_day":
-            return "fas fa-cloud-sun";
-        case "cloudy_night":
-            return "fas fa-cloud-moon";
-        case "rain":
-            return "fas fa-cloud-showers-heavy";
-
+        case 'clearsky_day': return "{{ static 'img/weather/clearsky_day.png' }}";
+        case 'clearsky_night': return "{{ static 'img/weather/clearsky_night.png' }}";
+        case 'clearsky_polartwilight': return "{{ static 'img/weather/clearsky_polartwilight.png' }}";
+        case 'cloudy': return "{{ static 'img/weather/cloudy.png' }}";
+        case 'fair_day': return "{{ static 'img/weather/fair_day.png' }}";
+        case 'fair_night': return "{{ static 'img/weather/fair_night.png' }}";
+        case 'fair_polartwilight': return "{{ static 'img/weather/fair_polartwilight.png' }}";
+        case 'fog': return "{{ static 'img/weather/fog.png' }}";
+        case 'heavyrain': return "{{ static 'img/weather/heavyrain.png' }}";
+        case 'heavyrainandthunder': return "{{ static 'img/weather/heavyrainandthunder.png' }}";
+        case 'heavyrainshowersandthunder_day': return "{{ static 'img/weather/heavyrainshowersandthunder_day.png' }}";
+        case 'heavyrainshowersandthunder_night': return "{{ static 'img/weather/heavyrainshowersandthunder_night.png' }}";
+        case 'heavyrainshowersandthunder_polartwilight': return "{{ static 'img/weather/heavyrainshowersandthunder_polartwilight.png' }}";
+        case 'heavyrainshowers_day': return "{{ static 'img/weather/heavyrainshowers_day.png' }}";
+        case 'heavyrainshowers_night': return "{{ static 'img/weather/heavyrainshowers_night.png' }}";
+        case 'heavyrainshowers_polartwilight': return "{{ static 'img/weather/heavyrainshowers_polartwilight.png' }}";
+        case 'heavysleet': return "{{ static 'img/weather/heavysleet.png' }}";
+        case 'heavysleetandthunder': return "{{ static 'img/weather/heavysleetandthunder.png' }}";
+        case 'heavysleetshowersandthunder_day': return "{{ static 'img/weather/heavysleetshowersandthunder_day.png' }}";
+        case 'heavysleetshowersandthunder_night': return "{{ static 'img/weather/heavysleetshowersandthunder_night.png' }}";
+        case 'heavysleetshowersandthunder_polartwilight': return "{{ static 'img/weather/heavysleetshowersandthunder_polartwilight.png' }}";
+        case 'heavysleetshowers_day': return "{{ static 'img/weather/heavysleetshowers_day.png' }}";
+        case 'heavysleetshowers_night': return "{{ static 'img/weather/heavysleetshowers_night.png' }}";
+        case 'heavysleetshowers_polartwilight': return "{{ static 'img/weather/heavysleetshowers_polartwilight.png' }}";
+        case 'heavysnow': return "{{ static 'img/weather/heavysnow.png' }}";
+        case 'heavysnowandthunder': return "{{ static 'img/weather/heavysnowandthunder.png' }}";
+        case 'heavysnowshowersandthunder_day': return "{{ static 'img/weather/heavysnowshowersandthunder_day.png' }}";
+        case 'heavysnowshowersandthunder_night': return "{{ static 'img/weather/heavysnowshowersandthunder_night.png' }}";
+        case 'heavysnowshowersandthunder_polartwilight': return "{{ static 'img/weather/heavysnowshowersandthunder_polartwilight.png' }}";
+        case 'heavysnowshowers_day': return "{{ static 'img/weather/heavysnowshowers_day.png' }}";
+        case 'heavysnowshowers_night': return "{{ static 'img/weather/heavysnowshowers_night.png' }}";
+        case 'heavysnowshowers_polartwilight': return "{{ static 'img/weather/heavysnowshowers_polartwilight.png' }}";
+        case 'lightrain': return "{{ static 'img/weather/lightrain.png' }}";
+        case 'lightrainandthunder': return "{{ static 'img/weather/lightrainandthunder.png' }}";
+        case 'lightrainshowersandthunder_day': return "{{ static 'img/weather/lightrainshowersandthunder_day.png' }}";
+        case 'lightrainshowersandthunder_night': return "{{ static 'img/weather/lightrainshowersandthunder_night.png' }}";
+        case 'lightrainshowersandthunder_polartwilight': return "{{ static 'img/weather/lightrainshowersandthunder_polartwilight.png' }}";
+        case 'lightrainshowers_day': return "{{ static 'img/weather/lightrainshowers_day.png' }}";
+        case 'lightrainshowers_night': return "{{ static 'img/weather/lightrainshowers_night.png' }}";
+        case 'lightrainshowers_polartwilight': return "{{ static 'img/weather/lightrainshowers_polartwilight.png' }}";
+        case 'lightsleet': return "{{ static 'img/weather/lightsleet.png' }}";
+        case 'lightsleetandthunder': return "{{ static 'img/weather/lightsleetandthunder.png' }}";
+        case 'lightsleetshowers_day': return "{{ static 'img/weather/lightsleetshowers_day.png' }}";
+        case 'lightsleetshowers_night': return "{{ static 'img/weather/lightsleetshowers_night.png' }}";
+        case 'lightsleetshowers_polartwilight': return "{{ static 'img/weather/lightsleetshowers_polartwilight.png' }}";
+        case 'lightsnow': return "{{ static 'img/weather/lightsnow.png' }}";
+        case 'lightsnowandthunder': return "{{ static 'img/weather/lightsnowandthunder.png' }}";
+        case 'lightsnowshowers_day': return "{{ static 'img/weather/lightsnowshowers_day.png' }}";
+        case 'lightsnowshowers_night': return "{{ static 'img/weather/lightsnowshowers_night.png' }}";
+        case 'lightsnowshowers_polartwilight': return "{{ static 'img/weather/lightsnowshowers_polartwilight.png' }}";
+        case 'lightssleetshowersandthunder_day': return "{{ static 'img/weather/lightssleetshowersandthunder_day.png' }}";
+        case 'lightssleetshowersandthunder_night': return "{{ static 'img/weather/lightssleetshowersandthunder_night.png' }}";
+        case 'lightssleetshowersandthunder_polartwilight': return "{{ static 'img/weather/lightssleetshowersandthunder_polartwilight.png' }}";
+        case 'lightssnowshowersandthunder_day': return "{{ static 'img/weather/lightssnowshowersandthunder_day.png' }}";
+        case 'lightssnowshowersandthunder_night': return "{{ static 'img/weather/lightssnowshowersandthunder_night.png' }}";
+        case 'lightssnowshowersandthunder_polartwilight': return "{{ static 'img/weather/lightssnowshowersandthunder_polartwilight.png' }}";
+        case 'partlycloudy_day': return "{{ static 'img/weather/partlycloudy_day.png' }}";
+        case 'partlycloudy_night': return "{{ static 'img/weather/partlycloudy_night.png' }}";
+        case 'partlycloudy_polartwilight': return "{{ static 'img/weather/partlycloudy_polartwilight.png' }}";
+        case 'rain': return "{{ static 'img/weather/rain.png' }}";
+        case 'rainandthunder': return "{{ static 'img/weather/rainandthunder.png' }}";
+        case 'rainshowersandthunder_day': return "{{ static 'img/weather/rainshowersandthunder_day.png' }}";
+        case 'rainshowersandthunder_night': return "{{ static 'img/weather/rainshowersandthunder_night.png' }}";
+        case 'rainshowersandthunder_polartwilight': return "{{ static 'img/weather/rainshowersandthunder_polartwilight.png' }}";
+        case 'rainshowers_day': return "{{ static 'img/weather/rainshowers_day.png' }}";
+        case 'rainshowers_night': return "{{ static 'img/weather/rainshowers_night.png' }}";
+        case 'rainshowers_polartwilight': return "{{ static 'img/weather/rainshowers_polartwilight.png' }}";
+        case 'sleet': return "{{ static 'img/weather/sleet.png' }}";
+        case 'sleetandthunder': return "{{ static 'img/weather/sleetandthunder.png' }}";
+        case 'sleetshowersandthunder_day': return "{{ static 'img/weather/sleetshowersandthunder_day.png' }}";
+        case 'sleetshowersandthunder_night': return "{{ static 'img/weather/sleetshowersandthunder_night.png' }}";
+        case 'sleetshowersandthunder_polartwilight': return "{{ static 'img/weather/sleetshowersandthunder_polartwilight.png' }}";
+        case 'sleetshowers_day': return "{{ static 'img/weather/sleetshowers_day.png' }}";
+        case 'sleetshowers_night': return "{{ static 'img/weather/sleetshowers_night.png' }}";
+        case 'sleetshowers_polartwilight': return "{{ static 'img/weather/sleetshowers_polartwilight.png' }}";
+        case 'snow': return "{{ static 'img/weather/snow.png' }}";
+        case 'snowandthunder': return "{{ static 'img/weather/snowandthunder.png' }}";
+        case 'snowshowersandthunder_day': return "{{ static 'img/weather/snowshowersandthunder_day.png' }}";
+        case 'snowshowersandthunder_night': return "{{ static 'img/weather/snowshowersandthunder_night.png' }}";
+        case 'snowshowersandthunder_polartwilight': return "{{ static 'img/weather/snowshowersandthunder_polartwilight.png' }}";
+        case 'snowshowers_day': return "{{ static 'img/weather/snowshowers_day.png' }}";
+        case 'snowshowers_night': return "{{ static 'img/weather/snowshowers_night.png' }}";
+        case 'snowshowers_polartwilight': return "{{ static 'img/weather/snowshowers_polartwilight.png' }}";
     }
 }
 
@@ -55,7 +125,7 @@ function update_weather() {
             row += "<td>" + wind + " m/s</td>";
             row += "<td>" + wind_dir + "</td>";
             row += "<td>" + humidity + " %</td>";
-            row += "<td><i class='" + symbol + "'></i>></td>";
+            row += "<td><img src='" + symbol + "'></td>";
             row += "</tr>";
             $("#weather-table").append(row);
         });
