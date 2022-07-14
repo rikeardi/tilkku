@@ -128,7 +128,7 @@ function update_weather() {
         $("#weather-table").empty();
         data.properties.timeseries.forEach(function(info) {
             var info_time = new Date(info.time);
-            var time = info_time.getHours() + ":" + info_time.getMinutes();
+            var time = info_time.getHours() + ":" + ("0" + info_time.getMinutes()).slice(-2);
             var temp = info.data.instant.details.air_temperature;
             var wind = info.data.instant.details.wind_speed;
             var wind_dir = info.data.instant.details.wind_from_direction;
