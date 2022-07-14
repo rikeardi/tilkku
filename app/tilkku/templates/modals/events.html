@@ -150,8 +150,9 @@ function topic_modal_open(topic_id) {
                 if(note.link) {
                     note_item.find(".note-link").attr("href", note.link);
                     note_item.find(".note-link").text("Linkki");
+                    note_item.find(".note-link").removeClass("is-hidden");
                 } else {
-                    note_item.find(".note-link").remove();
+                    note_item.find(".note-link").addClass("is-hidden");
                 }
                 $("#topic-modal-notes").append(note_item);
             });
