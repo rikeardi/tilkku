@@ -10,8 +10,24 @@
 
 <script>
 
-function weather_get_wind() {
-
+function weather_get_wind(deg) {
+    if(deg > 337.5 || deg <= 22.5) {
+        return "E";
+    } else if(deg > 22.5 && deg <= 67.5) {
+        return "SE";
+    } else if(deg > 67.5 && deg <= 112.5) {
+        return "S";
+    } else if(deg > 112.5 && deg <= 157.5) {
+        return "SW";
+    } else if(deg > 157.5 && deg <= 202.5) {
+        return "W";
+    } else if(deg > 202.5 && deg <= 247.5) {
+        return "NW";
+    } else if(deg > 247.5 && deg <= 292.5) {
+        return "N";
+    } else if(deg > 292.5 && deg <= 337.5) {
+        return "NE";
+    }
 }
 
 function weather_get_symbol(code) {
@@ -123,7 +139,7 @@ function update_weather() {
             row += "<td>" + time.toLocaleTimeString() + "</td>";
             row += "<td>" + temp + " &deg;C</td>";
             row += "<td>" + wind + " m/s</td>";
-            row += "<td>" + wind_dir + "</td>";
+            row += "<td>" + weather_get_wind(wind_dir) + "</td>";
             row += "<td>" + humidity + " %</td>";
             row += "<td><img src='" + symbol + "'></td>";
             row += "</tr>";
