@@ -127,8 +127,8 @@ function update_weather() {
         console.log(data);
         $("#weather-table").empty();
         data.properties.timeseries.forEach(function(info) {
-            console.log(info);
             var time = new Date(info.time);
+            console.log(time);
             var temp = info.data.instant.details.air_temperature;
             var wind = info.data.instant.details.wind_speed;
             var wind_dir = info.data.instant.details.wind_from_direction;
@@ -138,9 +138,8 @@ function update_weather() {
             var row = "<tr>";
             row += "<td>" + time.toLocaleTimeString() + "</td>";
             row += "<td>" + temp + " &deg;C</td>";
-            row += "<td>" + wind + " m/s</td>";
-            row += "<td>" + weather_get_wind(wind_dir) + "</td>";
             row += "<td>" + humidity + " %</td>";
+            row += "<td>" + wind + " m/s " + weather_get_wind(wind_dir) + "</td>";
             row += "<td><img class='image is-32x32' src='" + symbol + "'></td>";
             row += "</tr>";
             $("#weather-table").append(row);
