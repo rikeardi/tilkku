@@ -23,8 +23,10 @@ function update_weather() {
         });
     });
 }
+update_weather();
 
-var weather_timeout = setTimeout(update_weather, 1000);
+var weather_timeout = setInterval(update_weather, 60000);
+
 
 </script>
 {% endblock %}
