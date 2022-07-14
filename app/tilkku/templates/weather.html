@@ -4,7 +4,7 @@
 
 </style>
 <div id="weather-window" style="height: 100%; overflow: auto;">
-    <table class="table" id="weather-table">
+    <table class="table is-size-7" id="weather-table">
     </table>
 </div>
 
@@ -124,7 +124,7 @@ function update_weather() {
     url += "&lon=" + map.getCenter().lng;
     url += "&altitude=129";
     $.getJSON(url, function(data) {
-        $("#weather-table").html("<tr><th>Klo</th><th>Lämpötila</th><th>Kosteus</th><th>Tuuli</th><th></th></tr>");
+        $("#weather-table").html("<tr><th>Klo</th><th>Lämpötila</th><th>Kosteus</th><th>Tuuli</th><th>Sade</th><th></th></tr>");
         for(var i = 0; i < 24; i++) {
             var info = data.properties.timeseries[i];
             var info_time = new Date(info.time);
@@ -133,6 +133,7 @@ function update_weather() {
             var wind = info.data.instant.details.wind_speed;
             var wind_dir = info.data.instant.details.wind_from_direction;
             var humidity = info.data.instant.details.relative_humidity;
+            var rain = info.data.next_1_hours.details.precipitation_amount;
             var symbol = weather_get_symbol(info.data.next_1_hours.summary.symbol_code);
 
             var row = "<tr>";
@@ -140,6 +141,7 @@ function update_weather() {
             row += "<td>" + temp + " &deg;C</td>";
             row += "<td>" + humidity + " %</td>";
             row += "<td>" + wind + " m/s " + weather_get_wind(wind_dir) + "</td>";
+            row += "<td>" + rain + " mm</td>";
             row += "<td><img class='image is-32x32' src='" + symbol + "'></td>";
             row += "</tr>";
             $("#weather-table").append(row);
