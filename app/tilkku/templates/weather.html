@@ -23,9 +23,12 @@ function update_weather() {
         });
     });
 }
-update_weather();
 
-var weather_timeout = setInterval(update_weather, 60000);
+$(document).ready(function() {
+    update_weather();
+    var weather_timeout = setInterval(update_weather, 60000);
+});
+
 
 
 </script>
