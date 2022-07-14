@@ -25,11 +25,11 @@ function update_weather() {
         data.properties.timeseries.forEach(function(info) {
             console.log(info);
             var time = new Date(info.time);
-            var temp = info.instant.details.air_temperature;
-            var wind = info.instant.details.wind_speed;
-            var wind_dir = info.instant.details.wind_from_direction;
-            var humidity = info.instant.details.relative_humidity;
-            var symbol = info.next_1_hour.summary.symbol_code;
+            var temp = info.data.instant.details.air_temperature;
+            var wind = info.data.instant.details.wind_speed;
+            var wind_dir = info.data.instant.details.wind_from_direction;
+            var humidity = info.data.instant.details.relative_humidity;
+            var symbol = info.data.next_1_hour.summary.symbol_code;
 
             var row = "<tr>";
             row += "<td>" + time.toLocaleTimeString() + "</td>";
