@@ -144,27 +144,6 @@ var grid_cols = ["01","02","03","04","05","06","07","08","09","10","11","12","13
 var grid_rows = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
 
 function map_show_coords(latlng) {
-    var inv_x = false;
-    var inv_y = false;
-
-    if(grid_start[0] < grid_end[0]) {
-        var min_x = grid_start[0];
-        var max_x = grid_end[0];
-    } else {
-        var min_x = grid_end[0];
-        var max_x = grid_start[0];
-        inv_x = true;
-    }
-
-    if(grid_start[1] < grid_end[1]) {
-        var min_y = grid_start[1];
-        var max_y = grid_end[1];
-    } else {
-        var min_y = grid_end[1];
-        var max_y = grid_start[1];
-        inv_y = true;
-    }
-
     if(min_x < latlng.lat && latlng.lat < max_x && min_y < latlng.lng && latlng.lng < max_y) {
         var row = Math.floor((grid_end[0] - latlng.lat) / (grid_size[0]/grid_transfer));
         if(inv_x) {
@@ -180,29 +159,29 @@ function map_show_coords(latlng) {
     }
 }
 
-var map_grid = null;
+var map_grid = {};
 
 function map_set_grid() {
     console.log(settings);
     if(!settings.map.grid) {
-        if(map_grid != null) {
-            map_grid.remove();
-            map_grid = null;
+        if(map_grid.layer != null) {
+            map_grid.layer.remove();
+            map_grid.layer = null;
         }
         return;
     }
-    var x = grid_start[0];
-    var y = grid_start[1];
+    map_grid.x = grid_start[0];
+    map_grid.y = grid_start[1];
     var row = 0;
     var col = 0;
-    map_grid = L.layerGroup().addTo(map);
+    map_grid.layer = L.layerGroup().addTo(map);
     for(var row = 0; row <= grid_rows.length; row++) {
         var rowLine = L.polyline([
             [x + row * (grid_size[0]/grid_transfer), y],
             [x + row * (grid_size[0]/grid_transfer), y + grid_cols.length * (grid_size[1]/grid_transfer)],
         ], {
             className: 'grid-line',
-        }).addTo(map_grid);
+        }).addTo(map_grid.layer);
     }
     for (var col = 0; col <= grid_cols.length; col++) {
         var colLine = L.polyline([
@@ -210,7 +189,7 @@ function map_set_grid() {
             [x + grid_rows.length * (grid_size[0]/grid_transfer), y + col * (grid_size[1]/grid_transfer)],
         ], {
             className: 'grid-line',
-        }).addTo(map_grid);
+        }).addTo(map_grid.layer);
     }
     grid_end = [x + grid_rows.length * (grid_size[0]/grid_transfer), y + grid_cols.length * (grid_size[1]/grid_transfer)];
     var gridbox = L.rectangle([[x, y], [grid_end[0], grid_end[1]]], {
@@ -218,7 +197,11 @@ function map_set_grid() {
         fillOpacity: 0,
         stroke: false,
         cursor: 'none',
-    }).addTo(map_grid);
+    }).addTo(map_grid.layer);
+    for(var i = 0; i < grid_rows.length; i++) {
+        var rowHeader = L.point(y + i * (grid_size[1]/grid_transfer), x - (grid_size[0]/grid_transfer/2)).addTo(map_grid.layer);
+        rowHeader.bindTooltip(grid_rows[i]);
+    }
     gridbox.on("mousemove", function(e) {
         map_show_coords(e.latlng);
     });
