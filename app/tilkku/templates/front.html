@@ -136,6 +136,11 @@ function map_set_grid() {
         minNativeZoom: 18,
         maxZoom: 18,
         maxNativeZoom: 18,
+        createTile: function(coords) {
+            var tile = L.DomUtil.create('div');
+            tile.innerHTML = grid_rows[coords.y] + grid_cols[coords.x];
+            return tile;
+        }
     });
     console.log(grid);
     grid.addTo(map);
