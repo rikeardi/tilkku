@@ -132,7 +132,7 @@ function map_set_grid() {
     var transfer = 100000;
     var row = 0;
     var col = 0;
-    var grid = L.layerGroup();
+    var grid = L.layerGroup().addTo(map);
     for(var i = 0; i < grid_cols.length; i++) {
         var col_x = x + (col * grid_size[0]);
         var col_y = y + (row * grid_size[1]);
@@ -145,7 +145,6 @@ function map_set_grid() {
             row++;
         }
     }
-    grid.addTo(map);
 
 }
 map_set_grid();
