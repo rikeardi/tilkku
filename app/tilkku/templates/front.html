@@ -307,7 +307,6 @@ function map_load_layers() {
 }
 
 function map_get_layer(id) {
-    console.log(id);
     var correct_layer = null;
     map.eachLayer(function(layer) {
         if(layer.options.id == id) {
@@ -337,7 +336,6 @@ function open_area(id) {
         });
     });
     open_site_modal(opened_area.id, null);
-    console.log(opened_area);
 }
 
 var opened_marker = null;
@@ -351,7 +349,6 @@ function open_marker(id) {
         });
     });
     open_site_modal(null, opened_marker.id);
-    console.log(opened_marker);
 }
 
 </script>
