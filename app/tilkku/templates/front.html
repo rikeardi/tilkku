@@ -137,8 +137,8 @@ function map_set_grid() {
         var col_x = x + (col * grid_size[0]);
         var col_y = y + (row * grid_size[1]);
         var col_bounds = [[col_x, col_y], [col_x + grid_size[0]/transfer, col_y + grid_size[1]/transfer]];
-        var tile = L.polygon(col_bounds).addTo(grid);
-        tile.bindPopup(grid_cols[i] + " " + grid_rows[row]);
+        var tile = L.rectangle(col_bounds).addTo(grid);
+        tile.bindPopup(grid_rows[row] + grid_cols[i]);
         col++;
         if(col == grid_cols.length) {
             col = 0;
