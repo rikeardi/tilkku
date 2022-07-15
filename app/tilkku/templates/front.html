@@ -135,7 +135,7 @@ function map_set_grid() {
     var row = 0;
     var col = 0;
     var grid = L.layerGroup().addTo(map);
-    for(var i = 0; i < grid_cols.length; i++) {
+    for(var i = 0; i < grid_rows.length; i++) {
         var col_x = x + (row * (grid_size[0]/transfer));
         var col_y = y + (col * (grid_size[1]/transfer));
         var col_bounds = [[col_x, col_y], [col_x + grid_size[0]/transfer, col_y + grid_size[1]/transfer]];
