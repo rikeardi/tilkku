@@ -270,7 +270,7 @@ function map_load_layers() {
                 area_layer.addTo(layer.layer);
                 area_layer.on("click", function(e) {
                     console.log(e);
-                    e.originalEvent.stopPropagation();
+                    e.originalEvent.preventDefault();
                     open_area(e.target.options.id);
                 });
 
