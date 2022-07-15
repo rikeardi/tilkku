@@ -142,7 +142,7 @@ function map_set_grid() {
         var tile = L.rectangle(col_bounds, {
             className: "grid-tile",
         }).addTo(grid);
-        tile.bindPopup(grid_rows[row] + grid_cols[i]);
+        tile.bindPopup(grid_rows[row] + grid_cols[col]);
         col++;
         if(col == grid_cols.length) {
             col = 0;
