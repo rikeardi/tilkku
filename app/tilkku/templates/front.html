@@ -164,7 +164,7 @@ function map_set_grid() {
             className: 'grid-line',
         }).addTo(grid);
     }
-    var gridbox = L.rectangle([[x, y], [x + row * (grid_size[0]/transfer), y + col * (grid_size[1]/transfer)]], {
+    var gridbox = L.rectangle([[x, y], [x + grid_rows.length * (grid_size[0]/transfer), y + grid_cols.length * (grid_size[1]/transfer)]], {
         weight: 1,
         fillOpacity: 0,
         stroke: false,
