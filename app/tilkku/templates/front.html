@@ -100,8 +100,8 @@ var map = null;
     </div>
 </div>
 
-<div id="map-coordinates" class="box is-size-7 p-1 has-text-centered" style="position: fixed; left: 5px; bottom: 5px; width: 40px; opacity: 0.7;">
-    <p>A1</p>
+<div id="map-coordinates" class="box is-size-7 p-1 has-text-centered is-hidden" style="position: fixed; left: 5px; bottom: 5px; width: 40px; opacity: 0.7;">
+    <p></p>
 </div>
 
 {% include 'modals.html' %}
@@ -147,11 +147,16 @@ function map_set_grid() {
             var tile = L.rectangle(col_bounds, {
                 className: "grid-tile",
             }).addTo(grid);
-            tile.bindPopup(grid_rows[row] + grid_cols[col]);
+
+            tile.bindTooltip(grid_rows[row] + grid_cols[col]);
         }
     }
 }
 map_set_grid();
+
+function map_show_coordinates(coord) {
+
+}
 
 map_scale = L.control.scale({
     imperial: false,
