@@ -117,6 +117,31 @@ function map_set_bg() {
     map_background = map_servers[settings.map.server].layer.addTo(map);
 }
 
+var grid_size = 100;
+var grid_cols = ["01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30"];
+var grid_rows = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
+
+function map_set_grid() {
+    var grid = L.gridLayer.googleMutant({
+        maxZoom: settings.map.zoom,
+        minZoom: settings.map.zoom,
+        type: 'roadmap',
+        opacity: 0.5,
+        tileSize: 256,
+        subdomains: ['a', 'b', 'c'],
+        errorTileUrl: '',
+        attribution: '',
+        zoomOffset: 0,
+        reuseTiles: true,
+        detectRetina: false,
+        getTileUrl: function(coords) {
+            return 'https://mt1.google.com/vt/lyrs=m@2220744&hl=en&x=' + coords.x + '&y=' + coords.y + '&z=' + coords.z;
+        }
+    });
+    grid.addTo(map);
+}
+
+
 map_scale = L.control.scale({
     imperial: false,
     metric: true,
