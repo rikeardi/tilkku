@@ -127,44 +127,6 @@ function map_set_bg() {
     map_background = map_servers[settings.map.server].layer.addTo(map);
 }
 
-var grid_size = [-52, 112.5];
-var grid_start = [61.21340, 25.10560];
-var grid_cols = ["01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30"];
-var grid_rows = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
-
-function map_set_grid() {
-    var x = grid_start[0];
-    var y = grid_start[1];
-    var transfer = 100000;
-    var row = 0;
-    var col = 0;
-    var grid = L.layerGroup().addTo(map);
-    for(var row = 0; row < grid_rows.length; row++) {
-        for (var col = 0; col < grid_cols.length; col++) {
-            var col_x = x + (row * (grid_size[0]/transfer));
-            var col_y = y + (col * (grid_size[1]/transfer));
-            var col_bounds = [[col_x, col_y], [col_x + grid_size[0]/transfer, col_y + grid_size[1]/transfer]];
-            var tile = L.rectangle(col_bounds, {
-                className: "grid-tile",
-                data: {
-                    row: grid_rows[row],
-                    col: grid_cols[col],
-                },
-            });
-            tile.on("mouseover", function(e) {
-                console.log(e);
-                var text = e.target.options.data.row + e.target.options.data.col;
-                document.getElementById("map-coordinates").innerHTML = text;
-                document.getElementById("map-coordinates").classList.remove("is-hidden");
-            });
-            tile.on("mouseout", function(e) {
-                document.getElementById("map-coordinates").classList.add("is-hidden");
-            });
-            tile.addTo(grid);
-        }
-    }
-}
-map_set_grid();
 
 function map_show_coordinates(coord) {
 
@@ -347,6 +309,45 @@ function open_marker(id) {
     open_site_modal(null, opened_marker.id);
     console.log(opened_marker);
 }
+
+
+var grid_size = [-52, 112.5];
+var grid_start = [61.21340, 25.10560];
+var grid_cols = ["01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30"];
+var grid_rows = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
+
+function map_set_grid() {
+    var x = grid_start[0];
+    var y = grid_start[1];
+    var transfer = 100000;
+    var row = 0;
+    var col = 0;
+    var grid = L.layerGroup().addTo(map);
+    for(var row = 0; row < grid_rows.length; row++) {
+        for (var col = 0; col < grid_cols.length; col++) {
+            var col_x = x + (row * (grid_size[0]/transfer));
+            var col_y = y + (col * (grid_size[1]/transfer));
+            var col_bounds = [[col_x, col_y], [col_x + grid_size[0]/transfer, col_y + grid_size[1]/transfer]];
+            var tile = L.rectangle(col_bounds, {
+                className: "grid-tile",
+                data: {
+                    row: grid_rows[row],
+                    col: grid_cols[col],
+                },
+            });
+            tile.on("mouseover", function(e) {
+                var text = e.target.options.data.row + e.target.options.data.col;
+                document.getElementById("map-coordinates").innerHTML = text;
+                document.getElementById("map-coordinates").classList.remove("is-hidden");
+            });
+            tile.on("mouseout", function(e) {
+                document.getElementById("map-coordinates").classList.add("is-hidden");
+            });
+            tile.addTo(grid);
+        }
+    }
+}
+map_set_grid();
 
 </script>
 {% include 'settings.html' %}
