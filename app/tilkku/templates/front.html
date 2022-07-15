@@ -135,9 +135,7 @@ function map_set_grid() {
     var grid = L.layerGroup();
     var bounds = [[y, x], [y + grid_size[1]/transfer, x + grid_size[0]/transfer]];
     var tile = L.rectangle(bounds, {
-        color: '#000000',
-        weight: 1,
-        fillOpacity: 0.0,
+
     });
     grid.addLayer(tile);
     grid.addTo(map);
