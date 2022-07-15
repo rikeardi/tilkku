@@ -133,8 +133,8 @@ function map_set_grid() {
     var row = 0;
     var col = 0;
     var grid = L.canvas();
-    var tile = L.rectangle({
-        bounds: [[y, x], [y + grid_size[1]/transfer, x + grid_size[0]/transfer]],
+    var bounds = [[y, x], [y + grid_size[1]/transfer, x + grid_size[0]/transfer]];
+    var tile = L.rectangle(bounds, {
         color: '#000000',
         weight: 1,
         fillOpacity: 0.0,
