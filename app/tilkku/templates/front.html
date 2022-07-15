@@ -168,7 +168,7 @@ function map_show_coords(latlng) {
     if(min_x < latlng.lat && latlng.lat < max_x && min_y < latlng.lng && latlng.lng < max_y) {
         var row = Math.floor((grid_end[0] - latlng.lat) / (grid_size[0]/grid_transfer));
         if(inv_x) {
-            row = grid_rows.length - row;
+            row = grid_rows.length - row - 1;
         }
         var col = Math.floor((latlng.lng - grid_start[1]) / (grid_size[1]/grid_transfer));
         if(inv_y) {
