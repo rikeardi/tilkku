@@ -175,7 +175,7 @@ function map_show_coords(latlng) {
             col = grid_cols.length - col - 1;
         }
         var coords = grid_rows[row] + grid_cols[col];
-        $("#map-coordinates").html = coords;
+        $("#map-coordinates p").text = coords;
         $("#map-coordinates").removeClass("is-hidden");
     }
 }
