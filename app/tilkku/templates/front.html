@@ -150,8 +150,8 @@ function map_set_grid() {
     var grid = L.layerGroup().addTo(map);
     for(var row = 0; row <= grid_rows.length; row++) {
         var rowLine = L.polyline([
-            [x, y],
-            [x, y + grid_cols.length * (grid_size[1]/transfer)],
+            [x + row * (grid_size[0]/transfer), y],
+            [x + row * (grid_size[0]/transfer), y + grid_cols.length * (grid_size[1]/transfer)],
         ], {
             color: '#000',
             weight: 1,
