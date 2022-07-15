@@ -128,7 +128,7 @@ var grid_rows = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P"
 
 function map_set_grid() {
     var grid = L.gridLayer({
-        tileSize: settings.map.scale * grid_size,
+        tileSize: grid_size,
         className: 'leaflet-grid',
         bounds: grid_bounds,
     });
