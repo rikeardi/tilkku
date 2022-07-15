@@ -137,7 +137,7 @@ function map_set_grid() {
     var tile = L.rectangle(bounds, {
 
     });
-    grid.addLayer(tile);
+    tile.addTo(grid);
     grid.addTo(map);
 
 }
