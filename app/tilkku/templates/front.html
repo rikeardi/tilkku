@@ -218,7 +218,7 @@ function map_set_grid() {
         });
         rowHeader.bindTooltip("<div class='grid-header'>" + grid_rows[i] + "</div>");
         map_grid.layer.addLayer(rowHeader);
-        rowHeader.getTooltip().addTo(map);
+        console.log(rowHeader.getTooltip());
     }
 
     gridbox.on("mousemove", function(e) {
