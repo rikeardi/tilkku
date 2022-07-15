@@ -175,10 +175,8 @@ function map_show_coords(latlng) {
             col = grid_cols.length - col - 1;
         }
         var coords = grid_rows[row] + grid_cols[col];
-        document.getElementById("map-coordinates").innerHTML = coords;
-        document.getElementById("map-coordinates").classList.remove("is-hidden");
-    } else {
-        document.getElementById("map-coordinates").classList.add("is-hidden");
+        $("#map-coordinates").html = coords;
+        $("#map-coordinates").removeClass("is-hidden");
     }
 }
 
@@ -213,6 +211,9 @@ function map_set_grid() {
     }).addTo(grid);
     gridbox.on("mousemove", function(e) {
         map_show_coords(e.latlng);
+    });
+    gridbox.on("mouseout", function(e) {
+        $("#map-coordinates").addClass("is-hidden");
     });
 }
 
