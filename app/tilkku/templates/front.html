@@ -137,6 +137,7 @@ function map_set_bg() {
 }
 
 var grid_size = [-52, 112.5];
+var grid_transfer = 100000;
 var grid_start = [61.21340, 25.10560];
 var grid_end = [];
 var grid_cols = ["01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30"];
@@ -160,8 +161,8 @@ function map_show_coords(latlng) {
     }
 
     if(min_x < latlng.lat && latlng.lat < max_x && min_y < latlng.lng && latlng.lng < max_y) {
-        var col = Math.floor((latlng.lng - grid_start[1]) / grid_size[1]);
-        var row = Math.floor((grid_end[0] - latlng.lat) / grid_size[0]);
+        var col = Math.floor((latlng.lng - grid_start[1]) / (grid_size[1]/grid_transfer));
+        var row = Math.floor((grid_end[0] - latlng.lat) / (grid_size[0]/grid_transfer));
         var coords = grid_cols[col] + grid_rows[row];
         document.getElementById("map-coordinates").innerHTML = coords;
         document.getElementById("map-coordinates").classList.remove("is-hidden");
@@ -173,27 +174,26 @@ function map_show_coords(latlng) {
 function map_set_grid() {
     var x = grid_start[0];
     var y = grid_start[1];
-    var transfer = 100000;
     var row = 0;
     var col = 0;
     var grid = L.layerGroup().addTo(map);
     for(var row = 0; row <= grid_rows.length; row++) {
         var rowLine = L.polyline([
-            [x + row * (grid_size[0]/transfer), y],
-            [x + row * (grid_size[0]/transfer), y + grid_cols.length * (grid_size[1]/transfer)],
+            [x + row * (grid_size[0]/grid_transfer), y],
+            [x + row * (grid_size[0]/grid_transfer), y + grid_cols.length * (grid_size[1]/grid_transfer)],
         ], {
             className: 'grid-line',
         }).addTo(grid);
     }
     for (var col = 0; col <= grid_cols.length; col++) {
         var colLine = L.polyline([
-            [x, y + col * (grid_size[1]/transfer)],
-            [x + grid_rows.length * (grid_size[0]/transfer), y + col * (grid_size[1]/transfer)],
+            [x, y + col * (grid_size[1]/grid_transfer)],
+            [x + grid_rows.length * (grid_size[0]/grid_transfer), y + col * (grid_size[1]/grid_transfer)],
         ], {
             className: 'grid-line',
         }).addTo(grid);
     }
-    grid_end = [x + grid_rows.length * (grid_size[0]/transfer), y + grid_cols.length * (grid_size[1]/transfer)];
+    grid_end = [x + grid_rows.length * (grid_size[0]/grid_transfer), y + grid_cols.length * (grid_size[1]/grid_transfer)];
     var gridbox = L.rectangle([[x, y], [grid_end[0], grid_end[1]]], {
         weight: 1,
         fillOpacity: 0,
@@ -202,7 +202,6 @@ function map_set_grid() {
     }).addTo(grid);
     gridbox.on("mousemove", function(e) {
         map_show_coords(e.latlng);
-        //$("#map-coordinates").removeClass("is-hidden");
     });
 }
 
