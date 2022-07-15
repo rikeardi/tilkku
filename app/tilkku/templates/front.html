@@ -122,20 +122,11 @@ var grid_cols = ["01","02","03","04","05","06","07","08","09","10","11","12","13
 var grid_rows = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
 
 function map_set_grid() {
-    var grid = L.gridLayer.googleMutant({
-        maxZoom: settings.map.zoom,
-        minZoom: settings.map.zoom,
-        type: 'roadmap',
-        opacity: 0.5,
-        tileSize: 256,
-        subdomains: ['a', 'b', 'c'],
-        errorTileUrl: '',
-        attribution: '',
-        zoomOffset: 0,
-        reuseTiles: true,
-        detectRetina: false,
-        getTileUrl: function(coords) {
-            return 'https://mt1.google.com/vt/lyrs=m@2220744&hl=en&x=' + coords.x + '&y=' + coords.y + '&z=' + coords.z;
+    var grid = L.GridLayer.extend({
+        createTile: function(coords) {
+            var tile = L.DomUtil.create('div', 'tile');
+            tile.innerHTML = grid_rows[coords.x] + grid_cols[coords.y];
+            return tile;
         }
     });
     grid.addTo(map);
