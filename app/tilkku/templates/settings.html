@@ -69,6 +69,7 @@ function settings_open() {
 
 function settings_close() {
     $("#settings-modal").removeClass('is-active');
+    map_init();
 }
 
 function settings_select(page) {

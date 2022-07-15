@@ -351,6 +351,12 @@ function open_marker(id) {
     open_site_modal(null, opened_marker.id);
 }
 
+function map_init() {
+    map_set_bg();
+    map_set_scale();
+    map_set_layers();
+}
+
 </script>
 {% include 'settings.html' %}
 {% endblock %}
