@@ -146,6 +146,15 @@ function map_set_grid() {
         }
     });
     console.log(CanvasLayer);
+    map.addLayer(new CanvasLayer({
+        tileSize: grid_size,
+        className: 'leaflet-grid',
+        bounds: grid_bounds,
+        minZoom: 14,
+        minNativeZoom: 18,
+        maxZoom: 18,
+        maxNativeZoom: 18,
+    }));
     var gridClass = L.GridLayer.extend({
         createTile: function(coords) {
             var tile = L.DomUtil.create('div');
