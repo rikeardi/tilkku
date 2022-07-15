@@ -142,24 +142,17 @@ var grid_start = [61.21340, 25.10560];
 var grid_end = [];
 var grid_cols = ["01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30"];
 var grid_rows = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
-
-function map_show_coords(latlng) {
-    if(min_x < latlng.lat && latlng.lat < max_x && min_y < latlng.lng && latlng.lng < max_y) {
-        var row = Math.floor((grid_end[0] - latlng.lat) / (grid_size[0]/grid_transfer));
-        if(inv_x) {
-            row = grid_rows.length - row - 1;
-        }
-        var col = Math.floor((latlng.lng - grid_start[1]) / (grid_size[1]/grid_transfer));
-        if(inv_y) {
-            col = grid_cols.length - col - 1;
-        }
-        var coords = grid_rows[row] + grid_cols[col];
-        $("#map-coordinates p").text(coords);
-        $("#map-coordinates").removeClass("is-hidden");
-    }
-}
-
-var map_grid = {};
+var map_grid = {
+    x: grid_start[0],
+    y: grid_start[1],
+    min_x: grid_start[0],
+    min_y: grid_start[1],
+    max_x: grid_start[0],
+    max_y: grid_start[1],
+    inv_x: false,
+    inv_y: false,
+    layer:null,
+};
 
 function map_set_grid() {
     console.log(settings);
@@ -170,8 +163,8 @@ function map_set_grid() {
         }
         return;
     }
-    map_grid.x = grid_start[0];
-    map_grid.y = grid_start[1];
+    var x = map_grid.x;
+    var y = map_grid.y;
     var row = 0;
     var col = 0;
     map_grid.layer = L.layerGroup().addTo(map);
@@ -191,17 +184,39 @@ function map_set_grid() {
             className: 'grid-line',
         }).addTo(map_grid.layer);
     }
+
     grid_end = [x + grid_rows.length * (grid_size[0]/grid_transfer), y + grid_cols.length * (grid_size[1]/grid_transfer)];
+
+    if(grid_end[0] < grid_start[0]) {
+        map_grid.min_x = grid_end[0];
+        map_grid.max_x = grid_start[0];
+        map_grid.inv_x = true;
+    } else {
+        map_grid.min_x = grid_start[0];
+        map_grid.max_x = grid_end[0];
+    }
+
+    if(grid_end[1] < grid_start[1]) {
+        map_grid.min_y = grid_end[1];
+        map_grid.max_y = grid_start[1];
+        map_grid.inv_y = true;
+    } else {
+        map_grid.min_y = grid_start[1];
+        map_grid.max_y = grid_end[1];
+    }
+
     var gridbox = L.rectangle([[x, y], [grid_end[0], grid_end[1]]], {
         weight: 1,
         fillOpacity: 0,
         stroke: false,
         cursor: 'none',
     }).addTo(map_grid.layer);
+
     for(var i = 0; i < grid_rows.length; i++) {
         var rowHeader = L.point(y + i * (grid_size[1]/grid_transfer), x - (grid_size[0]/grid_transfer/2)).addTo(map_grid.layer);
         rowHeader.bindTooltip(grid_rows[i]).openTooltip();
     }
+
     gridbox.on("mousemove", function(e) {
         map_show_coords(e.latlng);
     });
@@ -392,6 +407,22 @@ function map_init() {
     map_set_bg();
     map_set_scale();
     map_set_layers();
+}
+
+function map_show_coords(latlng) {
+    if(map_grid.min_x < latlng.lat && latlng.lat < map_grid.max_x && map_grid.min_y < latlng.lng && latlng.lng < map_grid.max_y) {
+        var row = Math.floor((grid_end[0] - latlng.lat) / (grid_size[0]/grid_transfer));
+        if(map_grid.inv_x) {
+            row = grid_rows.length - row - 1;
+        }
+        var col = Math.floor((latlng.lng - grid_start[1]) / (grid_size[1]/grid_transfer));
+        if(map_grid.inv_y) {
+            col = grid_cols.length - col - 1;
+        }
+        var coords = grid_rows[row] + grid_cols[col];
+        $("#map-coordinates p").text(coords);
+        $("#map-coordinates").removeClass("is-hidden");
+    }
 }
 
 </script>
