@@ -146,9 +146,13 @@ function map_set_grid() {
             var col_bounds = [[col_x, col_y], [col_x + grid_size[0]/transfer, col_y + grid_size[1]/transfer]];
             var tile = L.rectangle(col_bounds, {
                 className: "grid-tile",
+                mouseover: function(e) {
+                    console.log(e);
+                },
+                mouseout: function(e) {
+                    console.log(e);
+                },
             }).addTo(grid);
-
-            tile.bindTooltip(grid_rows[row] + grid_cols[col]);
         }
     }
 }
