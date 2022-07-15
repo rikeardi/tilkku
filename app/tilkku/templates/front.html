@@ -113,6 +113,14 @@ var home = [61.205, 25.130];
 var home_zoom = 15;
 map = L.map('map').setView(settings.map.center, settings.map.zoom);
 
+const forwarder = new L.EventForwarder({
+    map: map,
+    events: {
+        click: true,
+        mouseover: false,
+    },
+});
+
 map_servers = {{ map_servers | safe }};
 
 map_servers.forEach(function(server) {
