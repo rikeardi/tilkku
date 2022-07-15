@@ -181,6 +181,9 @@ function map_show_coords(latlng) {
 }
 
 function map_set_grid() {
+    if(!settings.map.grid) {
+        return;
+    }
     var x = grid_start[0];
     var y = grid_start[1];
     var row = 0;
