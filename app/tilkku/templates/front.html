@@ -168,6 +168,10 @@ function map_set_grid() {
             opacity: 0.5,
         }).addTo(grid);
     }
+    grid.on("mouseover", function(e) {
+        console.log(e);
+        $("#map-coordinates").removeClass("is-hidden");
+    });
 }
 
 map_scale = L.control.scale({
