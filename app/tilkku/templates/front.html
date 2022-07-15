@@ -128,24 +128,7 @@ var grid_rows = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P"
 
 console.log(grid_rows.length * grid_cols.length);
 function map_set_grid() {
-    var CanvasLayer = L.GridLayer.extend({
-        createTile: function(coords){
-            var tile = L.DomUtil.create('div');
-            tile.innerHTML = coords.x + " " + coords.y;
-            return tile;
-        }
-    });
-    var grid = new CanvasLayer({
-        tileSize: grid_size,
-        className: 'leaflet-grid',
-        bounds: grid_bounds,
-        minZoom: 14,
-        minNativeZoom: 18,
-        maxZoom: 18,
-        maxNativeZoom: 18,
-    });
-    console.log(grid);
-    grid.addTo(map);
+
 }
 map_set_grid();
 
