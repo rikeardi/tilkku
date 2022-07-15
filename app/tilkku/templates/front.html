@@ -75,6 +75,10 @@ var map = null;
     font-size: 1.4em;
     -webkit-text-stroke: 1px black;
 }
+
+.leaflet-grid {
+    border: solid 1px black;
+}
 </style>
 
 <div id="map" style="width: 100%; height: 100%; position: fixed; top: 0; left: 0;"></div>
@@ -124,6 +128,8 @@ var grid_rows = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P"
 function map_set_grid() {
     var grid = L.gridLayer({
         tileSize: settings.map.scale * grid_size,
+        className: 'leaflet-grid',
+        bounds: [],
     });
     grid.addTo(map);
 }
