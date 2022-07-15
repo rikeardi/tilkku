@@ -134,8 +134,8 @@ function map_set_grid() {
     var col = 0;
     var grid = L.layerGroup().addTo(map);
     for(var i = 0; i < grid_cols.length; i++) {
-        var col_x = x + (col * grid_size[0]);
-        var col_y = y + (row * grid_size[1]);
+        var col_x = x + (col * (grid_size[0]/transfer));
+        var col_y = y + (row * (grid_size[1]/transfer));
         var col_bounds = [[col_x, col_y], [col_x + grid_size[0]/transfer, col_y + grid_size[1]/transfer]];
         var tile = L.rectangle(col_bounds).addTo(grid);
         tile.bindPopup(grid_rows[row] + grid_cols[i]);
