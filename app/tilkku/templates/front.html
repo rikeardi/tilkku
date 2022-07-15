@@ -153,7 +153,7 @@ function map_set_grid() {
             });
             tile.on("mouseover", function(e) {
                 console.log(e);
-                var text = grid_rows[row] + grid_cols[col];
+                var text = e.target.options.data.row + e.target.options.data.col;
                 document.getElementById("map-coordinates").innerHTML = text;
                 document.getElementById("map-coordinates").classList.remove("is-hidden");
             });
