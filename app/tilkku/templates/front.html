@@ -131,8 +131,10 @@ function map_set_grid() {
         tileSize: grid_size,
         className: 'leaflet-grid',
         bounds: grid_bounds,
-        minZoom: 5,
-        minNativeZoom: 5,
+        minZoom: 16,
+        minNativeZoom: 16,
+        maxZoom: 18,
+        maxNativeZoom: 18,
     });
     grid.addTo(map);
 }
