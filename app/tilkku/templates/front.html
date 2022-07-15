@@ -131,6 +131,7 @@ function map_set_grid() {
         tileSize: grid_size,
         className: 'leaflet-grid',
         bounds: grid_bounds,
+        updateWhenZooming: false,
     });
     grid.addTo(map);
 }
