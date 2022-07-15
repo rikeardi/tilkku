@@ -163,7 +163,7 @@ function map_show_coords(latlng) {
     if(min_x < latlng.lat && latlng.lat < max_x && min_y < latlng.lng && latlng.lng < max_y) {
         var col = Math.floor((latlng.lng - grid_start[1]) / (grid_size[1]/grid_transfer));
         var row = Math.floor((grid_end[0] - latlng.lat) / (grid_size[0]/grid_transfer));
-        var coords = grid_cols[col] + grid_rows[row];
+        var coords = grid_rows[row] + grid_cols[col];
         document.getElementById("map-coordinates").innerHTML = coords;
         document.getElementById("map-coordinates").classList.remove("is-hidden");
     } else {
