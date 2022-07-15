@@ -170,7 +170,7 @@ function map_set_grid() {
         stroke: false,
     }).addTo(grid);
     gridbox.on("mousemove", function(e) {
-        console.log(e);
+        console.log(e.layerPoint.x, e.layerPoint.y);
         //$("#map-coordinates").removeClass("is-hidden");
     });
 }
