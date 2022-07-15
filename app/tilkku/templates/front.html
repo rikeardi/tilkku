@@ -144,12 +144,16 @@ var grid_cols = ["01","02","03","04","05","06","07","08","09","10","11","12","13
 var grid_rows = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
 
 function map_show_coords(latlng) {
+    var inv_x = false;
+    var inv_y = false;
+
     if(grid_start[0] < grid_end[0]) {
         var min_x = grid_start[0];
         var max_x = grid_end[0];
     } else {
         var min_x = grid_end[0];
         var max_x = grid_start[0];
+        inv_x = true;
     }
 
     if(grid_start[1] < grid_end[1]) {
@@ -158,11 +162,18 @@ function map_show_coords(latlng) {
     } else {
         var min_y = grid_end[1];
         var max_y = grid_start[1];
+        inv_y = true;
     }
 
     if(min_x < latlng.lat && latlng.lat < max_x && min_y < latlng.lng && latlng.lng < max_y) {
-        var col = Math.floor((latlng.lng - grid_start[1]) / (grid_size[1]/grid_transfer));
         var row = Math.floor((grid_end[0] - latlng.lat) / (grid_size[0]/grid_transfer));
+        if(inv_x) {
+            row = grid_rows.length - row;
+        }
+        var col = Math.floor((latlng.lng - grid_start[1]) / (grid_size[1]/grid_transfer));
+        if(inv_y) {
+            col = grid_cols.length - col - 1;
+        }
         var coords = grid_rows[row] + grid_cols[col];
         document.getElementById("map-coordinates").innerHTML = coords;
         document.getElementById("map-coordinates").classList.remove("is-hidden");
