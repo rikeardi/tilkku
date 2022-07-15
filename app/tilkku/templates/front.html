@@ -269,8 +269,7 @@ function map_load_layers() {
                 area_layer.bindTooltip("<div style='color: " + layer.style.stroke + "; font-size: " + layer.style.font_size + "px'>" + area.name + "</div>", tooltip_style);
                 area_layer.addTo(layer.layer);
                 area_layer.on("click", function(e) {
-                    console.log(e);
-                    e.originalEvent.preventDefault();
+                    e.originalEvent._stopped = true;
                     open_area(e.target.options.id);
                 });
 
