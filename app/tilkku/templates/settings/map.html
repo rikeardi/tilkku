@@ -13,6 +13,12 @@
                 </div>
             </div>
             <div class="field">
+                <label class="label">Ruudukko</label>
+                <div class="control">
+                    <label class="checkbox"><input id="settings-map-grid" type="checkbox" onchange='map_toggle_grid();'> Näkyvissä</label>
+                </div>
+            </div>
+            <div class="field">
                 <label class="label">Mittakaava</label>
                 <div class="control">
                     <label class="checkbox"><input id="settings-map-scale" type="checkbox" onchange='map_toggle_scale();'> Näkyvissä</label>
@@ -47,6 +53,9 @@ $(document).ready(function() {
         if(settings.map.server == i) selected = " selected";
         $("#settings-map-bg").append("<option value='" + i + "'" + selected + ">" + server.name + "</option>");
 
+        if(settings.map.grid == 1) {
+            $("#settings-map-grid").prop("checked", true);
+        }
         if(settings.map.scale == 1) {
             $("#settings-map-scale").prop("checked", true);
         }
@@ -76,6 +85,11 @@ function map_select_layer() {
             settings.map.layers.push(parseInt($(this).val()));
         }
     });
+    refresh_settings();
+}
+
+function map_toggle_grid() {
+    settings.map.grid = $("#settings-map-scale").is(":checked") ? 1 : 0;
     refresh_settings();
 }
 
