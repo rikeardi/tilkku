@@ -212,7 +212,9 @@ function map_set_grid() {
     }).addTo(map_grid.layer);
 
     for(var i = 0; i < grid_rows.length; i++) {
-        var rowHeader = L.marker([x + (grid_size[0]/grid_transfer)/2 + i * (grid_size[0]/grid_transfer), y - (grid_size[1]/grid_transfer)/2]);
+        var rowHeader = L.marker([x + (grid_size[0]/grid_transfer)/2 + i * (grid_size[0]/grid_transfer), y - (grid_size[1]/grid_transfer)/2], {
+            icon: 'none',
+        });
         rowHeader.bindTooltip("<div class='grid-header'>" + grid_rows[i] + "</div>");
         map_grid.layer.addLayer(rowHeader);
         rowHeader.getTooltip().addTo(map_grid.layer);
