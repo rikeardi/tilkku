@@ -213,7 +213,7 @@ function map_set_grid() {
     }).addTo(map_grid.layer);
 
     for(var i = 0; i < grid_rows.length; i++) {
-        var rowHeader = L.point(y + i * (grid_size[1]/grid_transfer), x - (grid_size[0]/grid_transfer/2));
+        var rowHeader = L.marker([y + i * (grid_size[1]/grid_transfer), x - (grid_size[0]/grid_transfer/2)]);
         rowHeader.bindTooltip(grid_rows[i]).openTooltip();
         map_grid.layer.addLayer(rowHeader);
     }
