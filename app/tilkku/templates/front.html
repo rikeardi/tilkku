@@ -76,7 +76,7 @@ var map = null;
     -webkit-text-stroke: 1px black;
 }
 
-.leaflet-grid .leaflet-tile {
+.grid-tile {
     border: solid 1px black;
 }
 </style>
@@ -137,7 +137,9 @@ function map_set_grid() {
         var col_x = x + (row * (grid_size[0]/transfer));
         var col_y = y + (col * (grid_size[1]/transfer));
         var col_bounds = [[col_x, col_y], [col_x + grid_size[0]/transfer, col_y + grid_size[1]/transfer]];
-        var tile = L.rectangle(col_bounds).addTo(grid);
+        var tile = L.rectangle(col_bounds, {
+            className: "grid-tile",
+        }).addTo(grid);
         tile.bindPopup(grid_rows[row] + grid_cols[i]);
         col++;
         if(col == grid_cols.length) {
