@@ -131,7 +131,11 @@ function map_set_grid() {
         tileSize: grid_size,
         className: 'leaflet-grid',
         bounds: grid_bounds,
-        updateWhenZooming: false,
+        createTile: function(coords) {
+            var tile = L.DomUtil.create('div', 'leaflet-tile');
+            tile.innerHTML = grid_cols[coords.x] + grid_rows[coords.y];
+            return tile;
+        }
     });
     grid.addTo(map);
 }
