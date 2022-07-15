@@ -133,7 +133,7 @@ function map_set_grid() {
     var row = 0;
     var col = 0;
     var grid = L.layerGroup();
-    var bounds = [[y, x], [y + grid_size[1]/transfer, x + grid_size[0]/transfer]];
+    var bounds = [[x, y], [x + grid_size[0], y + grid_size[1]]];
     var tile = L.rectangle(bounds, {
 
     });
