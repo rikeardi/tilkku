@@ -311,7 +311,7 @@ function map_get_layer(id) {
     map.eachLayer(function(layer) {
         if(layer.options.id == id) {
             correct_layer = layer;
-            break;
+            return;
         }
     });
     return correct_layer;
@@ -333,7 +333,7 @@ function open_area(id) {
         layer.areas.forEach(function(area) {
             if(area.id == id) {
                 opened_area = area;
-                break;
+                return;
             }
         });
     });
@@ -347,7 +347,7 @@ function open_marker(id) {
         layer.markers.forEach(function(marker) {
             if(marker.id == id) {
                 opened_marker = marker;
-                break;
+                return;
             }
         });
     });
