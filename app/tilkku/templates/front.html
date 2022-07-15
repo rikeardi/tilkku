@@ -133,10 +133,18 @@ function map_set_grid() {
     var row = 0;
     var col = 0;
     var grid = L.layerGroup();
-    var bounds = [[x, y], [x + grid_size[0]/transfer, y + grid_size[1]/transfer]];
-    var tile = L.rectangle(bounds, {
-
-    });
+    for(var i = 0; i < grid_cols.length; i++) {
+        var col_x = x + (col * grid_size[0]);
+        var col_y = y + (row * grid_size[1]);
+        var col_bounds = [[col_y, col_x], [col_y + grid_size[1], col_x + grid_size[0]]];
+        var col_bounds_poly = L.polygon(col_bounds).addTo(grid);
+        col_bounds_poly.bindPopup(grid_cols[i] + " " + grid_rows[row]);
+        col++;
+        if(col == grid_cols.length) {
+            col = 0;
+            row++;
+        }
+    }
     tile.addTo(grid);
     grid.addTo(map);
 
