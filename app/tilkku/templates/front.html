@@ -168,7 +168,14 @@ function map_set_grid() {
             opacity: 0.5,
         }).addTo(grid);
     }
-    grid.on("mouseover", function(e) {
+    var gridbox = L.rectangle([[x, y], [x + row * (grid_size[0]/transfer), y + col * (grid_size[1]/transfer)]], {
+        color: '#000000',
+        weight: 1,
+        fillOpacity: 0.1,
+        fillColor: '#000000',
+        stroke: false,
+    }).addTo(grid);
+    gridbox.on("mouseover", function(e) {
         console.log(e);
         $("#map-coordinates").removeClass("is-hidden");
     });
