@@ -128,13 +128,14 @@ var grid_rows = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P"
 
 console.log(grid_rows.length * grid_cols.length);
 function map_set_grid() {
-    var gridClass = L.gridLayer.extend({
+    var gridClass = L.GridLayer.extend({
         createTile: function(coords) {
             var tile = L.DomUtil.create('div');
             tile.innerHTML = grid_rows[coords.y] + grid_cols[coords.x];
             return tile;
         }
     });
+    console.log(gridClass);
     var grid = gridClass({
         tileSize: grid_size,
         className: 'leaflet-grid',
