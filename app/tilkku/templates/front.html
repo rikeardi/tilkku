@@ -122,7 +122,7 @@ var grid_cols = ["01","02","03","04","05","06","07","08","09","10","11","12","13
 var grid_rows = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
 
 function map_set_grid() {
-    var grid = L.GridLayer({
+    var grid = L.gridLayer({
         tileSize: settings.map.scale * grid_size,
     });
     grid.addTo(map);
