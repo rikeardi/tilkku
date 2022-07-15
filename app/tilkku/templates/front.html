@@ -135,21 +135,17 @@ function map_set_grid() {
     var row = 0;
     var col = 0;
     var grid = L.layerGroup().addTo(map);
-    for(var i = 0; i <= grid_cols.length; i++) {
-        var col_x = x + (row * (grid_size[0]/transfer));
-        var col_y = y + (col * (grid_size[1]/transfer));
-        var col_bounds = [[col_x, col_y], [col_x + grid_size[0]/transfer, col_y + grid_size[1]/transfer]];
-        var tile = L.rectangle(col_bounds, {
-            className: "grid-tile",
-        }).addTo(grid);
-        tile.bindPopup(grid_rows[row] + grid_cols[col]);
-        col++;
-        if(col == grid_cols.length) {
-            col = 0;
-            row++;
+    for(var row = 0; row < grid_rows.length; row++) {
+        for (var col = 0; col < grid_cols.length; col++) {
+            var col_x = x + (row * (grid_size[0]/transfer));
+            var col_y = y + (col * (grid_size[1]/transfer));
+            var col_bounds = [[col_x, col_y], [col_x + grid_size[0]/transfer, col_y + grid_size[1]/transfer]];
+            var tile = L.rectangle(col_bounds, {
+                className: "grid-tile",
+            }).addTo(grid);
+            tile.bindPopup(grid_rows[row] + grid_cols[col]);
         }
     }
-
 }
 map_set_grid();
 
