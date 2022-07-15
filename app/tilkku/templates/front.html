@@ -122,17 +122,19 @@ var grid_cols = ["01","02","03","04","05","06","07","08","09","10","11","12","13
 var grid_rows = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
 
 function map_set_grid() {
-    var grid = L.GridLayer.extend({
+    var grid = L.GridLayer();
+    grid.extend({
         createTile: function(coords) {
-            var tile = L.DomUtil.create('div', 'tile');
-            tile.innerHTML = grid_rows[coords.x] + grid_cols[coords.y];
+            var tile = L.DomUtil.create('div', 'leaflet-tile leaflet-grid-tile');
+            var size = this.getTileSize();
+            tile.width = grid_size + "px";
+            tile.height = grid_size + "px";
             return tile;
         }
     });
     grid.addTo(map);
 }
 map_set_grid();
-
 
 map_scale = L.control.scale({
     imperial: false,
