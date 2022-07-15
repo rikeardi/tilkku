@@ -200,7 +200,7 @@ function map_set_grid() {
     }).addTo(map_grid.layer);
     for(var i = 0; i < grid_rows.length; i++) {
         var rowHeader = L.point(y + i * (grid_size[1]/grid_transfer), x - (grid_size[0]/grid_transfer/2)).addTo(map_grid.layer);
-        rowHeader.bindTooltip(grid_rows[i]);
+        rowHeader.bindTooltip(grid_rows[i]).openTooltip();
     }
     gridbox.on("mousemove", function(e) {
         map_show_coords(e.latlng);
