@@ -146,13 +146,16 @@ function map_set_grid() {
             var col_bounds = [[col_x, col_y], [col_x + grid_size[0]/transfer, col_y + grid_size[1]/transfer]];
             var tile = L.rectangle(col_bounds, {
                 className: "grid-tile",
-                mouseover: function(e) {
-                    console.log(e);
-                },
-                mouseout: function(e) {
-                    console.log(e);
-                },
-            }).addTo(grid);
+            });
+            tile.on("mouseover", function(e) {
+                var text = grid_rows[row] + grid_cols[col];
+                document.getElementById("map-coordinates").innerHTML = text;
+                document.getElementById("map-coordinates").classList.remove("is-hidden");
+            });
+            tile.on("mouseout", function(e) {
+                document.getElementById("map-coordinates").classList.add("is-hidden");
+            });
+            tile.addTo(grid);
         }
     }
 }
