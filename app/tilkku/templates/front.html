@@ -80,7 +80,6 @@ var map = null;
     stroke: #0000001a;
     stroke-width: 1;
     fill-opacity: 0;
-    stroke-opacity: 0.1;
 }
 </style>
 
@@ -213,7 +212,7 @@ function map_set_grid() {
     }).addTo(map_grid.layer);
 
     for(var i = 0; i < grid_rows.length; i++) {
-        var rowHeader = L.marker([y + i * (grid_size[1]/grid_transfer), x - (grid_size[0]/grid_transfer/2)]);
+        var rowHeader = L.marker([x - (grid_size[0]/grid_transfer/2), y + i * (grid_size[1]/grid_transfer)]);
         rowHeader.bindTooltip(grid_rows[i]).openTooltip();
         map_grid.layer.addLayer(rowHeader);
     }
