@@ -130,13 +130,12 @@ console.log(grid_rows.length * grid_cols.length);
 function map_set_grid() {
     var CanvasLayer = L.GridLayer.extend({
         createTile: function(coords){
-            console.log(coords);
             var tile = L.DomUtil.create('div');
             tile.innerHTML = coords.x + " " + coords.y;
             return tile;
         }
     });
-    map.addLayer(new CanvasLayer({
+    var grid = new CanvasLayer({
         tileSize: grid_size,
         className: 'leaflet-grid',
         bounds: grid_bounds,
@@ -145,6 +144,8 @@ function map_set_grid() {
         maxZoom: 18,
         maxNativeZoom: 18,
     }));
+    console.log(grid);
+    grid.addTo(map);
 }
 map_set_grid();
 
