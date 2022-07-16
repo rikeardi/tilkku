@@ -229,7 +229,7 @@ function map_set_grid() {
 
     for(var i = 0; i < grid_cols.length; i++) {
         var startpoint = [x, y + i * (grid_size[1]/grid_transfer)];
-        var endpoint = [x + (grid_size[0]/grid_transfer), y + (i+1) * (grid_size[1]/grid_transfer)];
+        var endpoint = [x - (grid_size[0]/grid_transfer), y + (i+1) * (grid_size[1]/grid_transfer)];
         var colHeader = L.rectangle([startpoint, endpoint], {
             opacity: 0,
             fillOpacity: 0,
