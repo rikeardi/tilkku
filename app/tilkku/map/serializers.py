@@ -36,3 +36,8 @@ class MapServerSerializer(serializers.ModelSerializer):
     class Meta:
         model = MapServer
         fields = '__all__'
+
+class WMSServerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = WMSServer
+        fields = '__all__'
