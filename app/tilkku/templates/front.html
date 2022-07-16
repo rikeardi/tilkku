@@ -137,6 +137,14 @@ function map_set_bg() {
     map_background = map_servers[settings.map.server].layer.addTo(map);
 }
 
+function map_set_wms() {
+    var wms_layer = L.tileLayer.wms(wms_servers[0].url, {
+        layers: wms_servers[0].layer,
+        format: 'image/png',
+        transparent: true,
+    });
+}
+
 var grid_size = [-52, 112.5];
 var grid_transfer = 100000;
 var grid_start = [61.21340, 25.10560];
