@@ -79,6 +79,7 @@
 <script>
 
 function save_to_site(area_id, marker_id) {
+    console.log(map_layers);
     map_layers.forEach(function(layer) {
         layer.areas.forEach(function(area) {
             if(area.id == area_id) {
