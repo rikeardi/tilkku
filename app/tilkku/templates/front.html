@@ -225,7 +225,17 @@ function map_set_grid() {
         });
         rowHeader.bindTooltip("<div class='grid-header'>" + grid_rows[i] + "</div>", tooltip_style);
         map_grid.layer.addLayer(rowHeader);
-        console.log(rowHeader.getTooltip());
+    }
+
+    for(var i = 0; i < grid_cols.length; i++) {
+        var startpoint = [x, y + i * (grid_size[1]/grid_transfer)];
+        var endpoint = [x + (grid_size[0]/grid_transfer), y + (i+1) * (grid_size[1]/grid_transfer)];
+        var colHeader = L.rectangle([startpoint, endpoint], {
+            opacity: 0,
+            fillOpacity: 0,
+        });
+        colHeader.bindTooltip("<div class='grid-header'>" + grid_cols[i] + "</div>", tooltip_style);
+        map_grid.layer.addLayer(colHeader);
     }
 
     gridbox.on("mousemove", function(e) {
