@@ -180,6 +180,7 @@ $("#sites-site-search").on('keyup', function(e) {
             search_coords($("#sites-site-search").val());
         } else if($("#sites-site-search").val().length == 2) {
             var coords = $("#sites-site-search").val().substring(0, 1) + "0" + $("#sites-site-search").val().substring(1);
+            search_coords(coords);
         }
     }
 });
