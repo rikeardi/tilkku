@@ -475,6 +475,9 @@ function search_coords(coords) {
         direction: "center",
     });
     map.fitBounds(highlight_layer.getBounds());
+    setTimeout(function() {
+        highlight_layer.removeLayer(highlight);
+    }, 3000);
 }
 
 </script>
