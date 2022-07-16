@@ -455,12 +455,14 @@ function search_coords(coords) {
     var lng_0 = map_grid.min_y + coord[1] * grid_size[1] / grid_transfer;
     var lat_1 = lat_0 + grid_size[0] / grid_transfer;
     var lng_1 = lng_0 + grid_size[1] / grid_transfer;
+    var highlight_layer = L.featureGroup().addTo(map);
     var highlight = L.rectangle([[lat_0, lng_0], [lat_1, lng_1]], {
         color: '#ff0000',
         fillColor: '#ff0000',
         fillOpacity: 0.2,
         weight: 1,
-    }).addTo(map);
+    }).addTo(highlight_layer);
+    console.log(highlight);
 }
 
 </script>
