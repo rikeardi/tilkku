@@ -450,9 +450,17 @@ function map_show_coords(latlng) {
 function search_coords(coords) {
     var row = coords.substring(0, 1).toUpperCase();
     var col = coords.substring(1, 3);
+    var min_x = map_grid.min_x;
+    if(map_grid.inv_x) {
+        min_x = map_grid.max_x;
+    }
+    var min_y = map_grid.min_y;
+    if(map_grid.inv_y) {
+        min_y = map_grid.max_y;
+    }
     var coord = [map_grid.rows.indexOf(row), map_grid.cols.indexOf(col)];
-    var lat_0 = map_grid.min_x + coord[0] * grid_size[0] / grid_transfer;
-    var lng_0 = map_grid.min_y + coord[1] * grid_size[1] / grid_transfer;
+    var lat_0 = min_x + coord[0] * grid_size[0] / grid_transfer;
+    var lng_0 = min_y + coord[1] * grid_size[1] / grid_transfer;
     var lat_1 = lat_0 + grid_size[0] / grid_transfer;
     var lng_1 = lng_0 + grid_size[1] / grid_transfer;
     var highlight_layer = L.featureGroup().addTo(map);
