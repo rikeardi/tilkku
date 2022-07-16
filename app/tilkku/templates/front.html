@@ -343,7 +343,7 @@ function map_load_layers() {
                     e.originalEvent._stopped = true;
                     open_area(e.target.options.id);
                 });
-                area_layer.on("rightclick", function(e) {
+                area_layer.on("contextmenu", function(e) {
                     e.originalEvent._stopped = true;
                     e.preventDefault();
                     save_area_to_site(e.target.options.id);
