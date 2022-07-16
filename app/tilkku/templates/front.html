@@ -313,7 +313,7 @@ map_layers.forEach(function(layer) {
     });
 });
 
-function map_load_layers() {
+function map_set_layers() {
     for(var i = 0; i < map_layers.length; i++) {
         var layer = map_layers[i];
         if(layer.layer) {
@@ -398,11 +398,6 @@ function map_get_layer(id) {
     return correct_layer;
 }
 
-function map_set_layers() {
-    map_load_layers();
-}
-map_set_layers();
-
 map.on('zoomend', function() {
     map_set_names();
 });
@@ -441,6 +436,7 @@ function map_init() {
     map_set_layers();
     map_set_wms();
 }
+map_init();
 
 function map_show_coords(latlng) {
     if(map_grid.min_x < latlng.lat && latlng.lat < map_grid.max_x && map_grid.min_y < latlng.lng && latlng.lng < map_grid.max_y) {
