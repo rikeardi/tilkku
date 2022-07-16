@@ -343,11 +343,6 @@ function map_load_layers() {
                     e.originalEvent._stopped = true;
                     open_area(e.target.options.id);
                 });
-                area_layer.on("contextmenu", function(e) {
-                    e.originalEvent._stopped = true;
-                    e.preventDefault();
-                    save_area_to_site(e.target.options.id);
-                });
 
                 area.active = true;
             });
@@ -412,6 +407,7 @@ function open_area(id) {
             }
         });
     });
+    console.log(opened_area);
     open_site_modal(opened_area.id, null);
 }
 
