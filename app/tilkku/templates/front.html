@@ -217,7 +217,9 @@ function map_set_grid() {
     }
 
     for(var i = 0; i < grid_rows.length; i++) {
-        var rowHeader = L.marker([x + (grid_size[0]/grid_transfer)/2 + (i+1) * (grid_size[0]/grid_transfer), y - (grid_size[1]/grid_transfer)/2], {
+        var startpoint = [x + i * (grid_size[0]/grid_transfer), y];
+        var endpoint = [x + i * (grid_size[0]/grid_transfer), y - (grid_size[1]/grid_transfer)];
+        var rowHeader = L.rectangle([startpoint, endpoint], {
             opacity: 0,
         });
         rowHeader.bindTooltip("<div class='grid-header'>" + grid_rows[i] + "</div>", tooltip_style);
