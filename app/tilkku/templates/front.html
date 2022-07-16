@@ -462,7 +462,7 @@ function search_coords(coords) {
         fillOpacity: 0.2,
         weight: 1,
     }).addTo(highlight_layer);
-    highlight.bindTooltip("<div style='color: #ff0000; font-size: " + map_grid.font_size + "px'>" + coords + "</div>", {
+    highlight.bindTooltip("<div style='color: #ff0000; font-size: " + map_grid.font_size + "px'>" + row + col + "</div>", {
         permanent: true,
         direction: "center",
     });
