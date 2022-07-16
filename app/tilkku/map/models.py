@@ -78,7 +78,7 @@ class MapServer(models.Model):
 class WMSServer(models.Model):
     name = models.CharField(max_length=100)
     url = models.CharField(max_length=500)
-    layer = models.CharField(max_length=100)
+    layer = models.CharField(max_length=200, blank=True, default='')
 
     def __str__(self):
         return f'{self.name}'
