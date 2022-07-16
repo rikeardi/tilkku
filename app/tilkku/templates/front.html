@@ -343,6 +343,10 @@ function map_load_layers() {
                     e.originalEvent._stopped = true;
                     open_area(e.target.options.id);
                 });
+                area_layer.on("dblclick", function(e) {
+                    e.originalEvent._stopped = true;
+                    save_area_to_site(e.target.options.id);
+                });
 
                 area.active = true;
             });
@@ -408,6 +412,17 @@ function open_area(id) {
         });
     });
     open_site_modal(opened_area.id, null);
+}
+
+function save_area_to_site(id) {
+    map_layers.forEach(function(layer) {
+        layer.areas.forEach(function(area) {
+            if(area.id == id) {
+                var site = area;
+            }
+        });
+    });
+    console.log(site);
 }
 
 var opened_marker = null;
