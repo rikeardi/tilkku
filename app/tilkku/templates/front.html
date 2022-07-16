@@ -121,6 +121,8 @@ const forwarder = L.eventForwarder({
 }).enable();
 
 map_servers = {{ map_servers | safe }};
+wms_servers = {{ wms_servers | safe }};
+console.log(wms_servers);
 
 map_servers.forEach(function(server) {
     server.layer = L.tileLayer(server.url, {
