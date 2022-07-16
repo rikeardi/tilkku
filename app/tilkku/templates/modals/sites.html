@@ -40,32 +40,32 @@
         </header>
         <section class="modal-card-body">
             <div class="field">
+                <label class="label">Nimi</label>
+                <div class="control">
+                    <input class="input site-new-input" id="site-new-name" type="text" placeholder="Nimi...">
+                </div>
+            </div>
+            <div class="field">
                 <label class="label">Tyyppi</label>
                 <div class="control">
-                    <div class="select" style="width: 100%;">
+                    <div class="select site-new-input" style="width: 100%;">
                         <select id="site-new-category" style="width: 100%;">
                         </select>
                     </div>
                 </div>
             </div>
             <div class="field">
-                <label class="label">Nimi</label>
-                <div class="control">
-                    <input class="input" id="site-new-name" type="text" placeholder="Nimi...">
-                </div>
-            </div>
-            <div class="field">
                 <label class="label">Alue</label>
                 <div class="control">
-                    <input class="input" id="site-new-area" type="text">
-                    <input type="hidden" id="site-new-area-id">
+                    <input class="input site-new-input" id="site-new-area" type="text">
+                    <input class="site-new-input" type="hidden" id="site-new-area-id">
                 </div>
             </div>
             <div class="field">
                 <label class="label">Merkki</label>
                 <div class="control">
-                    <input class="input" id="site-new-marker" type="text">
-                    <input type="hidden" id="site-new-marker-id">
+                    <input class="input site-new-input" id="site-new-marker" type="text">
+                    <input class="site-new-input" type="hidden" id="site-new-marker-id">
                 </div>
             </div>
         </section>
@@ -77,24 +77,6 @@
 </div>
 
 <script>
-
-function save_to_site(area_id, marker_id) {
-    console.log(map_layers);
-    map_layers.forEach(function(layer) {
-        layer.areas.forEach(function(area) {
-            if(area.id == area_id) {
-                var site = area;
-                console.log(site);
-            }
-        });
-        layer.markers.forEach(function(marker) {
-            if(marker.id == marker_id) {
-                var site = marker;
-                console.log(site);
-            }
-        });
-    });
-}
 
 var opened_site = null;
 function open_site_modal(area_id, marker_id) {
@@ -208,6 +190,66 @@ $(document).ready(function() {
         }
     });
 });
+
+function save_to_site(area_id, marker_id) {
+    map_layers.forEach(function(layer) {
+        layer.areas.forEach(function(area) {
+            if(area.id == area_id) {
+                open_new_site_modal(area, null);
+            }
+        });
+        layer.markers.forEach(function(marker) {
+            if(marker.id == marker_id) {
+                open_new_site_modal(null, marker);
+            }
+        });
+    });
+}
+
+function open_new_site_modal(area, marker) {
+    $('.site-new-input').val('');
+    if(area) {
+        $('#site-new-area').val(area.name);
+        $('#site-new-area-id').val(area.id);
+        $('#site-new-name').val(area.name);
+    } else {
+        $('#site-new-marker').val(marker.name);
+        $('#site-new-marker-id').val(marker.id);
+        $('#site-new-name').val(marker.name);
+    }
+    $('#site-new-modal').addClass('is-active');
+}
+
+function new_site_modal_close() {
+    $('#site-new-modal').removeClass('is-active');
+}
+
+function new_site_modal_save() {
+    var name = $('#site-new-name').val();
+    var category = $('#site-new-category').val();
+    var area_id = $('#site-new-area-id').val();
+    var marker_id = $('#site-new-marker-id').val();
+    var contact = $('#site-new-contact').val();
+    var notes = $('#site-new-notes').val();
+    $.ajax({
+        url: '/api/sites/',
+        type: 'POST',
+        data: {
+            name: name,
+            category: category,
+            area: area_id,
+            marker: marker_id,
+            contact: contact,
+            notes: notes,
+        },
+        headers: {
+            "X-CSRFToken": csrf_token
+        },
+        success: function(data) {
+            new_site_modal_close();
+        }
+    });
+}
 
 </script>
 {% endblock %}
