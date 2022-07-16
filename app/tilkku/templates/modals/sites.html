@@ -220,7 +220,7 @@ function open_new_site_modal(area, marker) {
     $('#site-new-modal').addClass('is-active');
 }
 
-function new_site_modal_close() {
+function site_new_modal_close() {
     $('#site-new-modal').removeClass('is-active');
 }
 
@@ -246,7 +246,7 @@ function site_new_modal_save() {
             "X-CSRFToken": csrf_token
         },
         success: function(data) {
-            new_site_modal_close();
+            site_new_modal_close();
         }
     });
 }
