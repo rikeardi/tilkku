@@ -69,7 +69,7 @@ class Marker(models.Model):
 class MapServer(models.Model):
     name = models.CharField(max_length=100)
     url = models.CharField(max_length=500)
-    attribution = models.CharField(max_length=300)
+    attribution = models.CharField(max_length=300, blank=True, default='')
 
     def __str__(self):
         return f'{self.name}'
