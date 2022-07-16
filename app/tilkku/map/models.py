@@ -75,6 +75,14 @@ class MapServer(models.Model):
         return f'{self.name}'
 
 
+class WMSServer(models.Model):
+    name = models.CharField(max_length=100)
+    url = models.CharField(max_length=500)
+
+    def __str__(self):
+        return f'{self.name}'
+
+
 class SiteCategory(models.Model):
     name = models.CharField(max_length=100)
 

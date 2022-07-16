@@ -20,6 +20,7 @@ def home(request):
 def events(request, id):
     context = {
         'map_servers': json.dumps(MapServerSerializer(MapServer.objects.all(), many=True).data),
+        'wms_servers': json.dumps(WMSServerSerializer(WMSServer.objects.all(), many=True).data),
         'layers': json.dumps(LayerSerializer(Layer.objects.all().order_by('id'), many=True).data),
         'location_query': {'events': id},
     }
