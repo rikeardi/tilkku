@@ -221,6 +221,7 @@ function map_set_grid() {
         var endpoint = [x + (i+1) * (grid_size[0]/grid_transfer), y - (grid_size[1]/grid_transfer)];
         var rowHeader = L.rectangle([startpoint, endpoint], {
             opacity: 0,
+            fillOpacity: 0,
         });
         rowHeader.bindTooltip("<div class='grid-header'>" + grid_rows[i] + "</div>", tooltip_style);
         map_grid.layer.addLayer(rowHeader);
