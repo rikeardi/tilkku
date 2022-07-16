@@ -142,7 +142,7 @@ function map_set_wms() {
         layers: wms_servers[0].layer,
         format: 'image/png',
         transparent: true,
-    });
+    }).addTo(map);
 }
 
 var grid_size = [-52, 112.5];
@@ -439,6 +439,7 @@ function map_init() {
     map_set_bg();
     map_set_scale();
     map_set_layers();
+    map_set_wms();
 }
 
 function map_show_coords(latlng) {
