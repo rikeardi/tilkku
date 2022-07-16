@@ -31,7 +31,68 @@
     </div>
 </div>
 
+<div class="modal" id="site-new-modal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+        <header class="modal-card-head">
+            <p class="modal-card-title">Lisää uusi paikka</p>
+            <button class="delete" aria-label="close" onclick="site_new_modal_close();" style="margin-left: 15px;"></button>
+        </header>
+        <section class="modal-card-body">
+            <div class="field">
+                <label class="label">Tyyppi</label>
+                <div class="control">
+                    <div class="select" style="width: 100%;">
+                        <select id="site-new-category" style="width: 100%;">
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Nimi</label>
+                <div class="control">
+                    <input class="input" id="site-new-name" type="text" placeholder="Nimi...">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Alue</label>
+                <div class="control">
+                    <input class="input" id="site-new-area" type="text">
+                    <input type="hidden" id="site-new-area-id">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Merkki</label>
+                <div class="control">
+                    <input class="input" id="site-new-marker" type="text">
+                    <input type="hidden" id="site-new-marker-id">
+                </div>
+            </div>
+        </section>
+        <footer class="modal-card-foot">
+            <button class="button is-success" onclick="site_new_modal_save();">Tallenna</button>
+            <button class="button" onclick="site_new_modal_close();">Peruuta</button>
+        </footer>
+    </div>
+</div>
+
 <script>
+
+function save_to_site(area_id, marker_id) {
+    map_layers.forEach(function(layer) {
+        layer.areas.forEach(function(area) {
+            if(area.id == area_id) {
+                var site = area;
+            }
+        });
+        layer.markers.forEach(function(marker) {
+            if(marker.id == marker_id) {
+                var site = marker;
+            }
+        });
+    });
+    console.log(site);
+}
 
 var opened_site = null;
 function open_site_modal(area_id, marker_id) {
@@ -39,8 +100,12 @@ function open_site_modal(area_id, marker_id) {
         url: '/api/sites/?area=' + area_id + '&marker=' + marker_id,
         type: 'GET',
         success: function(data) {
-            opened_site = data[0];
-            load_site_modal();
+            if(data.length == 0) {
+                save_to_site(area_id, marker_id);
+            } else {
+                opened_site = data[0];
+                load_site_modal();
+            }
         }
     });
 }
@@ -126,6 +191,21 @@ function site_select_contact(contact_id) {
     $('#site-new-contact').addClass('is-hidden');
     $("#site-contact-autocomplete").html("");
 }
+
+$(document).ready(function() {
+    $.ajax({
+        url: '/api/sitecategories/',
+        type: 'GET',
+        success: function(data) {
+            data.forEach(function(category) {
+                var option = $('<option>');
+                option.text(category.name);
+                option.val(category.id);
+                $('#site-new-category').append(option);
+            });
+        }
+    });
+});
 
 </script>
 {% endblock %}

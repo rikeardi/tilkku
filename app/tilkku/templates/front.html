@@ -407,20 +407,7 @@ function open_area(id) {
             }
         });
     });
-    console.log(opened_area);
     open_site_modal(opened_area.id, null);
-}
-
-function save_area_to_site(id) {
-    console.log(id);
-    map_layers.forEach(function(layer) {
-        layer.areas.forEach(function(area) {
-            if(area.id == id) {
-                var site = area;
-            }
-        });
-    });
-    console.log(site);
 }
 
 var opened_marker = null;
