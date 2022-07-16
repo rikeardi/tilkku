@@ -345,6 +345,7 @@ function map_load_layers() {
                 });
                 area_layer.on("rightclick", function(e) {
                     e.originalEvent._stopped = true;
+                    e.preventDefault();
                     save_area_to_site(e.target.options.id);
                 });
 
@@ -415,6 +416,7 @@ function open_area(id) {
 }
 
 function save_area_to_site(id) {
+    console.log(id);
     map_layers.forEach(function(layer) {
         layer.areas.forEach(function(area) {
             if(area.id == id) {
