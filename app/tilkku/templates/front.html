@@ -450,6 +450,7 @@ function map_show_coords(latlng) {
 function search_coords(coords) {
     var row = coords.substring(0, 1);
     var col = coords.substring(1, 2);
+    console.log(row, col);
     var coord = [map_grid.rows.indexOf(row), map_grid.cols.indexOf(col)];
     console.log(coord);
 }
