@@ -84,15 +84,16 @@ function save_to_site(area_id, marker_id) {
         layer.areas.forEach(function(area) {
             if(area.id == area_id) {
                 var site = area;
+                console.log(site);
             }
         });
         layer.markers.forEach(function(marker) {
             if(marker.id == marker_id) {
                 var site = marker;
+                console.log(site);
             }
         });
     });
-    console.log(site);
 }
 
 var opened_site = null;
