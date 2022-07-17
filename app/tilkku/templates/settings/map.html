@@ -41,6 +41,13 @@
     <div class="column is-half">
         <div class="content p-3">
             <div class="field">
+                <label class="label">GeoJSON</label>
+                <div class="control">
+                    <button class="button is-primary" onclick="map_export_geoJSON();">Vie</button>
+                    <button class="button is-primary" onclick="map_import_geoJSON();">Tuo</button>
+                </div>
+            </div>
+            <div class="field">
                 <label class="label">Karttatasot</label>
                 <div id="settings-map-layers" class="control">
                 </div>
@@ -116,6 +123,13 @@ function map_toggle_location() {
     settings.map.location = $("#settings-map-location").is(":checked") ? 1 : 0;
     map_user_location();
     refresh_settings();
+}
+
+function map_export_geoJSON() {
+    console.log(map_layers);
+//    var json = JSON.stringify(data);
+//    var blob = new Blob([json], {type: "text/plain;charset=utf-8"});
+//    saveAs(blob, "tilkku.geojson");
 }
 
 </script>

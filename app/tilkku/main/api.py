@@ -322,12 +322,19 @@ class GeoJSONViewSet(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
         instance = self.get_object()
 
         areas = Area.objects.all()
+        markers = Marker.objects.all()
+
+        layers = request.data.get('layers', None)
+        if layers is not None:
+            layers = layers.split(',')
+            areas = areas.filter(layer__id__in=layers)
+            markers = markers.filter(layer__id__in=layers)
+
         for area in areas:
             area.type = "Polygon"
             area.coordinates = [area.coordinates]
             instance.features.append(area)
 
-        markers = Marker.objects.all()
         for marker in markers:
             marker.type = "Point"
             instance.features.append(marker)
