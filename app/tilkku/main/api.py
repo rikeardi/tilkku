@@ -313,7 +313,7 @@ class GeoJSONViewSet(viewsets.ModelViewSet):
     serializer_class = GeoJSONSerializer
 
     def get_queryset(self):
-        queryset = GeoJSON.objects.first()
+        queryset = GeoJSON()
         areas = Area.objects.all()
         markers = Marker.objects.all()
         queryset.features = areas + markers
