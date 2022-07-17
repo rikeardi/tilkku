@@ -316,6 +316,9 @@ class GeoJSONViewSet(generics.RetrieveAPIView):
         model = GeoJSON
         fields = ('type', 'features')
 
+    def get_object(self):
+        return GeoJSON()
+
     def get_queryset(self):
         queryset = GeoJSON()
         areas = Area.objects.all()
@@ -328,6 +331,6 @@ class GeoJSONViewSet(generics.RetrieveAPIView):
     def get_extra_actions(cls):
         return []
 
-    def as_view(self, **initkwargs):
-        view = super().as_view(**initkwargs)
+    def as_view(self, *args, **kwargs):
+        view = super(GeoJSONViewSet, self).as_view(**initkwargs)
         return view
