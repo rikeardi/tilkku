@@ -9,33 +9,28 @@ $(document).ready(function() {
         if(e.keyCode == 97) {
             e.preventDefault();
             toolbox_tool('events');
-        }
-
-        if(e.ctrlKey && e.keyCode == 97) {
-            e.preventDefault();
-            toolbox_tool('events');
             new_topic_modal_open();
         }
 
-        if(e.keyCode == 80) {
+        if(e.keyCode == 112) {
             e.preventDefault();
             toolbox_tool('sites');
             $("#sites-site-search").focus();
         }
 
-        if(e.keyCode == 89) {
+        if(e.keyCode == 121) {
             e.preventDefault();
             toolbox_tool('contacts');
             $("#contacts-search").focus();
         }
 
-        if(e.ctrlKey && e.keyCode == 65) {
+        if(e.keyCode == 25) {
             e.preventDefault();
             toolbox_tool('contacts');
             new_contact_modal_open();
         }
 
-        if(e.keyCode == 67) {
+        if(e.keyCode == 99) {
             e.preventDefault();
             toolbox_tool('chat');
             $("#chat-input").focus();
