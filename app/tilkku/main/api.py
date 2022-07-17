@@ -308,7 +308,7 @@ class GeoJSONSerializer(serializers.Serializer):
         }
 
 
-class GeoJSONViewSet(generics.GenericAPIView):
+class GeoJSONViewSet(generics.RetrieveAPIView):
     serializer_class = GeoJSONSerializer
 
     def get_queryset(self):
