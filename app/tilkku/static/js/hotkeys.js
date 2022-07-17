@@ -6,12 +6,12 @@ $(document).ready(function() {
 
         console.log(e.keyCode);
 
-        if(e.keyCode == 65) {
+        if(e.keyCode == 97) {
             e.preventDefault();
             toolbox_tool('events');
         }
 
-        if(e.ctrlKey && e.keyCode == 65) {
+        if(e.ctrlKey && e.keyCode == 97) {
             e.preventDefault();
             toolbox_tool('events');
             new_topic_modal_open();
