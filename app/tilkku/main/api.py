@@ -282,10 +282,6 @@ class GeoJSONFeatureSerializer(serializers.Serializer):
     def to_representation(self, obj):
         return {
             'type': 'Feature',
-            'geometry': {
-                'type': obj.type,
-                'coordinates': [obj.coordinates]
-            },
             'properties': {
                 'name': obj.name,
                 'id': obj.id,
@@ -295,7 +291,11 @@ class GeoJSONFeatureSerializer(serializers.Serializer):
                 'stroke-width': obj.layer.style.stroke_width,
                 'stroke-opacity': obj.layer.style.opacity + 0.2,
                 'fill-opacity': obj.layer.style.opacity,
-            }
+            },
+            'geometry': {
+                'type': obj.type,
+                'coordinates': [obj.coordinates]
+            },
         }
 
 
