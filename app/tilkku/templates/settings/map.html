@@ -154,7 +154,7 @@ function map_import_geoJSON() {
 }
 
 function map_import_upload() {
-    console.log("Ladataan tiedosto...");
+    console.log($("#map-import-file"));
     var file = $("#map-import-file")[0].files[0];
     var reader = new FileReader();
     reader.onload = function(e) {
