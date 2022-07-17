@@ -532,7 +532,7 @@ function map_user_location() {
     if(settings.map.location == 1) {
         user_marker = L.marker([0, 0], {
             icon: L.icon({
-                iconUrl: {% static 'img/user.png' %},
+                iconUrl: "{% static 'img/user.png' %}",
                 iconSize: [32, 32],
                 iconAnchor: [16, 16],
             }),
