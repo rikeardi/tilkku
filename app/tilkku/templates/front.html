@@ -504,6 +504,9 @@ function search_coords(coords) {
         direction: "center",
     });
     map.fitBounds(highlight_layer.getBounds());
+    if(mobile) {
+        toolbox_menu();
+    }
     setTimeout(function() {
         highlight_layer.removeLayer(highlight);
     }, 3000);

@@ -43,10 +43,6 @@ function search_sites() {
 }
 search_sites();
 
-$("#sites-site-search").on('keyup', function() {
-    search_sites();
-});
-
 function show_site_area(id) {
     map_layers.forEach(function(layer) {
         for(var i = 0; i < layer.areas.length; i++) {
@@ -199,6 +195,10 @@ $("#sites-site-search").on('keyup', function(e) {
     if(e.keyCode == 13) {
         search_site_click();
     }
+});
+
+$("#sites-site-search").on('keyup', function() {
+    search_site_click();
 });
 
 </script>
