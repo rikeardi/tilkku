@@ -150,5 +150,9 @@ class Topic(models.Model):
 
 
 class GeoJSON:
-    type = "FeatureCollection"
-    features = []
+    type: str
+    features: list
+
+    def __init__(self):
+        self.type = "FeatureCollection"
+        self.features = []
