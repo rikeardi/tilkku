@@ -250,9 +250,18 @@ function map_set_grid() {
             direction: "center",
         }
 
+        var lefttop_x = map_grid.min_x;
+        var lefttop_y = map_grid.min_y;
+        if(map_grid.inv_x) {
+            lefttop_x = map_grid.max_x;
+        }
+        if(map_grid.inv_y) {
+            lefttop_y = map_grid.max_y;
+        }
+
         for(var i = 0; i < map_grid.rows.length; i++) {
-            var startpoint = [map_grid.min_x + i * map_grid.move_y, map_grid.min_y];
-            var endpoint = [map_grid.min_x + (i+1) * map_grid.move_x, map_grid.min_y - map_grid.move_y];
+            var startpoint = [lefttop_x + i * map_grid.move_y, lefttop_y];
+            var endpoint = [lefttop_x + (i+1) * map_grid.move_x, lefttop_y - map_grid.move_y];
             var rowHeader = L.rectangle([startpoint, endpoint], {
                 opacity: 0,
                 fillOpacity: 0,
@@ -263,8 +272,8 @@ function map_set_grid() {
         }
 
         for(var i = 0; i < map_grid.cols.length; i++) {
-            var startpoint = [map_grid.min_x, map_grid.min_y + i * map_grid.move_y];
-            var endpoint = [map_grid.min_x - map_grid.move_x, map_grid.min_y + (i+1) * map_grid.move_y];
+            var startpoint = [lefttop_x, lefttop_y + i * map_grid.move_y];
+            var endpoint = [lefttop_x - map_grid.move_x, lefttop_y + (i+1) * map_grid.move_y];
             var colHeader = L.rectangle([startpoint, endpoint], {
                 opacity: 0,
                 fillOpacity: 0,
