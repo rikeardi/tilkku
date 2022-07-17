@@ -232,6 +232,7 @@ function map_set_grid() {
                 [map_grid.x + row * map_grid.move_x, map_grid.y + map_grid.cols.length * map_grid.move_y],
             ], {
                 className: 'grid-line',
+                interactive: false,
             }).addTo(map_grid.layer);
         }
         for (var col = 0; col <= map_grid.cols.length; col++) {
@@ -240,6 +241,7 @@ function map_set_grid() {
                 [map_grid.x + map_grid.rows.length * map_grid.move_x, map_grid.y + col * map_grid.move_y],
             ], {
                 className: 'grid-line',
+                interactive: false,
             }).addTo(map_grid.layer);
         }
 
@@ -249,11 +251,12 @@ function map_set_grid() {
         }
 
         for(var i = 0; i < map_grid.rows.length; i++) {
-            var startpoint = [map_grid.x + i * map_grid.move_y, y];
+            var startpoint = [map_grid.x + i * map_grid.move_y, map_grid.y];
             var endpoint = [map_grid.x + (i+1) * map_grid.move_x, map_grid.y - map_grid.move_y];
             var rowHeader = L.rectangle([startpoint, endpoint], {
                 opacity: 0,
                 fillOpacity: 0,
+                interactive: false,
             });
             rowHeader.bindTooltip("<div class='grid-header'>" + map_grid.rows[i] + "</div>", tooltip_style);
             map_grid.layer.addLayer(rowHeader);
@@ -265,6 +268,7 @@ function map_set_grid() {
             var colHeader = L.rectangle([startpoint, endpoint], {
                 opacity: 0,
                 fillOpacity: 0,
+                interactive: false,
             });
             colHeader.bindTooltip("<div class='grid-header'>" + grid_cols[i] + "</div>", tooltip_style);
             map_grid.layer.addLayer(colHeader);
