@@ -273,32 +273,24 @@ class TopicViewSet(viewsets.ModelViewSet):
 
 
 class GeoJSONFeatureSerializer(serializers.Serializer):
-    type = serializers.SerializerMethodField()
-    properties = serializers.SerializerMethodField()
-    geometry = serializers.SerializerMethodField()
 
-    def get_type(self, obj):
-        return 'Feature'
-
-    def get_properties(self, obj):
+    def to_representation(self, obj):
         return {
-            'id': obj.id,
-            'name': obj.name,
-            'description': obj.description,
-            'status': obj.status,
-            'category': obj.category.name,
-            'area': obj.area.name,
-            'marker': obj.marker.name,
-            'contacts': [contact.name for contact in obj.contacts.all()],
-            'site': obj.site.name,
-            'topic': obj.topic.name,
-            'notes': [note.message for note in obj.notes.all()]
-        }
-
-    def get_geometry(self, obj):
-        return {
-            'type': 'Point',
-            'coordinates': [obj.marker.longitude, obj.marker.latitude]
+            'type': 'Feature',
+            'geometry': {
+                'type': 'Point',
+                'coordinates': obj.coordinates
+            },
+            'properties': {
+                'name': obj.name,
+                'id': obj.id,
+                'layer_id': obj.layer.id,
+                'stroke': obj.layer.stroke,
+                'fill': obj.layer.fill,
+                'stroke-width': obj.layer.stroke_width,
+                'stroke-opacity': obj.layer.opacity + 0.2,
+                'fill-opacity': obj.layer.opacity,
+            }
         }
 
 
