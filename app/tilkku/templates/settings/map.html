@@ -126,7 +126,13 @@ function map_toggle_location() {
 }
 
 function map_export_geoJSON() {
-    console.log(map_layers);
+    var layers = [];
+    for(var i=0;i<map_layers.length;i++) {
+        if(settings.map.layers.includes(i)) {
+            layers.push(map_layers[i].id);
+        }
+    }
+    console.log(layers);
 //    var json = JSON.stringify(data);
 //    var blob = new Blob([json], {type: "text/plain;charset=utf-8"});
 //    saveAs(blob, "tilkku.geojson");
