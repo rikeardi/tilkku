@@ -8,6 +8,11 @@ $(document).ready(function() {
 
         if(e.keyCode == 65) {
             e.preventDefault();
+            toolbox_tool('events');
+        }
+
+        if(e.ctrlKey && e.keyCode == 65) {
+            e.preventDefault();
             new_topic_modal_open();
         }
 
