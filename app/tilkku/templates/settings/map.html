@@ -138,9 +138,10 @@ function map_export_geoJSON() {
         url: "/api/geojson/1/?layers=" + layers.join(","),
         type: "GET",
         success: function(data) {
-            console.log(data);
-            //var blob = new Blob([data], {type: "text/plain;charset=utf-8"});
-            //saveAs(blob, "tilkku.geojson");
+            $("<a/>", {
+                "download": "map.geojson",
+                "href": "data:application/json," + encodeURIComponent(data)
+            }).appendTo("body").click().remove();
         }
     });
 }
