@@ -35,5 +35,17 @@ $(document).ready(function() {
             toolbox_tool('chat');
             $("#chat-input").focus();
         }
+
+        if(e.keyCode == 109) {
+            e.preventDefault();
+            if(settings.menu == "hidden") {
+                toolbox_menu();
+            }
+        }
+
+        if(e.keyCode == 113) {
+            e.preventDefault();
+            settings_open();
+        }
     });
 });
