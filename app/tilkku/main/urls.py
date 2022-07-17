@@ -17,13 +17,12 @@ router.register(r'users', api.UserViewSet)
 router.register(r'notes', api.NoteViewSet)
 router.register(r'topics', api.TopicViewSet)
 router.register(r'contacts', api.ContactViewSet)
-#router.register(r'geojson', api.GeoJSONViewSet, basename='geojson')
+router.register(r'geojson', api.GeoJSONViewSet, basename='geojson')
 
 app_name = 'main'
 urlpatterns = [
     path('', views.home, name='home'),
     path('events/<id>/', views.events, name='events'),
-    path('api/geojson', api.GeoJSONViewSet.as_view(), name='geojson'),
     path('api/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('accounts/login/', django.contrib.auth.views.LoginView.as_view(authentication_form=forms.LoginForm), name='login'),
