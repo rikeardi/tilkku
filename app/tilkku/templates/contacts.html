@@ -1,11 +1,12 @@
 {% block content %}
-<div class="content m-1">
-    <button class="button is-small"><i class="fa fa-plus" title="Lisää" onclick="new_contact_modal_open();"></i></button>
-</div>
-
 <div class="content" style="height: calc(100% - 40px); overflow-y: clip;">
-    <div>
-        <input id="contacts-search" class="input is-small" type="text" placeholder="Hae..." autocomplete="no">
+    <div class="field has-addons">
+        <div class="control">
+            <button class="button is-small"><i class="fa fa-plus" title="Lisää" onclick="new_contact_modal_open();"></i></button>
+        </div>
+        <div class="control is-expanded">
+            <input id="contacts-search" class="input is-small" type="text" placeholder="Hae..." autocomplete="no">
+        </div>
     </div>
     <div id="contacts-box" style="overflow: auto; height: calc(100% - 36px);">
         <table id="contacts-table" class="table is-striped">
