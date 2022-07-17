@@ -135,11 +135,8 @@ function map_export_geoJSON() {
     console.log(layers);
 
     $.ajax({
-        url: "/api/geojson/1/",
+        url: "/api/geojson/1/?layers=" + layers.join(","),
         type: "GET",
-        data: {
-            layers: layers
-        },
         success: function(data) {
             console.log(data);
             //var blob = new Blob([data], {type: "text/plain;charset=utf-8"});
