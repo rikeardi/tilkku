@@ -158,6 +158,15 @@ function map_import_upload() {
     reader.onload = function(e) {
         var data = JSON.parse(e.target.result);
         console.log(data);
+        $.ajax({
+            url: "/api/geojson/1/",
+            type: "PATCH",
+            data: JSON.stringify(data),
+            contentType: "application/json",
+            success: function(data) {
+                console.log(data);
+            }
+        });
     };
     reader.readAsText(file);
 }

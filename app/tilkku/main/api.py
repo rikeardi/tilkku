@@ -310,7 +310,7 @@ class GeoJSONSerializer(serializers.Serializer):
         }
 
 
-class GeoJSONViewSet(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
+class GeoJSONViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, viewsets.GenericViewSet):
     queryset = GeoJSON()
     serializer_class = GeoJSONSerializer
 
@@ -338,6 +338,22 @@ class GeoJSONViewSet(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
         for marker in markers:
             marker.type = "Point"
             instance.features.append(marker)
+
+        return Response(GeoJSONSerializer(instance).data)
+
+    def update(self, request, *args, **kwargs):
+        features = request.data.get('features')
+        if features is not None:
+            for feature in features:
+                if feature.get('type') == 'Feature':
+                    if feature.get('geometry').get('type') == 'Polygon':
+                        area = Area.objects.get(id=feature.get('id'))
+                        area.coordinates = feature.get('geometry').get('coordinates')[0]
+                        area.save()
+                    elif feature.get('geometry').get('type') == 'Point':
+                        marker = Marker.objects.get(id=feature.get('id'))
+                        marker.coordinates = feature.get('geometry').get('coordinates')
+                        marker.save()
 
         return Response(GeoJSONSerializer(instance).data)
 
