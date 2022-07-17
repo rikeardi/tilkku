@@ -328,6 +328,6 @@ class GeoJSONViewSet(viewsets.GenericViewSet):
 
         return queryset
 
-    @classmethod
-    def get_extra_actions(cls):
-        return []
+#    @classmethod
+#    def get_extra_actions(cls):
+#        return []
