@@ -1,7 +1,12 @@
 {% block content %}
 <div class="content" style="height: calc(100% - 20px); overflow-y: clip;">
-    <div>
-        <input id="sites-site-search" class="input is-small" type="text" placeholder="Hae..." autocomplete="no">
+    <div class="field has-addons">
+        <div class="control">
+            <input id="sites-site-search" class="input is-small" type="text" placeholder="Hae..." autocomplete="no">
+        </div>
+        <div class="control">
+            <button id="sites-site-search-button" class="button is-small is-info" onclick=""><i class="fas fa-magnifying-glass"></i></button>
+        </div>
     </div>
     <div id="sites-site-box" style="overflow: auto; height: calc(100% - 32px);">
         <table id="sites-site-table" class="table is-striped">
@@ -180,14 +185,19 @@ $(document).ready(function() {
     }
 });
 
+function search_site_click() {
+    var search = $('#sites-site-search').val();
+    if($("#sites-site-search").val().length == 3) {
+        search_coords($("#sites-site-search").val());
+    } else if($("#sites-site-search").val().length == 2) {
+        var coords = $("#sites-site-search").val().substring(0, 1) + "0" + $("#sites-site-search").val().substring(1);
+        search_coords(coords);
+    }
+}
+
 $("#sites-site-search").on('keyup', function(e) {
     if(e.keyCode == 13) {
-        if($("#sites-site-search").val().length == 3) {
-            search_coords($("#sites-site-search").val());
-        } else if($("#sites-site-search").val().length == 2) {
-            var coords = $("#sites-site-search").val().substring(0, 1) + "0" + $("#sites-site-search").val().substring(1);
-            search_coords(coords);
-        }
+        search_site_click();
     }
 });
 
