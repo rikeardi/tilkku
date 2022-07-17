@@ -161,6 +161,9 @@ function map_import_upload() {
         $.ajax({
             url: "/api/geojson/1/",
             type: "PATCH",
+            headers: {
+                "X-CSRFToken": csrf_token
+            },
             data: JSON.stringify(data),
             contentType: "application/json",
             success: function(data) {
