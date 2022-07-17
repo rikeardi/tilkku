@@ -260,7 +260,7 @@ function map_set_grid() {
         }
 
         for(var i = 0; i < map_grid.rows.length; i++) {
-            var startpoint = [lefttop_x + i * map_grid.move_x, lefttop_y];
+            var startpoint = [lefttop_x - i * map_grid.move_x, lefttop_y];
             var endpoint = [lefttop_x - (i+1) * map_grid.move_x, lefttop_y - map_grid.move_y];
             var rowHeader = L.rectangle([startpoint, endpoint], {
                 opacity: 0,
