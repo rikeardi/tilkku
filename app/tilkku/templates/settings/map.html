@@ -30,6 +30,12 @@
                     <label class="checkbox"><input id="settings-map-names" type="checkbox" onchange='map_toggle_names();'> Näkyvissä</label>
                 </div>
             </div>
+            <div class="field">
+                <label class="label">Paikannus</label>
+                <div class="control">
+                    <label class="checkbox"><input id="settings-map-location" type="checkbox" onchange='map_toggle_location();'> Käytössä</label>
+                </div>
+            </div>
         </div>
     </div>
     <div class="column is-half">
@@ -61,6 +67,9 @@ $(document).ready(function() {
         }
         if(settings.map.names == 1) {
             $("#settings-map-names").prop("checked", true);
+        }
+        if(settings.map.location == 1) {
+            $("#settings-map-location").prop("checked", true);
         }
     }
 
@@ -100,6 +109,11 @@ function map_toggle_scale() {
 
 function map_toggle_names() {
     settings.map.names = $("#settings-map-names").is(":checked") ? 1 : 0;
+    refresh_settings();
+}
+
+function map_toggle_location() {
+    settings.map.location = $("#settings-map-location").is(":checked") ? 1 : 0;
     refresh_settings();
 }
 

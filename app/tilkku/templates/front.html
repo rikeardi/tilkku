@@ -25,7 +25,10 @@ var default_settings = {
         zoom: 15,
         server: 0,
         layers: [],
+        grid: 1,
         scale: 1,
+        names: 1,
+        location: 0,
     }
 }
 
@@ -126,7 +129,6 @@ if(window.innerWidth < 768) {
     mobile = true;
     map_zoom = false;
 }
-
 
 map = L.map('map', {
     zoomControl: map_zoom,
@@ -510,6 +512,26 @@ function search_coords(coords) {
     setTimeout(function() {
         highlight_layer.removeLayer(highlight);
     }, 3000);
+}
+
+function map_user_update() {
+    if(navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            var lat = position.coords.latitude;
+            var lng = position.coords.longitude;
+            var latlng = L.latLng(lat, lng);
+            console.log(latlng);
+        });
+    }
+}
+
+var map_location_timer = null;
+function map_user_location() {
+    if(settings.map.location == 1) {
+        map_location_timer = setInterval(function() {
+            map_user_update();
+        }, 10000);
+    }
 }
 
 </script>
