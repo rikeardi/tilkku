@@ -465,6 +465,7 @@ map_init();
 
 function map_show_coords(latlng) {
     console.log(latlng);
+    console.log(map_grid.min_x, map_grid.min_y, map_grid.max_x, map_grid.max_y);
     if(map_grid.min_x < latlng.lat && latlng.lat < map_grid.max_x && map_grid.min_y < latlng.lng && latlng.lng < map_grid.max_y) {
         var row = Math.floor((grid_end[0] - latlng.lat) / (grid_size[0]/grid_transfer));
         if(map_grid.inv_x) {
