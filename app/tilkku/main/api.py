@@ -309,7 +309,7 @@ class GeoJSONSerializer(serializers.Serializer):
         }
 
 
-class GeoJSONViewSet(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
+class GeoJSONViewSet(mixins.RetrieveModelMixin, generics.GenericAPIView):
     queryset = GeoJSON()
     serializer_class = GeoJSONSerializer
 
