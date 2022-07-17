@@ -53,6 +53,7 @@ class GeoItem(models.Model):
 
 class Area(GeoItem):
     subtitle = models.CharField(max_length=300, blank=True, default='')
+    type = models.CharField(max_length=2, default='AR')
 
     class Meta:
         ordering = ['name']
@@ -62,6 +63,8 @@ class Area(GeoItem):
 
 
 class Marker(GeoItem):
+    type = models.CharField(max_length=2, default='PO')
+
     class Meta:
         ordering = ['name']
 
