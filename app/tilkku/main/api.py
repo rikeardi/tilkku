@@ -311,6 +311,10 @@ class GeoJSONSerializer(serializers.Serializer):
 class GeoJSONViewSet(generics.RetrieveAPIView):
     serializer_class = GeoJSONSerializer
 
+    class Meta:
+        model = GeoJSON
+        fields = ('type', 'features')
+
     def get_queryset(self):
         queryset = GeoJSON()
         areas = Area.objects.all()
