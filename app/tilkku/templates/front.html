@@ -518,8 +518,10 @@ function search_coords(coords, center=true) {
     }, 3000);
 }
 
+var user_marker = null;
 function map_user_coords(latlng) {
     if(map_grid.min_x < latlng.lat && latlng.lat < map_grid.max_x && map_grid.min_y < latlng.lng && latlng.lng < map_grid.max_y) {
+        console.log("Aww Yiss");
         var row = Math.floor((map_grid.end[0] - latlng.lat) / (map_grid.size[0]/grid_transfer));
         if(map_grid.inv_x) {
             row = map_grid.rows.length - row - 1;
@@ -534,7 +536,6 @@ function map_user_coords(latlng) {
     }
 }
 
-var user_marker = null;
 function map_user_update() {
     if(navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
