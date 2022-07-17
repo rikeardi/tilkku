@@ -308,7 +308,7 @@ class GeoJSONSerializer(serializers.Serializer):
         }
 
 
-class GeoJSONViewSet(viewsets.ModelViewSet):
+class GeoJSONViewSet(viewsets.ViewSet):
     queryset = GeoJSON()
     serializer_class = GeoJSONSerializer
 
