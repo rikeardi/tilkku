@@ -1,0 +1,34 @@
+{% block content %}
+<div style="width: 100%; opacity: 0.999999;">
+    <div id="mobile-clock" class="p-2 has-text-centered is-hidden">
+        <h3 class="title is-5" id="mobile-time"></h3>
+    </div>
+</div>
+<script>
+var timer = null;
+
+function set_mobile_clock() {
+    if(settings.clock == 1 && window.innerWidth < 768) {
+        $("#mobile-clock").removeClass("is-hidden");
+        update_mobile_clock();
+    } else {
+        $("#mobile-clock").addClass("is-hidden");
+        timer = null;
+    }
+}
+set_mobile_clock();
+
+function update_mobile_clock() {
+    var date = new Date();
+    var d = date.getDate();
+    var mo = date.getMonth() + 1;
+    var h = date.getHours();
+    var m = "0" + date.getMinutes();
+    var s = "0" + date.getSeconds();
+    var time = d + "." + mo + ". " + h + ":" + m.substr(-2) + ":" + s.substr(-2);
+    $("#mobile-time").html(time);
+    timer = setTimeout(update_mobile_clock, 250);
+}
+
+</script>
+{% endblock %}

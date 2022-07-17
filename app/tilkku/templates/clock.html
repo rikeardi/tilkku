@@ -8,7 +8,7 @@
 var timer = null;
 
 function set_clock() {
-    if(settings.clock == 1) {
+    if(settings.clock == 1 && window.innerWidth > 768) {
         $("#clock").removeClass("is-hidden");
         update_clock();
     } else {
@@ -29,5 +29,6 @@ function update_clock() {
     $("#time").html(time);
     timer = setTimeout(update_clock, 250);
 }
+
 </script>
 {% endblock %}
