@@ -59,8 +59,6 @@ class Area(GeoItem):
 
 
 class Marker(GeoItem):
-    name = models.CharField(max_length=200)
-
     class Meta:
         ordering = ['name']
 
