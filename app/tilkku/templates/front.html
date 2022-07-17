@@ -530,12 +530,9 @@ function map_user_update() {
 var map_location_timer = null;
 function map_user_location() {
     if(settings.map.location == 1) {
+        user_marker = L.marker([0, 0], {
+        }).addTo(map);
         map_location_timer = setInterval(function() {
-            user_marker = L.marker([0, 0], {
-                draggable: false,
-                opacity: 0,
-                zIndexOffset: -1,
-            }).addTo(map);
             map_user_update();
         }, 10000);
     } else {
