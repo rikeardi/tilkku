@@ -279,6 +279,11 @@ class GeoJSONSerializer(serializers.Serializer):
     def to_representation(self, obj):
         return {
             'type': 'Feature',
+            'properties': {
+                'name': obj.name,
+                'description': obj.description,
+                'id': obj.id,
+            },
             'geometry': {
                 'type': 'Polygon',
                 'coordinates': obj.coordinates
