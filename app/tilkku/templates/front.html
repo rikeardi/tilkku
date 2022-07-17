@@ -93,6 +93,14 @@ var map = null;
             {% include 'toolbox.html' %}
         </div>
     </div>
+    <div class="column is-hidden-desktop is-full-mobile">
+        <div style="width: 150px; float: left; margin-left: 42px;">
+            {% include 'clock.html' %}
+        </div>
+        <div style="width: 32px; float: right;">
+            {% include 'mobile-toolbox.html' %}
+        </div>
+    </div>
     <div id="front-tools" class="column is-third-desktop is-full-mobile" style="z-index: 2; opacity: 0.99999;">
         <div class="box p-0" style="height: calc(100% - 10px);">
             {% include 'tools.html' %}
@@ -110,7 +118,17 @@ var map = null;
 
 var home = [61.205, 25.130];
 var home_zoom = 15;
-map = L.map('map').setView(settings.map.center, settings.map.zoom);
+
+var map_zoom = true;
+if(window.innerWidth < 768) {
+    map_zoom = false;
+}
+
+map = L.map('map', {
+    zoomControl: map_zoom,
+    center: settings.map.center,
+    zoom: settings.map.zoom,
+});
 
 const forwarder = L.eventForwarder({
     map: map,
