@@ -194,51 +194,79 @@ var map_grid = {
 function map_set_grid() {
     if(!settings.map.grid) {
         if(map_grid.layer != null) {
-            map_grid.layer.remove();
-            map_grid.layer = null;
+            map_grid.layer.eachLayer(function(layer) {
+                map.removeLayer(layer);
+            });
         }
-        return;
-    }
-    var x = map_grid.x;
-    var y = map_grid.y;
-    var row = 0;
-    var col = 0;
-    map_grid.layer = L.layerGroup().addTo(map);
-    for(var row = 0; row <= grid_rows.length; row++) {
-        var rowLine = L.polyline([
-            [x + row * (grid_size[0]/grid_transfer), y],
-            [x + row * (grid_size[0]/grid_transfer), y + grid_cols.length * (grid_size[1]/grid_transfer)],
-        ], {
-            className: 'grid-line',
-        }).addTo(map_grid.layer);
-    }
-    for (var col = 0; col <= grid_cols.length; col++) {
-        var colLine = L.polyline([
-            [x, y + col * (grid_size[1]/grid_transfer)],
-            [x + grid_rows.length * (grid_size[0]/grid_transfer), y + col * (grid_size[1]/grid_transfer)],
-        ], {
-            className: 'grid-line',
-        }).addTo(map_grid.layer);
-    }
-
-    grid_end = [x + grid_rows.length * (grid_size[0]/grid_transfer), y + grid_cols.length * (grid_size[1]/grid_transfer)];
-
-    if(grid_end[0] < grid_start[0]) {
-        map_grid.min_x = grid_end[0];
-        map_grid.max_x = grid_start[0];
-        map_grid.inv_x = true;
     } else {
-        map_grid.min_x = grid_start[0];
-        map_grid.max_x = grid_end[0];
-    }
+        var x = map_grid.x;
+        var y = map_grid.y;
+        var row = 0;
+        var col = 0;
+        map_grid.layer = L.layerGroup().addTo(map);
+        for(var row = 0; row <= grid_rows.length; row++) {
+            var rowLine = L.polyline([
+                [x + row * (grid_size[0]/grid_transfer), y],
+                [x + row * (grid_size[0]/grid_transfer), y + grid_cols.length * (grid_size[1]/grid_transfer)],
+            ], {
+                className: 'grid-line',
+            }).addTo(map_grid.layer);
+        }
+        for (var col = 0; col <= grid_cols.length; col++) {
+            var colLine = L.polyline([
+                [x, y + col * (grid_size[1]/grid_transfer)],
+                [x + grid_rows.length * (grid_size[0]/grid_transfer), y + col * (grid_size[1]/grid_transfer)],
+            ], {
+                className: 'grid-line',
+            }).addTo(map_grid.layer);
+        }
 
-    if(grid_end[1] < grid_start[1]) {
-        map_grid.min_y = grid_end[1];
-        map_grid.max_y = grid_start[1];
-        map_grid.inv_y = true;
-    } else {
-        map_grid.min_y = grid_start[1];
-        map_grid.max_y = grid_end[1];
+        grid_end = [x + grid_rows.length * (grid_size[0]/grid_transfer), y + grid_cols.length * (grid_size[1]/grid_transfer)];
+
+        if(grid_end[0] < grid_start[0]) {
+            map_grid.min_x = grid_end[0];
+            map_grid.max_x = grid_start[0];
+            map_grid.inv_x = true;
+        } else {
+            map_grid.min_x = grid_start[0];
+            map_grid.max_x = grid_end[0];
+        }
+
+        if(grid_end[1] < grid_start[1]) {
+            map_grid.min_y = grid_end[1];
+            map_grid.max_y = grid_start[1];
+            map_grid.inv_y = true;
+        } else {
+            map_grid.min_y = grid_start[1];
+            map_grid.max_y = grid_end[1];
+        }
+
+        var tooltip_style = {
+            permanent: true,
+            direction: "center",
+        }
+
+        for(var i = 0; i < grid_rows.length; i++) {
+            var startpoint = [x + i * (grid_size[0]/grid_transfer), y];
+            var endpoint = [x + (i+1) * (grid_size[0]/grid_transfer), y - (grid_size[1]/grid_transfer)];
+            var rowHeader = L.rectangle([startpoint, endpoint], {
+                opacity: 0,
+                fillOpacity: 0,
+            });
+            rowHeader.bindTooltip("<div class='grid-header'>" + grid_rows[i] + "</div>", tooltip_style);
+            map_grid.layer.addLayer(rowHeader);
+        }
+
+        for(var i = 0; i < grid_cols.length; i++) {
+            var startpoint = [x, y + i * (grid_size[1]/grid_transfer)];
+            var endpoint = [x - (grid_size[0]/grid_transfer), y + (i+1) * (grid_size[1]/grid_transfer)];
+            var colHeader = L.rectangle([startpoint, endpoint], {
+                opacity: 0,
+                fillOpacity: 0,
+            });
+            colHeader.bindTooltip("<div class='grid-header'>" + grid_cols[i] + "</div>", tooltip_style);
+            map_grid.layer.addLayer(colHeader);
+        }
     }
 
     var gridbox = L.rectangle([[x, y], [grid_end[0], grid_end[1]]], {
@@ -248,36 +276,10 @@ function map_set_grid() {
         cursor: 'none',
     }).addTo(map_grid.layer);
 
-    var tooltip_style = {
-        permanent: true,
-        direction: "center",
-    }
-
-    for(var i = 0; i < grid_rows.length; i++) {
-        var startpoint = [x + i * (grid_size[0]/grid_transfer), y];
-        var endpoint = [x + (i+1) * (grid_size[0]/grid_transfer), y - (grid_size[1]/grid_transfer)];
-        var rowHeader = L.rectangle([startpoint, endpoint], {
-            opacity: 0,
-            fillOpacity: 0,
-        });
-        rowHeader.bindTooltip("<div class='grid-header'>" + grid_rows[i] + "</div>", tooltip_style);
-        map_grid.layer.addLayer(rowHeader);
-    }
-
-    for(var i = 0; i < grid_cols.length; i++) {
-        var startpoint = [x, y + i * (grid_size[1]/grid_transfer)];
-        var endpoint = [x - (grid_size[0]/grid_transfer), y + (i+1) * (grid_size[1]/grid_transfer)];
-        var colHeader = L.rectangle([startpoint, endpoint], {
-            opacity: 0,
-            fillOpacity: 0,
-        });
-        colHeader.bindTooltip("<div class='grid-header'>" + grid_cols[i] + "</div>", tooltip_style);
-        map_grid.layer.addLayer(colHeader);
-    }
-
     gridbox.on("mousemove", function(e) {
         map_show_coords(e.latlng);
     });
+
     gridbox.on("mouseout", function(e) {
         $("#map-coordinates").addClass("is-hidden");
     });
