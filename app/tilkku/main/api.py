@@ -308,14 +308,14 @@ class GeoJSONSerializer(serializers.Serializer):
         }
 
 
-class GeoJSONViewSet(viewsets.ModelViewSet):
-    queryset = GeoJSON.objects.first()
-    serializer_class = GeoJSONSerializer
+#class GeoJSONViewSet(viewsets.ModelViewSet):
+#    queryset = GeoJSON.objects.first()
+#    serializer_class = GeoJSONSerializer
 
-    def get_queryset(self):
-        queryset = GeoJSON.objects.first()
-        areas = Area.objects.all()
-        markers = Marker.objects.all()
-        queryset.features = areas + markers
+#    def get_queryset(self):
+#        queryset = GeoJSON.objects.first()
+#        areas = Area.objects.all()
+#        markers = Marker.objects.all()
+#        queryset.features = areas + markers
 
-        return queryset
+#        return queryset
