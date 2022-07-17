@@ -277,7 +277,7 @@ class GeoJSONSerializer(serializers.Serializer):
     coordinates = serializers.ListField()
 
     def to_representation(self, obj):
-        layer = Layer.objects.get(pk=obj.layer__id)
+        layer = Layer.objects.get(pk=obj.layer.id)
         style = MapStyle.objects.get(pk=layer.style__id)
         return {
             'type': 'Feature',
