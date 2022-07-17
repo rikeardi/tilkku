@@ -4,7 +4,7 @@ from datetime import datetime
 from django.contrib.auth.models import User
 from django.db.models import Q
 from django.views.decorators.csrf import csrf_exempt
-from rest_framework import serializers, viewsets, generics
+from rest_framework import serializers, viewsets, mixins, generics
 from rest_framework.response import Response
 from map.models import *
 
@@ -309,7 +309,7 @@ class GeoJSONSerializer(serializers.Serializer):
         }
 
 
-class GeoJSONViewSet(viewsets.GenericViewSet):
+class GeoJSONViewSet(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     queryset = GeoJSON()
     serializer_class = GeoJSONSerializer
 
