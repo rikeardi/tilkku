@@ -531,6 +531,13 @@ var map_location_timer = null;
 function map_user_location() {
     if(settings.map.location == 1) {
         user_marker = L.marker([0, 0], {
+            icon: L.icon({
+                iconUrl: "img/user.png",
+                iconSize: [32, 32],
+                iconAnchor: [16, 16],
+            }),
+            draggable: false,
+            opacity: 0.8,
         }).addTo(map);
         map_location_timer = setInterval(function() {
             map_user_update();
