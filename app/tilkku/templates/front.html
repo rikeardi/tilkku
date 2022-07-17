@@ -514,6 +514,7 @@ function search_coords(coords) {
     }, 3000);
 }
 
+var user_marker = null;
 function map_user_update() {
     if(navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
@@ -521,6 +522,7 @@ function map_user_update() {
             var lng = position.coords.longitude;
             var latlng = L.latLng(lat, lng);
             console.log(latlng);
+            user_marker.setLatLng(latlng);
         });
     }
 }
@@ -529,8 +531,19 @@ var map_location_timer = null;
 function map_user_location() {
     if(settings.map.location == 1) {
         map_location_timer = setInterval(function() {
+            user_marker = L.marker([0, 0], {
+                draggable: false,
+                opacity: 0,
+                zIndexOffset: -1,
+            }).addTo(map);
             map_user_update();
         }, 10000);
+    } else {
+        clearInterval(map_location_timer);
+        if(user_marker) {
+            map.removeLayer(user_marker);
+            user_marker = null;
+        }
     }
 }
 map_user_location();
