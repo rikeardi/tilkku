@@ -342,6 +342,7 @@ class GeoJSONViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, viewset
         return Response(GeoJSONSerializer(instance).data)
 
     def update(self, request, *args, **kwargs):
+        instance = self.get_object()
         features = request.data.get('features')
         if features is not None:
             for feature in features:
