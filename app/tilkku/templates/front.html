@@ -520,6 +520,7 @@ function search_coords(coords, center=true) {
 
 var user_marker = null;
 function map_user_coords(latlng) {
+    console.log("Testing...");
     if(map_grid.min_x < latlng.lat && latlng.lat < map_grid.max_x && map_grid.min_y < latlng.lng && latlng.lng < map_grid.max_y) {
         console.log("Aww Yiss");
         var row = Math.floor((map_grid.end[0] - latlng.lat) / (map_grid.size[0]/grid_transfer));
