@@ -278,7 +278,7 @@ class GeoJSONSerializer(serializers.Serializer):
 
     def to_representation(self, obj):
         return {
-            'type': obj.geom_type,
+            'type': 'Feature',
             'coordinates': obj.coords,
         }
 
