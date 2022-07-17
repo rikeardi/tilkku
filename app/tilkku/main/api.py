@@ -273,6 +273,9 @@ class TopicViewSet(viewsets.ModelViewSet):
 
 
 class GeoJSONFeatureSerializer(serializers.Serializer):
+    type = serializers.CharField()
+    properties = serializers.DictField()
+    geometry = serializers.DictField()
 
     def to_representation(self, obj):
         return {
