@@ -13,6 +13,7 @@ $(document).ready(function() {
 
         if(e.ctrlKey && e.keyCode == 65) {
             e.preventDefault();
+            toolbox_tool('events');
             new_topic_modal_open();
         }
 
@@ -26,6 +27,12 @@ $(document).ready(function() {
             e.preventDefault();
             toolbox_tool('contacts');
             $("#contacts-search").focus();
+        }
+
+        if(e.ctrlKey && e.keyCode == 65) {
+            e.preventDefault();
+            toolbox_tool('contacts');
+            new_contact_modal_open();
         }
 
         if(e.keyCode == 67) {
