@@ -4,6 +4,8 @@ $(document).ready(function() {
             return;
         }
 
+        console.log(e.keyCode);
+
         if(e.keyCode == 65) {
             new_topic_modal_open();
         }
