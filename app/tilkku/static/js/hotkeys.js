@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $(document).keydown(function(e) {
+    $("body").on("keydown", function(e) {
         console.log(e.keyCode);
     }
 }
