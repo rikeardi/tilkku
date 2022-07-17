@@ -251,8 +251,8 @@ function map_set_grid() {
         }
 
         for(var i = 0; i < map_grid.rows.length; i++) {
-            var startpoint = [map_grid.x + i * map_grid.move_y, map_grid.y];
-            var endpoint = [map_grid.x + (i+1) * map_grid.move_x, map_grid.y - map_grid.move_y];
+            var startpoint = [map_grid.min_x + i * map_grid.move_y, map_grid.min_y];
+            var endpoint = [map_grid.min_x + (i+1) * map_grid.move_x, map_grid.min_y - map_grid.move_y];
             var rowHeader = L.rectangle([startpoint, endpoint], {
                 opacity: 0,
                 fillOpacity: 0,
@@ -263,8 +263,8 @@ function map_set_grid() {
         }
 
         for(var i = 0; i < map_grid.cols.length; i++) {
-            var startpoint = [map_grid.x, map_grid.y + i * map_grid.move_y];
-            var endpoint = [map_grid.x - map_grid.move_x, map_grid.y + (i+1) * map_grid.move_y];
+            var startpoint = [map_grid.min_x, map_grid.min_y + i * map_grid.move_y];
+            var endpoint = [map_grid.min_x - map_grid.move_x, map_grid.min_y + (i+1) * map_grid.move_y];
             var colHeader = L.rectangle([startpoint, endpoint], {
                 opacity: 0,
                 fillOpacity: 0,
