@@ -464,6 +464,7 @@ function map_init() {
 map_init();
 
 function map_show_coords(latlng) {
+    console.log(latlng);
     if(map_grid.min_x < latlng.lat && latlng.lat < map_grid.max_x && map_grid.min_y < latlng.lng && latlng.lng < map_grid.max_y) {
         var row = Math.floor((grid_end[0] - latlng.lat) / (grid_size[0]/grid_transfer));
         if(map_grid.inv_x) {
@@ -522,7 +523,6 @@ function map_user_update() {
             var lat = position.coords.latitude;
             var lng = position.coords.longitude;
             var latlng = L.latLng(lat, lng);
-            console.log(latlng);
             user_marker.setLatLng(latlng);
         });
     }
@@ -540,6 +540,7 @@ function map_user_location() {
             draggable: false,
             opacity: 0.8,
         }).addTo(map);
+        map_user_update();
         user_marker.on("click", function() {
             console.log(user_marker.getLatLng());
             map_show_coords(user_marker.getLatLng());
