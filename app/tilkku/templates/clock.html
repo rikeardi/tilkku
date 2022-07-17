@@ -16,7 +16,9 @@ function set_clock() {
         timer = null;
     }
 }
-set_clock();
+$(document).ready(function() {
+    set_clock();
+});
 
 function update_clock() {
     var date = new Date();

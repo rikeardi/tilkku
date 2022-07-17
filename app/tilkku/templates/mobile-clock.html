@@ -16,7 +16,9 @@ function set_mobile_clock() {
         timer = null;
     }
 }
-set_mobile_clock();
+$(document).ready(function() {
+    set_mobile_clock();
+});
 
 function update_mobile_clock() {
     var date = new Date();
