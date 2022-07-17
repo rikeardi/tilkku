@@ -358,14 +358,21 @@ class GeoJSONViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, viewset
                             marker.coordinates = feature.get('geometry').get('coordinates')
                             marker.save()
                     else:
+                        if properties.get('layer_id'):
+                            layer = Layer.objects.get(id=properties.get('layer_id'))
+                        elif properties.get('layer'):
+                            layer = Layer.objects.get(name=properties.get('layer'))
+                        else:
+                            layer = Layer.objects.get(name='default')
+
                         if feature.get('geometry').get('type') == 'Polygon':
                             area = Area.objects.create(name=properties.get('name'),
-                                                        layer_id=properties.get('layer_id'),
+                                                        layer=layer,
                                                         coordinates=feature.get('geometry').get('coordinates')[0])
                             area.save()
                         elif feature.get('geometry').get('type') == 'Point':
                             marker = Marker.objects.create(name=properties.get('name'),
-                                                            layer_id=properties.get('layer_id'),
+                                                            layer=layer,
                                                             coordinates=feature.get('geometry').get('coordinates'))
                             marker.save()
 
