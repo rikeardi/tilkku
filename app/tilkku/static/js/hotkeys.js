@@ -1,6 +1,6 @@
 $(document).ready(function() {
     $("body").on("keydown", function(e) {
-        if($("input").hasFocus() || $("textarea").hasFocus()) {
+        if($("input").is(":focus") || $("textarea").is(":focus")) {
             return;
         }
         console.log(e.keyCode);
