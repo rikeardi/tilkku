@@ -322,3 +322,7 @@ class GeoJSONViewSet(generics.RetrieveAPIView):
         queryset.features = areas + markers
 
         return queryset
+
+    @classmethod
+    def get_extra_actions(cls):
+        return []
