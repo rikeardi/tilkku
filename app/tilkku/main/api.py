@@ -325,6 +325,7 @@ class GeoJSONViewSet(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
         markers = Marker.objects.all()
 
         layers = request.data.get('layers', None)
+        print(layers)
         if layers is not None:
             layers = layers.split(',')
             areas = areas.filter(layer__id__in=layers)
