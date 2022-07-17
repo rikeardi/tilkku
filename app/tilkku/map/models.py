@@ -41,11 +41,15 @@ class Layer(models.Model):
         return f'{self.name}'
 
 
-class Area(models.Model):
-    name = models.CharField(max_length=200)
-    subtitle = models.CharField(max_length=300, blank=True, default='')
-    layer = models.ForeignKey(Layer, related_name="areas", on_delete=models.DO_NOTHING)
+class GeoItem(models.Model):
+    type = models.CharField(max_length=2, choices=(('PO', 'Piste'), ('AR', 'Alue')))
+    name = models.CharField(max_length=100)
+    layer = models.ForeignKey(Layer, on_delete=models.DO_NOTHING)
     coordinates = models.JSONField()
+
+
+class Area(GeoItem):
+    subtitle = models.CharField(max_length=300, blank=True, default='')
 
     class Meta:
         ordering = ['name']
@@ -54,10 +58,8 @@ class Area(models.Model):
         return f'{self.name}'
 
 
-class Marker(models.Model):
+class Marker(GeoItem):
     name = models.CharField(max_length=200)
-    layer = models.ForeignKey(Layer, related_name="markers", on_delete=models.DO_NOTHING)
-    coordinates = models.JSONField()
 
     class Meta:
         ordering = ['name']
