@@ -562,7 +562,7 @@ function map_user_update() {
     }
 }
 
-var map_location_timer = null;
+var map_locator = null;
 function map_user_location() {
     if(settings.map.location == 1) {
         user_marker = L.marker([0, 0], {
@@ -574,18 +574,22 @@ function map_user_location() {
             draggable: false,
             opacity: 0.8,
         }).addTo(map);
-        map_user_update();
         user_marker.on("click", function() {
             map_user_coords(user_marker.getLatLng());
         });
         user_marker.on("tap", function() {
             map_user_coords(user_marker.getLatLng());
         });
-        map_location_timer = setInterval(function() {
-            map_user_update();
-        }, 10000);
+        map_locator = navigator.geolocation.watchPosition(function(position) {
+            var lat = position.coords.latitude;
+            var lng = position.coords.longitude;
+            var latlng = L.latLng(lat, lng);
+            user_marker.setLatLng(latlng);
+        });
     } else {
-        clearInterval(map_location_timer);
+        if(map_locator) {
+            navigator.geolocation.clearWatch(map_locator);
+        }
         if(user_marker) {
             map.removeLayer(user_marker);
             user_marker = null;
