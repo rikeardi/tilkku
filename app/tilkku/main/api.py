@@ -329,5 +329,5 @@ class GeoJSONViewSet(generics.RetrieveAPIView):
         return []
 
     def as_view(self, **initkwargs):
-        view = super(GeoJSONViewSet, self).as_view(**initkwargs)
+        view = super(generics.RetrieveAPIView, self).as_view(**initkwargs)
         return view
