@@ -17,10 +17,10 @@ $(document).ready(function() {
             $("#sites-site-search").focus();
         }
 
-        if(e.keyCode == 80) {
+        if(e.keyCode == 89) {
             e.preventDefault();
             toolbox_tool('contacts');
-            $("#sites-contacts-search").focus();
+            $("#contacts-search").focus();
         }
     });
 });
