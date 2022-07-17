@@ -277,11 +277,15 @@ class GeoJSONSerializer(serializers.Serializer):
     coordinates = serializers.ListField()
 
     def to_representation(self, obj):
+        layer = Layer.objects.get(pk=obj.layer__id)
+        style = MapStyle.objects.get(pk=layer.style__id)
         return {
             'type': 'Feature',
             'properties': {
                 'name': obj.name,
                 'id': obj.id,
+                'layer_id': obj.layer__id,
+                'stroke': style.stroke,
             },
             'geometry': {
                 'type': 'Polygon',
