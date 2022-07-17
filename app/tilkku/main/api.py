@@ -284,7 +284,7 @@ class GeoJSONFeatureSerializer(serializers.Serializer):
             'type': 'Feature',
             'geometry': {
                 'type': obj.type,
-                'coordinates': obj.coordinates
+                'coordinates': [obj.coordinates]
             },
             'properties': {
                 'name': obj.name,
