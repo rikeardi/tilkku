@@ -540,6 +540,9 @@ function map_user_location() {
             draggable: false,
             opacity: 0.8,
         }).addTo(map);
+        user_marker.on("click", function() {
+            map_show_coords(user_marker.getLatLng());
+        });
         map_location_timer = setInterval(function() {
             map_user_update();
         }, 10000);
