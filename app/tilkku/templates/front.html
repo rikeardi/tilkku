@@ -187,6 +187,7 @@ var map_grid = {
     inv_y: false,
     cols: grid_cols,
     rows: grid_rows,
+    size: grid_size,
     layer:null,
 };
 
@@ -479,7 +480,7 @@ function map_show_coords(latlng) {
     }
 }
 
-function search_coords(coords) {
+function search_coords(coords, center=true) {
     var row = coords.substring(0, 1).toUpperCase();
     var col = coords.substring(1, 3);
     var min_x = map_grid.min_x;
@@ -506,7 +507,9 @@ function search_coords(coords) {
         permanent: true,
         direction: "center",
     });
-    map.fitBounds(highlight_layer.getBounds());
+    if(center) {
+        map.fitBounds(highlight_layer.getBounds());
+    }
     if(mobile) {
         toolbox_menu();
     }
@@ -517,16 +520,16 @@ function search_coords(coords) {
 
 function map_user_coords(latlng) {
     if(map_grid.min_x < latlng.lat && latlng.lat < map_grid.max_x && map_grid.min_y < latlng.lng && latlng.lng < map_grid.max_y) {
-        var row = Math.floor((grid_end[0] - latlng.lat) / (grid_size[0]/grid_transfer));
+        var row = Math.floor((map_grid.end[0] - latlng.lat) / (map_grid.size[0]/grid_transfer));
         if(map_grid.inv_x) {
-            row = grid_rows.length - row - 1;
+            row = map_grid.rows.length - row - 1;
         }
         var col = Math.floor((latlng.lng - grid_start[1]) / (grid_size[1]/grid_transfer));
         if(map_grid.inv_y) {
-            col = grid_cols.length - col - 1;
+            col = map_grid.cols.length - col - 1;
         }
-        var coords = grid_rows[row] + grid_cols[col];
-        search_coords(coords);
+        var coords = map_grid.rows[row] + map_grid.cols[col];
+        search_coords(coords, false);
     }
 }
 
