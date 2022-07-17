@@ -310,6 +310,7 @@ class GeoJSONSerializer(serializers.Serializer):
 
 
 class GeoJSONViewSet(viewsets.GenericViewSet):
+    queryset = GeoJSON()
     serializer_class = GeoJSONSerializer
 
     class Meta:
