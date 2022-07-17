@@ -155,3 +155,4 @@ class GeoJSON(models.Model):
 
     class Meta:
         managed = False
+        db_table = 'map_geojson'
