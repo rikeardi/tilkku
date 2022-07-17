@@ -3,6 +3,7 @@ from datetime import datetime
 
 from django.contrib.auth.models import User
 from django.db.models import Q
+from django.views.decorators.csrf import csrf_exempt
 from rest_framework import serializers, viewsets, generics
 from rest_framework.response import Response
 from map.models import *
@@ -326,3 +327,7 @@ class GeoJSONViewSet(generics.RetrieveAPIView):
     @classmethod
     def get_extra_actions(cls):
         return []
+
+    def as_view(cls, **initkwargs):
+        view = super(GeoJSONViewSet, cls).as_view(**initkwargs)
+        return csrf_exempt(view)
