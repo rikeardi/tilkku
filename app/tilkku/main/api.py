@@ -314,6 +314,7 @@ class GeoJSONViewSet(generics.RetrieveAPIView):
     class Meta:
         model = GeoJSON
         fields = ('type', 'features')
+        basename = 'geojson'
 
     def get_queryset(self):
         queryset = GeoJSON()
