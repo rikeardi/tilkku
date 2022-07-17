@@ -212,6 +212,10 @@ function map_set_grid() {
         map_grid.max_y = grid_end[1];
     }
 
+    var x = map_grid.x;
+    var y = map_grid.y;
+    map_grid.layer = L.layerGroup().addTo(map);
+
     if(!settings.map.grid) {
         if(map_grid.layer != null) {
             map_grid.layer.eachLayer(function(layer) {
@@ -219,11 +223,8 @@ function map_set_grid() {
             });
         }
     } else {
-        var x = map_grid.x;
-        var y = map_grid.y;
         var row = 0;
         var col = 0;
-        map_grid.layer = L.layerGroup().addTo(map);
         for(var row = 0; row <= grid_rows.length; row++) {
             var rowLine = L.polyline([
                 [x + row * (grid_size[0]/grid_transfer), y],
