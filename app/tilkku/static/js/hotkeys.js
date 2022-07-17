@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $("body").on("keydown", function(e) {
+    $("body").on("keypress", function(e) {
         if($("input").is(":focus") || $("textarea").is(":focus")) {
             return;
         }
