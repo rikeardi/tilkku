@@ -465,19 +465,19 @@ function map_init() {
 map_init();
 
 function map_show_coords(latlng) {
-    if(map_grid.min_x < latlng.lat && latlng.lat < map_grid.max_x && map_grid.min_y < latlng.lng && latlng.lng < map_grid.max_y) {
-        var row = Math.floor((grid_end[0] - latlng.lat) / (grid_size[0]/grid_transfer));
-        if(map_grid.inv_x) {
-            row = grid_rows.length - row - 1;
-        }
-        var col = Math.floor((latlng.lng - grid_start[1]) / (grid_size[1]/grid_transfer));
-        if(map_grid.inv_y) {
-            col = grid_cols.length - col - 1;
-        }
-        var coords = grid_rows[row] + grid_cols[col];
-        $("#map-coordinates p").text(coords);
-        $("#map-coordinates").removeClass("is-hidden");
+    var min_x = map_grid.min_x;
+    if(map_grid.inv_x) {
+        min_x = map_grid.max_x;
     }
+    var min_y = map_grid.min_y;
+    if(map_grid.inv_y) {
+        min_y = map_grid.max_y;
+    }
+    var coord = [Math.floor((latlng.lat - min_x) / (map_grid.size[0] / grid_transfer)), Math.floor((latlng.lng - min_y) / (map_grid.size[1] / grid_transfer))];
+    var row = map_grid.rows[coord[0]];
+    var col = map_grid.cols[coord[1]];
+    $("#map-coordinates p").text(row + col);
+    $("#map-coordinates").removeClass("is-hidden");
 }
 
 function search_coords(coords, center=true) {
