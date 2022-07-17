@@ -301,11 +301,16 @@ class GeoJSONViewSet(viewsets.ModelViewSet):
     serializer_class = GeoJSONSerializer
 
     def get_queryset(self):
-        queryset = Area.objects.all()
-
-        area_id = self.request.query_params.get('area', None)
-        if area_id is not None:
-            queryset = queryset.filter(id=area_id)
+        areas = Area.objects.all()
+        markers = Marker.objects.all()
+        queryset = {
+            'type': 'FeatureCollection',
+            'features': [
+                GeoJSONSerializer(area).data for area in areas
+            ] + [
+                GeoJSONSerializer(marker).data for marker in markers
+            ]
+        }
 
         return queryset
 
