@@ -283,7 +283,7 @@ class GeoJSONFeatureSerializer(serializers.Serializer):
         return {
             'type': 'Feature',
             'geometry': {
-                'type': 'Point',
+                'type': obj.type,
                 'coordinates': obj.coordinates
             },
             'properties': {
