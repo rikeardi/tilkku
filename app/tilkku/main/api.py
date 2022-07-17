@@ -346,6 +346,7 @@ class GeoJSONViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, viewset
         if features is not None:
             for feature in features:
                 if feature.get('type') == 'Feature':
+                    print(feature.get('id'))
                     if feature.get('geometry').get('type') == 'Polygon':
                         area = Area.objects.get(id=feature.get('id'))
                         area.coordinates = feature.get('geometry').get('coordinates')[0]
