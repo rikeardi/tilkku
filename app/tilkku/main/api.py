@@ -1,5 +1,6 @@
 import json
 from datetime import datetime
+from itertools import chain
 
 from django.contrib.auth.models import User
 from django.db.models import Q
@@ -319,6 +320,9 @@ class GeoJSONViewSet(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
 
     def retrieve(self, request, *args, **kwargs):
         instance = self.get_object()
+        areas = Area.objects.all()
+        markers = Marker.objects.all()
+        instance.features = list(chain(areas, markers))
         return Response(GeoJSONSerializer(instance).data)
 
     def get_object(self):
