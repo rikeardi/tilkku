@@ -149,7 +149,7 @@ class Topic(models.Model):
         return f'{self.name}'
 
 
-class GeoJSON(models.Model):
-    type = models.CharField(max_length=100, default='FeatureCollection')
-    features = []
+#class GeoJSON(models.Model):
+#    type = models.CharField(max_length=100, default='FeatureCollection')
+#    features = []
 
