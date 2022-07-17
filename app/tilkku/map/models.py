@@ -153,6 +153,3 @@ class GeoJSON(models.Model):
     type = models.CharField(max_length=100, default='FeatureCollection')
     features = []
 
-    class Meta:
-        managed = False
-        db_table = 'map_geojson'
