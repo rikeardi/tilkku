@@ -147,7 +147,6 @@ const forwarder = L.eventForwarder({
 
 map_servers = {{ map_servers | safe }};
 wms_servers = {{ wms_servers | safe }};
-console.log(wms_servers);
 
 map_servers.forEach(function(server) {
     server.layer = L.tileLayer(server.url, {
@@ -193,6 +192,7 @@ var map_grid = {
     end: [],
     layer: null,
 };
+console.log(map_grid);
 
 function map_set_grid() {
     grid_end = [map_grid.x + map_grid.rows.length * map_grid.move_x, map_grid.y + map_grid.cols.length * map_grid.move_y];
