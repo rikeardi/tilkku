@@ -148,3 +148,13 @@ class Topic(models.Model):
     def __str__(self):
         return f'{self.name}'
 
+
+class GeoJSON(models.Model):
+    type = "FeatureCollection"
+    features = []
+
+    class Meta:
+        managed = False
+
+    def __str__(self):
+        return f'{self.name}'
