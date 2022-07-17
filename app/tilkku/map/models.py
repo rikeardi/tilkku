@@ -47,6 +47,9 @@ class GeoItem(models.Model):
     layer = models.ForeignKey(Layer, on_delete=models.DO_NOTHING)
     coordinates = models.JSONField()
 
+    class Meta:
+        abstract = True
+
 
 class Area(GeoItem):
     subtitle = models.CharField(max_length=300, blank=True, default='')
