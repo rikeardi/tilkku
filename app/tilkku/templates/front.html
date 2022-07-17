@@ -532,6 +532,10 @@ function map_user_coords(latlng) {
     }
     var coord = [Math.floor((latlng.lat - min_x) / (map_grid.size[0] / grid_transfer)), Math.floor((latlng.lng - min_y) / (map_grid.size[1] / grid_transfer))];
     console.log(coord);
+    var row = map_grid.rows[coord[0]];
+    var col = map_grid.cols[coord[1]];
+    console.log(row, col);
+    search_coords(row + col, false);
 }
 
 function map_user_update() {
