@@ -17,7 +17,7 @@ router.register(r'users', api.UserViewSet)
 router.register(r'notes', api.NoteViewSet)
 router.register(r'topics', api.TopicViewSet)
 router.register(r'contacts', api.ContactViewSet)
-router.register(r'geojson', api.GeoJSONViewSet, basename='geojson')
+router.register(r'geojson', api.GeoJSONViewSet.as_view(), basename='geojson')
 
 app_name = 'main'
 urlpatterns = [
