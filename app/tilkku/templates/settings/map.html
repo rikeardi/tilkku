@@ -149,18 +149,17 @@ function map_export_geoJSON() {
 }
 
 function map_import_geoJSON() {
-    console.log("Avataan tiedosto...");
     $("#map-import-file").click();
 }
 
 function map_import_upload() {
-    console.log($("#map-import-file"));
     var file = $("#map-import-file")[0].files[0];
     var reader = new FileReader();
     reader.onload = function(e) {
         var data = JSON.parse(e.target.result);
         console.log(data);
     };
+    reader.readAsText(file);
 }
 
 </script>
