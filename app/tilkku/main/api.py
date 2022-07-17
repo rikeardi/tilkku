@@ -271,3 +271,48 @@ class TopicViewSet(viewsets.ModelViewSet):
         instance.save()
         return Response(TopicSerializer(instance).data)
 
+
+class GeoJSONFeatureSerializer(serializers.Serializer):
+
+    def to_representation(self, obj):
+        return {
+            'type': 'Feature',
+            'geometry': {
+                'type': 'Point',
+                'coordinates': obj.coordinates
+            },
+            'properties': {
+                'name': obj.name,
+                'id': obj.id,
+                'layer_id': obj.layer.id,
+                'stroke': obj.layer.stroke,
+                'fill': obj.layer.fill,
+                'stroke-width': obj.layer.stroke_width,
+                'stroke-opacity': obj.layer.opacity + 0.2,
+                'fill-opacity': obj.layer.opacity,
+            }
+        }
+
+
+class GeoJSONSerializer(serializers.Serializer):
+    type = serializers.CharField()
+    coordinates = serializers.ListField()
+
+    def to_representation(self, obj):
+        return {
+            'type': 'FeatureCollection',
+            'features': GeoJSONFeatureSerializer(obj.features, many=True).data
+        }
+
+
+class GeoJSONViewSet(viewsets.ModelViewSet):
+    queryset = GeoJSON()
+    serializer_class = GeoJSONSerializer
+
+    def get_queryset(self):
+        queryset = GeoJSON()
+        areas = Area.objects.all()
+        markers = Marker.objects.all()
+        queryset.features = list(chain(areas, markers))
+
+        return queryset
