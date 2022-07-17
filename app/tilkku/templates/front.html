@@ -275,7 +275,7 @@ function map_set_grid() {
         }
     }
 
-    var gridbox = L.rectangle([[map_grid.x, map_grid.y], [map_grid.max_x, map_grid.max_y]], {
+    var gridbox = L.rectangle([[map_grid.min_x, map_grid.min_y], [map_grid.max_x, map_grid.max_y]], {
         weight: 1,
         fillOpacity: 0,
         stroke: false,
