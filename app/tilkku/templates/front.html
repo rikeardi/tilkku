@@ -173,7 +173,6 @@ function map_set_wms() {
 var grid_size = [-52, 112.5];
 var grid_transfer = 100000;
 var grid_start = [61.21340, 25.10560];
-var grid_end = [];
 var grid_cols = ["01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30"];
 var grid_rows = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
 var map_grid = {
@@ -185,14 +184,18 @@ var map_grid = {
     max_y: grid_start[1],
     inv_x: false,
     inv_y: false,
+    move_x: grid_size[0] / grid_transfer,
+    move_y: grid_size[1] / grid_transfer,
     cols: grid_cols,
     rows: grid_rows,
     size: grid_size,
-    layer:null,
+    transfer: grid_transfer,
+    end: [],
+    layer: null,
 };
 
 function map_set_grid() {
-    grid_end = [x + grid_rows.length * (grid_size[0]/grid_transfer), y + grid_cols.length * (grid_size[1]/grid_transfer)];
+    grid_end = [map_grid.x + map_grid.rows.length * map_grid.move_x, map_grid.y + map_grid.cols.length * map_grid.move_y];
 
     if(grid_end[0] < grid_start[0]) {
         map_grid.min_x = grid_end[0];
@@ -212,8 +215,6 @@ function map_set_grid() {
         map_grid.max_y = grid_end[1];
     }
 
-    var x = map_grid.x;
-    var y = map_grid.y;
     map_grid.layer = L.layerGroup().addTo(map);
 
     if(!settings.map.grid) {
@@ -227,16 +228,16 @@ function map_set_grid() {
         var col = 0;
         for(var row = 0; row <= grid_rows.length; row++) {
             var rowLine = L.polyline([
-                [x + row * (grid_size[0]/grid_transfer), y],
-                [x + row * (grid_size[0]/grid_transfer), y + grid_cols.length * (grid_size[1]/grid_transfer)],
+                [map_grid.x + row * map_grid.move_x, map_grid.y],
+                [map_grid.x + row * map_grid.move_x, map_grid.y + map_grid.cols.length * map_grid.move_y],
             ], {
                 className: 'grid-line',
             }).addTo(map_grid.layer);
         }
-        for (var col = 0; col <= grid_cols.length; col++) {
+        for (var col = 0; col <= map_grid.cols.length; col++) {
             var colLine = L.polyline([
-                [x, y + col * (grid_size[1]/grid_transfer)],
-                [x + grid_rows.length * (grid_size[0]/grid_transfer), y + col * (grid_size[1]/grid_transfer)],
+                [map_grid.x, map_grid.y + col * map_grid.move_y],
+                [map_grid.x + map_grid.rows.length * map_grid.move_x, map_grid.y + col * map_grid.move_y],
             ], {
                 className: 'grid-line',
             }).addTo(map_grid.layer);
@@ -247,20 +248,20 @@ function map_set_grid() {
             direction: "center",
         }
 
-        for(var i = 0; i < grid_rows.length; i++) {
-            var startpoint = [x + i * (grid_size[0]/grid_transfer), y];
-            var endpoint = [x + (i+1) * (grid_size[0]/grid_transfer), y - (grid_size[1]/grid_transfer)];
+        for(var i = 0; i < map_grid.rows.length; i++) {
+            var startpoint = [map_grid.x + i * map_grid.move_y, y];
+            var endpoint = [map_grid.x + (i+1) * map_grid.move_x, map_grid.y - map_grid.move_y];
             var rowHeader = L.rectangle([startpoint, endpoint], {
                 opacity: 0,
                 fillOpacity: 0,
             });
-            rowHeader.bindTooltip("<div class='grid-header'>" + grid_rows[i] + "</div>", tooltip_style);
+            rowHeader.bindTooltip("<div class='grid-header'>" + map_grid.rows[i] + "</div>", tooltip_style);
             map_grid.layer.addLayer(rowHeader);
         }
 
-        for(var i = 0; i < grid_cols.length; i++) {
-            var startpoint = [x, y + i * (grid_size[1]/grid_transfer)];
-            var endpoint = [x - (grid_size[0]/grid_transfer), y + (i+1) * (grid_size[1]/grid_transfer)];
+        for(var i = 0; i < map_grid.cols.length; i++) {
+            var startpoint = [map_grid.x, map_grid.y + i * map_grid.move_y];
+            var endpoint = [map_grid.x - map_grid.move_x, map_grid.y + (i+1) * map_grid.move_y];
             var colHeader = L.rectangle([startpoint, endpoint], {
                 opacity: 0,
                 fillOpacity: 0,
@@ -270,7 +271,7 @@ function map_set_grid() {
         }
     }
 
-    var gridbox = L.rectangle([[x, y], [grid_end[0], grid_end[1]]], {
+    var gridbox = L.rectangle([[map_grid.x, map_grid.y], [map_grid.max_x, map_grid.max_y]], {
         weight: 1,
         fillOpacity: 0,
         stroke: false,
@@ -476,7 +477,7 @@ function map_show_coords(latlng) {
     if(map_grid.inv_y) {
         min_y = map_grid.max_y;
     }
-    var coord = [Math.floor((latlng.lat - min_x) / (map_grid.size[0] / grid_transfer)), Math.floor((latlng.lng - min_y) / (map_grid.size[1] / grid_transfer))];
+    var coord = [Math.floor((latlng.lat - min_x) / map_grid.move_x), Math.floor((latlng.lng - min_y) / map_grid.move_y)];
     var row = map_grid.rows[coord[0]];
     var col = map_grid.cols[coord[1]];
     console.log(row + col);
@@ -496,10 +497,10 @@ function search_coords(coords, center=true) {
         min_y = map_grid.max_y;
     }
     var coord = [map_grid.rows.indexOf(row), map_grid.cols.indexOf(col)];
-    var lat_0 = min_x + coord[0] * map_grid.size[0] / grid_transfer;
-    var lng_0 = min_y + coord[1] * map_grid.size[1] / grid_transfer;
-    var lat_1 = lat_0 + map_grid.size[0] / grid_transfer;
-    var lng_1 = lng_0 + map_grid.size[1] / grid_transfer;
+    var lat_0 = min_x + coord[0] * map_grid.move_x;
+    var lng_0 = min_y + coord[1] * map_grid.move_y;
+    var lat_1 = lat_0 + map_grid.move_x;
+    var lng_1 = lng_0 + map_grid.move_y;
     var highlight_layer = L.featureGroup().addTo(map);
     var highlight = L.rectangle([[lat_0, lng_0], [lat_1, lng_1]], {
         color: '#ff0000',
@@ -532,7 +533,7 @@ function map_user_coords(latlng) {
     if(map_grid.inv_y) {
         min_y = map_grid.max_y;
     }
-    var coord = [Math.floor((latlng.lat - min_x) / (map_grid.size[0] / grid_transfer)), Math.floor((latlng.lng - min_y) / (map_grid.size[1] / grid_transfer))];
+    var coord = [Math.floor((latlng.lat - min_x) / map_grid.move_x), Math.floor((latlng.lng - min_y) / map_grid.move_y)];
     var row = map_grid.rows[coord[0]];
     var col = map_grid.cols[coord[1]];
     search_coords(row + col, false);
