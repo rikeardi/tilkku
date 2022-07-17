@@ -291,7 +291,7 @@ class GeoJSONSerializer(serializers.Serializer):
             },
             'geometry': {
                 'type': 'Polygon',
-                'coordinates': obj.coordinates
+                'coordinates': [obj.coordinates]
             },
         }
 
