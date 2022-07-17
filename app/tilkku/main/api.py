@@ -280,9 +280,8 @@ class GeoJSONFeatureSerializer(serializers.Serializer):
     geometry = serializers.DictField()
 
     def to_representation(self, obj):
-        layer = Layer.objects.get(obj.layer)
-
-
+#layer = Layer.objects.get(obj.layer)
+        print(obj.layer)
         return {
             'type': 'Feature',
             'geometry': {
