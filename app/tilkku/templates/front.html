@@ -541,11 +541,11 @@ function map_user_location() {
             opacity: 0.8,
         }).addTo(map);
         user_marker.on("click", function() {
-            console.log(user_marker);
+            console.log(user_marker.getLatLng());
             map_show_coords(user_marker.getLatLng());
         });
         user_marker.on("tap", function() {
-            console.log(user_marker);
+            console.log(user_marker.getLatLng());
             map_show_coords(user_marker.getLatLng());
         });
         map_location_timer = setInterval(function() {
