@@ -270,3 +270,61 @@ class TopicViewSet(viewsets.ModelViewSet):
         instance.status = request.data.get('status')
         instance.save()
         return Response(TopicSerializer(instance).data)
+
+
+class GeoJSONSerializer(serializers.Serializer):
+    type = serializers.CharField()
+    coordinates = serializers.ListField()
+
+    def to_representation(self, obj):
+        return {
+            'type': obj.geom_type,
+            'coordinates': obj.coords,
+        }
+
+
+class GeoJSONViewSet(viewsets.ModelViewSet):
+    queryset = Area.objects.all()
+    serializer_class = GeoJSONSerializer
+
+    def get_queryset(self):
+        queryset = Area.objects.all()
+
+        area_id = self.request.query_params.get('area', None)
+        if area_id is not None:
+            queryset = queryset.filter(id=area_id)
+
+        return queryset
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
+
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = self.get_serializer(instance)
+        return Response(serializer.data)
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
+    def perform_create(self, serializer):
+        serializer.save()
+
+    def update(self, request, *args, **kwargs):
+        partial = kwargs.pop('partial', False)
+        instance = self.get_object()
+        serializer = self.get_serializer(instance, data=request.data, partial=partial)
+        serializer.is_valid(raise_exception=True)
+        self.perform_update(serializer)
+
+        if getattr(instance, '_prefetched_objects_cache', None):
+            # If 'prefetch_related' has been applied to a queryset, we need to
+            # forcibly invalidate the prefetch cache on the instance.
+            instance._prefetched_objects_cache =
