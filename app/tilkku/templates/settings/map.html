@@ -167,7 +167,7 @@ function map_import_upload() {
             data: JSON.stringify(data),
             contentType: "application/json",
             success: function(data) {
-                console.log(data);
+                location.reload();
             }
         });
     };
