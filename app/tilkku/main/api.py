@@ -306,7 +306,7 @@ class GeoJSONSerializer(serializers.Serializer):
 
 
 class GeoJSONViewSet(viewsets.ModelViewSet):
-    queryset = GeoJSON.objects.create()
+    queryset = GeoJSON()
     serializer_class = GeoJSONSerializer
 
     def get_queryset(self):
