@@ -140,7 +140,9 @@ function map_export_geoJSON() {
             $("<a />", {
                 "download": "map.geojson",
                 "href": "data:application/json," + encodeURIComponent(data)
-            }).appendTo("body").click().remove();
+            }).appendTo("body").click(function() {
+                $(this).remove();
+            })[0].click();
         }
     });
 }
