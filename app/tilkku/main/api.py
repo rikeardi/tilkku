@@ -297,19 +297,15 @@ class GeoJSONSerializer(serializers.Serializer):
 
 
 class GeoJSONViewSet(viewsets.ModelViewSet):
-    queryset = Area.objects.all()
     serializer_class = GeoJSONSerializer
 
     def get_queryset(self):
         areas = Area.objects.all()
         markers = Marker.objects.all()
+        features = list(areas) + list(markers)
         queryset = {
             'type': 'FeatureCollection',
-            'features': [
-                GeoJSONSerializer(area).data for area in areas
-            ] + [
-                GeoJSONSerializer(marker).data for marker in markers
-            ]
+            'features': features
         }
 
         return queryset
