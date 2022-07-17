@@ -322,7 +322,7 @@ class GeoJSONViewSet(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
         instance = self.get_object()
         areas = Area.objects.all()
         markers = Marker.objects.all()
-        instance.features = areas
+        instance.features = list(chain(areas, markers))
         return Response(GeoJSONSerializer(instance).data)
 
     def get_object(self):
