@@ -133,9 +133,19 @@ function map_export_geoJSON() {
         }
     }
     console.log(layers);
-//    var json = JSON.stringify(data);
-//    var blob = new Blob([json], {type: "text/plain;charset=utf-8"});
-//    saveAs(blob, "tilkku.geojson");
+
+    $.ajax({
+        url: "/api/geojson/1/",
+        type: "GET",
+        data: {
+            layers: layers
+        },
+        success: function(data) {
+            console.log(data);
+            //var blob = new Blob([data], {type: "text/plain;charset=utf-8"});
+            //saveAs(blob, "tilkku.geojson");
+        }
+    });
 }
 
 </script>
