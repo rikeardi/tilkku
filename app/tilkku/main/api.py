@@ -281,7 +281,6 @@ class GeoJSONSerializer(serializers.Serializer):
             'type': 'Feature',
             'properties': {
                 'name': obj.name,
-                'description': obj.description,
                 'id': obj.id,
             },
             'geometry': {
