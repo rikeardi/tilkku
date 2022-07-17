@@ -272,27 +272,44 @@ class TopicViewSet(viewsets.ModelViewSet):
         return Response(TopicSerializer(instance).data)
 
 
+class GeoJSONFeatureSerializer(serializers.Serializer):
+    type = serializers.SerializerMethodField()
+    properties = serializers.SerializerMethodField()
+    geometry = serializers.SerializerMethodField()
+
+    def get_type(self, obj):
+        return 'Feature'
+
+    def get_properties(self, obj):
+        return {
+            'id': obj.id,
+            'name': obj.name,
+            'description': obj.description,
+            'status': obj.status,
+            'category': obj.category.name,
+            'area': obj.area.name,
+            'marker': obj.marker.name,
+            'contacts': [contact.name for contact in obj.contacts.all()],
+            'site': obj.site.name,
+            'topic': obj.topic.name,
+            'notes': [note.message for note in obj.notes.all()]
+        }
+
+    def get_geometry(self, obj):
+        return {
+            'type': 'Point',
+            'coordinates': [obj.marker.longitude, obj.marker.latitude]
+        }
+
+
 class GeoJSONSerializer(serializers.Serializer):
     type = serializers.CharField()
     coordinates = serializers.ListField()
 
     def to_representation(self, obj):
         return {
-            'type': 'Feature',
-            'properties': {
-                'name': obj.name,
-                'id': obj.id,
-                'layer_id': obj.layer.id,
-                'stroke': obj.layer.style.stroke,
-                'stroke-opacity': obj.layer.style.opacity + 0.2,
-                'stroke-width': obj.layer.style.stroke_width,
-                'fill': obj.layer.style.fill,
-                'fill-opacity': obj.layer.style.opacity,
-            },
-            'geometry': {
-                'type': 'Polygon',
-                'coordinates': [obj.coordinates]
-            },
+            'type': 'FeatureCollection',
+            'features': GeoJSONFeatureSerializer(obj.features, many=True).data
         }
 
 
@@ -303,12 +320,8 @@ class GeoJSONViewSet(viewsets.ModelViewSet):
         areas = Area.objects.all()
         markers = Marker.objects.all()
         features = list(areas) + list(markers)
-        queryset = {
-            'type': 'FeatureCollection',
-            'features': features
-        }
 
-        return queryset
+        return features
 
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
