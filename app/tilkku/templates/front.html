@@ -529,6 +529,7 @@ function map_user_coords(latlng) {
             col = map_grid.cols.length - col - 1;
         }
         var coords = map_grid.rows[row] + map_grid.cols[col];
+        console.log(coords);
         search_coords(coords, false);
     }
 }
