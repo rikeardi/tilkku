@@ -493,7 +493,6 @@ function map_show_coords(latlng) {
     var coord = [Math.floor((latlng.lat - min_x) / map_grid.move_x), Math.floor((latlng.lng - min_y) / map_grid.move_y)];
     var row = map_grid.rows[coord[0]];
     var col = map_grid.cols[coord[1]];
-    console.log(row + col);
     $("#map-coordinates p").text(row + col);
     $("#map-coordinates").removeClass("is-hidden");
 }
