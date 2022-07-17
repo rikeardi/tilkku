@@ -330,5 +330,5 @@ class GeoJSONViewSet(generics.RetrieveAPIView):
 
     @classmethod
     def as_view(cls, **initkwargs):
-        view = super(GeoJSONViewSet, cls).as_view(**initkwargs)
+        view = super(GeoJSONViewSet).as_view(**initkwargs)
         return csrf_exempt(view)
