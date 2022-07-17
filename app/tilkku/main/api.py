@@ -317,6 +317,10 @@ class GeoJSONViewSet(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
         model = GeoJSON
         fields = ('type', 'features')
 
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+        return Response(GeoJSONSerializer(instance).data)
+
     def get_object(self):
         return GeoJSON()
 
