@@ -283,18 +283,18 @@ class GeoJSONFeatureSerializer(serializers.Serializer):
         return {
             'type': 'Feature',
             'properties': {
+                'stroke': obj.layer.style.stroke,
+                'stroke-width': obj.layer.style.stroke_width,
+                'stroke-opacity': obj.layer.style.opacity + 0.2,
+                'fill': obj.layer.style.fill,
+                'fill-opacity': obj.layer.style.opacity,
                 'name': obj.name,
                 'id': obj.id,
                 'layer_id': obj.layer.id,
-                'stroke': obj.layer.style.stroke,
-                'fill': obj.layer.style.fill,
-                'stroke-width': obj.layer.style.stroke_width,
-                'stroke-opacity': obj.layer.style.opacity + 0.2,
-                'fill-opacity': obj.layer.style.opacity,
             },
             'geometry': {
                 'type': obj.type,
-                'coordinates': [obj.coordinates]
+                'coordinates': obj.coordinates
             },
         }
 
@@ -324,6 +324,7 @@ class GeoJSONViewSet(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
         areas = Area.objects.all()
         for area in areas:
             area.type = "Polygon"
+            area.coordinates = [area.coordinates]
             instance.features.append(area)
 
         markers = Marker.objects.all()
