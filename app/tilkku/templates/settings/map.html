@@ -114,6 +114,7 @@ function map_toggle_names() {
 
 function map_toggle_location() {
     settings.map.location = $("#settings-map-location").is(":checked") ? 1 : 0;
+    map_user_location();
     refresh_settings();
 }
 
