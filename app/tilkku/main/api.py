@@ -320,9 +320,17 @@ class GeoJSONViewSet(mixins.RetrieveModelMixin, viewsets.GenericViewSet):
 
     def retrieve(self, request, *args, **kwargs):
         instance = self.get_object()
+
         areas = Area.objects.all()
+        for area in areas:
+            area.type = "Polygon"
+            instance.features.append(area)
+
         markers = Marker.objects.all()
-        instance.features = list(chain(areas, markers))
+        for marker in markers:
+            marker.type = "Point"
+            instance.features.append(marker)
+
         return Response(GeoJSONSerializer(instance).data)
 
     def get_object(self):
