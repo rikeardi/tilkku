@@ -45,6 +45,7 @@
                 <div class="control">
                     <button class="button is-primary is-small" onclick="map_export_geoJSON();">Vie</button>
                     <button class="button is-primary is-small" onclick="map_import_geoJSON();">Tuo</button>
+                    <input type="file" id="map-import-file" style="display: none;" onchange="map_import_upload();">
                 </div>
             </div>
             <div class="field">
@@ -145,6 +146,19 @@ function map_export_geoJSON() {
             })[0].click();
         }
     });
+}
+
+function map_import_geoJSON() {
+    $("#map-import-file").click();
+}
+
+function map_import_upload() {
+    var file = $("#map-import-file")[0].files[0];
+    var reader = new FileReader();
+    reader.onload = function(e) {
+        var data = JSON.parse(e.target.result);
+        console.log(data);
+    };
 }
 
 </script>
