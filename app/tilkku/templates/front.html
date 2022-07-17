@@ -559,12 +559,10 @@ function map_user_location() {
         }).addTo(map);
         map_user_update();
         user_marker.on("click", function() {
-            console.log(user_marker.getLatLng());
-            map_show_coords(user_marker.getLatLng());
+            map_user_coords(user_marker.getLatLng());
         });
         user_marker.on("tap", function() {
-            console.log(user_marker.getLatLng());
-            map_show_coords(user_marker.getLatLng());
+            map_user_coords(user_marker.getLatLng());
         });
         map_location_timer = setInterval(function() {
             map_user_update();
