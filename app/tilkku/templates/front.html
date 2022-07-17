@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
+{% load static %}
 {% csrf_token %}
 <script>
 const csrf_token = document.querySelector('[name="csrfmiddlewaretoken"]').value;
