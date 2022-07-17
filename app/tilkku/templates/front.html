@@ -192,6 +192,26 @@ var map_grid = {
 };
 
 function map_set_grid() {
+    grid_end = [x + grid_rows.length * (grid_size[0]/grid_transfer), y + grid_cols.length * (grid_size[1]/grid_transfer)];
+
+    if(grid_end[0] < grid_start[0]) {
+        map_grid.min_x = grid_end[0];
+        map_grid.max_x = grid_start[0];
+        map_grid.inv_x = true;
+    } else {
+        map_grid.min_x = grid_start[0];
+        map_grid.max_x = grid_end[0];
+    }
+
+    if(grid_end[1] < grid_start[1]) {
+        map_grid.min_y = grid_end[1];
+        map_grid.max_y = grid_start[1];
+        map_grid.inv_y = true;
+    } else {
+        map_grid.min_y = grid_start[1];
+        map_grid.max_y = grid_end[1];
+    }
+
     if(!settings.map.grid) {
         if(map_grid.layer != null) {
             map_grid.layer.eachLayer(function(layer) {
@@ -219,26 +239,6 @@ function map_set_grid() {
             ], {
                 className: 'grid-line',
             }).addTo(map_grid.layer);
-        }
-
-        grid_end = [x + grid_rows.length * (grid_size[0]/grid_transfer), y + grid_cols.length * (grid_size[1]/grid_transfer)];
-
-        if(grid_end[0] < grid_start[0]) {
-            map_grid.min_x = grid_end[0];
-            map_grid.max_x = grid_start[0];
-            map_grid.inv_x = true;
-        } else {
-            map_grid.min_x = grid_start[0];
-            map_grid.max_x = grid_end[0];
-        }
-
-        if(grid_end[1] < grid_start[1]) {
-            map_grid.min_y = grid_end[1];
-            map_grid.max_y = grid_start[1];
-            map_grid.inv_y = true;
-        } else {
-            map_grid.min_y = grid_start[1];
-            map_grid.max_y = grid_end[1];
         }
 
         var tooltip_style = {
