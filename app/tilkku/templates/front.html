@@ -119,11 +119,14 @@ var map = null;
 var home = [61.205, 25.130];
 var mobile_home = [61.206, 25.121];
 var home_zoom = 15;
-
 var map_zoom = true;
+
+var mobile = false;
 if(window.innerWidth < 768) {
+    mobile = true;
     map_zoom = false;
 }
+
 
 map = L.map('map', {
     zoomControl: map_zoom,

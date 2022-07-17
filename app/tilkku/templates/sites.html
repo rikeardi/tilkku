@@ -149,6 +149,9 @@ function goto_active_area(id) {
     map.eachLayer(function(layer) {
         if(layer.options.id == id) {
             map.fitBounds(layer.getBounds());
+            if(mobile) {
+                toolbox_menu();
+            }
         }
     });
 }
@@ -156,6 +159,9 @@ function goto_active_area(id) {
 function goto_passive_area(area) {
     highlight_passive(area);
     map.fitBounds(site_highlight_layer.getBounds());
+    if(mobile) {
+        toolbox_menu();
+    }
     setTimeout(function() {
         remove_highlight_passive();
     }, 2000);

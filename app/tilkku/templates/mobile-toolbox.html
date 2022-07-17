@@ -26,54 +26,16 @@
             </div>
           </div>
         </div>
-        <button class="button m-0 is-small" style="width: 30px;" title="Keskitä" onclick="toolbox_center();">
+        <button class="button m-0 is-small" style="width: 30px;" title="Keskitä" onclick="mobile_toolbox_center();">
             <i class="fas fa-home"></i>
-        </button>
-    </div>
-
-    <div id="front-toolsmenu" style="display: none;">
-        <button class="button m-0 is-small" style="width: 100%;" title="Tapahtumat" onclick="toolbox_tool('events');">
-            <i id="front-events-btn" class="fas fa-book"></i>
-        </button>
-        <button class="button m-0 is-small" style="width: 100%;" title="Keskustelu" onclick="toolbox_tool('chat');">
-            <i id="front-chat-btn" class="fas fa-comments"></i>
-        </button>
-        <button class="button m-0 is-small" style="width: 100%;" title="Paikat" onclick="toolbox_tool('sites');">
-            <i id="front-sites-btn" class="fas fa-thumbtack"></i>
-        </button>
-        <button class="button m-0 is-small" style="width: 100%;" title="Yhteystiedot" onclick="toolbox_tool('contacts');">
-            <i id="front-contacts-btn" class="fas fa-phone"></i>
-        </button>
-        <button class="button m-0 is-small" style="width: 100%;" title="Säätiedot" onclick="toolbox_tool('weather');">
-            <i id="front-weather-btn" class="fas fa-cloud-sun-rain"></i>
         </button>
     </div>
 </div>
 
 <script>
 
-function toolbox_menu() {
-    $("#front-tools").toggle();
-    if($("#front-tools").is(":visible")) {
-        $("#front-toolsmenu").hide();
-        settings.menu = "visible";
-    } else {
-        $("#front-toolsmenu").show();
-        settings.menu = "hidden";
-    }
-    refresh_settings();
-}
-
-function toolbox_center() {
+function mobile_toolbox_center() {
     map.setView(mobile_home, home_zoom);
-}
-
-function toolbox_tool(tool) {
-    $("#front-" + tool + "-btn").removeClass("newmsg");
-    toolbox_menu();
-    tools_select(tool);
-    settings.tool = tool;
-    refresh_settings();
 }
 
 </script>
