@@ -22,5 +22,11 @@ $(document).ready(function() {
             toolbox_tool('contacts');
             $("#contacts-search").focus();
         }
+
+        if(e.keyCode == 67) {
+            e.preventDefault();
+            toolbox_tool('chat');
+            $("#chat-input").focus();
+        }
     });
 });
