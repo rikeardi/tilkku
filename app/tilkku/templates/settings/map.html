@@ -132,13 +132,12 @@ function map_export_geoJSON() {
             layers.push(map_layers[i].id);
         }
     }
-    console.log(layers);
 
     $.ajax({
         url: "/api/geojson/1/?layers=" + layers.join(","),
         type: "GET",
         success: function(data) {
-            $("<a/>", {
+            $("<a />", {
                 "download": "map.geojson",
                 "href": "data:application/json," + encodeURIComponent(data)
             }).appendTo("body").click().remove();
