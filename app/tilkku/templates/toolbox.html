@@ -70,7 +70,9 @@ function toolbox_center() {
 
 function toolbox_tool(tool) {
     $("#front-" + tool + "-btn").removeClass("newmsg");
-    toolbox_menu();
+    if(settings.menu == "hidden") {
+        toolbox_menu();
+    }
     tools_select(tool);
     settings.tool = tool;
     refresh_settings();
