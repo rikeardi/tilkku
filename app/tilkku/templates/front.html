@@ -464,8 +464,6 @@ function map_init() {
 map_init();
 
 function map_show_coords(latlng) {
-    console.log(latlng);
-    console.log(map_grid.min_x, map_grid.min_y, map_grid.max_x, map_grid.max_y);
     if(map_grid.min_x < latlng.lat && latlng.lat < map_grid.max_x && map_grid.min_y < latlng.lng && latlng.lng < map_grid.max_y) {
         var row = Math.floor((grid_end[0] - latlng.lat) / (grid_size[0]/grid_transfer));
         if(map_grid.inv_x) {
@@ -515,6 +513,21 @@ function search_coords(coords) {
     setTimeout(function() {
         highlight_layer.removeLayer(highlight);
     }, 3000);
+}
+
+function map_user_coords(latlng) {
+    if(map_grid.min_x < latlng.lat && latlng.lat < map_grid.max_x && map_grid.min_y < latlng.lng && latlng.lng < map_grid.max_y) {
+        var row = Math.floor((grid_end[0] - latlng.lat) / (grid_size[0]/grid_transfer));
+        if(map_grid.inv_x) {
+            row = grid_rows.length - row - 1;
+        }
+        var col = Math.floor((latlng.lng - grid_start[1]) / (grid_size[1]/grid_transfer));
+        if(map_grid.inv_y) {
+            col = grid_cols.length - col - 1;
+        }
+        var coords = grid_rows[row] + grid_cols[col];
+        search_coords(coords);
+    }
 }
 
 var user_marker = null;
