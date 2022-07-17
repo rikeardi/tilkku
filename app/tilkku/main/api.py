@@ -309,7 +309,7 @@ class GeoJSONSerializer(serializers.Serializer):
         }
 
 
-class GeoJSONViewSet(generics.RetrieveAPIView):
+class GeoJSONViewSet(viewsets.GenericViewSet):
     serializer_class = GeoJSONSerializer
 
     class Meta:
@@ -330,7 +330,3 @@ class GeoJSONViewSet(generics.RetrieveAPIView):
     @classmethod
     def get_extra_actions(cls):
         return []
-
-#    def as_view(self, *args, **kwargs):
-#        view = super().as_view(*args, **kwargs)
-#        return view
