@@ -284,6 +284,10 @@ class GeoJSONSerializer(serializers.Serializer):
                 'id': obj.id,
                 'layer_id': obj.layer.id,
                 'stroke': obj.layer.style.stroke,
+                'stroke-opacity': obj.layer.style.opacity + 0.2,
+                'stroke-width': obj.layer.style.stroke_width,
+                'fill': obj.layer.style.fill,
+                'fill-opacity': obj.layer.style.opacity,
             },
             'geometry': {
                 'type': 'Polygon',
