@@ -510,8 +510,7 @@ function search_coords(coords, center=true) {
     if(center) {
         map.fitBounds(highlight_layer.getBounds());
     }
-    console.log(settings);
-    if(mobile) {
+    if(mobile && settings.menu == "visible") {
         toolbox_menu();
     }
     setTimeout(function() {
@@ -521,8 +520,6 @@ function search_coords(coords, center=true) {
 
 var user_marker = null;
 function map_user_coords(latlng) {
-    console.log("Testing...");
-    console.log(latlng, map_grid);
     var min_x = map_grid.min_x;
     if(map_grid.inv_x) {
         min_x = map_grid.max_x;
@@ -532,10 +529,8 @@ function map_user_coords(latlng) {
         min_y = map_grid.max_y;
     }
     var coord = [Math.floor((latlng.lat - min_x) / (map_grid.size[0] / grid_transfer)), Math.floor((latlng.lng - min_y) / (map_grid.size[1] / grid_transfer))];
-    console.log(coord);
     var row = map_grid.rows[coord[0]];
     var col = map_grid.cols[coord[1]];
-    console.log(row, col);
     search_coords(row + col, false);
 }
 
