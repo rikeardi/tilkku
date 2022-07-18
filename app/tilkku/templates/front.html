@@ -129,7 +129,10 @@ var map = null;
 <script>
 
 var env = {{ environment | safe }};
-console.log(env);
+
+map_servers = {{ map_servers | safe }};
+wms_servers = {{ wms_servers | safe }};
+
 var home = [env.HOME_LAT, env.HOME_LON];
 var mobile_home = [home[0] + 0.001, home[1] - 0.009];
 var home_zoom = env.HOME_ZOOM;
@@ -154,9 +157,6 @@ const forwarder = L.eventForwarder({
         mousemove: false,
     },
 }).enable();
-
-map_servers = {{ map_servers | safe }};
-wms_servers = {{ wms_servers | safe }};
 
 map_servers.forEach(function(server) {
     server.layer = L.tileLayer(server.url, {
@@ -187,7 +187,7 @@ function toDeg(x) {
     return x * 180 / Math.PI;
 }
 
-function calculate_grid() {
+function map_calculate_grid() {
     var earth_radius = 6378137;
     var dist = env.GRID_SIZE / earth_radius;
 
@@ -198,60 +198,74 @@ function calculate_grid() {
     var brng_y = toRad(90);
 
     var lat_x = Math.asin(Math.sin(lat) * Math.cos(dist) + Math.cos(lat) * Math.sin(dist) * Math.cos(brng_x));
-
     var lon_x = lon + Math.atan2(Math.sin(brng_y) * Math.sin(dist) * Math.cos(lat), Math.cos(dist) - Math.sin(lat) * Math.sin(lat_x));
-    console.log(toDeg(lat_x) - env.GRID_LAT);
-    console.log(toDeg(lon_x) - env.GRID_LON);
 
+    var grid_cols = [];
+    if(env.GRID_COLS > 99) {
+        for(var i = 0; i < env.GRID_COLS; i++) {
+            grid_cols.push(("00" + (i+1)).slice(-3));
+        }
+    } else if(env.GRID_COLS > 9) {
+        for(var i = 0; i < env.GRID_COLS; i++) {
+            grid_cols.push(("0" + (i+1)).slice(-2));
+        }
+    } else {
+        for(var i = 0; i < env.GRID_COLS; i++) {
+            grid_cols.push(i+1);
+        }
+    }
 
-}
-calculate_grid();
+    var grid_rows = [];
+    var pre_letter = "";
+    var letter = "A";
+    for(var i = 0; i < env.GRID_ROWS; i++) {
+        grid_rows.push(pre_letter + letter);
+        letter = String.fromCharCode(letter.charCodeAt(0) + 1);
+        if(letter == "Z") {
+            pre_letter = "A";
+            letter = "A";
+        }
+    }
 
-var grid_size = [-52, 112.5];
-var grid_transfer = 100000;
-var grid_start = [61.2134, 25.1056];
-var grid_cols = ["01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30"];
-var grid_rows = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
-var map_grid = {
-    x: grid_start[0],
-    y: grid_start[1],
-    min_x: grid_start[0],
-    min_y: grid_start[1],
-    max_x: grid_start[0],
-    max_y: grid_start[1],
-    inv_x: false,
-    inv_y: false,
-    move_x: grid_size[0] / grid_transfer,
-    move_y: grid_size[1] / grid_transfer,
-    cols: grid_cols,
-    rows: grid_rows,
-    size: grid_size,
-    transfer: grid_transfer,
-    end: [],
-    layer: null,
-};
-console.log(map_grid);
+    var map_grid = {
+        x: env.GRID_LAT,
+        y: env.GRID_LON,
+        inv_x: false,
+        inv_y: false,
+        move_x: toDeg(lat_x) - env.GRID_LAT,
+        move_y: toDeg(lon_x) - env.GRID_LON,
+        cols: grid_cols,
+        rows: grid_rows,
+        transfer: grid_transfer,
+        end: [],
+        layer: null,
+    };
 
-function map_set_grid() {
     grid_end = [map_grid.x + map_grid.rows.length * map_grid.move_x, map_grid.y + map_grid.cols.length * map_grid.move_y];
 
-    if(grid_end[0] < grid_start[0]) {
+    if(grid_end[0] < env.GRID_LAT) {
         map_grid.min_x = grid_end[0];
-        map_grid.max_x = grid_start[0];
+        map_grid.max_x = env.GRID_LAT;
         map_grid.inv_x = true;
     } else {
-        map_grid.min_x = grid_start[0];
+        map_grid.min_x = env.GRID_LAT;
         map_grid.max_x = grid_end[0];
     }
 
-    if(grid_end[1] < grid_start[1]) {
+    if(grid_end[1] < env.GRID_LON) {
         map_grid.min_y = grid_end[1];
-        map_grid.max_y = grid_start[1];
+        map_grid.max_y = env.GRID_LON;
         map_grid.inv_y = true;
     } else {
-        map_grid.min_y = grid_start[1];
+        map_grid.min_y = env.GRID_LON;
         map_grid.max_y = grid_end[1];
     }
+}
+calculate_grid();
+console.log(map_grid);
+
+function map_set_grid() {
+
 
     map_grid.layer = L.layerGroup().addTo(map);
 
