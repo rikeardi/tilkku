@@ -181,14 +181,9 @@ function map_set_wms() {
 
 function calculate_grid() {
     var earth_radius = 6378137;
-    var lat_rad = settings.map.center.lat * Math.PI / 180;
-    var cos_lat = Math.cos(lat_rad);
-    var sin_lat = Math.sin(lat_rad);
-    var lat_per_meter = 111132.92 - 559.82 * cos_lat * cos_lat + 1.175 * sin_lat * sin_lat;
-    var lon_per_meter = lat_per_meter * Math.cos(lat_rad);
-    var move_x = env.GRID_SIZE * lat_per_meter;
-    var move_y = env.GRID_SIZE * lon_per_meter;
-    console.log(move_x, move_y);
+    lat_perc = env.GRID_SIZE / earth_radius;
+    lng_perc = env.GRID_SIZE / (earth_radius * Math.cos(settings.map.center.lat * Math.PI / 180));
+    console.log(lat_perc, lng_perc);
 }
 calculate_grid();
 
