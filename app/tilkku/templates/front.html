@@ -277,7 +277,7 @@ function map_set_grid() {
     } else {
         var row = 0;
         var col = 0;
-        for(var row = 0; row <= grid_rows.length; row++) {
+        for(var row = 0; row <= map_grid.rows.length; row++) {
             var rowLine = L.polyline([
                 [map_grid.x + row * map_grid.move_x, map_grid.y],
                 [map_grid.x + row * map_grid.move_x, map_grid.y + map_grid.cols.length * map_grid.move_y],
