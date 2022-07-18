@@ -3,6 +3,11 @@
 {% load static %}
 {% csrf_token %}
 <script>
+var env = {{ environment | safe }};
+
+map_servers = {{ map_servers | safe }};
+wms_servers = {{ wms_servers | safe }};
+
 const csrf_token = document.querySelector('[name="csrfmiddlewaretoken"]').value;
 
 var location_query = {};
@@ -127,12 +132,6 @@ var map = null;
 {% include 'modals.html' %}
 
 <script>
-
-var env = {{ environment | safe }};
-console.log(env);
-
-map_servers = {{ map_servers | safe }};
-wms_servers = {{ wms_servers | safe }};
 
 var home = [env.HOME_LAT, env.HOME_LON];
 var mobile_home = [home[0] + 0.001, home[1] - 0.009];
@@ -269,7 +268,6 @@ function map_calculate_grid() {
     }
 }
 map_calculate_grid();
-console.log(map_grid);
 
 function map_set_grid() {
     map_grid.layer = L.layerGroup().addTo(map);
