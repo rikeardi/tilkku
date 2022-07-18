@@ -5,6 +5,7 @@ services:
     image: postgres
     env_file:
       - .env
+    environment:
     restart: unless-stopped
     volumes:
       - ./db/data:/var/lib/postgresql/data
