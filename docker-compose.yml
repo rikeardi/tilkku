@@ -22,6 +22,8 @@ services:
     ports:
       - 8001:8000
     environment:
+      HOSTNAME: ${HOSTNAME}
+      TIMEZONE: ${TIMEZONE}
       POSTGRES_USER: ${DBUSER}
       POSTGRES_PASS: ${DBPASS}
       POSTGRES_DBNAME: ${DBNAME}
@@ -30,6 +32,9 @@ services:
       DJANGO_SUPERUSER_EMAIL: ${ADMIN_EMAIL}
       DJANGO_SUPERUSER_PASSWORD: ${ADMIN_PASS}
       DJANGO_KEY: ${DJANGO_KEY}
+      HOME_LAT: ${HOME_LAT}
+      HOME_LON: ${HOME_LON}
+      HOME_ZOOM: ${HOME_ZOOM}
     restart: unless-stopped
     depends_on:
       - tilkku_postgres
