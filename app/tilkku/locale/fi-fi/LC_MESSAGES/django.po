@@ -1,5 +1,70 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: fi\n"
+
+#: templates/chat.html
 msgid "joined"
 msgstr "liittyi"
 
 msgid "left"
 msgstr "poistui"
+
+msgid "Add"
+msgstr "Lisää"
+
+msgid "Search"
+msgstr "Hae"
+
+msgid "Yes"
+msgstr "Kyllä"
+
+msgid "No"
+msgstr "Ei"
+
+msgid "Cancel"
+msgstr "Peruuta"
+
+msgid "Close"
+msgstr "Sulje"
+
+msgid "Menu"
+msgstr "Valikko"
+
+msgid "Settings"
+msgstr "Asetukset"
+
+msgid "User"
+msgstr "Käyttäjä"
+
+msgid "User information"
+msgstr "Käyttäjätiedot"
+
+msgid "Log out"
+msgstr "Kirjaudu ulos"
+
+msgid "Log in"
+msgstr "Kirjaudu sisään"
+
+msgid "Center"
+msgstr "Keskitä"
+
+msgid "General"
+msgstr "Yleiset"
+
+msgid "Chat"
+msgstr "Keskustelu"
+
+msgid "Map"
+msgstr "Kartta"
+
+msgid "Events"
+msgstr "Tapahtumat"
+
+msgid "Locations"
+msgstr "Paikat"
+
+msgid "Admin"
+msgstr "Ylläpito"
