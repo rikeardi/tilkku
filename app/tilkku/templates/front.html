@@ -231,8 +231,8 @@ function map_calculate_grid() {
     }
 
     map_grid = {
-        x: env.GRID_LAT,
-        y: env.GRID_LON,
+        x: floatVal(env.GRID_LAT),
+        y: floatVal(env.GRID_LON),
         inv_x: false,
         inv_y: false,
         move_x: toDeg(lat_x) - env.GRID_LAT,
