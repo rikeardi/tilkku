@@ -223,10 +223,10 @@ function map_calculate_grid() {
     for(var i = 0; i < env.GRID_ROWS; i++) {
         grid_rows.push(pre_letter + letter);
         letter = String.fromCharCode(letter.charCodeAt(0) + 1);
-        //if(letter == "Z") {
-        //    pre_letter = "A";
-        //    letter = "A";
-        //}
+        if(letter == "[") {
+            pre_letter = "A";
+            letter = "A";
+        }
     }
 
     map_grid = {
