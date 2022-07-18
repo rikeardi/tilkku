@@ -48,7 +48,6 @@ INSTALLED_APPS = [
     'main.apps.MainConfig',
     'map.apps.MapConfig',
     'chat.apps.ChatConfig',
-    'user_guide',
 ]
 
 MIDDLEWARE = [

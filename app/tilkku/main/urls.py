@@ -2,7 +2,6 @@ from django.contrib.auth.decorators import login_required
 from django.urls import path, include
 import django.contrib.auth.views
 from rest_framework import routers
-from django.views.generic import TemplateView
 
 from . import views, forms, api
 
@@ -28,5 +27,4 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('accounts/login/', django.contrib.auth.views.LoginView.as_view(authentication_form=forms.LoginForm), name='login'),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('user-guide/', include('user_guide.urls')),
 ]
