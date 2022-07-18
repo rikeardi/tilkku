@@ -181,8 +181,9 @@ function map_set_wms() {
 
 function calculate_grid() {
     var earth_radius = 6378137;
-    var lat_move = env.GRID_SIZE * 1/111319.9;
-    console.log(lat_move);
+    var lat_move = env.GRID_SIZE * 1 / 111319.9;
+    var lon_move = env.GRID_SIZE * 1 / Math.cos(env.HOME_LAT) * 111319.9;
+    console.log(lat_move, lon_move);
 }
 calculate_grid();
 
