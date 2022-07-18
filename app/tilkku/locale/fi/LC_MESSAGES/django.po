@@ -191,3 +191,6 @@ msgstr "Kirjaudu sisään"
 
 msgid "Username or password not found. Please try again."
 msgstr "Virheellinen käyttäjätunnus tai salasana. Yritä uudestaan."
+
+msgid "Language"
+msgstr "Kieli"
