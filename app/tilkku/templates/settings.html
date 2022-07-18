@@ -24,7 +24,7 @@
                         </a>
                     </li>
                     <li id="settings-menu-events" class="settings-menu">
-                        <a href="#" onclick="settings_select('map-layers')">
+                        <a href="#" onclick="settings_select('map-layer')">
                             <span class="icon"><i class="fas fa-layer-group"></i></span>
                             <span>{% translate 'Map layers' %}</span>
                         </a>
@@ -52,7 +52,7 @@
                 <div id="settings-map" class="settings-box" style="height: 100%; display: none;">
                     {% include 'settings/map.html' %}
                 </div>
-                <div id="settings-map-layers" class="settings-box" style="height: 100%; display: none;">
+                <div id="settings-map-layer" class="settings-box" style="height: 100%; display: none;">
                     {% include 'settings/map-layers.html' %}
                 </div>
                 <div id="settings-sites" class="settings-box" style="height: 100%; display: none;">
