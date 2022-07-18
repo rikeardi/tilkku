@@ -3,10 +3,8 @@ services:
   tilkku_postgres:
     container_name: tilkku_postgres
     image: postgres
-    environment:
-      POSTGRES_USER: ${DBUSER}
-      POSTGRES_PASSWORD: ${DBPASS}
-      POSTGRES_DB: ${DBNAME}
+    env_file:
+      - .env
     restart: unless-stopped
     volumes:
       - ./db/data:/var/lib/postgresql/data
@@ -21,20 +19,10 @@ services:
     build: .
     ports:
       - 8001:8000
+    env_file:
+      - .env
     environment:
-      HOSTNAME: ${HOST_NAME}
-      TIMEZONE: ${TIME_ZONE}
-      POSTGRES_USER: ${DBUSER}
-      POSTGRES_PASS: ${DBPASS}
-      POSTGRES_DBNAME: ${DBNAME}
       POSTGRES_HOST: tilkku_postgres
-      DJANGO_SUPERUSER_USERNAME: ${ADMIN_USER}
-      DJANGO_SUPERUSER_EMAIL: ${ADMIN_EMAIL}
-      DJANGO_SUPERUSER_PASSWORD: ${ADMIN_PASS}
-      DJANGO_KEY: ${DJANGO_KEY}
-      HOME_LAT: ${HOME_LAT}
-      HOME_LON: ${HOME_LON}
-      HOME_ZOOM: ${HOME_ZOOM}
     restart: unless-stopped
     depends_on:
       - tilkku_postgres
