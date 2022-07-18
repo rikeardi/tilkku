@@ -10,14 +10,14 @@ Built for the 2022 FinnJamboree
 - Notes and contacts for map items
 - Weather forecast for event area based on location
 - User Geolocation
+- Hotkeys and coordinates for quick navigation
+- REST API for data export
 
 ### Services
 
 - Postgres SQL database for data storage
 - Redis cache for Chat data
 - Tilkku web service
-
-
 
 ## Installation
 
@@ -64,7 +64,6 @@ GRID_LON | The longitude of the grid top left corner location.
 GRID_SIZE | The size of one grid square in meters.
 GRID_COLS | The number of columns in the grid.
 GRID_ROWS | The number of rows in the grid.
-|--- | ---|
 
 The DJANGO_KEY is used to encrypt the session cookies. You can generate a new one by running `openssl rand --base64 128`. DO NOT USE the one on the example!
 
