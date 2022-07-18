@@ -3,11 +3,27 @@
 #### Situational Awareness tool for Scouting events
 Built for the 2022 FinnJamboree
 
+## Features
+
+- OpenStreetMap-based base map
+- GeoJSON-based event map layers
+- Notes and contacts for map items
+- Weather forecast for event area based on location
+- User Geolocation
+
+### Services
+
+- Postgres SQL database for data storage
+- Redis cache for Chat data
+- Tilkku web service
+
+
+
 ## Installation
 
 ### Prerequisites
 - Docker
-- Docker Compose
+- [docker-compose](https://docs.docker.com/compose/install/#install-compose)
 
 ### Setup
 - Clone the repository
@@ -16,6 +32,14 @@ Built for the 2022 FinnJamboree
 - Run `docker-compose up -d --build`
 - Open the browser and navigate to http://hostname:8001/
 - You should see the application running
+
+#### Nginx SSL proxy
+
+You should never expose the application directly to the internet. Instead, you should use a proxy like nginx.
+
+Take a look at https://github.com/wmnnd/nginx-certbot
+
+You can use the nginx.conf.example file as a template.
 
 ### Environment
 The environment is defined in the .env file. All values in this table are mandatory.
@@ -43,6 +67,14 @@ GRID_ROWS | The number of rows in the grid.
 |--- | ---|
 
 The DJANGO_KEY is used to encrypt the session cookies. You can generate a new one by running `openssl rand --base64 128`. DO NOT USE the one on the example!
+
+## Usage
+
+### Map
+
+Create the event map as GeoJSON data and upload it to the database. Great tool for GeoJSON editing is [https://geojson.io/](https://geojson.io/).
+
+Import the GeoJSON data to the database from the settings menu.
 
 ---
 &copy; 2022 Risto Lievonen
