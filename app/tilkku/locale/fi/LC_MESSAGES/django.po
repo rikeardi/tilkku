@@ -114,7 +114,7 @@ msgstr "Mittakaava"
 msgid "Names"
 msgstr "Nimet"
 
-msgid "Location"
+msgid "User location"
 msgstr "Paikannus"
 
 msgid "Import"
