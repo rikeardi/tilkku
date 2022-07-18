@@ -63,8 +63,29 @@ msgstr "Kartta"
 msgid "Events"
 msgstr "Tapahtumat"
 
+msgid "Contacts"
+msgstr "Yhteystiedot"
+
+msgid "Weather"
+msgstr "Säätiedot"
+
 msgid "Locations"
 msgstr "Paikat"
 
 msgid "Admin"
 msgstr "Ylläpito"
+
+msgid "Time"
+msgstr "Aika"
+
+msgid "Temperature"
+msgstr "Lämpötila"
+
+msgid "Humidity"
+msgstr "Kosteus"
+
+msgid "Wind"
+msgstr "Tuuli"
+
+msgid "Rain"
+msgstr "Sade"
