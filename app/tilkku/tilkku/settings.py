@@ -31,7 +31,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-CSRF_TRUSTED_ORIGINS = ['https://rikeardi.duckdns.org']
+CSRF_TRUSTED_ORIGINS = [env('HOSTNAME')]
 
 
 # Application definition
@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'channels',
-    'djgeojson',
     'rest_framework',
     'main.apps.MainConfig',
     'map.apps.MapConfig',
@@ -77,6 +76,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'tilkku.context_processor.export_env_variables',
             ],
         },
     },
@@ -146,7 +146,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Europe/Helsinki'
+TIME_ZONE = env('TIMEZONE')
 
 USE_I18N = True
 

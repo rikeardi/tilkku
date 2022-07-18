@@ -128,8 +128,10 @@ var map = null;
 
 <script>
 
+var env = {{ ENV_VARIABLES }};
+console.log(env);
 var home = [61.205, 25.130];
-var mobile_home = [61.206, 25.121];
+var mobile_home = [home[0] + 0.001, home[1] - 0.009];
 var home_zoom = 15;
 var map_zoom = true;
 
