@@ -179,11 +179,28 @@ function map_set_wms() {
     }).addTo(map);
 }
 
+function toRad(x) {
+    return x * Math.PI / 180;
+}
+
+function toDeg(x) {
+    return x * 180 / Math.PI;
+}
+
 function calculate_grid() {
     var earth_radius = 6378137;
-    var lat_move = env.GRID_SIZE * 1 / 111319.9;
-    var lon_move = env.GRID_SIZE * 1 / (Math.cos(env.HOME_LAT) * 111319.9);
-    console.log(lat_move, lon_move);
+    var dist = env.GRID_SIZE / earth_radius;
+
+    var lat = toRad(env.GRID_LAT);
+    var lon = toRad(env.GRID_LON);
+
+    var brng_x = toRad(180);
+    var brng_y = toRad(90);
+
+    var lat_x = Math.asin(Math.sin(lat) * Math.cos(dist) + Math.cos(lat) * Math.sin(dist) * Math.cos(brng_x));
+    console.log(toDeg(lat_x) - env.GRID_LAT);
+
+
 }
 calculate_grid();
 
