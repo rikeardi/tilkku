@@ -159,6 +159,9 @@ msgstr "Liittyvät merkinnät"
 msgid "Copy link"
 msgstr "Kopioi linkki"
 
+msgid "Contact"
+msgstr "Yhteystieto"
+
 msgid "Passwords don't match!"
 msgstr "Salasanat eivät täsmää!"
 
@@ -171,6 +174,9 @@ msgstr "Alue"
 msgid "Marker"
 msgstr "Paikka"
 
+msgid "Edit user"
+msgstr "Muokkaa käyttäjää"
+
 msgid "First name"
 msgstr "Etunimi"
 
@@ -179,3 +185,9 @@ msgstr "Sukunimi"
 
 msgid "Confirm password"
 msgstr "Vahvista salasana"
+
+msgid "Login"
+msgstr "Kirjaudu sisään"
+
+msgid "Username or password not found. Please try again."
+msgstr "Virheellinen käyttäjätunnus tai salasana. Yritä uudestaan."
