@@ -198,7 +198,10 @@ function calculate_grid() {
     var brng_y = toRad(90);
 
     var lat_x = Math.asin(Math.sin(lat) * Math.cos(dist) + Math.cos(lat) * Math.sin(dist) * Math.cos(brng_x));
+
+    var lon_x = Math.atan2(Math.sin(brng_y) * Math.sin(dist) * Math.cos(lat), Math.cos(dist) - Math.sin(lat) * Math.sin(lat_x));
     console.log(toDeg(lat_x) - env.GRID_LAT);
+    console.log(toDeg(lon_x) - env.GRID_LON);
 
 
 }
