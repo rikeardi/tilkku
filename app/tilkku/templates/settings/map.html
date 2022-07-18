@@ -1,6 +1,7 @@
 {% block content %}
 {% load static %}
 {% load i18n %}
+{% load user_guide_tags %}
 <div class="columns">
     <div class="column is-half">
         <div class="content p-3">
@@ -43,6 +44,7 @@
             <div class="field">
                 <label class="label">GeoJSON</label>
                 <div class="control">
+                    {% user_guide_tag 'map-import' %}
                     <button class="button is-primary is-small" onclick="map_export_geoJSON();">{% translate 'Export' %}</button>
                     <button class="button is-primary is-small" onclick="map_import_geoJSON();">{% translate 'Import' %}</button>
                     <input type="file" id="map-import-file" style="display: none;" onchange="map_import_upload();">
