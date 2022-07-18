@@ -125,3 +125,57 @@ msgstr "Vie"
 
 msgid "Map layers"
 msgstr "Karttatasot"
+
+msgid "Details"
+msgstr "Yksityiskohdat"
+
+msgid "Notes"
+msgstr "Merkintöjä"
+
+msgid "New contact"
+msgstr "Uusi yhteystieto"
+
+msgid "Name"
+msgstr "Nimi"
+
+msgid "E-mail"
+msgstr "Sähköposti"
+
+msgid "Telephone"
+msgstr "Puhelin"
+
+msgid "Title"
+msgstr "Tehtävä"
+
+msgid "Save"
+msgstr "Tallenna"
+
+msgid "Type"
+msgstr "Tyyppi"
+
+msgid "Related notes"
+msgstr "Liittyvät merkinnät"
+
+msgid "Copy link"
+msgstr "Kopioi linkki"
+
+msgid "Passwords don't match!"
+msgstr "Salasanat eivät täsmää!"
+
+msgid "Add location"
+msgstr "Lisää paikka"
+
+msgid "Area"
+msgstr "Alue"
+
+msgid "Marker"
+msgstr "Paikka"
+
+msgid "First name"
+msgstr "Etunimi"
+
+msgid "Last name"
+msgstr "Sukunimi"
+
+msgid "Confirm password"
+msgstr "Vahvista salasana"
