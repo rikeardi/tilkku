@@ -190,6 +190,12 @@ function toDeg(x) {
 
 var map_grid = null;
 function map_calculate_grid() {
+    env.GRID_SIZE = parseFloat(env.GRID_SIZE);
+    env.GRID_LAT = parseFloat(env.GRID_LAT);
+    env.GRID_LON = parseFloat(env.GRID_LON);
+    env.GRID_COLS = parseInt(env.GRID_COLS);
+    env.GRID_ROWS = parseInt(env.GRID_ROWS);
+
     var earth_radius = 6378137;
     var dist = env.GRID_SIZE / earth_radius;
 
@@ -231,8 +237,8 @@ function map_calculate_grid() {
     }
 
     map_grid = {
-        x: parseFloat(env.GRID_LAT),
-        y: parseFloat(env.GRID_LON),
+        x: env.GRID_LAT,
+        y: env.GRID_LON,
         inv_x: false,
         inv_y: false,
         move_x: toDeg(lat_x) - env.GRID_LAT,
@@ -247,7 +253,7 @@ function map_calculate_grid() {
 
     if(grid_end[0] < env.GRID_LAT) {
         map_grid.min_x = grid_end[0];
-        map_grid.max_x = env.GRID_LAT;
+        map_grid.max_x = parseFloat(env.GRID_LAT;
         map_grid.inv_x = true;
     } else {
         map_grid.min_x = env.GRID_LAT;
