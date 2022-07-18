@@ -39,27 +39,6 @@
 <script>
 
 $(document).ready(function() {
-    for(var i=0;i<map_servers.length;i++) {
-        var selected = "";
-        var server = map_servers[i];
-
-        if(settings.map.server == i) selected = " selected";
-        $("#settings-map-bg").append("<option value='" + i + "'" + selected + ">" + server.name + "</option>");
-    }
-
-    if(settings.map.grid == 1) {
-        $("#settings-map-grid").prop("checked", true);
-    }
-    if(settings.map.scale == 1) {
-        $("#settings-map-scale").prop("checked", true);
-    }
-    if(settings.map.names == 1) {
-        $("#settings-map-names").prop("checked", true);
-    }
-    if(settings.map.location == 1) {
-        $("#settings-map-location").prop("checked", true);
-    }
-
     for(var i=0;i<map_layers.length;i++) {
         var selected = "";
         var layer = map_layers[i];
@@ -69,11 +48,6 @@ $(document).ready(function() {
     }
 });
 
-function map_select_bg() {
-    settings.map.server = $("#settings-map-bg").val();
-    refresh_settings();
-}
-
 function map_select_layer() {
     settings.map.layers = [];
     var layers = $("#settings-map-layers input").each(function() {
@@ -82,75 +56,6 @@ function map_select_layer() {
         }
     });
     refresh_settings();
-}
-
-function map_toggle_grid() {
-    settings.map.grid = $("#settings-map-grid").is(":checked") ? 1 : 0;
-    refresh_settings();
-}
-
-function map_toggle_scale() {
-    settings.map.scale = $("#settings-map-scale").is(":checked") ? 1 : 0;
-    refresh_settings();
-}
-
-function map_toggle_names() {
-    settings.map.names = $("#settings-map-names").is(":checked") ? 1 : 0;
-    refresh_settings();
-}
-
-function map_toggle_location() {
-    settings.map.location = $("#settings-map-location").is(":checked") ? 1 : 0;
-    map_user_location();
-    refresh_settings();
-}
-
-function map_export_geoJSON() {
-    var layers = [];
-    for(var i=0;i<map_layers.length;i++) {
-        if(settings.map.layers.includes(i)) {
-            layers.push(map_layers[i].id);
-        }
-    }
-
-    $.ajax({
-        url: "/api/geojson/1/?layers=" + layers.join(","),
-        type: "GET",
-        success: function(data) {
-            $("<a />", {
-                "download": "map.geojson",
-                "href": "data:application/json," + encodeURIComponent(JSON.stringify(data))
-            }).appendTo("body").click(function() {
-                $(this).remove();
-            })[0].click();
-        }
-    });
-}
-
-function map_import_geoJSON() {
-    $("#map-import-file").click();
-}
-
-function map_import_upload() {
-    var file = $("#map-import-file")[0].files[0];
-    var reader = new FileReader();
-    reader.onload = function(e) {
-        var data = JSON.parse(e.target.result);
-        console.log(data);
-        $.ajax({
-            url: "/api/geojson/1/",
-            type: "PATCH",
-            headers: {
-                "X-CSRFToken": csrf_token
-            },
-            data: JSON.stringify(data),
-            contentType: "application/json",
-            success: function(data) {
-                location.reload();
-            }
-        });
-    };
-    reader.readAsText(file);
 }
 
 </script>

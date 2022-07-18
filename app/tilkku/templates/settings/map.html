@@ -75,28 +75,10 @@ $(document).ready(function() {
     if(settings.map.location == 1) {
         $("#settings-map-location").prop("checked", true);
     }
-
-    for(var i=0;i<map_layers.length;i++) {
-        var selected = "";
-        var layer = map_layers[i];
-
-        if(settings.map.layers.includes(i)) selected = " checked";
-        $("#settings-map-layers").append("<label class='checkbox'><input type='checkbox' value='" + i + "'" + selected + " onchange='map_select_layer();'> " + layer.name + "</label><br>");
-    }
 });
 
 function map_select_bg() {
     settings.map.server = $("#settings-map-bg").val();
-    refresh_settings();
-}
-
-function map_select_layer() {
-    settings.map.layers = [];
-    var layers = $("#settings-map-layers input").each(function() {
-        if($(this).is(":checked")) {
-            settings.map.layers.push(parseInt($(this).val()));
-        }
-    });
     refresh_settings();
 }
 
