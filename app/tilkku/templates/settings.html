@@ -1,11 +1,12 @@
 {% block content %}
 {% load static %}
+{% load i18n %}
 <div class="modal" id="settings-modal">
     <div class="modal-background"></div>
     <div class="modal-content" style="overflow: hidden;">
         <div class="box" style="text-align: center;">
-            <h1>Asetukset</h1>
-            <button class="delete is-hidden-tablet" aria-label="close" onclick="settings_close();" style="position: absolute; top: 10px; right: 10px;"></button>
+            <h1>{% translate 'Settings' %}</h1>
+            <button class="delete is-hidden-tablet" aria-label="close" onclick="settings_close();" style="position: absolute; top: 10px; right: 10px;" title="{% translate 'Close' %}"></button>
         </div>
         <div class="box p-0" style="width: 100%; height: 80vh;">
             <div class="tabs is-boxed is-small" style="margin-bottom: 0px;">
@@ -13,32 +14,32 @@
                     <li id="settings-menu-general" class="settings-menu is-active">
                         <a href="#" onclick="settings_select('general')">
                             <span class="icon"><i class="fas fa-cog"></i></span>
-                            <span>Yleiset</span>
+                            <span>{% translate 'General' %}</span>
                         </a>
                     </li>
                     <li id="settings-menu-map" class="settings-menu">
                         <a href="#" onclick="settings_select('map')">
                             <span class="icon"><i class="fas fa-map"></i></span>
-                            <span>Kartta</span>
+                            <span>{% translate 'Map' %}</span>
                         </a>
                     </li>
                     <li id="settings-menu-events" class="settings-menu">
                         <a href="#" onclick="settings_select('events')">
                             <span class="icon"><i class="fas fa-book"></i></span>
-                            <span>Tapahtumat</span>
+                            <span>{% translate 'Events' %}</span>
                         </a>
                     </li>
                     <li id="settings-menu-sites" class="settings-menu">
                         <a href="#" onclick="settings_select('sites')">
                             <span class="icon"><i class="fas fa-thumbtack"></i></span>
-                            <span>Paikat</span>
+                            <span>{% translate 'Locations' %}</span>
                         </a>
                     </li>
                     {% if user.is_superuser %}
                     <li class="">
                         <a href="{% url 'admin:index' %}" target="_blank">
                             <span class="icon"><i class="fas fa-lock"></i></span>
-                            <span>Hallinta</span>
+                            <span>{% translate 'Admin' %}</span>
                         </a>
                     </li>
                     {% endif %}
