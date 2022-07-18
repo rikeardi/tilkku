@@ -38,9 +38,7 @@ $(document).ready(function() {
 
         if(e.keyCode == 109) {
             e.preventDefault();
-            if(settings.menu == "hidden") {
-                toolbox_menu();
-            }
+            toolbox_menu();
         }
 
         if(e.keyCode == 113) {
