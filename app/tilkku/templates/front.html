@@ -187,6 +187,7 @@ function toDeg(x) {
     return x * 180 / Math.PI;
 }
 
+var map_grid = null;
 function map_calculate_grid() {
     var earth_radius = 6378137;
     var dist = env.GRID_SIZE / earth_radius;
@@ -227,7 +228,7 @@ function map_calculate_grid() {
         }
     }
 
-    var map_grid = {
+    map_grid = {
         x: env.GRID_LAT,
         y: env.GRID_LON,
         inv_x: false,
