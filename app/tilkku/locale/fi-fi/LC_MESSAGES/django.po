@@ -1,0 +1,5 @@
+msgid "joined"
+msgstr "liittyi"
+
+msgid "left"
+msgstr "poistui"
