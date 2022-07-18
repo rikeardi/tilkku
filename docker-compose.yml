@@ -22,8 +22,8 @@ services:
     ports:
       - 8001:8000
     environment:
-      HOSTNAME: ${HOSTNAME}
-      TIMEZONE: ${TIMEZONE}
+      HOSTNAME: ${HOST_NAME}
+      TIMEZONE: ${TIME_ZONE}
       POSTGRES_USER: ${DBUSER}
       POSTGRES_PASS: ${DBPASS}
       POSTGRES_DBNAME: ${DBNAME}
