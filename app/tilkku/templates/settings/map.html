@@ -1,11 +1,11 @@
 {% block content %}
 {% load static %}
-
+{% load i18n %}
 <div class="columns">
     <div class="column is-half">
         <div class="content p-3">
             <div class="field">
-                <label class="label">Taustakartta</label>
+                <label class="label">{% translate 'Background map' %}</label>
                 <div class="control">
                     <div class="select" style="width: 100%;">
                         <select id="settings-map-bg" style="width: 100%;" onchange="map_select_bg();"></select>
@@ -13,27 +13,27 @@
                 </div>
             </div>
             <div class="field">
-                <label class="label">Ruudukko</label>
+                <label class="label">{% translate 'Grid' %}</label>
                 <div class="control">
-                    <label class="checkbox"><input id="settings-map-grid" type="checkbox" onchange='map_toggle_grid();'> Näkyvissä</label>
+                    <label class="checkbox"><input id="settings-map-grid" type="checkbox" onchange='map_toggle_grid();'> {% translate 'Visible' %}</label>
                 </div>
             </div>
             <div class="field">
-                <label class="label">Mittakaava</label>
+                <label class="label">{% translate 'Map scale' %}</label>
                 <div class="control">
-                    <label class="checkbox"><input id="settings-map-scale" type="checkbox" onchange='map_toggle_scale();'> Näkyvissä</label>
+                    <label class="checkbox"><input id="settings-map-scale" type="checkbox" onchange='map_toggle_scale();'> {% translate 'Visible' %}</label>
                 </div>
             </div>
             <div class="field">
-                <label class="label">Nimet</label>
+                <label class="label">{% translate 'Names' %}</label>
                 <div class="control">
-                    <label class="checkbox"><input id="settings-map-names" type="checkbox" onchange='map_toggle_names();'> Näkyvissä</label>
+                    <label class="checkbox"><input id="settings-map-names" type="checkbox" onchange='map_toggle_names();'> {% translate 'Visible' %}</label>
                 </div>
             </div>
             <div class="field">
-                <label class="label">Paikannus</label>
+                <label class="label">{% translate 'Location' %}</label>
                 <div class="control">
-                    <label class="checkbox"><input id="settings-map-location" type="checkbox" onchange='map_toggle_location();'> Käytössä</label>
+                    <label class="checkbox"><input id="settings-map-location" type="checkbox" onchange='map_toggle_location();'> {% translate 'Visible' %}</label>
                 </div>
             </div>
         </div>
@@ -43,13 +43,13 @@
             <div class="field">
                 <label class="label">GeoJSON</label>
                 <div class="control">
-                    <button class="button is-primary is-small" onclick="map_export_geoJSON();">Vie</button>
-                    <button class="button is-primary is-small" onclick="map_import_geoJSON();">Tuo</button>
+                    <button class="button is-primary is-small" onclick="map_export_geoJSON();">{% translate 'Export' %}</button>
+                    <button class="button is-primary is-small" onclick="map_import_geoJSON();">{% translate 'Import' %}</button>
                     <input type="file" id="map-import-file" style="display: none;" onchange="map_import_upload();">
                 </div>
             </div>
             <div class="field">
-                <label class="label">Karttatasot</label>
+                <label class="label">{% translate 'Map layers' %}</label>
                 <div id="settings-map-layers" class="control">
                 </div>
             </div>
