@@ -509,4 +509,4 @@ map.on("moveend", function() {
 
 $(document).ready(function() {
     map_init();
-}
+});
