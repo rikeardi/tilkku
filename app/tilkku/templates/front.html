@@ -209,7 +209,6 @@ function map_calculate_grid() {
     var lon_x = lon + Math.atan2(Math.sin(brng_y) * Math.sin(dist) * Math.cos(lat), Math.cos(dist) - Math.sin(lat) * Math.sin(lat_x));
 
     var grid_cols = [];
-    env.GRID_COLS = 120;
     if(env.GRID_COLS > 99) {
         for(var i = 0; i < env.GRID_COLS; i++) {
             grid_cols.push(("00" + (i+1)).slice(-3));
@@ -227,7 +226,6 @@ function map_calculate_grid() {
     var grid_rows = [];
     var pre_letter = "";
     var letter = "A";
-    env.GRID_ROWS = 29;
     for(var i = 0; i < env.GRID_ROWS; i++) {
         grid_rows.push(pre_letter + letter);
         letter = String.fromCharCode(letter.charCodeAt(0) + 1);
