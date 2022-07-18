@@ -194,3 +194,9 @@ msgstr "Virheellinen käyttäjätunnus tai salasana. Yritä uudestaan."
 
 msgid "Language"
 msgstr "Kieli"
+
+msgid "New note"
+msgstr "Uusi merkintä"
+
+msgid "Link"
+msgstr "Linkki"
