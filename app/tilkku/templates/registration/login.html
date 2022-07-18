@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
-
+{% load i18n %}
 {% block content %}
 <div class="columns">
   <div class="column is-quarter"></div>
@@ -9,7 +9,7 @@
       <div class="columns">
         <div class="column is-narrow"><img src="{% static 'img/logo.png' %}" style="height: 80px"/></div>
         <div class="column">
-          <h1 class="title">Kirjaudu sisään</h1>
+          <h1 class="title">{% translate 'Login' %}</h1>
         </div>
       </div>
     </div>
@@ -17,29 +17,24 @@
       <form method="post" action="{% url 'main:login' %}">
         {% csrf_token %}
         <div class="field">
-          <label class="label">Käyttäjätunnus</label>
+          <label class="label">{% translate 'Username' %}</label>
           <div class="control">
             {{ form.username }}
           </div>
         </div>
 
         <div class="field">
-          <label class="label">Salasana</label>
+          <label class="label">{% translate 'Password' %}</label>
           <div class="control">
             {{ form.password }}
           </div>
         </div>
 
-        <input class="button is-primary" type="submit" value="Kirjaudu" />
+        <input class="button is-primary" type="submit" value="{% translate 'Login' %}" />
         <input type="hidden" name="next" value="{{ next }}" />
       </form>
       {% if form.errors %}
-        <p class="formerror">Käyttäjätunnus ja salasana ei täsmää. Yritä uudelleen.</p>
-      {% endif %}
-      {% if next %}
-        {% if user.is_authenticated %}
-          <p class="formerror">Sinulla ei ole käyttöoikeutta tähän sivuun. Ole hyvä ja kirjaudu toisella tunnuksella.</p>
-        {% endif %}
+        <p class="formerror">{% translate 'Username or password not found. Please try again.' %}</p>
       {% endif %}
     </div>
   </div>

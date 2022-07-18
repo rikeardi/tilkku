@@ -1,28 +1,28 @@
 {% block content %}
-
+{% load i18n %}
 <div id="new-topic-modal" class="modal">
     <div class="modal-background"></div>
     <div class="modal-card">
         <header class="modal-card-head">
-            <p class="modal-card-title">Aiheen lisäys</p>
+            <p class="modal-card-title">{% translate 'New event' %}</p>
             <button class="delete" aria-label="close" onclick="new_topic_modal_close();"></button>
         </header>
         <section class="modal-card-body">
             <div class="field">
-                <label class="label">Otsikko</label>
+                <label class="label">{% translate 'Title' %}</label>
                 <div class="control">
                     <input class="input" type="text" id="new-topic-modal-name">
                 </div>
             </div>
             <div class="field">
-                <label class="label">Kuvaus</label>
+                <label class="label">{% translate 'Description' %}</label>
                 <div class="control">
                     <textarea class="textarea" id="new-topic-modal-description"></textarea>
                 </div>
         </section>
         <footer class="modal-card-foot">
-            <button class="button is-primary" onclick="new_topic_modal_save();">Tallenna</button>
-            <button class="button" onclick="new_topic_modal_close();">Peruuta</button>
+            <button class="button is-primary" onclick="new_topic_modal_save();">{% translate 'Save' %}</button>
+            <button class="button" onclick="new_topic_modal_close();">{% translate 'Cancel' %}</button>
         </footer>
     </div>
 </div>
@@ -32,7 +32,7 @@
     <div class="modal-card" style="height: 94%;">
         <header class="modal-card-head">
             <p class="modal-card-title" id="topic-modal-name"></p>
-            <button class="button is-small" id="topic-link-btn">Kopioi linkki</button>
+            <button class="button is-small" id="topic-link-btn">{% translate 'Copy link' %}</button>
             <button class="delete" aria-label="close" onclick="topic_modal_close();" style="margin-left: 15px;"></button>
         </header>
         <section class="modal-card-body p-2">
@@ -48,13 +48,13 @@
         </section>
         <section class="modal-card-body p-2">
             <div class="field">
-                <label class="label">Uusi merkintä</label>
+                <label class="label">{% translate 'New note' %}</label>
                 <div class="control">
                     <textarea class="textarea is-small topic-input" rows="2" id="topic-modal-new-note"></textarea>
                 </div>
             </div>
             <div class="field" style="position: relative;">
-                <label class="label">Paikkatieto</label>
+                <label class="label">{% translate 'Location' %}</label>
                 <div class="control">
                     <input class="input is-small topic-input" type="text" id="topic-modal-location" autocomplete="no">
                     <input class="topic-input" type="hidden" id="topic-modal-location-id">
@@ -63,15 +63,15 @@
                 </div>
             </div>
             <div class="field">
-                <label class="label">Linkki</label>
+                <label class="label">{% translate 'Link' %}</label>
                 <div class="control">
                     <input class="input is-small topic-input" type="text" id="topic-modal-link">
                 </div>
             </div>
         </section>
         <footer class="modal-card-foot">
-            <button class="button is-primary" onclick="topic_modal_save();">Lisää</button>
-            <button class="button" onclick="topic_modal_close();">Sulje</button>
+            <button class="button is-primary" onclick="topic_modal_save();">{% translate 'Add' %}</button>
+            <button class="button" onclick="topic_modal_close();">{% translate 'Close' %}</button>
         </footer>
     </div>
 </div>
@@ -79,7 +79,7 @@
 <div class='note-item box p-2 mb-2 notification is-success is-hidden' id="note-item-template">
     <p class="m-0" style="font-size: 0.6rem;">
         <span class="note-user-name"></span> - <span class="note-datetime"></span>
-        <i class="fa fa-flag is-hidden" style="cursor:pointer; float: right; margin-left: 15px;" title="Sijainti"></i>
+        <i class="fa fa-flag is-hidden" style="cursor:pointer; float: right; margin-left: 15px;" title="{% translate 'Location' %}"></i>
         <a class="note-link" style="float: right;" target="_blank"></a></p>
     <p class="note-text m-0"></p>
 </div>

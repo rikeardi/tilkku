@@ -1,4 +1,5 @@
 {% block content %}
+{% load i18n %}
 <style>
 .newmsg {
     color: #ff0c0c;
@@ -6,27 +7,27 @@
 </style>
 <div style="width: 100%; float: right;">
     <div style="">
-        <button class="button m-0 is-small" style="width: 30px;" title="Valikko" onclick="toolbox_menu();">
+        <button class="button m-0 is-small" style="width: 30px;" title="{% translate 'Menu' %}" onclick="toolbox_menu();">
             <i class="fas fa-bars"></i>
         </button>
-        <button class="button m-0 is-small" style="width: 30px;" title="Asetukset" onclick="settings_open();">
+        <button class="button m-0 is-small" style="width: 30px;" title="{% translate 'Settings' %}" onclick="settings_open();">
             <i class="fas fa-cog"></i>
         </button>
-        <div class="dropdown is-hoverable is-right" style="width: 30px;" title="Käyttäjä">
+        <div class="dropdown is-hoverable is-right" style="width: 30px;" title="{% translate 'User' %}">
           <div class="dropdown-trigger" style="width: 100%;">
-            <button class="button m-0 is-small" style="width: 100%;" aria-haspopup="true" aria-controls="kayttajamenu">
+            <button class="button m-0 is-small" style="width: 100%;" aria-haspopup="true" aria-controls="mobile-usermenu">
               <i class="fas fa-user"></i>
             </button>
           </div>
-          <div class="dropdown-menu" id="kayttajamenu" role="menu">
+          <div class="dropdown-menu" id="mobile-usermenu" role="menu">
             <div class="dropdown-content">
-                <a href="#" class="dropdown-item" onclick="user_edit_modal_open();">Omat tiedot</a>
+                <a href="#" class="dropdown-item" onclick="user_edit_modal_open();">{% translate 'User information' %}</a>
                 <hr class="dropdown-divider">
-                <a href="{% url 'main:logout' %}" class="dropdown-item">Kirjaudu ulos</a>
+                <a href="{% url 'main:logout' %}" class="dropdown-item">{% translate 'Log out' %}</a>
             </div>
           </div>
         </div>
-        <button class="button m-0 is-small" style="width: 30px;" title="Keskitä" onclick="mobile_toolbox_center();">
+        <button class="button m-0 is-small" style="width: 30px;" title="{% translate 'Center' %}" onclick="mobile_toolbox_center();">
             <i class="fas fa-home"></i>
         </button>
     </div>

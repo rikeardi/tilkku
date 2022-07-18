@@ -4,24 +4,24 @@
     <div class="modal-background"></div>
     <div class="modal-card">
         <header class="modal-card-head">
-            <p class="modal-card-title">Yhteystieto</p>
+            <p class="modal-card-title">{% translate 'Contact' %}</p>
             <button class="delete" aria-label="close" onclick="contact_modal_close();"></button>
         </header>
         <section class="modal-card-body">
             <div class="field">
-                <label class="label">Nimi</label>
+                <label class="label">{% translate 'Name' %}</label>
                 <p id="contact-modal-name"></p>
             </div>
             <div class="field">
-                <label class="label">Sähköposti</label>
+                <label class="label">{% translate 'E-mail' %}</label>
                 <p id="contact-email"></p>
             </div>
             <div class="field">
-                <label class="label">Puhelin</label>
+                <label class="label">{% translate 'Telephone' %}</label>
                 <p id="contact-phone"></p>
             </div>
             <div class="field">
-                <label class="label">Tehtävä</label>
+                <label class="label">{% translate 'Title' %}</label>
                 <p id="contact-title"></p>
             </div>
         </section>
@@ -32,38 +32,38 @@
     <div class="modal-background"></div>
     <div class="modal-card">
         <header class="modal-card-head">
-            <p class="modal-card-title">Uusi yhteystieto</p>
+            <p class="modal-card-title">{% translate 'New contact' %}</p>
             <button class="delete" aria-label="close" onclick="new_contact_modal_close();"></button>
         </header>
         <section class="modal-card-body">
             <div class="field">
-                <label class="label">Nimi</label>
+                <label class="label">{% translate 'Name' %}</label>
                 <div class="control">
                     <input class="input" type="text" id="new-contact-name">
                 </div>
             </div>
             <div class="field">
-                <label class="label">Sähköposti</label>
+                <label class="label">{% translate 'E-mail' %}</label>
                 <div class="control">
                     <input class="input" type="text" id="new-contact-email">
                 </div>
             </div>
             <div class="field">
-                <label class="label">Puhelin</label>
+                <label class="label">{% translate 'Telephone' %}</label>
                 <div class="control">
                     <input class="input" type="text" id="new-contact-phone">
                 </div>
             </div>
             <div class="field">
-                <label class="label">Tehtävä</label>
+                <label class="label">{% translate 'Title' %}</label>
                 <div class="control">
                     <input class="input" type="text" id="new-contact-title">
                 </div>
             </div>
         </section>
         <section class="modal-card-foot">
-            <button class="button is-success" onclick="new_contact_save();">Tallenna</button>
-            <button class="button" onclick="new_contact_modal_close();">Peruuta</button>
+            <button class="button is-success" onclick="new_contact_save();">{% translate 'Save' %}</button>
+            <button class="button" onclick="new_contact_modal_close();">{% translate 'Cancel' %}</button>
         </section>
     </div>
 </div>

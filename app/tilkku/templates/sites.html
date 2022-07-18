@@ -1,11 +1,12 @@
 {% block content %}
+{% load i18n %}
 <div class="content" style="height: calc(100% - 20px); overflow-y: clip;">
     <div class="field has-addons">
         <div class="control is-expanded">
-            <input id="sites-site-search" class="input is-small" type="text" placeholder="Hae..." autocomplete="no">
+            <input id="sites-site-search" class="input is-small" type="text" placeholder="{% translate 'Search...' %}" autocomplete="no">
         </div>
         <div class="control">
-            <button id="sites-site-search-button" class="button is-small is-info" onclick="search_site_click();">Hae</button>
+            <button id="sites-site-search-button" class="button is-small is-info" onclick="search_site_click();">{% translate 'Search' %}</button>
         </div>
     </div>
     <div id="sites-site-box" style="overflow: auto; height: calc(100% - 32px);">

@@ -1,11 +1,11 @@
 {% extends "base.html" %}
-
 {% block content %}
+{% load i18n %}
 <div class="center" style="width: 400px">
   <div class="box">
-    <div class="title">Olet kirjautunut ulos</div>
+    <div class="title">{% translate 'You have been logged out' %}</div>
     <div class="content">
-    <p><a href="{% url 'main:login'%}">Kirjaudu uudestaan sisään.</a></p>
+    <p><a href="{% url 'main:login'%}">{% translate 'Login again.' %}</a></p>
     </div>
   </div>
 </div>

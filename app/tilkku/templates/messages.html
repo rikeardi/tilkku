@@ -1,4 +1,5 @@
 {% block messages %}
+{% load i18n %}
 
 <div class="modal" id="messages-confirm-modal">
     <div class="modal-background"></div>
@@ -11,8 +12,8 @@
             <p id="messages-confirm-question"></p>
         </section>
         <section class="modal-card-foot">
-            <button class="button is-success" onclick="messages_confirm_accept();">Kyllä</button>
-            <button class="button" onclick="messages_confirm_modal_close();">Peruuta</button>
+            <button class="button is-success" onclick="messages_confirm_accept();">{% translate 'Yes' %}</button>
+            <button class="button" onclick="messages_confirm_modal_close();">{% translate 'Cancel' %}</button>
         </section>
     </div>
 </div>

@@ -1,5 +1,6 @@
 {% block content %}
 {% load static %}
+{% load i18n %}
 <style>
 .chat-window {
     height: calc(100% - 50px);
@@ -107,9 +108,9 @@ chatSocket.onmessage = function(e) {
     //console.log(data);
 
     if(data.type == "user_join") {
-        elem = "<li class='system'>\n<p>" + data.time + " " + data.user + " liittyi.</p>\n</li>";
+        elem = "<li class='system'>\n<p>" + data.time + " " + data.user + " {% translate 'joined' %}.</p>\n</li>";
     } else if(data.type == "user_leave") {
-        elem = "<li class='system'>\n<p>" + data.time + " " + data.user + " poistui.</p>\n</li>";
+        elem = "<li class='system'>\n<p>" + data.time + " " + data.user + " {% translate 'left' %}.</p>\n</li>";
     }
     else if(data.type == "chat_message") {
         if(data.user == username) {

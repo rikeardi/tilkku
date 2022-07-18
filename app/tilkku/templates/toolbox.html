@@ -1,4 +1,5 @@
 {% block content %}
+{% load i18n %}
 <style>
 .newmsg {
     color: #ff0c0c;
@@ -6,45 +7,45 @@
 </style>
 <div style="width: 100%;">
     <div style="margin-bottom: 20px;">
-        <button class="button m-0 is-small" style="width: 100%;" title="Valikko" onclick="toolbox_menu();">
+        <button class="button m-0 is-small" style="width: 100%;" title="{% translate 'Menu' %}" onclick="toolbox_menu();">
             <i class="fas fa-bars"></i>
         </button>
-        <button class="button m-0 is-small" style="width: 100%;" title="Asetukset" onclick="settings_open();">
+        <button class="button m-0 is-small" style="width: 100%;" title="{% translate 'Settings' %}" onclick="settings_open();">
             <i class="fas fa-cog"></i>
         </button>
-        <div class="dropdown is-hoverable is-right" style="width: 100%;" title="Käyttäjä">
+        <div class="dropdown is-hoverable is-right" style="width: 100%;" title="{% translate 'User' %}">
           <div class="dropdown-trigger" style="width: 100%;">
-            <button class="button m-0 is-small" style="width: 100%;" aria-haspopup="true" aria-controls="kayttajamenu">
+            <button class="button m-0 is-small" style="width: 100%;" aria-haspopup="true" aria-controls="usermenu">
               <i class="fas fa-user"></i>
             </button>
           </div>
-          <div class="dropdown-menu" id="kayttajamenu" role="menu">
+          <div class="dropdown-menu" id="usermenu" role="menu">
             <div class="dropdown-content">
-                <a href="#" class="dropdown-item" onclick="user_edit_modal_open();">Omat tiedot</a>
+                <a href="#" class="dropdown-item" onclick="user_edit_modal_open();">{% translate 'User information' %}</a>
                 <hr class="dropdown-divider">
-                <a href="{% url 'main:logout' %}" class="dropdown-item">Kirjaudu ulos</a>
+                <a href="{% url 'main:logout' %}" class="dropdown-item">{% translate 'Log out' %}</a>
             </div>
           </div>
         </div>
-        <button class="button m-0 is-small" style="width: 100%;" title="Keskitä" onclick="toolbox_center();">
+        <button class="button m-0 is-small" style="width: 100%;" title="{% translate 'Center' %}" onclick="toolbox_center();">
             <i class="fas fa-home"></i>
         </button>
     </div>
 
     <div id="front-toolsmenu" style="display: none;">
-        <button class="button m-0 is-small" style="width: 100%;" title="Tapahtumat" onclick="toolbox_tool('events');">
+        <button class="button m-0 is-small" style="width: 100%;" title="{% translate 'Events' %}" onclick="toolbox_tool('events');">
             <i id="front-events-btn" class="fas fa-book"></i>
         </button>
-        <button class="button m-0 is-small" style="width: 100%;" title="Keskustelu" onclick="toolbox_tool('chat');">
+        <button class="button m-0 is-small" style="width: 100%;" title="{% translate 'Chat' %}" onclick="toolbox_tool('chat');">
             <i id="front-chat-btn" class="fas fa-comments"></i>
         </button>
-        <button class="button m-0 is-small" style="width: 100%;" title="Paikat" onclick="toolbox_tool('sites');">
+        <button class="button m-0 is-small" style="width: 100%;" title="{% translate 'Locations' %}" onclick="toolbox_tool('sites');">
             <i id="front-sites-btn" class="fas fa-thumbtack"></i>
         </button>
-        <button class="button m-0 is-small" style="width: 100%;" title="Yhteystiedot" onclick="toolbox_tool('contacts');">
+        <button class="button m-0 is-small" style="width: 100%;" title="{% translate 'Contacts' %}" onclick="toolbox_tool('contacts');">
             <i id="front-contacts-btn" class="fas fa-phone"></i>
         </button>
-        <button class="button m-0 is-small" style="width: 100%;" title="Säätiedot" onclick="toolbox_tool('weather');">
+        <button class="button m-0 is-small" style="width: 100%;" title="{% translate 'Weather' %}" onclick="toolbox_tool('weather');">
             <i id="front-weather-btn" class="fas fa-cloud-sun-rain"></i>
         </button>
     </div>

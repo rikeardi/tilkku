@@ -1,5 +1,6 @@
 {% block content %}
 {% load static %}
+{% load i18n %}
 <style>
 .event-item {
     cursor: pointer;
@@ -11,7 +12,7 @@
 </style>
 
 <div class="content">
-    <button class="button is-small is-info"><i class="fa fa-plus" title="Lisää" onclick="new_topic_modal_open();"></i></button>
+    <button class="button is-small is-info"><i class="fa fa-plus" title="{% translate 'Add...' %}" onclick="new_topic_modal_open();"></i></button>
 </div>
 
 <div class="content" style="height: calc(100% - 20px); overflow-y: clip;">
@@ -22,15 +23,15 @@
 <div id="topic-template" class="topic-item box p-2 mb-2 notification is-info is-hidden">
     <div class="columns">
         <div class="column is-1 is-hidden-mobile is-size-6">
-            <i class="fa fa-info-circle" style="cursor:pointer" title="Lisätiedot"></i>
-            <i class="fa fa-check" style="cursor:pointer" title="Kuittaa"></i>
+            <i class="fa fa-info-circle" style="cursor:pointer" title="{% translate 'Details' %}"></i>
+            <i class="fa fa-check" style="cursor:pointer" title="{% translate 'Close' %}"></i>
         </div>
         <div class="column is-10-mobile">
             <h1 class="topic-title title is-size-5" style="cursor:pointer"></h1>
             <h2 class="topic-description subtitle is-size-7"></h2>
         </div>
         <div class="column is-1 is-hidden-mobile is-size-7 m-1" style="text-align: center;">
-            <i class="fa fa-clipboard-list" style="cursor:pointer" title="Merkintöjä"></i>
+            <i class="fa fa-clipboard-list" style="cursor:pointer" title="{% translate 'Notes' %}"></i>
             <p class="topic-notes-count"></p>
         </div>
     </div>
@@ -88,7 +89,7 @@ function topic_open_site(site) {
 }
 
 function topic_accept_open(topic_id) {
-    messages_confirm("Kuittaa valmiiksi", "Haluatko varmasti sulkea tämän aiheen?", function() {
+    messages_confirm("{% translate 'Close' %}", "{% translate 'Are you sure you wish to close this event?' %}", function() {
         $.ajax({
             url: "/api/topics/" + topic_id + "/",
             type: "PATCH",

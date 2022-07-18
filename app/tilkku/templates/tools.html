@@ -4,31 +4,31 @@
         <li id="tools-menu-events" class="tools-menu is-active">
             <a href="#" onclick="tools_select('events')">
                 <span class="icon"><i class="fas fa-book"></i></span>
-                <span class="tools-menu-text" id="tools-events-text">Tapahtumat</span>
+                <span class="tools-menu-text" id="tools-events-text">{% translate 'Events' %}</span>
             </a>
         </li>
         <li id="tools-menu-chat" class="tools-menu">
             <a href="#" onclick="tools_select('chat')">
                 <span class="icon"><i class="fas fa-comments"></i></span>
-                <span class="tools-menu-text" id="tools-chat-text">Keskustelu</span>
+                <span class="tools-menu-text" id="tools-chat-text">{% translate 'Chat' %}</span>
             </a>
         </li>
         <li id="tools-menu-sites" class="tools-menu">
             <a href="#" onclick="tools_select('sites')">
                 <span class="icon"><i class="fas fa-thumbtack"></i></span>
-                <span class="tools-menu-text" id="tools-sites-text">Paikat</span>
+                <span class="tools-menu-text" id="tools-sites-text">{% translate 'Locations' %}</span>
             </a>
         </li>
         <li id="tools-menu-contacts" class="tools-menu">
             <a href="#" onclick="tools_select('contacts')">
                 <span class="icon"><i class="fas fa-phone"></i></span>
-                <span class="tools-menu-text" id="tools-contacts-text">Yhteystiedot</span>
+                <span class="tools-menu-text" id="tools-contacts-text">{% translate 'Contacts' %}</span>
             </a>
         </li>
         <li id="tools-menu-weather" class="tools-menu">
             <a href="#" onclick="tools_select('weather')">
                 <span class="icon"><i class="fas fa-cloud-sun-rain"></i></span>
-                <span class="tools-menu-text" id="tools-weather-text">Säätiedot</span>
+                <span class="tools-menu-text" id="tools-weather-text">{% translate 'Weather' %}</span>
             </a>
         </li>
     </ul>
@@ -52,6 +52,7 @@
 </div>
 
 <script>
+
 function tools_select(tool) {
     $(".tools-menu").removeClass('is-active');
     $(".tools-box").hide();
@@ -70,5 +71,6 @@ if(settings.menu == "hidden") {
     $("#front-tools").hide();
     $("#front-toolsmenu").show();
 }
+
 </script>
 {% endblock %}
