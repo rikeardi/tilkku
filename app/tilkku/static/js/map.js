@@ -3,7 +3,6 @@ var home = [env.HOME_LAT, env.HOME_LON];
 var mobile_home = [home[0] + 0.001, home[1] - 0.009];
 var home_zoom = env.HOME_ZOOM;
 var map_zoom = true;
-var map_background = null;
 
 var map_grid = null;
 var opened_area = null;
@@ -19,6 +18,7 @@ map = L.map('map', {
     center: settings.map.center,
     zoom: settings.map.zoom,
 });
+
 
 
 map_scale = L.control.scale({
@@ -40,6 +40,8 @@ map_servers.forEach(function(server) {
         attribution: server.attribution,
     });
 });
+
+var map_background = map_servers[settings.map.server].layer.addTo(map);
 
 function map_set_bg() {
     map_background.remove();
