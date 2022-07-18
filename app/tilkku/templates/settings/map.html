@@ -66,19 +66,19 @@ $(document).ready(function() {
 
         if(settings.map.server == i) selected = " selected";
         $("#settings-map-bg").append("<option value='" + i + "'" + selected + ">" + server.name + "</option>");
+    }
 
-        if(settings.map.grid == 1) {
-            $("#settings-map-grid").prop("checked", true);
-        }
-        if(settings.map.scale == 1) {
-            $("#settings-map-scale").prop("checked", true);
-        }
-        if(settings.map.names == 1) {
-            $("#settings-map-names").prop("checked", true);
-        }
-        if(settings.map.location == 1) {
-            $("#settings-map-location").prop("checked", true);
-        }
+    if(settings.map.grid == 1) {
+        $("#settings-map-grid").prop("checked", true);
+    }
+    if(settings.map.scale == 1) {
+        $("#settings-map-scale").prop("checked", true);
+    }
+    if(settings.map.names == 1) {
+        $("#settings-map-names").prop("checked", true);
+    }
+    if(settings.map.location == 1) {
+        $("#settings-map-location").prop("checked", true);
     }
 
     for(var i=0;i<map_layers.length;i++) {
