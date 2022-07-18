@@ -10,6 +10,12 @@
                     <label class="checkbox"><input id="settings-clock" type="checkbox" onchange='toggle_clock();'> {% translate 'Visible' %}</label>
                 </div>
             </div>
+            <div class="field">
+                <label class="label">{% translate 'Hotkeys' %}</label>
+                <div class="control">
+                    <label class="checkbox"><input id="settings-hotkeys" type="checkbox" onchange='toggle_hotkeys();'> {% translate 'In use' %}</label>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -19,12 +25,20 @@ $(document).ready(function() {
     if(settings.clock == 1) {
         $("#settings-clock").prop("checked", true);
     }
+    if(settings.hotkeys == 1) {
+        $("#settings-hotkeys").prop("checked", true);
+    }
 });
 
 function toggle_clock() {
     settings.clock = $("#settings-clock").is(":checked") ? 1 : 0;
     refresh_settings();
     set_clock();
+}
+
+function toggle_hotkeys() {
+    settings.hotkeys = $("#settings-hotkeys").is(":checked") ? 1 : 0;
+    refresh_settings();
 }
 
 </script>

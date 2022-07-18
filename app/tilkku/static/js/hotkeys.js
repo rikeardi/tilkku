@@ -1,5 +1,6 @@
 $(document).ready(function() {
     $("body").on("keypress", function(e) {
+        if(settings.hotkeys == 0) return;
         if($("input").is(":focus") || $("textarea").is(":focus")) {
             return;
         }
@@ -41,7 +42,7 @@ $(document).ready(function() {
             toolbox_menu();
         }
 
-        if(e.keyCode == 113) {
+        if(e.keyCode == 115) {
             e.preventDefault();
             settings_open();
         }
