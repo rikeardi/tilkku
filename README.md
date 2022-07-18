@@ -1,6 +1,6 @@
 
-#Tilkku
-####Situational Awareness tool for Scouting events
+# Tilkku
+#### Situational Awareness tool for Scouting events
 Built for the 2022 FinnJamboree
 
 ---
@@ -44,3 +44,6 @@ GRID_ROWS | The number of rows in the grid.
 |--- | ---|
 
 The DJANGO_KEY is used to encrypt the session cookies. You can generate a new one by running `openssl rand --base64 128`. DO NOT USE the one on the example!
+
+---
+&copy; 2022 Risto Lievonen
