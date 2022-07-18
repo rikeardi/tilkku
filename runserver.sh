@@ -2,6 +2,7 @@
 
 cd /code/tilkku
 
+django-admin compilemessages
 python manage.py makemigrations --noinput
 python manage.py migrate
 python manage.py collectstatic --noinput
