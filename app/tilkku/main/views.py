@@ -13,7 +13,8 @@ def home(request):
     context = {
         'map_servers': json.dumps(MapServerSerializer(MapServer.objects.all(), many=True).data),
         'wms_servers': json.dumps(WMSServerSerializer(WMSServer.objects.all(), many=True).data),
-        'layers': json.dumps(LayerSerializer(Layer.objects.all().order_by('id'), many=True).data),
+        'map_layers': json.dumps(LayerSerializer(Layer.objects.all().order_by('id'), many=True).data),
+        'map_styles': json.dumps(MapStyleSerializer(MapStyle.objects.all().order_by('id'), many=True).data),
     }
     return render(request, 'front.html', context)
 
@@ -23,7 +24,8 @@ def events(request, id):
     context = {
         'map_servers': json.dumps(MapServerSerializer(MapServer.objects.all(), many=True).data),
         'wms_servers': json.dumps(WMSServerSerializer(WMSServer.objects.all(), many=True).data),
-        'layers': json.dumps(LayerSerializer(Layer.objects.all().order_by('id'), many=True).data),
+        'map_layers': json.dumps(LayerSerializer(Layer.objects.all().order_by('id'), many=True).data),
+        'map_styles': json.dumps(MapStyleSerializer(MapStyle.objects.all().order_by('id'), many=True).data),
         'location_query': {'events': id},
     }
     return render(request, 'front.html', context)

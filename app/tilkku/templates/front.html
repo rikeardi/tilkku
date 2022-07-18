@@ -8,7 +8,8 @@ var env = {{ environment | safe }};
 var map_servers = {{ map_servers | safe }};
 var wms_servers = {{ wms_servers | safe }};
 
-var map_layers = {{ layers | safe }};
+var map_layers = {{ map_layers | safe }};
+var map_styles = {{ map_styles | safe }};
 
 const csrf_token = document.querySelector('[name="csrfmiddlewaretoken"]').value;
 
