@@ -10,5 +10,7 @@ def export_env_variables(request):
             'GRID_LAT': os.environ['GRID_LAT'],
             'GRID_LON': os.environ['GRID_LON'],
             'GRID_SIZE': os.environ['GRID_SIZE'],
+            'GRID_COLS': os.environ['GRID_COLS'],
+            'GRID_ROWS': os.environ['GRID_ROWS'],
         }
     }
