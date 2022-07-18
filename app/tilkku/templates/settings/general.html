@@ -5,6 +5,15 @@
     <div class="column is-half">
         <div class="content p-3">
             <div class="field">
+                <label class="label">{% translate 'Language' %}</label>
+                <div class="control">
+                    <select class="input" id="settings-language" onchange="settings_select_language();">
+                        <option value="en">English</option>
+                        <option value="fi">Suomi</option>
+                    </select>
+                </div>
+            </div>
+            <div class="field">
                 <label class="label">{% translate 'Clock' %}</label>
                 <div class="control">
                     <label class="checkbox"><input id="settings-clock" type="checkbox" onchange='toggle_clock();'> {% translate 'Visible' %}</label>
@@ -39,6 +48,18 @@ function toggle_clock() {
 function toggle_hotkeys() {
     settings.hotkeys = $("#settings-hotkeys").is(":checked") ? 1 : 0;
     refresh_settings();
+}
+
+function settings_select_language() {
+    settings.language = $("#settings-language").val();
+    refresh_settings();
+    $.ajax({
+        url: "/lang/" + settings.language + "/",
+        type: "GET",
+        success: function(data) {
+            location.reload();
+        }
+    });
 }
 
 </script>

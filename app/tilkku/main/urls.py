@@ -24,6 +24,7 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('events/<id>/', views.events, name='events'),
     path('api/', include(router.urls)),
+    path('lang/<lang>/', views.set_language, name='set_language'),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('accounts/login/', django.contrib.auth.views.LoginView.as_view(authentication_form=forms.LoginForm), name='login'),
     path('accounts/', include('django.contrib.auth.urls')),
