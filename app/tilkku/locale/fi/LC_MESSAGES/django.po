@@ -89,3 +89,39 @@ msgstr "Tuuli"
 
 msgid "Rain"
 msgstr "Sade"
+
+msgid "Visible"
+msgstr "Näkyvissä"
+
+msgid "In use"
+msgstr "Käytössä"
+
+msgid "Clock"
+msgstr "Kello"
+
+msgid "Hotkeys"
+msgstr "Pikanäppäimet"
+
+msgid "Background map"
+msgstr "Taustakartta"
+
+msgid "Grid"
+msgstr "Ruudukko"
+
+msgid "Map scale"
+msgstr "Mittakaava"
+
+msgid "Names"
+msgstr "Nimet"
+
+msgid "Location"
+msgstr "Paikannus"
+
+msgid "Import"
+msgstr "Tuo"
+
+msgid "Export"
+msgstr "Vie"
+
+msgid "Map layers"
+msgstr "Karttatasot"
