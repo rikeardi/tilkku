@@ -31,7 +31,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-CSRF_TRUSTED_ORIGINS = [env('HOSTNAME')]
+CSRF_TRUSTED_ORIGINS = [env('HOST_NAME')]
 
 
 # Application definition
@@ -146,7 +146,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = env('TIMEZONE')
+TIME_ZONE = env('TIME_ZONE')
 
 USE_I18N = True
 
