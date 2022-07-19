@@ -12,8 +12,8 @@
             </div>
             <div class="field">
                 <div class="control">
-                    <div id="users-list">
-                    </div>
+                    <table id="users-list">
+                    </table>
                 </div>
             </div>
         </div>
@@ -22,16 +22,18 @@
 
 <script>
 
+var users = [];
+
 function users_init() {
     $("#users-list").html("");
     $.ajax({
         url: "/api/adm_users/",
         type: "GET",
         success: function(data) {
-            console.log(data);
+            users = data;
             for(var i=0;i<data.length;i++) {
                 var user = data[i];
-                $("#users-list").append("<div class='field'><label class='label'>" + user.username + "</label><div class='control'><button class='button is-primary is-small' onclick='user_edit(" + user.id + ");'>{% translate 'Edit' %}</button><button class='button is-primary is-small' onclick='user_delete(" + user.id + ");'>{% translate 'Delete' %}</button></div></div>");
+                $("#users-list").append("<tr><td>" + user.username + "</td><td>" + user.email + "</td><td><button class=\"button is-primary is-small\" onclick=\"user_edit(" + i + ");\">{% translate 'Edit' %}</button><button class=\"button is-primary is-small\" onclick=\"user_delete(" + i + ");\">{% translate 'Delete' %}</button></td></tr>");
             }
         }
     });
