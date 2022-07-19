@@ -1,7 +1,7 @@
 {% block content %}
 {% load static %}
 {% load i18n %}
-<div class="modal" id="map-style-modal">
+<div class="modal" id="map-style-modal" style="z-index: 41;">
     <div class="modal-background"></div>
     <div class="modal-card">
         <header class="modal-card-head">
@@ -14,7 +14,7 @@
                     <label class="label">{% translate 'Preview' %}</label>
                     <div class="field">
                         <div class="control">
-                            <div id="map-style-preview"></div>
+                            <div id="map-style-preview" style="height: 300px; width: 100%;"></div>
                         </div>
                     </div>
                 </div>
