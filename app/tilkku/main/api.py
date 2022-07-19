@@ -48,45 +48,55 @@ class UserAdminViewSet(viewsets.ModelViewSet):
     serializer_class = UserAdminSerializer
 
     def list(self, request, *args, **kwargs):
-        return super().list(request, *args, **kwargs)
+        if request.user.is_superuser:
+            queryset = self.get_queryset()
+            serializer = self.get_serializer(queryset, many=True)
+            return Response(serializer.data)
+        else:
+            return Response(status=403)
 
     def update(self, request, *args, **kwargs):
-        instance = User.objects.get(pk=request.data.get('id'))
-        instance.username = request.data.get('username')
-        instance.first_name = request.data.get('first_name')
-        instance.last_name = request.data.get('last_name')
-        instance.email = request.data.get('email')
-        instance.is_staff = request.data.get('is_staff')
-        instance.is_superuser = request.data.get('is_superuser')
-        instance.save()
-
-        password = request.data.get('password')
-        password2 = request.data.get('password2')
-        if password and password2 and password == password2:
-            instance.set_password(password)
+        if request.user.is_superuser:
+            instance = User.objects.get(pk=request.data.get('id'))
+            instance.username = request.data.get('username')
+            instance.first_name = request.data.get('first_name')
+            instance.last_name = request.data.get('last_name')
+            instance.email = request.data.get('email')
+            instance.is_staff = request.data.get('is_staff')
+            instance.is_superuser = request.data.get('is_superuser')
             instance.save()
 
-        return Response(UserSerializer(instance).data)
+            password = request.data.get('password')
+            password2 = request.data.get('password2')
+            if password and password2 and password == password2:
+                instance.set_password(password)
+                instance.save()
 
-    @user_passes_test(lambda u: u.is_superuser)
+            return Response(UserSerializer(instance).data)
+        else:
+            return Response(status=403)
+
     def create(self, request, *args, **kwargs):
-        password = request.data.get('password')
-        password2 = request.data.get('password2')
-        if password is None or password2 is None or password != password2:
-            return Response({'error': 'Passwords do not match'})
+        if request.user.is_superuser:
+            password = request.data.get('password')
+            password2 = request.data.get('password2')
+            if password is None or password2 is None or password != password2:
+                return Response({'error': 'Passwords do not match'})
 
-        instance = User.objects.create(
-            username=request.data.get('username'),
-            first_name=request.data.get('first_name'),
-            last_name=request.data.get('last_name'),
-            email=request.data.get('email'),
-            is_enabled=request.data.get('is_enabled'),
-            is_staff=request.data.get('is_staff'),
-            is_superuser=request.data.get('is_superuser'),
-            password=password
-        )
+            instance = User.objects.create(
+                username=request.data.get('username'),
+                first_name=request.data.get('first_name'),
+                last_name=request.data.get('last_name'),
+                email=request.data.get('email'),
+                is_enabled=request.data.get('is_enabled'),
+                is_staff=request.data.get('is_staff'),
+                is_superuser=request.data.get('is_superuser'),
+                password=password
+            )
 
-        return Response(UserSerializer(instance).data)
+            return Response(UserSerializer(instance).data)
+        else:
+            return Response(status=403)
 
 
 class MapStyleSerializer(serializers.ModelSerializer):
