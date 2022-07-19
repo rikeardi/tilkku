@@ -124,12 +124,12 @@ $(document).ready(function() {
         doubleClickZoom: false,
     });
 
-    var preview_background = L.tileLayer(server.url, {
-        attribution: server.attribution,
+    var preview_background = L.tileLayer(map_servers[settings.map.server].url, {
+        attribution: map_servers[settings.map.server].attribution,
     });
-    map_servers[settings.map.server].layer.addTo(preview);
 
     $.get("{% static 'js/preview.geojson' %}").done(function(data) {
+        preview_background.addTo(preview);
         preview_layer = L.polygon(data.coordinates, {
             color: '#000000',
             weight: 1,
