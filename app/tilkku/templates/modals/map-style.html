@@ -215,7 +215,12 @@ function map_style_save() {
                 "X-CSRFToken": csrf_token,
             },
             success: function(data) {
-                map_styles.push(data);
+                for (var i = 0; i < map_styles.length; i++) {
+                    if (map_styles[i].id == data.id) {
+                        map_styles[i] = data;
+                        break;
+                    }
+                }
                 settings_map_layers_init();
                 map_style_close();
             }
