@@ -233,3 +233,12 @@ msgstr "Taustakartat"
 
 msgid "Users"
 msgstr "Käyttäjät"
+
+msgid "Delete"
+msgstr "Poista"
+
+msgid "Are you sure you want to delete this layer style?"
+msgstr "Haluatko varmasti poistaa tämän tason tyylin?"
+
+msgid "Layer style deletion"
+msgstr "Tason tyylin poisto"
