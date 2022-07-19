@@ -12,12 +12,12 @@ router.register(r'areas', api.AreaViewSet)
 router.register(r'markers', api.MarkerViewSet)
 router.register(r'sitecategories', api.SiteCategoryViewSet)
 router.register(r'sites', api.SiteViewSet)
-router.register(r'users_admin', api.UserAdminViewSet)
-router.register(r'users', api.UserViewSet)
-router.register(r'notes', api.NoteViewSet)
-router.register(r'topics', api.TopicViewSet)
-router.register(r'contacts', api.ContactViewSet)
-router.register(r'geojson', api.GeoJSONViewSet, basename='geojson')
+router.register(r'users_admin/', api.UserAdminViewSet)
+router.register(r'users/', api.UserViewSet)
+router.register(r'notes/', api.NoteViewSet)
+router.register(r'topics/', api.TopicViewSet)
+router.register(r'contacts/', api.ContactViewSet)
+router.register(r'geojson/', api.GeoJSONViewSet, basename='geojson')
 
 app_name = 'main'
 urlpatterns = [
