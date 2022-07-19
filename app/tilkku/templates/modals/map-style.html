@@ -128,6 +128,8 @@ $(document).ready(function() {
         attribution: map_servers[settings.map.server].attribution,
     }).addTo(preview);
 
+    preview.setCenter([61.9301, 23.4460]);
+
     $.get("{% static 'js/preview.geojson' %}").done(function(data) {
         preview_layer = L.polygon(data.coordinates, {
             color: '#000000',
