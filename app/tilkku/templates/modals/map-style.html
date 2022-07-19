@@ -101,6 +101,9 @@ function map_edit_style(id) {
     console.log(opened_style);
     $('#map-style-modal').addClass('is-active');
     $('#map-style-name').val(opened_style.name);
+    $("#style-preview-text").text(opened_style.name);
+    $("#style-preview-text").css("font-size", opened_style.font + "px");
+    $("#style-preview-text").css("color", opened_style.stroke);
     document.querySelector('#style-stroke-color').jscolor.fromString(opened_style.stroke);
     $('#style-stroke-width').val(opened_style.stroke_width);
     document.querySelector('#style-fill-color').jscolor.fromString(opened_style.fill);
