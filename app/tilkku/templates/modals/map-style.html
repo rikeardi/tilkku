@@ -198,7 +198,7 @@ function map_style_save() {
         $.ajax({
             url: "/api/mapstyles/",
             type: "POST",
-            data: JSON.stringify(style),
+            data: style,
             headers: {
                 "X-CSRFToken": csrf_token,
             },
