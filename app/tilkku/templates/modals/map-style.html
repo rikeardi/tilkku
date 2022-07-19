@@ -147,6 +147,10 @@ $(document).ready(function() {
             fillColor: '#000000',
             fillOpacity: 0.1,
         }).addTo(preview);
+        preview_layer.bindTooltip("<div id='style-preview-text'>{% translate 'Text' %}</div>", {
+            permanent: true,
+            direction: "center"
+        }).addTo(preview);
     });
 });
 
