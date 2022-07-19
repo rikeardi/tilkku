@@ -215,6 +215,8 @@ function map_style_save() {
                 "X-CSRFToken": csrf_token,
             },
             success: function(data) {
+                map_styles.push(data);
+                settings_map_layers_init();
                 map_style_close();
             }
         });
@@ -227,6 +229,8 @@ function map_style_save() {
                 "X-CSRFToken": csrf_token,
             },
             success: function(data) {
+                map_styles.push(data);
+                settings_map_layers_init();
                 map_style_close();
             }
         });

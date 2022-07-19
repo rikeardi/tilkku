@@ -38,7 +38,8 @@
 
 <script>
 
-$(document).ready(function() {
+function settings_map_layers_init() {
+    $("#settings-map-layers").html("");
     for(var i=0;i<map_layers.length;i++) {
         var selected = "";
         var layer = map_layers[i];
@@ -46,11 +47,16 @@ $(document).ready(function() {
         if(settings.map.layers.includes(i)) selected = " checked";
         $("#settings-map-layers").append("<label class='checkbox'><input type='checkbox' value='" + i + "'" + selected + " onchange='map_select_layer();'> " + layer.name + " (" + layer.id + ")</label><br>");
     }
+    $("#settings-map-styles").html("");
     for(var i=0;i<map_styles.length;i++) {
         var selected = "";
         var style = map_styles[i];
         $("#settings-map-styles").append("<span style='cursor: pointer; text-decoration: underline; color: blue;' onclick='map_edit_style(" + style.id + ")'>" + style.name + "</span><br>");
     }
+}
+
+$(document).ready(function() {
+    settings_map_layers_init();
 });
 
 function map_select_layer() {
