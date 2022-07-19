@@ -158,6 +158,7 @@ $(".style-edit").on("change", function() {
     $("#style-preview-text").text($("#map-style-name").val());
     $("#style-preview-text").css("font-size", $("#style-font").val() + "px");
     $("#style-preview-text").css("color", $("#style-stroke-color").val());
+    preview_layer.redraw();
 });
 
 $(document).ready(function() {
