@@ -14,7 +14,7 @@
                     <label class="label">{% translate 'Preview' %}</label>
                     <div class="field">
                         <div class="control">
-                            <div id="map-style-preview" style="height: 300px; width: 100%;"></div>
+                            <div id="map-style-preview" style="height: 300px; width: 300px;"></div>
                         </div>
                     </div>
                 </div>
@@ -118,8 +118,12 @@ $(document).ready(function() {
         zoomControl: false,
         center: [61.9301, 23.4460],
         zoom: 15,
+        dragging: false,
+        touchZoom: false,
+        scrollWheelZoom: false,
+        doubleClickZoom: false,
     });
-    preview_background = map_servers[settings.map.server].layer.addTo(map);
+    var preview_background = map_servers[settings.map.server].layer.addTo(map);
     $.get("{% static 'js/preview.geojson' %}").done(function(data) {
         preview_layer = L.polygon(data.coordinates, {
             color: '#000000',
