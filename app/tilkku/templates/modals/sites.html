@@ -86,7 +86,9 @@ function open_site_modal(area_id, marker_id) {
         type: 'GET',
         success: function(data) {
             if(data.length == 0) {
+                {% if user.is_superuser %}
                 save_to_site(area_id, marker_id);
+                {% endif %}
             } else {
                 opened_site = data[0];
                 load_site_modal();
