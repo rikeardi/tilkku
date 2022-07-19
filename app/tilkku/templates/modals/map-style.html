@@ -111,6 +111,7 @@ function map_edit_style(id) {
         'stroke-width': opened_style.stroke_width,
     }
     preview_layer.setStyle(style);
+    preview.invalidateSize();
 }
 
 $(document).ready(function() {
@@ -136,7 +137,6 @@ $(document).ready(function() {
             fillColor: '#000000',
             fillOpacity: 0.1,
         }).addTo(preview);
-//        preview.invalidateSize();
     });
 });
 
