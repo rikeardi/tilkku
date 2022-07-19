@@ -1,20 +1,18 @@
 {% block content %}
 {% load static %}
 {% load i18n %}
-<div class="columns">
-    <div class="column is-half">
-        <div class="content p-3">
-            <div class="field">
-                <label class="label">{% translate 'Users' %}</label>
-                <div class="control">
-                    <button class="button is-primary is-small" onclick="user_add();">{% translate 'Add' %}</button>
-                </div>
+<div class="">
+    <div class="content p-3">
+        <div class="field">
+            <label class="label">{% translate 'Users' %}</label>
+            <div class="control">
+                <button class="button is-primary is-small" onclick="user_add();">{% translate 'Add' %}</button>
             </div>
-            <div class="field">
-                <div class="control">
-                    <table class="table" id="users-list">
-                    </table>
-                </div>
+        </div>
+        <div class="field">
+            <div class="control">
+                <table class="table" id="users-list">
+                </table>
             </div>
         </div>
     </div>
