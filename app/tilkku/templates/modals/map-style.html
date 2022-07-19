@@ -155,6 +155,7 @@ $(".style-edit").on("change", function() {
         'stroke-width': $("#style-stroke-width").val(),
     }
     preview_layer.setStyle(style);
+    $("#style-preview-text").text($("#map-style-name").val());
     $("#style-preview-text").css("font-size", $("#style-font").val() + "px");
     $("#style-preview-text").css("color", $("#style-stroke-color").val());
 });
