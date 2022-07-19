@@ -245,3 +245,6 @@ msgstr "Tason tyylin poisto"
 
 msgid "Is admin"
 msgstr "On ylläpitäjä"
+
+msgid "Edit"
+msgstr "Muokkaa"

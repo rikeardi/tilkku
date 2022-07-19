@@ -3,6 +3,7 @@ from datetime import datetime
 from itertools import chain
 
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import user_passes_test
 from django.db.models import Q
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import serializers, viewsets, mixins, generics
@@ -21,7 +22,7 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
 
     def update(self, request, *args, **kwargs):
-        instance = self.get_object()
+        instance = request.user
         instance.first_name = request.data.get('first_name')
         instance.last_name = request.data.get('last_name')
         instance.email = request.data.get('email')
@@ -32,6 +33,61 @@ class UserViewSet(viewsets.ModelViewSet):
         if password and password2 and password == password2:
             instance.set_password(password)
             instance.save()
+
+        return Response(UserSerializer(instance).data)
+
+
+class UserAdminSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'first_name', 'last_name', 'email', 'is_enabled', 'is_staff', 'is_superuser')
+
+
+class UserAdminViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+    @user_passes_test(lambda u: u.is_superuser)
+    def list(self, request, *args, **kwargs):
+        return super().list(request, *args, **kwargs)
+
+    @user_passes_test(lambda u: u.is_superuser)
+    def update(self, request, *args, **kwargs):
+        instance = User.objects.get(pk=request.data.get('id'))
+        instance.username = request.data.get('username')
+        instance.first_name = request.data.get('first_name')
+        instance.last_name = request.data.get('last_name')
+        instance.email = request.data.get('email')
+        instance.is_enabled = request.data.get('is_enabled')
+        instance.is_staff = request.data.get('is_staff')
+        instance.is_superuser = request.data.get('is_superuser')
+        instance.save()
+
+        password = request.data.get('password')
+        password2 = request.data.get('password2')
+        if password and password2 and password == password2:
+            instance.set_password(password)
+            instance.save()
+
+        return Response(UserSerializer(instance).data)
+
+    @user_passes_test(lambda u: u.is_superuser)
+    def create(self, request, *args, **kwargs):
+        password = request.data.get('password')
+        password2 = request.data.get('password2')
+        if password is None or password2 is None or password != password2:
+            return Response({'error': 'Passwords do not match'})
+
+        instance = User.objects.create(
+            username=request.data.get('username'),
+            first_name=request.data.get('first_name'),
+            last_name=request.data.get('last_name'),
+            email=request.data.get('email'),
+            is_enabled=request.data.get('is_enabled'),
+            is_staff=request.data.get('is_staff'),
+            is_superuser=request.data.get('is_superuser'),
+            password=password
+        )
 
         return Response(UserSerializer(instance).data)
 
