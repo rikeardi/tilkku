@@ -123,8 +123,11 @@ $(document).ready(function() {
         scrollWheelZoom: false,
         doubleClickZoom: false,
     });
-    console.log(map_servers[settings.map.server]);
-    var preview_background = map_servers[settings.map.server].layer.addTo(map);
+
+    var preview_background = L.tileLayer(map_servers[settings.map.server].url, {
+        attribution: map_servers[settings.map.server].attribution,
+    }).addTo(preview);
+
     $.get("{% static 'js/preview.geojson' %}").done(function(data) {
         preview_layer = L.polygon(data.coordinates, {
             color: '#000000',
