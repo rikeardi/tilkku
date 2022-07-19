@@ -39,12 +39,36 @@ class UserViewSet(viewsets.ModelViewSet):
 class MapStyleSerializer(serializers.ModelSerializer):
     class Meta:
         model = MapStyle
-        fields = ('id', 'name', 'stroke', 'fill', 'opacity')
+        fields = ('id', 'name', 'stroke', 'fill', 'opacity', 'stroke_width', 'min_zoom', 'max_zoom', 'font_size')
 
 
 class MapStyleViewSet(viewsets.ModelViewSet):
     queryset = MapStyle.objects.all()
     serializer_class = MapStyleSerializer
+
+    def update(self, request, *args, **kwargs):
+        instance = self.get_object()
+        instance.name = request.data.get('name')
+        instance.stroke = request.data.get('stroke')
+        instance.fill = request.data.get('fill')
+        instance.opacity = request.data.get('opacity')
+        instance.stroke_width = request.data.get('stroke_width')
+        instance.min_zoom = request.data.get('min_zoom')
+        instance.max_zoom = request.data.get('max_zoom')
+        instance.font_size = request.data.get('font_size')
+        instance.save()
+        return Response(MapStyleSerializer(instance).data)
+
+    def create(self, request, *args, **kwargs):
+        instance = MapStyle.objects.create(name=request.data.get('name'),
+                                           stroke=request.data.get('stroke'),
+                                           fill=request.data.get('fill'),
+                                           opacity=request.data.get('opacity'),
+                                           stroke_width=request.data.get('stroke_width'),
+                                           min_zoom=request.data.get('min_zoom'),
+                                           max_zoom=request.data.get('max_zoom'),
+                                           font_size=request.data.get('font_size'))
+        return Response(MapStyleSerializer(instance).data)
 
 
 class LayerSerializer(serializers.ModelSerializer):

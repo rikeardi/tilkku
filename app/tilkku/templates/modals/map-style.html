@@ -167,5 +167,51 @@ $(document).ready(function() {
     });
 });
 
+function map_style_save() {
+    var style = {
+        name: $("#map-style-name").val(),
+        stroke: $("#style-stroke-color").val(),
+        fill: $("#style-fill-color").val(),
+        opacity: $("#style-opacity").val(),
+        stroke_width: $("#style-stroke-width").val(),
+        min_zoom: $("#style-min-zoom").val(),
+        max_zoom: $("#style-max-zoom").val(),
+        font_size: $("#style-font").val(),
+    }
+    if(opened_style) {
+        $.ajax({
+            url: "/api/mapstyles/" + opened_style.id + "/",
+            type: "PATCH",
+            data: JSON.stringify(style),
+            headers: {
+                "X-CSRFToken": csrf_token,
+            },
+            success: function(data) {
+                if (data.success) {
+                    map_style_close();
+                } else {
+                    alert(data.error);
+                }
+            }
+        });
+    } else {
+        $.ajax({
+            url: "/api/mapstyles/",
+            type: "POST",
+            data: JSON.stringify(style),
+            headers: {
+                "X-CSRFToken": csrf_token,
+            },
+            success: function(data) {
+                if (data.success) {
+                    map_style_close();
+                } else {
+                    alert(data.error);
+                }
+            }
+        });
+    }
+}
+
 </script>
 {% endblock %}
