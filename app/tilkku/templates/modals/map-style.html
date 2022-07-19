@@ -188,11 +188,7 @@ function map_style_save() {
                 "X-CSRFToken": csrf_token,
             },
             success: function(data) {
-                if (data.success) {
-                    map_style_close();
-                } else {
-                    alert(data.error);
-                }
+                map_style_close();
             }
         });
     } else {
@@ -204,11 +200,7 @@ function map_style_save() {
                 "X-CSRFToken": csrf_token,
             },
             success: function(data) {
-                if (data.success) {
-                    map_style_close();
-                } else {
-                    alert(data.error);
-                }
+                map_style_close();
             }
         });
     }
