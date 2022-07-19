@@ -47,11 +47,9 @@ class UserAdminViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserAdminSerializer
 
-    @user_passes_test(lambda u: u.is_superuser)
     def list(self, request, *args, **kwargs):
         return super().list(request, *args, **kwargs)
 
-    @user_passes_test(lambda u: u.is_superuser)
     def update(self, request, *args, **kwargs):
         instance = User.objects.get(pk=request.data.get('id'))
         instance.username = request.data.get('username')
