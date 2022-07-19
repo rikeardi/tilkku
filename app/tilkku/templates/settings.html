@@ -23,7 +23,7 @@
                             <span>{% translate 'Map' %}</span>
                         </a>
                     </li>
-                    {% if user.is_admin %}
+                    {% if user.is_superuser %}
                     <li id="settings-menu-events" class="settings-menu">
                         <a href="#" onclick="settings_select('map-layer')">
                             <span class="icon"><i class="fas fa-layer-group"></i></span>
