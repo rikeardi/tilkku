@@ -131,6 +131,9 @@ $(document).ready(function() {
 
     $.get("{% static 'js/preview.geojson' %}").done(function(data) {
         preview_background.addTo(preview);
+        data.coordinates = data.coordinates.map(function(c) {
+            return [c[1], c[0]];
+        });
         preview_layer = L.polygon(data.coordinates, {
             color: '#000000',
             weight: 1,
