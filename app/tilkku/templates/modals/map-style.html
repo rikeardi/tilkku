@@ -120,7 +120,7 @@ $(document).ready(function() {
         zoom: 15,
     });
     preview_background = map_servers[settings.map.server].layer.addTo(map);
-    $.json({% static 'js/preview.geojson' %}).done(function(data) {
+    $.json("{% static 'js/preview.geojson' %}").done(function(data) {
         preview_layer = L.polygon(data.coordinates, {
             color: '#000000',
             weight: 1,
