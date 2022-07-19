@@ -121,6 +121,31 @@ function map_edit_style(id) {
     preview.invalidateSize();
 }
 
+function map_style_add() {
+    opened_style = null;
+    $('#map-style-modal').addClass('is-active');
+    $('#map-style-name').val('');
+    $("#style-preview-text").text('');
+    $("#style-preview-text").css("font-size", 12 + "px");
+    $("#style-preview-text").css("color", '#000000');
+    document.querySelector('#style-stroke-color').jscolor.fromString('#000000');
+    $('#style-stroke-width').val(1);
+    document.querySelector('#style-fill-color').jscolor.fromString('#000000');
+    $('#style-opacity').val(0.7);
+    $('#style-min-zoom').val(5);
+    $('#style-max-zoom').val(18);
+    $('#style-font').val(12);
+    var style = {
+        color: '#000000',
+        fillColor: '#000000',
+        opacity: 0.9,
+        fillOpacity: 0.7,
+        'stroke-width': 1,
+    }
+    preview_layer.setStyle(style);
+    preview.invalidateSize();
+}
+
 $(".style-edit").on("change", function() {
     var style = {
         color: $("#style-stroke-color").val(),
