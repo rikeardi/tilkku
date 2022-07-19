@@ -48,6 +48,68 @@
     </div>
 </div>
 
+{% if user.is_superuser %}
+<div class="modal" id="user-new-modal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+        <header class="modal-card-head">
+            <p class="modal-card-title">{% translate 'New user' %}</p>
+            <button class="delete" aria-label="close" onclick="user_new_modal_close();"></button>
+        </header>
+        <form>
+        <section class="modal-card-body">
+            <div class="field">
+                <label class="label">{% translate 'Username' %}</label>
+                <div class="control">
+                    <input class="input" type="text" id="user-new-modal-username" value="">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">{% translate 'First name' %}</label>
+                <div class="control">
+                    <input class="input" type="text" id="user-new-modal-firstname" value="">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">{% translate 'Last name' %}</label>
+                <div class="control">
+                    <input class="input" type="text" id="user-new-modal-lastname" value="">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">{% translate 'E-mail' %}</label>
+                <div class="control">
+                    <input class="input" type="text" id="user-new-modal-email" value="">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">{% translate 'Password' %}</label>
+                <div class="control">
+                    <input class="input" type="password" id="user-new-modal-password" autocomplete="new-password">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">{% translate 'Confirm password' %}</label>
+                <div class="control">
+                    <input class="input" type="password" id="user-new-modal-password-confirm" autocomplete="new-password">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">{% translate 'Admin' %}</label>
+                <div class="control">
+                    <label class="checkbox"><input id="user-new-modal-admin" type="checkbox"> {% translate 'Is admin' %}</label>
+                </div>
+            </div>
+        </section>
+        <footer class="modal-card-foot">
+            <button class="button is-primary" onclick="user_new_modal_save();">{% translate 'Save' %}</button>
+            <button class="button" onclick="user_new_modal_close();">{% translate 'Cancel' %}</button>
+        </footer>
+        </form>
+    </div>
+</div>
+{% endif %}
+
 <script>
 
 function user_edit_modal_open() {

@@ -1,4 +1,39 @@
 {% block content %}
 {% load static %}
+{% load i18n %}
+<div class="columns">
+    <div class="column is-half">
+        <div class="content p-3">
+            <div class="field">
+                <label class="label">{% translate 'Users' %}</label>
+                <div class="control">
+                    <button class="button is-primary is-small" onclick="user_add();">{% translate 'Add' %}</button>
+                </div>
+            </div>
+            <div class="field">
+                <div class="control">
+                    <div id="users-list">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
+<script>
+
+function users_init() {
+    $("#users-list").html("");
+    $.ajax({
+        url: "/api/users/",
+        type: "GET",
+        success: function(data) {
+            for(var i=0;i<data.length;i++) {
+                var user = data[i];
+                $("#users-list").append("<div class='field'><label class='label'>" + user.name + "</label><div class='control'><button class='button is-primary is-small' onclick='user_edit(" + user.id + ");'>{% translate 'Edit' %}</button><button class='button is-primary is-small' onclick='user_delete(" + user.id + ");'>{% translate 'Delete' %}</button></div></div>");
+            }
+        }
+    });
+}
+</script>
 {% endblock %}

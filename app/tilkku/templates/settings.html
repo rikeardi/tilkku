@@ -58,15 +58,17 @@
                 <div id="settings-map" class="settings-box" style="height: 100%; display: none;">
                     {% include 'settings/map.html' %}
                 </div>
+                <div id="settings-sites" class="settings-box" style="height: 100%; display: none;">
+                    {% include 'settings/sites.html' %}
+                </div>
+                {% if user.is_superuser %}
                 <div id="settings-map-layer" class="settings-box" style="height: 100%; display: none;">
                     {% include 'settings/map-layers.html' %}
                 </div>
                 <div id="settings-users" class="settings-box" style="height: 100%; display: none;">
                     {% include 'settings/users.html' %}
                 </div>
-                <div id="settings-sites" class="settings-box" style="height: 100%; display: none;">
-                    {% include 'settings/sites.html' %}
-                </div>
+                {% endif %}
             </div>
         </div>
     </div>

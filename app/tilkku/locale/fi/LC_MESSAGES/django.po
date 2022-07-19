@@ -242,3 +242,6 @@ msgstr "Haluatko varmasti poistaa tämän tason tyylin?"
 
 msgid "Layer style deletion"
 msgstr "Tason tyylin poisto"
+
+msgid "Is admin"
+msgstr "On ylläpitäjä"
