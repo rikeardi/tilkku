@@ -25,7 +25,7 @@
 function users_init() {
     $("#users-list").html("");
     $.ajax({
-        url: "/api/users/",
+        url: "/api/adm_users/",
         type: "GET",
         success: function(data) {
             console.log(data);
