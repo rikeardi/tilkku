@@ -28,6 +28,7 @@ function users_init() {
         url: "/api/users/",
         type: "GET",
         success: function(data) {
+            console.log(data);
             for(var i=0;i<data.length;i++) {
                 var user = data[i];
                 $("#users-list").append("<div class='field'><label class='label'>" + user.name + "</label><div class='control'><button class='button is-primary is-small' onclick='user_edit(" + user.id + ");'>{% translate 'Edit' %}</button><button class='button is-primary is-small' onclick='user_delete(" + user.id + ");'>{% translate 'Delete' %}</button></div></div>");
