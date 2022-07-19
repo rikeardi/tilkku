@@ -23,14 +23,6 @@
                             <span>{% translate 'Map' %}</span>
                         </a>
                     </li>
-                    {% if user.is_superuser %}
-                    <li id="settings-menu-events" class="settings-menu">
-                        <a href="#" onclick="settings_select('map-layer')">
-                            <span class="icon"><i class="fas fa-layer-group"></i></span>
-                            <span>{% translate 'Map layers' %}</span>
-                        </a>
-                    </li>
-                    {% endif %}
                     <li id="settings-menu-sites" class="settings-menu is-hidden">
                         <a href="#" onclick="settings_select('sites')">
                             <span class="icon"><i class="fas fa-thumbtack"></i></span>
@@ -38,6 +30,18 @@
                         </a>
                     </li>
                     {% if user.is_superuser %}
+                    <li id="settings-menu-events" class="settings-menu">
+                        <a href="#" onclick="settings_select('map-layer')">
+                            <span class="icon"><i class="fas fa-layer-group"></i></span>
+                            <span>{% translate 'Map layers' %}</span>
+                        </a>
+                    </li>
+                    <li id="settings-menu-users" class="settings-menu is-hidden">
+                        <a href="#" onclick="settings_select('users')">
+                            <span class="icon"><i class="fas fa-user-group"></i></span>
+                            <span>{% translate 'Users' %}</span>
+                        </a>
+                    </li>
                     <li class="">
                         <a href="{% url 'admin:index' %}" target="_blank">
                             <span class="icon"><i class="fas fa-lock"></i></span>
@@ -56,6 +60,9 @@
                 </div>
                 <div id="settings-map-layer" class="settings-box" style="height: 100%; display: none;">
                     {% include 'settings/map-layers.html' %}
+                </div>
+                <div id="settings-users" class="settings-box" style="height: 100%; display: none;">
+                    {% include 'settings/users.html' %}
                 </div>
                 <div id="settings-sites" class="settings-box" style="height: 100%; display: none;">
                     {% include 'settings/sites.html' %}

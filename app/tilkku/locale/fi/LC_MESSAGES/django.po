@@ -227,3 +227,6 @@ msgstr "Maksimi zoomaus"
 
 msgid "Font size"
 msgstr "Fontin koko"
+
+msgid "Background maps"
+msgstr "Taustakartat"
