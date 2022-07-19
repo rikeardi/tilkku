@@ -104,11 +104,11 @@ function map_edit_style(id) {
     $('#style-max-zoom').val(opened_style.max_zoom);
     $('#style-font').val(opened_style.font_size);
     var style = {
-        color: layer.style.stroke,
-        fillColor: layer.style.fill,
-        opacity: layer.style.opacity + 0.2,
-        fillOpacity: layer.style.opacity,
-        'stroke-width': layer.style.stroke_width,
+        color: opened_style.stroke,
+        fillColor: opened_style.fill,
+        opacity: opened_style.opacity + 0.2,
+        fillOpacity: opened_style.opacity,
+        'stroke-width': opened_style.stroke_width,
     }
     preview_layer.setStyle(style);
 }
