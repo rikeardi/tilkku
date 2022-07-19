@@ -31,22 +31,22 @@
                         <label class="label">{% translate 'Stroke' %}</label>
                         <div class="field">
                             <div class="control">
-                                <input class="input" id="style-stroke-color" data-jscolor="{}">
+                                <input class="input style-edit" id="style-stroke-color" data-jscolor="{}">
                             </div>
                             <div class="control">
-                                <input class="input" id="style-stroke-width" type="number" min="1" max="5">
+                                <input class="input style-edit" id="style-stroke-width" type="number" min="1" max="5">
                             </div>
                         </div>
                         <label class="label">{% translate 'Fill' %}</label>
                         <div class="field">
                             <div class="control">
-                                <input class="input" id="style-fill-color" data-jscolor="{}">
+                                <input class="input style-edit" id="style-fill-color" data-jscolor="{}">
                             </div>
                         </div>
                         <label class="label">{% translate 'Opacity' %}</label>
                         <div class="field">
                             <div class="control">
-                                <input class="input" id="style-opacity" type="number" min="0" max="1" step="0.1">
+                                <input class="input style-edit" id="style-opacity" type="number" min="0" max="1" step="0.1">
                             </div>
                         </div>
                     </div>
@@ -68,7 +68,7 @@
                         <label class="label">{% translate 'Font size' %}</label>
                         <div class="field">
                             <div class="control">
-                                <input class="input" id="style-font" type="number" min="5" max="36">
+                                <input class="input style-edit" id="style-font" type="number" min="5" max="36">
                             </div>
                         </div>
                     </div>
@@ -98,7 +98,6 @@ function map_edit_style(id) {
             break;
         }
     }
-    console.log(opened_style);
     $('#map-style-modal').addClass('is-active');
     $('#map-style-name').val(opened_style.name);
     $("#style-preview-text").text(opened_style.name);
@@ -121,6 +120,19 @@ function map_edit_style(id) {
     preview_layer.setStyle(style);
     preview.invalidateSize();
 }
+
+$(".style-edit").on("change", function() {
+    var style = {
+        color: $("#style-stroke-color").val(),
+        fillColor: $("#style-fill-color").val(),
+        opacity: $("#style-opacity").val() + 0.2,
+        fillOpacity: $("#style-opacity").val(),
+        'stroke-width': $("#style-stroke-width").val(),
+    }
+    preview_layer.setStyle(style);
+    $("#style-preview-text").css("font-size", $("#style-font").val() + "px");
+    $("#style-preview-text").css("color", $("#style-stroke-color").val());
+});
 
 $(document).ready(function() {
     preview = L.map('map-style-preview', {
