@@ -179,6 +179,7 @@ function map_style_save() {
         font_size: $("#style-font").val(),
     }
     if(opened_style) {
+        style.id = opened_style.id;
         $.ajax({
             url: "/api/mapstyles/" + opened_style.id + "/",
             type: "PATCH",
