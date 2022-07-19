@@ -200,3 +200,6 @@ msgstr "Uusi merkintä"
 
 msgid "Link"
 msgstr "Linkki"
+
+msgid "Layer styles"
+msgstr "Tason tyylit"

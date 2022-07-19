@@ -19,8 +19,6 @@ map = L.map('map', {
     zoom: settings.map.zoom,
 });
 
-
-
 map_scale = L.control.scale({
     imperial: false,
     metric: true,

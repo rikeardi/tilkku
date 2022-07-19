@@ -1,0 +1,133 @@
+{% block content %}
+<div class="modal" id="map-style-modal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+        <header class="modal-card-head">
+            <p class="modal-card-title">{% translate 'Map style' %}</p>
+            <button class="delete" aria-label="close" onclick="map_style_close();"></button>
+        </header>
+        <section class="modal-card-body">
+            <div>
+                <div class="content p-3">
+                    <label class="label">{% translate 'Preview' %}</label>
+                    <div class="field">
+                        <div class="control">
+                            <div id="map-style-preview"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="columns">
+                <div class="column is-half">
+                    <div class="content p-3">
+                        <label class="label">{% translate 'Name' %}</label>
+                        <div class="field">
+                            <div class="control">
+                                <input type="text" id="map-style-name" class="input" placeholder="{% translate 'Name' %}">
+                            </div>
+                        </div>
+                        <label class="label">{% translate 'Stroke' %}</label>
+                        <div class="field">
+                            <div class="control">
+                                <input class="input" id="style-stroke-color" data-jscolor="{}">
+                            </div>
+                            <div class="control">
+                                <input class="input" id="style-stroke-width" type="number" min="1" max="5">
+                            </div>
+                        </div>
+                        <label class="label">{% translate 'Fill' %}</label>
+                        <div class="field">
+                            <div class="control">
+                                <input class="input" id="style-fill-color" data-jscolor="{}">
+                            </div>
+                        </div>
+                        <label class="label">{% translate 'Opacity' %}</label>
+                        <div class="field">
+                            <div class="control">
+                                <input class="input" id="style-opacity" type="number" min="0" max="1" step="0.1">
+                            </div>
+                        </div>
+                        <label class="label">{% translate 'Minimum zoom' %}</label>
+                        <div class="field">
+                            <div class="control">
+                                <input class="input" id="style-min-zoom" type="number" min="5" max="18">
+                            </div>
+                        </div>
+                        <label class="label">{% translate 'Maximum zoom' %}</label>
+                        <div class="field">
+                            <div class="control">
+                                <input class="input" id="style-max-zoom" type="number" min="5" max="18">
+                            </div>
+                        </div>
+                        <label class="label">{% translate 'Font size' %}</label>
+                        <div class="field">
+                            <div class="control">
+                                <input class="input" id="style-font" type="number" min="5" max="36">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer class="modal-card-foot">
+            <button class="button is-primary" onclick="map_style_save();">{% translate 'Save' %}</button>
+            <button class="button" onclick="map_style_close();">{% translate 'Cancel' %}</button>
+        </footer>
+    </div>
+</div>
+<script>
+
+var preview = null;
+var preview_layer = null;
+var opened_style = null;
+
+function map_style_close() {
+    $('#map-style-modal').removeClass('is-active');
+}
+
+
+function map_edit_style(id) {
+    for (var i = 0; i < map_styles.length; i++) {
+        if (map_styles[i].id == id) {
+            opened_style = map_styles[i];
+            break;
+        }
+    }
+    $('#map-style-modal').addClass('is-active');
+    $('#map-style-name').val(opened_style.name);
+    $('#style-stroke-color').val(opened_style.stroke_color);
+    $('#style-stroke-width').val(opened_style.stroke_width);
+    $('#style-fill-color').val(opened_style.fill_color);
+    $('#style-opacity').val(opened_style.opacity);
+    $('#style-min-zoom').val(opened_style.min_zoom);
+    $('#style-max-zoom').val(opened_style.max_zoom);
+    $('#style-font').val(opened_style.font_size);
+    var style = {
+        color: layer.style.stroke,
+        fillColor: layer.style.fill,
+        opacity: layer.style.opacity + 0.2,
+        fillOpacity: layer.style.opacity,
+        'stroke-width': layer.style.stroke_width,
+    }
+    preview_layer.setStyle(style);
+}
+
+$(document).ready(function() {
+    preview = L.map('preview', {
+        zoomControl: false,
+        center: [61.9301, 23.4460],
+        zoom: 15,
+    });
+    preview_background = map_servers[settings.map.server].layer.addTo(map);
+    $.json({% static 'js/preview.geojson' %}).done(function(data) {
+        preview_layer = L.polygon(data.coordinates, {
+            color: '#000000',
+            weight: 1,
+            fillColor: '#000000',
+            fillOpacity: 0.1,
+        }).addTo(preview);
+    });
+});
+
+</script>
+{% endblock %}

@@ -4,6 +4,22 @@
 <div class="columns">
     <div class="column is-half">
         <div class="content p-3">
+            <label class="label">{% translate 'Map layers' %}</label>
+            <div class="field has-addons">
+                <div class="control">
+                    <button class="button is-primary is-small" onclick="map_layer_add();">{% translate 'Add' %}</button>
+                </div>
+                <div class="control">
+                </div>
+            </div>
+            <div class="field">
+                <div id="settings-map-layers" class="control">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="column is-half">
+        <div class="content p-3">
             <label class="label">{% translate 'Layer styles' %}</label>
             <div class="field has-addons">
                 <div class="control">
@@ -18,38 +34,22 @@
             </div>
         </div>
     </div>
-    <div class="column is-half">
-        <div class="content p-3">
-            <label class="label">{% translate 'Map layers' %}</label>
-            <div class="field has-addons">
-                <div class="control">
-                    <button class="button is-primary is-small" onclick="map_layerr_add();">{% translate 'Add' %}</button>
-                </div>
-                <div class="control">
-                </div>
-            </div>
-            <div class="field">
-                <div id="settings-map-layers" class="control">
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 
 <script>
 
 $(document).ready(function() {
-    for(var i=0;i<map_styles.length;i++) {
-        var selected = "";
-        var style = map_styles[i];
-        $("#settings-map-styles").append(style.name + "<br>");
-    }
     for(var i=0;i<map_layers.length;i++) {
         var selected = "";
         var layer = map_layers[i];
 
         if(settings.map.layers.includes(i)) selected = " checked";
         $("#settings-map-layers").append("<label class='checkbox'><input type='checkbox' value='" + i + "'" + selected + " onchange='map_select_layer();'> " + layer.name + " (" + layer.id + ")</label><br>");
+    }
+    for(var i=0;i<map_styles.length;i++) {
+        var selected = "";
+        var style = map_styles[i];
+        $("#settings-map-styles").append("<span onclick='map_edit_style(" + style.id + ")'>" + style.name + "</span><br>");
     }
 });
 
