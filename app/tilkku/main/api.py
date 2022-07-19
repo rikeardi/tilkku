@@ -46,7 +46,7 @@ class UserAdminSerializer(serializers.HyperlinkedModelSerializer):
 @user_passes_test(lambda u: u.is_superuser)
 class UserAdminViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
-    serializer_class = UserSerializer
+    serializer_class = UserAdminSerializer
 
     @user_passes_test(lambda u: u.is_superuser)
     def list(self, request, *args, **kwargs):
