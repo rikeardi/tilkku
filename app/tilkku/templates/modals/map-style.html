@@ -94,6 +94,7 @@ function map_edit_style(id) {
             break;
         }
     }
+    console.log(opened_style);
     $('#map-style-modal').addClass('is-active');
     $('#map-style-name').val(opened_style.name);
     document.querySelector('#style-stroke-color').jscolor.fromString(opened_style.stroke_color);
