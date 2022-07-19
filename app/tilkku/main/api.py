@@ -43,6 +43,7 @@ class UserAdminSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('id', 'username', 'first_name', 'last_name', 'email', 'is_enabled', 'is_staff', 'is_superuser')
 
 
+@user_passes_test(lambda u: u.is_superuser)
 class UserAdminViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
