@@ -230,3 +230,6 @@ msgstr "Fontin koko"
 
 msgid "Background maps"
 msgstr "Taustakartat"
+
+msgid "Users"
+msgstr "Käyttäjät"
