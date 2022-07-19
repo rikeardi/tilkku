@@ -96,9 +96,9 @@ function map_edit_style(id) {
     }
     $('#map-style-modal').addClass('is-active');
     $('#map-style-name').val(opened_style.name);
-    $('#style-stroke-color').val(opened_style.stroke_color);
+    $('#style-stroke-color').jscolor.fromString(opened_style.stroke_color);
     $('#style-stroke-width').val(opened_style.stroke_width);
-    $('#style-fill-color').val(opened_style.fill_color);
+    $('#style-fill-color').jscolor.fromString(opened_style.fill_color);
     $('#style-opacity').val(opened_style.opacity);
     $('#style-min-zoom').val(opened_style.min_zoom);
     $('#style-max-zoom').val(opened_style.max_zoom);
