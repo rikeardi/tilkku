@@ -118,17 +118,15 @@ $(document).ready(function() {
         zoomControl: false,
         center: [61.9301, 23.4460],
         zoom: 15,
-//        dragging: false,
-//        touchZoom: false,
-//        scrollWheelZoom: false,
-//        doubleClickZoom: false,
+        dragging: false,
+        touchZoom: false,
+        scrollWheelZoom: false,
+        doubleClickZoom: false,
     });
 
     var preview_background = L.tileLayer(map_servers[settings.map.server].url, {
         attribution: map_servers[settings.map.server].attribution,
     }).addTo(preview);
-
-    preview.setView([61.9301, 23.4460], 15);
 
     $.get("{% static 'js/preview.geojson' %}").done(function(data) {
         preview_layer = L.polygon(data.coordinates, {
@@ -137,6 +135,7 @@ $(document).ready(function() {
             fillColor: '#000000',
             fillOpacity: 0.1,
         }).addTo(preview);
+        preview.invalidateSize();
     });
 });
 
