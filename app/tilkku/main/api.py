@@ -40,7 +40,7 @@ class UserViewSet(viewsets.ModelViewSet):
 class UserAdminSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'username', 'first_name', 'last_name', 'email', 'is_enabled', 'is_staff', 'is_superuser')
+        fields = ('id', 'username', 'first_name', 'last_name', 'email', 'is_staff', 'is_superuser')
 
 
 class UserAdminViewSet(viewsets.ModelViewSet):
@@ -56,7 +56,6 @@ class UserAdminViewSet(viewsets.ModelViewSet):
         instance.first_name = request.data.get('first_name')
         instance.last_name = request.data.get('last_name')
         instance.email = request.data.get('email')
-        instance.is_enabled = request.data.get('is_enabled')
         instance.is_staff = request.data.get('is_staff')
         instance.is_superuser = request.data.get('is_superuser')
         instance.save()
