@@ -9,11 +9,13 @@
                 <div class="control">
                     <button class="button is-primary is-small" onclick="map_layer_add();">{% translate 'Add' %}</button>
                 </div>
-                <div class="control">
-                </div>
             </div>
             <div class="field">
-                <div id="settings-map-layers" class="control">
+                <label class="label">GeoJSON</label>
+                <div class="control">
+                    <button class="button is-primary is-small" onclick="map_export_geoJSON();">{% translate 'Export' %}</button>
+                    <button class="button is-primary is-small" onclick="map_import_geoJSON();">{% translate 'Import' %}</button>
+                    <input type="file" id="map-import-file" style="display: none;" onchange="map_import_upload();">
                 </div>
             </div>
         </div>
@@ -24,8 +26,6 @@
             <div class="field has-addons">
                 <div class="control">
                     <button class="button is-primary is-small" onclick="map_style_add();">{% translate 'Add' %}</button>
-                </div>
-                <div class="control">
                 </div>
             </div>
             <div class="field">
@@ -39,14 +39,6 @@
 <script>
 
 function settings_map_layers_init() {
-    $("#settings-map-layers").html("");
-    for(var i=0;i<map_layers.length;i++) {
-        var selected = "";
-        var layer = map_layers[i];
-
-        if(settings.map.layers.includes(i)) selected = " checked";
-        $("#settings-map-layers").append("<label class='checkbox'><input type='checkbox' value='" + i + "'" + selected + " onchange='map_select_layer();'> " + layer.name + " (" + layer.id + ")</label><br>");
-    }
     $("#settings-map-styles").html("");
     for(var i=0;i<map_styles.length;i++) {
         var selected = "";
@@ -59,14 +51,52 @@ $(document).ready(function() {
     settings_map_layers_init();
 });
 
-function map_select_layer() {
-    settings.map.layers = [];
-    var layers = $("#settings-map-layers input").each(function() {
-        if($(this).is(":checked")) {
-            settings.map.layers.push(parseInt($(this).val()));
+function map_export_geoJSON() {
+    var layers = [];
+    for(var i=0;i<map_layers.length;i++) {
+        if(settings.map.layers.includes(i)) {
+            layers.push(map_layers[i].id);
+        }
+    }
+
+    $.ajax({
+        url: "/api/geojson/1/?layers=" + layers.join(","),
+        type: "GET",
+        success: function(data) {
+            $("<a />", {
+                "download": "map.geojson",
+                "href": "data:application/json," + encodeURIComponent(JSON.stringify(data))
+            }).appendTo("body").click(function() {
+                $(this).remove();
+            })[0].click();
         }
     });
-    refresh_settings();
+}
+
+function map_import_geoJSON() {
+    $("#map-import-file").click();
+}
+
+function map_import_upload() {
+    var file = $("#map-import-file")[0].files[0];
+    var reader = new FileReader();
+    reader.onload = function(e) {
+        var data = JSON.parse(e.target.result);
+        console.log(data);
+        $.ajax({
+            url: "/api/geojson/1/",
+            type: "PATCH",
+            headers: {
+                "X-CSRFToken": csrf_token
+            },
+            data: JSON.stringify(data),
+            contentType: "application/json",
+            success: function(data) {
+                location.reload();
+            }
+        });
+    };
+    reader.readAsText(file);
 }
 
 </script>

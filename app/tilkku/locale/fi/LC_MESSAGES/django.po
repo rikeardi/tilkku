@@ -203,3 +203,27 @@ msgstr "Linkki"
 
 msgid "Layer styles"
 msgstr "Tason tyylit"
+
+msgid "Layer style"
+msgstr "Tason tyyli"
+
+msgid "Preview"
+msgstr "Esikatselu"
+
+msgid "Stroke"
+msgstr "Reuna"
+
+msgid "Fill"
+msgstr "Täyttö"
+
+msgid "Opacity"
+msgstr "Läpinäkyvyys"
+
+msgid "Minimum zoom"
+msgstr "Minimi zoomaus"
+
+msgid "Maximum zoom"
+msgstr "Maksimi zoomaus"
+
+msgid "Font size"
+msgstr "Fontin koko"
