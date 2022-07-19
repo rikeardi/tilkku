@@ -97,9 +97,9 @@ function map_edit_style(id) {
     console.log(opened_style);
     $('#map-style-modal').addClass('is-active');
     $('#map-style-name').val(opened_style.name);
-    document.querySelector('#style-stroke-color').jscolor.fromString(opened_style.stroke_color);
+    document.querySelector('#style-stroke-color').jscolor.fromString(opened_style.stroke);
     $('#style-stroke-width').val(opened_style.stroke_width);
-    document.querySelector('#style-fill-color').jscolor.fromString(opened_style.fill_color);
+    document.querySelector('#style-fill-color').jscolor.fromString(opened_style.fill);
     $('#style-opacity').val(opened_style.opacity);
     $('#style-min-zoom').val(opened_style.min_zoom);
     $('#style-max-zoom').val(opened_style.max_zoom);
