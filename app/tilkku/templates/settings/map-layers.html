@@ -16,8 +16,8 @@
                     </table>
                 </div>
             </div>
-            <label class="label"><span class="icon is-small" onclick="layers_toggle('layers');"><i class="fas fa-angle-down"></i></span> {% translate 'Map layers' %}</label>
             <div class="field" style="position: relative;">
+                <label class="label"><span class="icon is-small" onclick="layers_toggle('layers');"><i class="fas fa-angle-down"></i></span> {% translate 'Map layers' %}</label>
                 <div class="control" style="position: absolute; top: 0; right: 5px;">
                     <button class="button is-primary is-small" onclick="map_layer_add();">{% translate 'Add' %}</button>
                 </div>
@@ -149,7 +149,7 @@ function map_server_delete(id) {
 }
 
 function layers_toggle(layer) {
-    $(".map-layer-list").hide();
+    $(".map-layers-list").hide();
     $("#map-" + layer + "-list").show();
 }
 
