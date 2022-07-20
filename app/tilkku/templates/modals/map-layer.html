@@ -64,6 +64,11 @@ function map_layer_open(id) {
                 $('#map-layer-name').val(map_layers[i].name);
                 $('#map-layer-type').val(map_layers[i].type);
                 $('#map-layer-style').val(map_layers[i].style);
+                $('#map-layer-style option').each(function() {
+                    if($(this).val() == map_layers[i].style) {
+                        $(this).attr('selected', 'selected');
+                    }
+                });
                 opened_layer = map_layers[i];
                 break;
             }
