@@ -146,6 +146,13 @@ class LayerViewSet(viewsets.ModelViewSet):
     queryset = Layer.objects.all()
     serializer_class = LayerSerializer
 
+    def update(self, request, *args, **kwargs):
+        instance = self.get_object()
+        instance.name = request.data.get('name')
+        instance.style = MapStyle.objects.get(pk=request.data.get('style'))
+        instance.save()
+        return Response(LayerSerializer(instance).data)
+
 
 class AreaSerializer(serializers.ModelSerializer):
     layer = LayerSerializer(read_only=True)
