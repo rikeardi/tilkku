@@ -251,3 +251,12 @@ msgstr "On ylläpitäjä"
 
 msgid "Edit"
 msgstr "Muokkaa"
+
+msgid "Please fill all fields"
+msgstr "Täytä kaikki kentät"
+
+msgid "Map server deletion"
+msgstr "Taustakartan poisto"
+
+msgid "Are you sure you want to delete this map server?"
+msgstr "Haluatko varmasti poistaa tämän taustakartan?"
