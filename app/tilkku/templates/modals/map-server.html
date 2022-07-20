@@ -2,10 +2,114 @@
 {% load static %}
 {% load i18n %}
 
+<div class="modal" id="map-server-modal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+        <header class="modal-card-head">
+            <p class="modal-card-title">{% translate 'Map server' %}</p>
+            <button class="delete" aria-label="close" onclick="map_server_close();"></button>
+        </header>
+        <section class="modal-card-body">
+            <div class="content p-3">
+                <label class="label">{% translate 'Name' %}</label>
+                <div class="field">
+                    <div class="control">
+                        <input type="text" id="map-server-name" class="input layer-edit" placeholder="{% translate 'Name' %}">
+                    </div>
+                </div>
+                <label class="label">{% translate 'URL' %}</label>
+                <div class="field">
+                    <div class="control">
+                        <input type="text" id="map-server-url" class="input layer-edit" placeholder="{% translate 'URL' %}">
+                    </div>
+                </div>
+                <label class="label">{% translate 'Attribution' %}</label>
+                <div class="field">
+                    <div class="control">
+                        <input type="text" id="map-server-layer" class="input layer-edit" placeholder="{% translate 'Attribution' %}">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer>
+            <button class="button is-primary" onclick="map_server_save();">{% translate 'Save' %}</button>
+            <button class="button" onclick="map_server_close();">{% translate 'Cancel' %}</button>
+        </footer>
+    </div>
+</div>
 
 <script>
 
+function map_server_open(id) {
+    if(id) {
+        for(var i=0; i<map_servers.length; i++) {
+            if(map_servers[i].id == id) {
+                $('#map-server-name').val(map_servers[i].name);
+                $('#map-server-url').val(map_servers[i].url);
+                $('#map-server-layer').val(map_servers[i].layer);
+                break;
+            }
+        }
+    }
+    $('#map-server-modal').addClass('is-active');
+}
 
+function map_server_close() {
+    $('#map-server-modal').removeClass('is-active');
+}
+
+function map_server_save() {
+    var id = $('#map-server-modal').attr('data-id');
+    var name = $('#map-server-name').val();
+    var url = $('#map-server-url').val();
+    var layer = $('#map-server-layer').val();
+    if(name && url && layer) {
+        var data = {
+            'name': name,
+            'url': url,
+            'layer': layer
+        };
+        if(id) {
+            $.ajax({
+                type: 'PATCH',
+                url: '/api/map-servers/' + id + '/',
+                data: data,
+                headers: {
+                    'X-CSRFToken': csrftoken
+                },
+                success: function(data) {
+                    for(var i=0; i<map_servers.length; i++) {
+                        if(map_servers[i].id == id) {
+                            map_servers[i].name = name;
+                            map_servers[i].url = url;
+                            map_servers[i].layer = layer;
+                            break;
+                        }
+                    }
+                    map_server_close();
+                    settings_map_layers_init();
+                }
+            });
+        } else {
+            $.ajax({
+                type: 'POST',
+                url: '/api/map-servers/',
+                data: data,
+                headers: {
+                    'X-CSRFToken': csrftoken
+                },
+                success: function(data) {
+                    map_servers.push(data);
+                    map_server_close();
+                    settings_map_layers_init();
+                }
+            });
+        }
+        map_server_close();
+    } else {
+        messages_alert('{% translate 'Please fill all fields' %}');
+    }
+}
 
 </script>
 {% endblock %}

@@ -1,5 +1,7 @@
 {% block messages %}
 {% load i18n %}
+<div id="messages-alert-container" style="position: fixed; top: 0; width: 100%; text-align: center;">
+</div>
 
 <div class="modal" id="messages-confirm-modal">
     <div class="modal-background"></div>
@@ -16,6 +18,11 @@
             <button class="button" onclick="messages_confirm_modal_close();">{% translate 'Cancel' %}</button>
         </section>
     </div>
+</div>
+
+<div class="notification is-hidden" id="messages-alert-template">
+    <button class="delete" onclick="messages_alert_close();"></button>
+    <p class="messages-alert-message"></p>
 </div>
 
 <script>
@@ -36,6 +43,16 @@ function messages_confirm_modal_close() {
 function messages_confirm_accept() {
     messages_confirm_callback();
     messages_confirm_modal_close();
+}
+
+function messages_alert(message) {
+    var alert = $('#messages-alert-template').clone();
+    alert.removeClass('is-hidden');
+    alert.find('.messages-alert-message').text(message);
+    $('#messages-alert-container').append(alert);
+    setTimeout(function() {
+        alert.remove();
+    }, 5000);
 }
 
 </script>
