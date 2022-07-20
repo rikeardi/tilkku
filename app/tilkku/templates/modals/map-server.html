@@ -26,7 +26,7 @@
                 <label class="label">{% translate 'Attribution' %}</label>
                 <div class="field">
                     <div class="control">
-                        <input type="text" id="map-server-layer" class="input layer-edit" placeholder="{% translate 'Attribution' %}">
+                        <input type="text" id="map-server-attribution" class="input layer-edit" placeholder="{% translate 'Attribution' %}">
                     </div>
                 </div>
             </div>
@@ -46,7 +46,7 @@ function map_server_open(id) {
             if(map_servers[i].id == id) {
                 $('#map-server-name').val(map_servers[i].name);
                 $('#map-server-url').val(map_servers[i].url);
-                $('#map-server-layer').val(map_servers[i].layer);
+                $('#map-server-attribution').val(map_servers[i].attribution);
                 break;
             }
         }
