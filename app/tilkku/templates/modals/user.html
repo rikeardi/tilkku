@@ -205,7 +205,7 @@ function user_new_modal_save() {
             email: email,
             password: password,
             password2: password_confirm,
-            is_superuser: $('#user-new-modal-admin').prop('checked')
+            is_superuser: $('#user-new-modal-admin').prop('checked') ? 1 : 0
         },
         headers: {
             'X-CSRFToken': csrf_token,
