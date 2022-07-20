@@ -111,5 +111,26 @@ function map_server_save() {
     }
 }
 
+function map_server_delete(id) {
+    message_confirm("{% translate 'Map server deletion' %}", "{% translate 'Are you sure you want to delete this map server?' %}", function() {
+        $.ajax({
+            url: "/api/map/server/" + id + "/",
+            type: "DELETE",
+            headers: {
+                "X-CSRFToken": csrf_token
+            },
+            success: function(data) {
+                for(var i=0;i<map_servers.length;i++) {
+                    if(map_servers[i].id == id) {
+                        map_servers.splice(i, 1);
+                        break;
+                    }
+                }
+                settings_map_layers_init();
+            }
+        });
+    });
+}
+
 </script>
 {% endblock %}

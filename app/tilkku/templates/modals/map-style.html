@@ -92,57 +92,51 @@ function map_style_close() {
     $('#map-style-modal').removeClass('is-active');
 }
 
-function map_style_edit(id) {
-    for (var i = 0; i < map_styles.length; i++) {
-        if (map_styles[i].id == id) {
-            opened_style = map_styles[i];
-            break;
-        }
-    }
-    $('#map-style-modal').addClass('is-active');
-    $('#map-style-name').val(opened_style.name);
-    $("#style-preview-text").text(opened_style.name);
-    $("#style-preview-text").css("font-size", opened_style.font + "px");
-    $("#style-preview-text").css("color", opened_style.stroke);
-    document.querySelector('#style-stroke-color').jscolor.fromString(opened_style.stroke);
-    $('#style-stroke-width').val(opened_style.stroke_width);
-    document.querySelector('#style-fill-color').jscolor.fromString(opened_style.fill);
-    $('#style-opacity').val(opened_style.opacity);
-    $('#style-min-zoom').val(opened_style.min_zoom);
-    $('#style-max-zoom').val(opened_style.max_zoom);
-    $('#style-font').val(opened_style.font_size);
+function map_style_open(id) {
     var style = {
-        color: opened_style.stroke,
-        fillColor: opened_style.fill,
-        opacity: opened_style.opacity + 0.2,
-        fillOpacity: opened_style.opacity,
-        'stroke-width': opened_style.stroke_width,
-    }
-    preview_layer.setStyle(style);
-    preview.invalidateSize();
-}
-
-function map_style_add() {
-    opened_style = null;
-    $('#map-style-modal').addClass('is-active');
-    $('#map-style-name').val('');
-    $("#style-preview-text").text('');
-    $("#style-preview-text").css("font-size", 12 + "px");
-    $("#style-preview-text").css("color", '#000000');
-    document.querySelector('#style-stroke-color').jscolor.fromString('#000000');
-    $('#style-stroke-width').val(1);
-    document.querySelector('#style-fill-color').jscolor.fromString('#000000');
-    $('#style-opacity').val(0.7);
-    $('#style-min-zoom').val(5);
-    $('#style-max-zoom').val(18);
-    $('#style-font').val(12);
-    var style = {
+        name: '',
+        font_size: 16,
         color: '#000000',
         fillColor: '#000000',
         opacity: 0.9,
         fillOpacity: 0.7,
         'stroke-width': 1,
+        min_zoom: 5,
+        max_zoom: 18,
     }
+    if(id) {
+        for (var i = 0; i < map_styles.length; i++) {
+            if (map_styles[i].id == id) {
+                opened_style = map_styles[i];
+                break;
+            }
+        }
+        style = {
+            name: opened_style.name,
+            font_size: opened_style.font_size,
+            color: opened_style.stroke,
+            fillColor: opened_style.fill,
+            opacity: opened_style.opacity + 0.2,
+            fillOpacity: opened_style.opacity,
+            'stroke-width': opened_style.stroke_width,
+            min_zoom: opened_style.min_zoom,
+            max_zoom: opened_style.max_zoom,
+        }
+    }
+
+    $('#map-style-modal').addClass('is-active');
+    $('#map-style-name').val(style.name);
+    $("#style-preview-text").text(style.name);
+    $("#style-preview-text").css("font-size", style.font_size + "px");
+    $("#style-preview-text").css("color", style.color);
+    document.querySelector('#style-stroke-color').jscolor.fromString(style.color);
+    $('#style-stroke-width').val(style.stroke_width);
+    document.querySelector('#style-fill-color').jscolor.fromString(style.fillColor);
+    $('#style-opacity').val(style.opacity);
+    $('#style-min-zoom').val(style.min_zoom);
+    $('#style-max-zoom').val(style.max_zoom);
+    $('#style-font').val(style.font_size);
+
     preview_layer.setStyle(style);
     preview.invalidateSize();
 }

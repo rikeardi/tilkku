@@ -17,7 +17,7 @@
             <div class="field" style="position: relative;" onclick="layers_toggle('layers');">
                 <label class="label"><span class="icon is-small"><i id="map-layers-label" class="map-label fas fa-angle-right"></i></span> {% translate 'Map layers' %}</label>
                 <div class="control" style="position: absolute; top: 0; right: 5px;">
-                    <button class="button is-primary is-small" onclick="map_layer_add();">{% translate 'Add' %}</button>
+                    <button class="button is-primary is-small" onclick="map_layer_open();">{% translate 'Add' %}</button>
                 </div>
             </div>
             <div class="field">
@@ -29,7 +29,7 @@
             <div class="field" style="position: relative;" onclick="layers_toggle('styles');">
                 <label class="label"><span class="icon is-small"><i id="map-styles-label" class="map-label fas fa-angle-right"></i></span> {% translate 'Layer styles' %}</label>
                 <div class="control" style="position: absolute; top: 0; right: 5px;">
-                    <button class="button is-primary is-small" onclick="map_style_add();">{% translate 'Add' %}</button>
+                    <button class="button is-primary is-small" onclick="map_style_open();">{% translate 'Add' %}</button>
                 </div>
             </div>
             <div class="field">
@@ -54,7 +54,7 @@ function settings_map_layers_init() {
     $("#map-styles-list").html("");
     for(var i=0;i<map_styles.length;i++) {
         var style = map_styles[i];
-        $("#map-styles-list").append("<tr><td>" + style.name + "</td><td style='text-align: right;'><button class=\"button is-primary is-small\" onclick=\"map_style_edit(" + style.id + ");\">{% translate 'Edit' %}</button><button class=\"button is-danger is-small\" onclick=\"map_style_delete(" + style.id + ");\">{% translate 'Delete' %}</button></td></tr>");
+        $("#map-styles-list").append("<tr><td>" + style.name + "</td><td style='text-align: right;'><button class=\"button is-primary is-small\" onclick=\"map_style_open(" + style.id + ");\">{% translate 'Edit' %}</button><button class=\"button is-danger is-small\" onclick=\"map_style_delete(" + style.id + ");\">{% translate 'Delete' %}</button></td></tr>");
     }
     $("#map-servers-list").html("");
     for(var i=0;i<map_servers.length;i++) {
@@ -118,27 +118,6 @@ function map_import_upload() {
         });
     };
     reader.readAsText(file);
-}
-
-function map_server_delete(id) {
-    message_confirm("{% translate 'Map server deletion' %}", "{% translate 'Are you sure you want to delete this map server?' %}", function() {
-        $.ajax({
-            url: "/api/map/server/" + id + "/",
-            type: "DELETE",
-            headers: {
-                "X-CSRFToken": csrf_token
-            },
-            success: function(data) {
-                for(var i=0;i<map_servers.length;i++) {
-                    if(map_servers[i].id == id) {
-                        map_servers.splice(i, 1);
-                        break;
-                    }
-                }
-                settings_map_layers_init();
-            }
-        });
-    });
 }
 
 var active_layer = null;

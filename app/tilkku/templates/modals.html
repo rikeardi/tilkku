@@ -3,5 +3,9 @@
 {% include 'modals/contacts.html' %}
 {% include 'modals/events.html' %}
 {% include 'modals/user.html' %}
+{% if user.is_superuser %}
 {% include 'modals/map-style.html' %}
+{% include 'modals/map-layer.html' %}
+{% include 'modals/map-server.html' %}
+{% endif %}
 {% endblock %}
