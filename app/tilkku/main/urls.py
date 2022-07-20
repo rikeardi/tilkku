@@ -6,6 +6,7 @@ from rest_framework import routers
 from . import views, forms, api
 
 router = routers.DefaultRouter()
+router.register(r'mapservers', api.MapServerViewSet)
 router.register(r'mapstyles', api.MapStyleViewSet)
 router.register(r'layers', api.LayerViewSet)
 router.register(r'areas', api.AreaViewSet)

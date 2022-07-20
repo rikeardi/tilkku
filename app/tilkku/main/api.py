@@ -467,3 +467,34 @@ class GeoJSONViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, viewset
 
     def get_object(self):
         return GeoJSON()
+
+
+class MapServerSerializer(serializers.Serializer):
+    class Meta:
+        model = MapServer
+        fields = ('id', 'name', 'url', 'attribution')
+
+
+class MapServerViewSet(viewsets.ModelViewSet):
+    queryset = MapServer.objects.all()
+    serializer_class = MapServerSerializer
+
+    def get_queryset(self):
+        queryset = MapServer.objects.all()
+
+        return queryset
+
+    def update(self, request, *args, **kwargs):
+        instance = self.get_object()
+        instance.name = request.data.get('name')
+        instance.url = request.data.get('url')
+        instance.attribution = request.data.get('attribution')
+        instance.save()
+        return Response(MapServerSerializer(instance).data)
+
+    def create(self, request, *args, **kwargs):
+        instance = MapServer.objects.create(name=request.data.get('name'),
+                                             url=request.data.get('url'),
+                                             attribution=request.data.get('attribution'))
+        instance.save()
+        return Response(MapServerSerializer(instance).data)
