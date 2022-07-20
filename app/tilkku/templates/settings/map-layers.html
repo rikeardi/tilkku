@@ -1,8 +1,6 @@
 {% block content %}
 {% load static %}
 {% load i18n %}
-<div class="columns">
-    <div class="column is-half">
         <div class="content p-3">
             <div class="field" style="position: relative;">
                 <label class="label"><span class="icon is-small" onclick="layers_toggle('servers');"><i class="fas fa-angle-down"></i></span> {% translate 'Background maps' %}</label>
@@ -28,6 +26,18 @@
                     </table>
                 </div>
             </div>
+            <div class="field" style="position: relative;">
+                <label class="label"><span class="icon is-small" onclick="layers_toggle('styles');"><i class="fas fa-angle-down"></i></span> {% translate 'Layer styles' %}</label>
+                <div class="control" style="position: absolute; top: 0; right: 5px;">
+                    <button class="button is-primary is-small" onclick="map_style_add();">{% translate 'Add' %}</button>
+                </div>
+            </div>
+            <div class="field">
+                <div class="control">
+                    <table class="table map-layer-table" id="map-styles-list" style="display: none;">
+                    </table>
+                </div>
+            </div>
             <div class="field">
                 <label class="label">GeoJSON</label>
                 <div class="control">
@@ -37,31 +47,15 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="column is-half">
-        <div class="content p-3">
-            <label class="label">{% translate 'Layer styles' %}</label>
-            <div class="field has-addons">
-                <div class="control">
-                    <button class="button is-primary is-small" onclick="map_style_add();">{% translate 'Add' %}</button>
-                </div>
-            </div>
-            <div class="field">
-                <div id="settings-map-styles" class="control">
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 <script>
 
 function settings_map_layers_init() {
-    $("#settings-map-styles").html("");
+    $("#map-styles-list").html("");
     for(var i=0;i<map_styles.length;i++) {
         var selected = "";
         var style = map_styles[i];
-        $("#settings-map-styles").append("<span style='cursor: pointer; text-decoration: underline; color: blue;' onclick='map_edit_style(" + style.id + ")'>" + style.name + "</span><br>");
+        $("#map-styles-list").append("<tr><td>" + style.name + "</td><td><button class=\"button is-primary is-small\" onclick=\"map_style_edit(" + i + ");\">{% translate 'Edit' %}</button><button class=\"button is-danger is-small\" onclick=\"map_style_delete(" + i + ");\">{% translate 'Delete' %}</button></td></tr>");
     }
     $("#map-servers-list").html("");
     for(var i=0;i<map_servers.length;i++) {
