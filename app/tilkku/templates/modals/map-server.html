@@ -71,7 +71,7 @@ function map_server_save() {
             'url': url,
             'attribution': attribution,
         };
-        if(id) {
+        if(opened_server) {
             $.ajax({
                 type: 'PATCH',
                 url: '/api/mapservers/' + opened_server.id + '/',
