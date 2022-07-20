@@ -144,12 +144,8 @@ function user_edit_modal_save() {
             'X-CSRFToken': csrf_token,
         },
         success: function(data) {
-            if(data.success) {
-                user_edit_modal_close();
-                window.location.reload();
-            } else {
-                alert(data.message);
-            }
+            user_edit_modal_close();
+            users_init();
         }
     });
 }
@@ -212,6 +208,7 @@ function user_new_modal_save() {
         },
         success: function(data) {
             user_new_modal_close();
+            users_init();
         }
     });
 }
