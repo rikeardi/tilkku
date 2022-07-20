@@ -65,7 +65,7 @@ function map_server_save() {
     var name = $('#map-server-name').val();
     var url = $('#map-server-url').val();
     var attribution = $('#map-server-attribution').val();
-    if(name && url && layer) {
+    if(name && url && attribution) {
         var data = {
             'name': name,
             'url': url,
