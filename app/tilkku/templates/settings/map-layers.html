@@ -3,7 +3,7 @@
 {% load i18n %}
         <div class="content p-3">
             <div class="field" style="position: relative;">
-                <label class="label"><span class="icon is-small" onclick="layers_toggle('servers');"><i class="fas fa-angle-down"></i></span> {% translate 'Background maps' %}</label>
+                <label class="label"><span class="icon is-small" onclick="layers_toggle('servers');"><i class="fas fa-angle-down"></i> {% translate 'Background maps' %}</span></label>
                 <div class="control" style="position: absolute; top: 0; right: 5px;">
                     <button class="button is-primary is-small" onclick="map_server_open();">{% translate 'Add' %}</button>
                 </div>
@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div class="field" style="position: relative;">
-                <label class="label"><span class="icon is-small" onclick="layers_toggle('layers');"><i class="fas fa-angle-down"></i></span> {% translate 'Map layers' %}</label>
+                <label class="label"><span class="icon is-small" onclick="layers_toggle('layers');"><i class="fas fa-angle-down"></i> {% translate 'Map layers' %}</span></label>
                 <div class="control" style="position: absolute; top: 0; right: 5px;">
                     <button class="button is-primary is-small" onclick="map_layer_add();">{% translate 'Add' %}</button>
                 </div>
@@ -27,7 +27,7 @@
                 </div>
             </div>
             <div class="field" style="position: relative;">
-                <label class="label"><span class="icon is-small" onclick="layers_toggle('styles');"><i class="fas fa-angle-down"></i></span> {% translate 'Layer styles' %}</label>
+                <label class="label"><span class="icon is-small" onclick="layers_toggle('styles');"><i class="fas fa-angle-down"></i> {% translate 'Layer styles' %}</span></label>
                 <div class="control" style="position: absolute; top: 0; right: 5px;">
                     <button class="button is-primary is-small" onclick="map_style_add();">{% translate 'Add' %}</button>
                 </div>
@@ -53,19 +53,18 @@
 function settings_map_layers_init() {
     $("#map-styles-list").html("");
     for(var i=0;i<map_styles.length;i++) {
-        var selected = "";
         var style = map_styles[i];
-        $("#map-styles-list").append("<tr><td>" + style.name + "</td><td style='text-align: right;'><button class=\"button is-primary is-small\" onclick=\"map_style_edit(" + i + ");\">{% translate 'Edit' %}</button><button class=\"button is-danger is-small\" onclick=\"map_style_delete(" + i + ");\">{% translate 'Delete' %}</button></td></tr>");
+        $("#map-styles-list").append("<tr><td>" + style.name + "</td><td style='text-align: right;'><button class=\"button is-primary is-small\" onclick=\"map_style_edit(" + style.id + ");\">{% translate 'Edit' %}</button><button class=\"button is-danger is-small\" onclick=\"map_style_delete(" + style.id + ");\">{% translate 'Delete' %}</button></td></tr>");
     }
     $("#map-servers-list").html("");
     for(var i=0;i<map_servers.length;i++) {
         var server = map_servers[i];
-        $("#map-servers-list").append("<tr><td>" + server.name + "</td><td style='text-align: right;'><button class=\"button is-primary is-small\" onclick=\"map_server_open(" + i + ");\">{% translate 'Edit' %}</button><button class=\"button is-danger is-small\" onclick=\"map_server_delete(" + i + ");\">{% translate 'Delete' %}</button></td></tr>");
+        $("#map-servers-list").append("<tr><td>" + server.name + "</td><td style='text-align: right;'><button class=\"button is-primary is-small\" onclick=\"map_server_open(" + server.id + ");\">{% translate 'Edit' %}</button><button class=\"button is-danger is-small\" onclick=\"map_server_delete(" + server.id + ");\">{% translate 'Delete' %}</button></td></tr>");
     }
     $("#map-layers-list").html("");
     for(var i=0;i<map_layers.length;i++) {
         var layer = map_layers[i];
-        $("#map-layers-list").append("<tr><td>" + layer.name + "</td><td style='text-align: right;'><button class=\"button is-primary is-small\" onclick=\"map_layer_open(" + i + ");\">{% translate 'Edit' %}</button><button class=\"button is-danger is-small\" onclick=\"map_layer_delete(" + i + ");\">{% translate 'Delete' %}</button></td></tr>");
+        $("#map-layers-list").append("<tr><td>" + layer.name + "</td><td style='text-align: right;'><button class=\"button is-primary is-small\" onclick=\"map_layer_open(" + layer.id + ");\">{% translate 'Edit' %}</button><button class=\"button is-danger is-small\" onclick=\"map_layer_delete(" + layer.id + ");\">{% translate 'Delete' %}</button></td></tr>");
     }
 }
 
