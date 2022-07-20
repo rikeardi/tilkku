@@ -131,7 +131,7 @@ function map_style_open(id) {
     $("#style-preview-text").css("font-size", style.font_size + "px");
     $("#style-preview-text").css("color", style.color);
     document.querySelector('#style-stroke-color').jscolor.fromString(style.color);
-    $('#style-stroke-width').val(style.stroke_width);
+    $('#style-stroke-width').val(style['stroke-width']);
     document.querySelector('#style-fill-color').jscolor.fromString(style.fillColor);
     $('#style-opacity').val(style.opacity);
     $('#style-min-zoom').val(style.min_zoom);
