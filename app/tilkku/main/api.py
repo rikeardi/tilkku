@@ -137,7 +137,7 @@ class MapStyleViewSet(viewsets.ModelViewSet):
 class LayerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Layer
-        fields = ('id', 'name', 'type', 'style')
+        fields = ('id', 'name', 'style')
 
 
 class LayerViewSet(viewsets.ModelViewSet):

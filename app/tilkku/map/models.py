@@ -2,11 +2,6 @@ from django.db import models
 
 
 # Create your models here.
-class LayerType(models.TextChoices):
-    AREA = 'AR', 'Alue'
-    MARKER = 'MA', 'Merkintä'
-
-
 class TopicStatus(models.TextChoices):
     OPEN = 'OP', 'Avoin'
     CLOSED = 'CL', 'Suljettu'
@@ -31,7 +26,6 @@ class MapStyle(models.Model):
 
 class Layer(models.Model):
     name = models.CharField(max_length=100)
-    type = models.CharField(max_length=2, choices=LayerType.choices, default=LayerType.AREA)
     style = models.ForeignKey(MapStyle, on_delete=models.DO_NOTHING)
 
     class Meta:
