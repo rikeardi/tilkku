@@ -469,7 +469,7 @@ class GeoJSONViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, viewset
         return GeoJSON()
 
 
-class MapServerSerializer(serializers.Serializer):
+class MapServerSerializer(serializers.ModelSerializer):
     class Meta:
         model = MapServer
         fields = ('id', 'name', 'url', 'attribution')
@@ -489,7 +489,7 @@ class MapServerViewSet(viewsets.ModelViewSet):
 
     def create(self, request, *args, **kwargs):
         instance = MapServer.objects.create(name=request.data.get('name'),
-                                             url=request.data.get('url'),
-                                             attribution=request.data.get('attribution'))
+                                            url=request.data.get('url'),
+                                            attribution=request.data.get('attribution'))
         instance.save()
         return Response(MapServerSerializer(instance).data)
