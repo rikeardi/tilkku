@@ -114,7 +114,7 @@ function map_server_save() {
 }
 
 function map_server_delete(id) {
-    message_confirm("{% translate 'Map server deletion' %}", "{% translate 'Are you sure you want to delete this map server?' %}", function() {
+    messages_confirm("{% translate 'Map server deletion' %}", "{% translate 'Are you sure you want to delete this map server?' %}", function() {
         $.ajax({
             url: "/api/mapservers/" + id + "/",
             type: "DELETE",
