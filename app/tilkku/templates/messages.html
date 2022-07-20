@@ -1,6 +1,6 @@
 {% block messages %}
 {% load i18n %}
-<div id="messages-alert-container" style="position: fixed; top: 0; width: 100%; text-align: center;">
+<div id="messages-container" style="position: fixed; top: 0; width: 100%; text-align: center;">
 </div>
 
 <div class="modal" id="messages-confirm-modal">
@@ -20,9 +20,14 @@
     </div>
 </div>
 
-<div class="notification is-hidden" id="messages-alert-template">
-    <button class="delete" onclick="messages_alert_close();"></button>
-    <p class="messages-alert-message"></p>
+<div class="message is-hidden" id="messages-message-template">
+    <div class="message-header">
+        <p class="message-title"></p>
+        <button class="delete" aria-label="close" onclick="messages_message_close();"></button>
+    </div>
+    <div class="message-body">
+        <p class="messages-message"></p>
+    </div>
 </div>
 
 <script>
@@ -45,13 +50,39 @@ function messages_confirm_accept() {
     messages_confirm_modal_close();
 }
 
-function messages_alert(message) {
-    var alert = $('#messages-alert-template').clone();
-    alert.removeClass('is-hidden');
-    alert.find('.messages-alert-message').text(message);
-    $('#messages-alert-container').append(alert);
+function messages_alert(title, message) {
+    var item = $('#messages-message-template').clone();
+    item.removeClass('is-hidden');
+    item.addClass('is-danger');
+    item.find('.message-title').text(message);
+    item.find('.messages-message').text(message);
+    $('#messages-container').append(item);
     setTimeout(function() {
-        alert.remove();
+        item.remove();
+    }, 5000);
+}
+
+function messages_info(title, message) {
+    var item = $('#messages-message-template').clone();
+    item.removeClass('is-hidden');
+    item.addClass('is-info');
+    item.find('.message-title').text(title);
+    item.find('.messages-message').text(message);
+    $('#messages-container').append(item);
+    setTimeout(function() {
+        item.remove();
+    }, 5000);
+}
+
+function messages_success(title, message) {
+    var item = $('#messages-message-template').clone();
+    item.removeClass('is-hidden');
+    item.addClass('is-success');
+    item.find('.message-title').text(title);
+    item.find('.messages-message').text(message);
+    $('#messages-container').append(item);
+    setTimeout(function() {
+        item.remove();
     }, 5000);
 }
 
