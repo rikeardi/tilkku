@@ -479,11 +479,6 @@ class MapServerViewSet(viewsets.ModelViewSet):
     queryset = MapServer.objects.all()
     serializer_class = MapServerSerializer
 
-    def get_queryset(self):
-        queryset = MapServer.objects.all()
-
-        return queryset
-
     def update(self, request, *args, **kwargs):
         instance = self.get_object()
         instance.name = request.data.get('name')
