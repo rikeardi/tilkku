@@ -46,6 +46,7 @@ function settings_map_layer_init() {
 var opened_layer = null;
 function map_layer_open(id) {
     $(".layer-edit").val("");
+    opened_layer = null;
     if(id) {
         for(var i=0; i<map_layers.length; i++) {
             if(map_layers[i].id == id) {

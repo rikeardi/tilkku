@@ -43,6 +43,7 @@
 var opened_server = null;
 function map_server_open(id) {
     $(".server-edit").val("");
+    opened_server = null;
     if(id) {
         for(var i=0; i<map_servers.length; i++) {
             if(map_servers[i].id == id) {
