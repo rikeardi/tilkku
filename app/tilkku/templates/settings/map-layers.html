@@ -55,17 +55,17 @@ function settings_map_layers_init() {
     for(var i=0;i<map_styles.length;i++) {
         var selected = "";
         var style = map_styles[i];
-        $("#map-styles-list").append("<tr><td>" + style.name + "</td><td><button class=\"button is-primary is-small\" onclick=\"map_style_edit(" + i + ");\">{% translate 'Edit' %}</button><button class=\"button is-danger is-small\" onclick=\"map_style_delete(" + i + ");\">{% translate 'Delete' %}</button></td></tr>");
+        $("#map-styles-list").append("<tr><td>" + style.name + "</td><td style='text-align: right;'><button class=\"button is-primary is-small\" onclick=\"map_style_edit(" + i + ");\">{% translate 'Edit' %}</button><button class=\"button is-danger is-small\" onclick=\"map_style_delete(" + i + ");\">{% translate 'Delete' %}</button></td></tr>");
     }
     $("#map-servers-list").html("");
     for(var i=0;i<map_servers.length;i++) {
         var server = map_servers[i];
-        $("#map-servers-list").append("<tr><td>" + server.name + "</td><td><button class=\"button is-primary is-small\" onclick=\"map_server_open(" + i + ");\">{% translate 'Edit' %}</button><button class=\"button is-danger is-small\" onclick=\"map_server_delete(" + i + ");\">{% translate 'Delete' %}</button></td></tr>");
+        $("#map-servers-list").append("<tr><td>" + server.name + "</td><td style='text-align: right;'><button class=\"button is-primary is-small\" onclick=\"map_server_open(" + i + ");\">{% translate 'Edit' %}</button><button class=\"button is-danger is-small\" onclick=\"map_server_delete(" + i + ");\">{% translate 'Delete' %}</button></td></tr>");
     }
     $("#map-layers-list").html("");
     for(var i=0;i<map_layers.length;i++) {
         var layer = map_layers[i];
-        $("#map-layers-list").append("<tr><td>" + layer.name + "</td><td><button class=\"button is-primary is-small\" onclick=\"map_layer_open(" + i + ");\">{% translate 'Edit' %}</button><button class=\"button is-danger is-small\" onclick=\"map_layer_delete(" + i + ");\">{% translate 'Delete' %}</button></td></tr>");
+        $("#map-layers-list").append("<tr><td>" + layer.name + "</td><td style='text-align: right;'><button class=\"button is-primary is-small\" onclick=\"map_layer_open(" + i + ");\">{% translate 'Edit' %}</button><button class=\"button is-danger is-small\" onclick=\"map_layer_delete(" + i + ");\">{% translate 'Delete' %}</button></td></tr>");
     }
 }
 
