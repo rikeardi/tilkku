@@ -260,3 +260,9 @@ msgstr "Taustakartan poisto"
 
 msgid "Are you sure you want to delete this map server?"
 msgstr "Haluatko varmasti poistaa tämän taustakartan?"
+
+msgid "Layer"
+msgstr "Karttataso"
+
+msgid "Select type"
+msgstr "Valitse tyyppi"
