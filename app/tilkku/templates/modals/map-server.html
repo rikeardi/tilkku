@@ -81,7 +81,7 @@ function map_server_save() {
                 },
                 success: function(data) {
                     for(var i=0; i<map_servers.length; i++) {
-                        if(map_servers[i].id == id) {
+                        if(map_servers[i].id == data.id) {
                             map_servers[i].name = name;
                             map_servers[i].url = url;
                             map_servers[i].layer = layer;
