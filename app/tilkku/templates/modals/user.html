@@ -61,37 +61,37 @@
             <div class="field">
                 <label class="label">{% translate 'Username' %}</label>
                 <div class="control">
-                    <input class="input" type="text" id="user-new-modal-username" value="">
+                    <input class="input user-modal-input" type="text" id="user-new-modal-username" value="">
                 </div>
             </div>
             <div class="field">
                 <label class="label">{% translate 'First name' %}</label>
                 <div class="control">
-                    <input class="input" type="text" id="user-new-modal-firstname" value="">
+                    <input class="input user-modal-input" type="text" id="user-new-modal-firstname" value="">
                 </div>
             </div>
             <div class="field">
                 <label class="label">{% translate 'Last name' %}</label>
                 <div class="control">
-                    <input class="input" type="text" id="user-new-modal-lastname" value="">
+                    <input class="input user-modal-input" type="text" id="user-new-modal-lastname" value="">
                 </div>
             </div>
             <div class="field">
                 <label class="label">{% translate 'E-mail' %}</label>
                 <div class="control">
-                    <input class="input" type="text" id="user-new-modal-email" value="">
+                    <input class="input user-modal-input" type="text" id="user-new-modal-email" value="">
                 </div>
             </div>
             <div class="field">
                 <label class="label">{% translate 'Password' %}</label>
                 <div class="control">
-                    <input class="input" type="password" id="user-new-modal-password" autocomplete="new-password">
+                    <input class="input user-modal-input" type="password" id="user-new-modal-password" autocomplete="new-password">
                 </div>
             </div>
             <div class="field">
                 <label class="label">{% translate 'Confirm password' %}</label>
                 <div class="control">
-                    <input class="input" type="password" id="user-new-modal-password-confirm" autocomplete="new-password">
+                    <input class="input user-modal-input" type="password" id="user-new-modal-password-confirm" autocomplete="new-password">
                 </div>
             </div>
             <div class="field">
@@ -127,7 +127,7 @@ function user_edit_modal_save() {
     var password = $('#user-edit-modal-password').val();
     var password_confirm = $('#user-edit-modal-password-confirm').val();
     if(password != password_confirm) {
-        alert("{% translate "Passwords don't match!" %}");
+        messages_alert("{% translate "Passwords don't match!" %}");
         return;
     }
     $.ajax({
@@ -153,6 +153,69 @@ function user_edit_modal_save() {
         }
     });
 }
+
+{% if user.is_superuser %}
+var selected_user = null;
+
+function user_add() {
+    selected_user = null;
+    $(".user-modal-input").val("");
+    $('#user-new-modal').addClass('is-active');
+}
+
+function user_new_modal_close() {
+    $('#user-new-modal').removeClass('is-active');
+}
+
+function user_edit(id) {
+    $.ajax({
+        url: '/api/adm_users/' + id + '/',
+        type: 'GET',
+        success: function(data) {
+            selected_user = data;
+            $('#user-edit-modal-firstname').val(data.user.first_name);
+            $('#user-edit-modal-lastname').val(data.user.last_name);
+            $('#user-edit-modal-email').val(data.user.email);
+            $('#user-edit-modal-password').val('');
+            $('#user-edit-modal-password-confirm').val('');
+            $('#user-edit-modal-admin').prop('checked', data.user.is_superuser);
+            $('#user-edit-modal').addClass('is-active');
+        }
+    });
+}
+
+function user_new_modal_save() {
+    var username = $('#user-new-modal-username').val();
+    var firstname = $('#user-new-modal-firstname').val();
+    var lastname = $('#user-new-modal-lastname').val();
+    var email = $('#user-new-modal-email').val();
+    var password = $('#user-new-modal-password').val();
+    var password_confirm = $('#user-new-modal-password-confirm').val();
+    if(password != password_confirm) {
+        messages_alert("{% translate "Passwords don't match!" %}");
+        return;
+    }
+    $.ajax({
+        url: '/api/adm_users/',
+        type: 'POST',
+        data: {
+            username: username,
+            first_name: firstname,
+            last_name: lastname,
+            email: email,
+            password: password,
+            password2: password_confirm,
+            is_superuser: $('#user-new-modal-admin').prop('checked')
+        },
+        headers: {
+            'X-CSRFToken': csrf_token,
+        },
+        success: function(data) {
+            user_new_modal_close();
+        }
+    });
+}
+{% endif %}
 
 </script>
 {% endblock %}

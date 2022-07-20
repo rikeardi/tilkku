@@ -264,5 +264,11 @@ msgstr "Haluatko varmasti poistaa tämän taustakartan?"
 msgid "Layer"
 msgstr "Karttataso"
 
+msgid "Map server"
+msgstr "Taustakartta"
+
 msgid "Select type"
 msgstr "Valitse tyyppi"
+
+msgid "Attribution"
+msgstr "Tekijänoikeus"

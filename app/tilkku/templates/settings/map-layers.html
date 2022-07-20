@@ -1,52 +1,52 @@
 {% block content %}
 {% load static %}
 {% load i18n %}
-        <div class="content p-3">
-            <div class="field" style="position: relative;">
-                <label class="label" onclick="layers_toggle('servers');"><span class="icon is-small"><i id="map-servers-label" class="map-label fas fa-angle-right"></i></span> {% translate 'Background maps' %}</label>
-                <div class="control" style="position: absolute; top: 0; right: 5px;">
-                    <button class="button is-primary is-small" onclick="map_server_open();">{% translate 'Add' %}</button>
-                </div>
-            </div>
-            <div class="field">
-                <div class="control">
-                    <table class="table map-layer-table" id="map-servers-list" style="display: none;">
-                    </table>
-                </div>
-            </div>
-            <div class="field" style="position: relative;">
-                <label class="label" onclick="layers_toggle('layers');"><span class="icon is-small"><i id="map-layers-label" class="map-label fas fa-angle-right"></i></span> {% translate 'Map layers' %}</label>
-                <div class="control" style="position: absolute; top: 0; right: 5px;">
-                    <button class="button is-primary is-small" onclick="map_layer_open();">{% translate 'Add' %}</button>
-                </div>
-            </div>
-            <div class="field">
-                <div class="control">
-                    <table class="table map-layer-table" id="map-layers-list" style="display: none;">
-                    </table>
-                </div>
-            </div>
-            <div class="field" style="position: relative;">
-                <label class="label" onclick="layers_toggle('styles');"><span class="icon is-small"><i id="map-styles-label" class="map-label fas fa-angle-right"></i></span> {% translate 'Layer styles' %}</label>
-                <div class="control" style="position: absolute; top: 0; right: 5px;">
-                    <button class="button is-primary is-small" onclick="map_style_open();">{% translate 'Add' %}</button>
-                </div>
-            </div>
-            <div class="field">
-                <div class="control">
-                    <table class="table map-layer-table" id="map-styles-list" style="display: none;">
-                    </table>
-                </div>
-            </div>
-            <div class="field">
-                <label class="label">GeoJSON</label>
-                <div class="control">
-                    <button class="button is-primary is-small" onclick="map_export_geoJSON();">{% translate 'Export' %}</button>
-                    <button class="button is-primary is-small" onclick="map_import_geoJSON();">{% translate 'Import' %}</button>
-                    <input type="file" id="map-import-file" style="display: none;" onchange="map_import_upload();">
-                </div>
-            </div>
+<div class="content p-3">
+    <div class="field" style="position: relative;">
+        <label class="label" onclick="layers_toggle('servers');"><span class="icon is-small"><i id="map-servers-label" class="map-label fas fa-angle-right"></i></span> {% translate 'Background maps' %}</label>
+        <div class="control" style="position: absolute; top: 0; right: 5px;">
+            <button class="button is-primary is-small" onclick="map_server_open();">{% translate 'Add' %}</button>
         </div>
+    </div>
+    <div class="field">
+        <div class="control">
+            <table class="table map-layer-table" id="map-servers-list" style="display: none;">
+            </table>
+        </div>
+    </div>
+    <div class="field" style="position: relative;">
+        <label class="label" onclick="layers_toggle('layers');"><span class="icon is-small"><i id="map-layers-label" class="map-label fas fa-angle-right"></i></span> {% translate 'Map layers' %}</label>
+        <div class="control" style="position: absolute; top: 0; right: 5px;">
+            <button class="button is-primary is-small" onclick="map_layer_open();">{% translate 'Add' %}</button>
+        </div>
+    </div>
+    <div class="field">
+        <div class="control">
+            <table class="table map-layer-table" id="map-layers-list" style="display: none;">
+            </table>
+        </div>
+    </div>
+    <div class="field" style="position: relative;">
+        <label class="label" onclick="layers_toggle('styles');"><span class="icon is-small"><i id="map-styles-label" class="map-label fas fa-angle-right"></i></span> {% translate 'Layer styles' %}</label>
+        <div class="control" style="position: absolute; top: 0; right: 5px;">
+            <button class="button is-primary is-small" onclick="map_style_open();">{% translate 'Add' %}</button>
+        </div>
+    </div>
+    <div class="field">
+        <div class="control">
+            <table class="table map-layer-table" id="map-styles-list" style="display: none;">
+            </table>
+        </div>
+    </div>
+    <div class="field">
+        <label class="label">GeoJSON</label>
+        <div class="control">
+            <button class="button is-primary is-small" onclick="map_export_geoJSON();">{% translate 'Export' %}</button>
+            <button class="button is-primary is-small" onclick="map_import_geoJSON();">{% translate 'Import' %}</button>
+            <input type="file" id="map-import-file" style="display: none;" onchange="map_import_upload();">
+        </div>
+    </div>
+</div>
 
 <script>
 
