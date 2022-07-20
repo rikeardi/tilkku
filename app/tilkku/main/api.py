@@ -88,7 +88,6 @@ class UserAdminViewSet(viewsets.ModelViewSet):
                 first_name=request.data.get('first_name'),
                 last_name=request.data.get('last_name'),
                 email=request.data.get('email'),
-                is_staff=False,
                 is_superuser=request.data.get('is_superuser'),
                 password=password
             )
