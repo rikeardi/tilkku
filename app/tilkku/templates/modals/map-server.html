@@ -77,7 +77,7 @@ function map_server_save() {
                 url: '/api/mapservers/' + opened_server.id + '/',
                 data: data,
                 headers: {
-                    'X-CSRFToken': csrftoken
+                    'X-CSRFToken': csrf_token
                 },
                 success: function(data) {
                     for(var i=0; i<map_servers.length; i++) {
@@ -98,7 +98,7 @@ function map_server_save() {
                 url: '/api/mapservers/',
                 data: data,
                 headers: {
-                    'X-CSRFToken': csrftoken
+                    'X-CSRFToken': csrf_token
                 },
                 success: function(data) {
                     map_servers.push(data);
