@@ -3,7 +3,7 @@
 {% load i18n %}
         <div class="content p-3">
             <div class="field" style="position: relative;" onclick="layers_toggle('servers');">
-                <label class="label"><span class="icon is-small"><i class="fas fa-angle-down"></i></span> {% translate 'Background maps' %}</label>
+                <label class="label"><span class="icon is-small"><i id="map-servers-label" class="map-label fas fa-angle-right"></i></span> {% translate 'Background maps' %}</label>
                 <div class="control" style="position: absolute; top: 0; right: 5px;">
                     <button class="button is-primary is-small" onclick="map_server_open();">{% translate 'Add' %}</button>
                 </div>
@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div class="field" style="position: relative;" onclick="layers_toggle('layers');">
-                <label class="label"><span class="icon is-small"><i class="fas fa-angle-down"></i></span> {% translate 'Map layers' %}</label>
+                <label class="label"><span class="icon is-small"><i id="map-layers-label" class="map-label fas fa-angle-right"></i></span> {% translate 'Map layers' %}</label>
                 <div class="control" style="position: absolute; top: 0; right: 5px;">
                     <button class="button is-primary is-small" onclick="map_layer_add();">{% translate 'Add' %}</button>
                 </div>
@@ -27,7 +27,7 @@
                 </div>
             </div>
             <div class="field" style="position: relative;" onclick="layers_toggle('styles');">
-                <label class="label"><span class="icon is-small"><i class="fas fa-angle-down"></i></span> {% translate 'Layer styles' %}</label>
+                <label class="label"><span class="icon is-small"><i id="map-styles-label" class="map-label fas fa-angle-right"></i></span> {% translate 'Layer styles' %}</label>
                 <div class="control" style="position: absolute; top: 0; right: 5px;">
                     <button class="button is-primary is-small" onclick="map_style_add();">{% translate 'Add' %}</button>
                 </div>
@@ -141,9 +141,17 @@ function map_server_delete(id) {
     });
 }
 
+var active_layer = null;
 function layers_toggle(layer) {
     $(".map-layer-table").hide();
-    $("#map-" + layer + "-list").show();
+    $(".map-label").removeClass("fa-angle-down").addClass("fa-angle-right");
+    if(active_layer == layer) {
+        active_layer = null;
+    } else {
+        active_layer = layer;
+        $("#map-" + layer + "-list").show();
+        $("#map-" + layer + "-label").removeClass("fa-angle-right").addClass("fa-angle-down");
+    }
 }
 
 </script>
