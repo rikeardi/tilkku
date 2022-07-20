@@ -10,6 +10,12 @@
                     <button class="button is-primary is-small" onclick="map_server_add();">{% translate 'Add' %}</button>
                 </div>
             </div>
+            <div class="field">
+                <div class="control">
+                    <table class="table" id="map-servers-list">
+                    </table>
+                </div>
+            </div>
             <label class="label">{% translate 'Map layers' %}</label>
             <div class="field has-addons">
                 <div class="control">
@@ -50,6 +56,11 @@ function settings_map_layers_init() {
         var selected = "";
         var style = map_styles[i];
         $("#settings-map-styles").append("<span style='cursor: pointer; text-decoration: underline; color: blue;' onclick='map_edit_style(" + style.id + ")'>" + style.name + "</span><br>");
+    }
+    $("#map-servers-list").html("");
+    for(var i=0;i<map_servers.length;i++) {
+        var server = map_servers[i];
+        $("#map-servers-list").append("<tr><td>" + server.name + "</td><td><button class=\"button is-primary is-small\" onclick=\"map_server_edit(" + i + ");\">{% translate 'Edit' %}</button><button class=\"button is-danger is-small\" onclick=\"map_server_delete(" + i + ");\">{% translate 'Delete' %}</button></td></tr>");
     }
 }
 

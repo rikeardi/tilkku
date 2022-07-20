@@ -168,6 +168,9 @@ msgstr "Salasanat eivät täsmää!"
 msgid "Add location"
 msgstr "Lisää paikka"
 
+msgid "Location"
+msgstr "Paikka"
+
 msgid "Area"
 msgstr "Alue"
 

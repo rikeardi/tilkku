@@ -31,7 +31,7 @@ function users_init() {
             users = data;
             for(var i=0;i<data.length;i++) {
                 var user = data[i];
-                $("#users-list").append("<tr><td>" + user.username + "</td><td>" + user.email + "</td><td><button class=\"button is-primary is-small\" onclick=\"user_edit(" + i + ");\">{% translate 'Edit' %}</button><button class=\"button is-primary is-small\" onclick=\"user_delete(" + i + ");\">{% translate 'Delete' %}</button></td></tr>");
+                $("#users-list").append("<tr><td>" + user.username + "</td><td>" + user.email + "</td><td><button class=\"button is-primary is-small\" onclick=\"user_edit(" + i + ");\">{% translate 'Edit' %}</button><button class=\"button is-danger is-small\" onclick=\"user_delete(" + i + ");\">{% translate 'Delete' %}</button></td></tr>");
             }
         }
     });
