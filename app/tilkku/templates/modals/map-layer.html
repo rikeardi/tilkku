@@ -48,7 +48,110 @@
 </div>
 <script>
 
+function settings_map_layer_init() {
+    $("#map-layer-style").html("");
+    for(var i = 0; i < map_styles.length; i++) {
+        $('#map-layer-style').append('<option value="' + map_styles[i].id + '">' + map_styles[i].name + '</option>');
+    }
+}
 
+var opened_layer = null;
+function map_layer_open(id) {
+    $(".layer-edit").val("");
+    if(id) {
+        for(var i=0; i<map_layers.length; i++) {
+            if(map_layers[i].id == id) {
+                $('#map-layer-name').val(map_layers[i].name);
+                $('#map-layer-type').val(map_layers[i].type);
+                $('#map-layer-style').val(map_layers[i].style);
+                opened_layer = map_layers[i];
+                break;
+            }
+        }
+    }
+    $('#map-layer-modal').addClass('is-active');
+}
+
+function map_layer_close() {
+    $('#map-layer-modal').removeClass('is-active');
+}
+
+function map_layer_save() {
+    var name = $('#map-layer-name').val();
+    var type = $('#map-layer-type').val();
+    var style = $('#map-layer-style').val();
+    if(name) {
+        var data = {
+            'name': name,
+            'type': type,
+            'style': style,
+        };
+        if(opened_layer) {
+            $.ajax({
+                type: 'PATCH',
+                url: '/api/layers/' + opened_layer.id + '/',
+                data: data,
+                headers: {
+                    'X-CSRFToken': csrf_token
+                },
+                success: function(data) {
+                    for(var i=0; i<map_layers.length; i++) {
+                        if(map_layers[i].id == data.id) {
+                            map_layers[i].name = name;
+                            map_layers[i].type = type;
+                            map_layers[i].style = style;
+                            break;
+                        }
+                    }
+                    map_layer_close();
+                    settings_map_layers_init();
+                }
+            });
+        } else {
+            $.ajax({
+                type: 'POST',
+                url: '/api/layers/',
+                data: data,
+                headers: {
+                    'X-CSRFToken': csrf_token
+                },
+                success: function(data) {
+                    map_layers.push(data);
+                    map_layers_close();
+                    settings_map_layers_init();
+                }
+            });
+        }
+        map_layer_close();
+    } else {
+        messages_alert('{% translate 'Please fill all fields' %}');
+    }
+}
+
+function map_layer_delete(id) {
+    messages_confirm("{% translate 'Layer deletion' %}", "{% translate 'Are you sure you want to delete this layer?' %}", function() {
+        $.ajax({
+            url: "/api/layers/" + id + "/",
+            type: "DELETE",
+            headers: {
+                "X-CSRFToken": csrf_token
+            },
+            success: function(data) {
+                for(var i=0;i<map_layers.length;i++) {
+                    if(map_layers[i].id == id) {
+                        map_layers.splice(i, 1);
+                        break;
+                    }
+                }
+                settings_map_layers_init();
+            }
+        });
+    });
+}
+
+$(document).ready(function() {
+    settings_map_layers_init();
+});
 
 </script>
 {% endblock %}

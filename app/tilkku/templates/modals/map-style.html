@@ -150,7 +150,8 @@ function map_style_delete() {
                     url: '/api/mapstyles/' + opened_style.id + '/',
                     type: 'DELETE',
                     success: function(data) {
-                        console.log(data);
+                        settings_map_layer_init();
+                        settings_map_layers_init();
                     }
                 });
             }
@@ -233,6 +234,7 @@ function map_style_save() {
                         break;
                     }
                 }
+                settings_map_layer_init();
                 settings_map_layers_init();
                 map_style_close();
             }
@@ -247,11 +249,33 @@ function map_style_save() {
             },
             success: function(data) {
                 map_styles.push(data);
+                settings_map_layer_init();
                 settings_map_layers_init();
                 map_style_close();
             }
         });
     }
+}
+
+function map_style_delete(id) {
+    messages_confirm("{% translate 'Layer style deletion' %}", "{% translate 'Are you sure you want to delete this layer style?' %}", function() {
+        $.ajax({
+            url: "/api/mapstyles/" + id + "/",
+            type: "DELETE",
+            headers: {
+                "X-CSRFToken": csrf_token
+            },
+            success: function(data) {
+                for(var i=0;i<map_styles.length;i++) {
+                    if(map_styles[i].id == id) {
+                        map_styles.splice(i, 1);
+                        break;
+                    }
+                }
+                settings_map_styles_init();
+            }
+        });
+    });
 }
 
 </script>
