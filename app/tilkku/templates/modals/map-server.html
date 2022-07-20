@@ -14,19 +14,19 @@
                 <label class="label">{% translate 'Name' %}</label>
                 <div class="field">
                     <div class="control">
-                        <input type="text" id="map-server-name" class="input layer-edit" placeholder="{% translate 'Name' %}">
+                        <input type="text" id="map-server-name" class="input server-edit" placeholder="{% translate 'Name' %}">
                     </div>
                 </div>
                 <label class="label">{% translate 'URL' %}</label>
                 <div class="field">
                     <div class="control">
-                        <input type="text" id="map-server-url" class="input layer-edit" placeholder="{% translate 'URL' %}">
+                        <input type="text" id="map-server-url" class="input server-edit" placeholder="{% translate 'URL' %}">
                     </div>
                 </div>
                 <label class="label">{% translate 'Attribution' %}</label>
                 <div class="field">
                     <div class="control">
-                        <input type="text" id="map-server-attribution" class="input layer-edit" placeholder="{% translate 'Attribution' %}">
+                        <input type="text" id="map-server-attribution" class="input server-edit" placeholder="{% translate 'Attribution' %}">
                     </div>
                 </div>
             </div>
@@ -41,6 +41,7 @@
 <script>
 
 function map_server_open(id) {
+    $(".server-edit").val("");
     if(id) {
         for(var i=0; i<map_servers.length; i++) {
             if(map_servers[i].id == id) {

@@ -2,8 +2,8 @@
 {% load static %}
 {% load i18n %}
         <div class="content p-3">
-            <div class="field" style="position: relative;" onclick="layers_toggle('servers');">
-                <label class="label"><span class="icon is-small"><i id="map-servers-label" class="map-label fas fa-angle-right"></i></span> {% translate 'Background maps' %}</label>
+            <div class="field" style="position: relative;">
+                <label class="label" onclick="layers_toggle('servers');"><span class="icon is-small"><i id="map-servers-label" class="map-label fas fa-angle-right"></i></span> {% translate 'Background maps' %}</label>
                 <div class="control" style="position: absolute; top: 0; right: 5px;">
                     <button class="button is-primary is-small" onclick="map_server_open();">{% translate 'Add' %}</button>
                 </div>
@@ -14,8 +14,8 @@
                     </table>
                 </div>
             </div>
-            <div class="field" style="position: relative;" onclick="layers_toggle('layers');">
-                <label class="label"><span class="icon is-small"><i id="map-layers-label" class="map-label fas fa-angle-right"></i></span> {% translate 'Map layers' %}</label>
+            <div class="field" style="position: relative;">
+                <label class="label" onclick="layers_toggle('layers');"><span class="icon is-small"><i id="map-layers-label" class="map-label fas fa-angle-right"></i></span> {% translate 'Map layers' %}</label>
                 <div class="control" style="position: absolute; top: 0; right: 5px;">
                     <button class="button is-primary is-small" onclick="map_layer_open();">{% translate 'Add' %}</button>
                 </div>
@@ -26,8 +26,8 @@
                     </table>
                 </div>
             </div>
-            <div class="field" style="position: relative;" onclick="layers_toggle('styles');">
-                <label class="label"><span class="icon is-small"><i id="map-styles-label" class="map-label fas fa-angle-right"></i></span> {% translate 'Layer styles' %}</label>
+            <div class="field" style="position: relative;">
+                <label class="label" onclick="layers_toggle('styles');"><span class="icon is-small"><i id="map-styles-label" class="map-label fas fa-angle-right"></i></span> {% translate 'Layer styles' %}</label>
                 <div class="control" style="position: absolute; top: 0; right: 5px;">
                     <button class="button is-primary is-small" onclick="map_style_open();">{% translate 'Add' %}</button>
                 </div>
