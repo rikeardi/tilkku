@@ -10,4 +10,4 @@ python manage.py createsuperuser --noinput
 python manage.py loaddata tilkku/fixtures.yml
 
 #python manage.py runserver 0.0.0.0:8000
-gunicorn tilkku.asgi:application --bind 0.0.0.0:8000 --workers 4
+gunicorn tilkku.asgi --bind 0.0.0.0:8000 --workers 4
