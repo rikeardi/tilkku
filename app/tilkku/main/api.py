@@ -56,6 +56,7 @@ class UserAdminViewSet(viewsets.ModelViewSet):
             return Response(status=403)
 
     def update(self, request, *args, **kwargs):
+        print(request.user)
         if request.user.is_superuser:
             instance = User.objects.get(pk=request.data.get('id'))
             instance.username = request.data.get('username')
