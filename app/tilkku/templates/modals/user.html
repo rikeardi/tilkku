@@ -1,6 +1,56 @@
 {% block content %}
 {% load i18n %}
-<div class="modal" id="user-edit-modal">
+<div class="modal" id="user-edit-own-modal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+        <header class="modal-card-head">
+            <p class="modal-card-title">{% translate 'Edit user' %}</p>
+            <button class="delete" aria-label="close" onclick="user_edit_own_modal_close();"></button>
+        </header>
+        <form>
+        <section class="modal-card-body">
+            <div class="field">
+                <label class="label">{% translate 'First name' %}</label>
+                <div class="control">
+                    <input class="input" type="text" id="user-edit-own-modal-firstname" value="{{ user.first_name }}">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">{% translate 'Last name' %}</label>
+                <div class="control">
+                    <input class="input" type="text" id="user-edit-own-modal-lastname" value="{{ user.last_name }}">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">{% translate 'E-mail' %}</label>
+                <div class="control">
+                    <input class="input" type="text" id="user-edit-own-modal-email" value="{{ user.email }}">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">{% translate 'Password' %}</label>
+                <div class="control">
+                    <input class="input" type="password" id="user-edit-own-modal-password" autocomplete="new-password">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">{% translate 'Confirm password' %}</label>
+                <div class="control">
+                    <input class="input" type="password" id="user-edit-own-modal-password-confirm" autocomplete="new-password">
+                </div>
+            </div>
+        </section>
+        <footer class="modal-card-foot">
+            <button class="button is-primary" onclick="user_edit_own_modal_save();">{% translate 'Save' %}</button>
+            <button class="button" onclick="user_edit_own_modal_close();">{% translate 'Cancel' %}</button>
+        </footer>
+        </form>
+    </div>
+</div>
+
+{% if user.is_superuser %}
+
+<div class="modal" id="user-edit-modal" style="z-index: 41;">
     <div class="modal-background"></div>
     <div class="modal-card">
         <header class="modal-card-head">
@@ -10,33 +60,45 @@
         <form>
         <section class="modal-card-body">
             <div class="field">
+                <label class="label">{% translate 'Username' %}</label>
+                <div class="control">
+                    <input class="input user-edit-modal-input" type="text" id="user-edit-modal-username" value="">
+                </div>
+            </div>
+            <div class="field">
                 <label class="label">{% translate 'First name' %}</label>
                 <div class="control">
-                    <input class="input" type="text" id="user-edit-modal-firstname" value="{{ user.first_name }}">
+                    <input class="input user-edit-modal-input" type="text" id="user-edit-modal-firstname" value="">
                 </div>
             </div>
             <div class="field">
                 <label class="label">{% translate 'Last name' %}</label>
                 <div class="control">
-                    <input class="input" type="text" id="user-edit-modal-lastname" value="{{ user.last_name }}">
+                    <input class="input user-edit-modal-input" type="text" id="user-edit-modal-lastname" value="">
                 </div>
             </div>
             <div class="field">
                 <label class="label">{% translate 'E-mail' %}</label>
                 <div class="control">
-                    <input class="input" type="text" id="user-edit-modal-email" value="{{ user.email }}">
+                    <input class="input user-edit-modal-input" type="text" id="user-edit-modal-email" value="">
                 </div>
             </div>
             <div class="field">
                 <label class="label">{% translate 'Password' %}</label>
                 <div class="control">
-                    <input class="input" type="password" id="user-edit-modal-password" autocomplete="new-password">
+                    <input class="input user-edit-modal-input" type="password" id="user-edit-modal-password" autocomplete="new-password">
                 </div>
             </div>
             <div class="field">
                 <label class="label">{% translate 'Confirm password' %}</label>
                 <div class="control">
-                    <input class="input" type="password" id="user-edit-modal-password-confirm" autocomplete="new-password">
+                    <input class="input user-edit-modal-input" type="password" id="user-edit-modal-password-confirm" autocomplete="new-password">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">{% translate 'Admin' %}</label>
+                <div class="control">
+                    <label class="checkbox"><input id="user-edit-modal-admin" type="checkbox"> {% translate 'Is admin' %}</label>
                 </div>
             </div>
         </section>
@@ -48,7 +110,6 @@
     </div>
 </div>
 
-{% if user.is_superuser %}
 <div class="modal" id="user-new-modal" style="z-index: 41;">
     <div class="modal-background"></div>
     <div class="modal-card">
@@ -112,15 +173,15 @@
 
 <script>
 
-function user_edit_modal_open() {
-    $('#user-edit-modal').addClass('is-active');
+function user_edit_own_modal_open() {
+    $('#user-edit-own-modal').addClass('is-active');
 }
 
-function user_edit_modal_close() {
-    $('#user-edit-modal').removeClass('is-active');
+function user_edit_own_modal_close() {
+    $('#user-edit-own-modal').removeClass('is-active');
 }
 
-function user_edit_modal_save() {
+function user_edit_own_modal_save() {
     var firstname = $('#user-edit-modal-firstname').val();
     var lastname = $('#user-edit-modal-lastname').val();
     var email = $('#user-edit-modal-email').val();
@@ -145,7 +206,6 @@ function user_edit_modal_save() {
         },
         success: function(data) {
             user_edit_modal_close();
-            users_init();
         }
     });
 }
