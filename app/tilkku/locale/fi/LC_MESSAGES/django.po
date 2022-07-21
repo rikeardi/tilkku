@@ -272,3 +272,9 @@ msgstr "Valitse tyyppi"
 
 msgid "Attribution"
 msgstr "Tekijänoikeus"
+
+msgid "User deletion"
+msgstr "Käyttäjän poisto"
+
+msgid "Are you sure you want to delete user"
+msgstr "Haluatko varmasti poistaa käyttäjän"

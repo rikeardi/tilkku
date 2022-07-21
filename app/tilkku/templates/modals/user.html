@@ -310,6 +310,21 @@ function user_edit_modal_save() {
         }
     });
 }
+
+function user_delete(id) {
+    messages_confirm("{% translate "User deletion" %}", "{% translate "Are you sure you want to delete user" %} " + selected_user.username + "?", function() {
+        $.ajax({
+            url: '/api/adm_users/' + id + '/',
+            type: 'DELETE',
+            headers: {
+                'X-CSRFToken': csrf_token,
+            },
+            success: function(data) {
+                users_init();
+            }
+        });
+    });
+}
 {% endif %}
 
 </script>
