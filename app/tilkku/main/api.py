@@ -188,17 +188,6 @@ class MarkerViewSet(viewsets.ModelViewSet):
     serializer_class = MarkerSerializer
 
 
-class SiteCategorySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = SiteCategory
-        fields = ('id', 'name')
-
-
-class SiteCategoryViewSet(viewsets.ModelViewSet):
-    queryset = SiteCategory.objects.all()
-    serializer_class = SiteCategorySerializer
-
-
 class ContactSerializer(serializers.ModelSerializer):
     class Meta:
         model = Contact
@@ -234,12 +223,11 @@ class ContactViewSet(viewsets.ModelViewSet):
 class SiteSerializer(serializers.ModelSerializer):
     area = AreaSerializer(read_only=True)
     marker = MarkerSerializer(read_only=True)
-    category = SiteCategorySerializer(read_only=True)
     contacts = ContactSerializer(many=True, read_only=True)
 
     class Meta:
         model = Site
-        fields = ('id', 'name', 'area', 'marker', 'category', 'description', 'contacts')
+        fields = ('id', 'name', 'area', 'marker', 'description', 'contacts')
 
 
 class SiteViewSet(viewsets.ModelViewSet):
