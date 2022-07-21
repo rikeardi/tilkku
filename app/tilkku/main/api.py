@@ -278,6 +278,17 @@ class SiteViewSet(viewsets.ModelViewSet):
         instance.save()
         return Response(SiteSerializer(instance).data)
 
+    def destroy(self, request, *args, **kwargs):
+        instance = self.get_object()
+
+        if instance.area:
+            instance.area.delete()
+        if instance.marker:
+            instance.marker.delete()
+
+        instance.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
 
 class NoteSerializer(serializers.ModelSerializer):
     site = SiteSerializer(read_only=True)

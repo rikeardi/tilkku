@@ -5,6 +5,9 @@
     <div class="modal-card">
         <header class="modal-card-head">
             <p class="modal-card-title" id="site-modal-title"></p>
+            {% if user.is_admin %}
+            <button class="button is-small" id="site-delete-btn" onclick="site_delete();">{% translate 'Delete' %}</button>
+            {% endif %}
             <button class="button is-small" id="site-link-btn">{% translate 'Copy link' %}</button>
             <button class="delete" aria-label="close" onclick="site_modal_close();" style="margin-left: 15px;"></button>
         </header>
@@ -227,6 +230,19 @@ function site_new_modal_save() {
         },
         success: function(data) {
             site_new_modal_close();
+        }
+    });
+}
+
+function site_delete() {
+    $.ajax({
+        url: '/api/sites/' + opened_site.id + '/',
+        type: 'DELETE',
+        headers: {
+            "X-CSRFToken": csrf_token
+        },
+        success: function(data) {
+            site_modal_close();
         }
     });
 }
