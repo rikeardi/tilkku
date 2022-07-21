@@ -1,5 +1,0 @@
-- model: chat.room
-  pk: 1
-  fields:
-    name: "tilkku"
-    online: []
