@@ -5,7 +5,7 @@
     <div class="modal-card">
         <header class="modal-card-head">
             <p class="modal-card-title" id="site-modal-title"></p>
-            {% if user.is_admin %}
+            {% if user.is_superuser %}
             <button class="button is-small" id="site-delete-btn" onclick="site_delete();">{% translate 'Delete' %}</button>
             {% endif %}
             <button class="button is-small" id="site-link-btn">{% translate 'Copy link' %}</button>
