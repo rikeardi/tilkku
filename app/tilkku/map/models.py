@@ -3,8 +3,8 @@ from django.db import models
 
 # Create your models here.
 class TopicStatus(models.TextChoices):
-    OPEN = 'OP', 'Avoin'
-    CLOSED = 'CL', 'Suljettu'
+    OPEN = 'OP', 'Open'
+    CLOSED = 'CL', 'Closed'
 
 
 class MapStyle(models.Model):
@@ -78,16 +78,6 @@ class WMSServer(models.Model):
         return f'{self.name}'
 
 
-class SiteCategory(models.Model):
-    name = models.CharField(max_length=100)
-
-    class Meta:
-        ordering = ['name']
-
-    def __str__(self):
-        return f'{self.name}'
-
-
 class Contact(models.Model):
     name = models.CharField(max_length=100)
     title = models.CharField(max_length=100, blank=True, default='')
@@ -105,7 +95,6 @@ class Site(models.Model):
     name = models.CharField(max_length=100)
     area = models.ForeignKey(Area, on_delete=models.DO_NOTHING, blank=True, null=True)
     marker = models.ForeignKey(Marker, on_delete=models.DO_NOTHING, blank=True, null=True)
-    category = models.ForeignKey(SiteCategory, on_delete=models.DO_NOTHING)
     description = models.TextField(blank=True, default='')
     contacts = models.ManyToManyField(Contact, blank=True)
 
