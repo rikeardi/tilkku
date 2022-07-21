@@ -209,21 +209,15 @@ function site_new_modal_close() {
 
 function site_new_modal_save() {
     var name = $('#site-new-name').val();
-    var category = $('#site-new-category').val();
     var area_id = $('#site-new-area-id').val();
     var marker_id = $('#site-new-marker-id').val();
-    var contact = $('#site-new-contact').val();
-    var notes = $('#site-new-notes').val();
     $.ajax({
         url: '/api/sites/',
         type: 'POST',
         data: {
             name: name,
-            category: category,
             area: area_id,
             marker: marker_id,
-            contact: contact,
-            notes: notes,
         },
         headers: {
             "X-CSRFToken": csrf_token
