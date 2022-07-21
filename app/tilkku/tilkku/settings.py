@@ -26,13 +26,12 @@ environ.Env.read_env()
 SECRET_KEY = env('DJANGO_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-#DEBUG = False
+#DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
 CSRF_TRUSTED_ORIGINS = [env('HOST_NAME')]
-
 
 # Application definition
 
@@ -145,7 +144,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
-LANGUAGE_CODE = 'fi'
+LANGUAGE_CODE = 'en'
 
 TIME_ZONE = env('TIME_ZONE')
 
