@@ -229,6 +229,7 @@ function user_edit(id) {
         type: 'GET',
         success: function(data) {
             selected_user = data;
+            $('#user-edit-modal-username').val(data.username);
             $('#user-edit-modal-firstname').val(data.first_name);
             $('#user-edit-modal-lastname').val(data.last_name);
             $('#user-edit-modal-email').val(data.email);
