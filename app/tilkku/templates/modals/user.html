@@ -312,7 +312,7 @@ function user_edit_modal_save() {
 }
 
 function user_delete(id) {
-    messages_confirm("{% translate "User deletion" %}", "{% translate "Are you sure you want to delete user" %} " + selected_user.username + "?", function() {
+    messages_confirm("{% translate "User deletion" %}", "{% translate "Are you sure you want to delete this user?" %}", function() {
         $.ajax({
             url: '/api/adm_users/' + id + '/',
             type: 'DELETE',
