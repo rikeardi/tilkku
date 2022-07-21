@@ -48,15 +48,6 @@
                 </div>
             </div>
             <div class="field">
-                <label class="label">{% translate 'Type' %}</label>
-                <div class="control">
-                    <div class="select site-new-input" style="width: 100%;">
-                        <select id="site-new-category" style="width: 100%;">
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="field">
                 <label class="label">{% translate 'Area' %}</label>
                 <div class="control">
                     <input class="input site-new-input" id="site-new-area" type="text">
@@ -101,7 +92,6 @@ function open_site_modal(area_id, marker_id) {
 
 function load_site_modal() {
     $('#site-modal-title').text(opened_site.name);
-    $('#site-modal-type').text(opened_site.category.name);
     $('#site-contact-table').html('');
     opened_site.contacts.forEach(function(contact) {
         var row = $('<tr>');
@@ -182,18 +172,6 @@ function site_select_contact(contact_id) {
 }
 
 $(document).ready(function() {
-    $.ajax({
-        url: '/api/sitecategories/',
-        type: 'GET',
-        success: function(data) {
-            data.forEach(function(category) {
-                var option = $('<option>');
-                option.text(category.name);
-                option.val(category.id);
-                $('#site-new-category').append(option);
-            });
-        }
-    });
 });
 
 {% if user.is_superuser %}
