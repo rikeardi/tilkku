@@ -59,7 +59,11 @@ function settings_map_layers_init() {
     $("#map-servers-list").html("");
     for(var i=0;i<map_servers.length;i++) {
         var server = map_servers[i];
-        $("#map-servers-list").append("<tr><td>" + server.name + "</td><td style='text-align: right;'><button class=\"button is-primary is-small\" onclick=\"map_server_open(" + server.id + ");\">{% translate 'Edit' %}</button><button class=\"button is-danger is-small\" onclick=\"map_server_delete(" + server.id + ");\">{% translate 'Delete' %}</button></td></tr>");
+        if(server.id == 1) {
+            $("#map-servers-list").append("<tr><td>" + server.name + "</td><td style='text-align: right;'></td></tr>");
+        } else {
+            $("#map-servers-list").append("<tr><td>" + server.name + "</td><td style='text-align: right;'><button class=\"button is-primary is-small\" onclick=\"map_server_open(" + server.id + ");\">{% translate 'Edit' %}</button><button class=\"button is-danger is-small\" onclick=\"map_server_delete(" + server.id + ");\">{% translate 'Delete' %}</button></td></tr>");
+        }
     }
     $("#map-layers-list").html("");
     for(var i=0;i<map_layers.length;i++) {
