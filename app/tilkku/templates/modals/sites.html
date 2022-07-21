@@ -229,15 +229,17 @@ function site_new_modal_save() {
 }
 
 function site_delete() {
-    $.ajax({
-        url: '/api/sites/' + opened_site.id + '/',
-        type: 'DELETE',
-        headers: {
-            "X-CSRFToken": csrf_token
-        },
-        success: function(data) {
-            site_modal_close();
-        }
+    messages_confirm("Site deletion", "Are you sure you want to delete this site?", function() {
+        $.ajax({
+            url: '/api/sites/' + opened_site.id + '/',
+            type: 'DELETE',
+            headers: {
+                "X-CSRFToken": csrf_token
+            },
+            success: function(data) {
+                window.location.reload();
+            }
+        });
     });
 }
 
