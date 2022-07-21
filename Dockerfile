@@ -8,7 +8,6 @@ ENV C_INCLUDE_PATH=/usr/include/gdal
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 ENV LD_LIBRARY_PATH=/usr/local/lib
-ENV DJANGO_SETTINGS_MODULE=tilkku.settings
 
 WORKDIR /code
 COPY requirements.txt /code/
