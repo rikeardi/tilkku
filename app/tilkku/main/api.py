@@ -279,13 +279,13 @@ class SiteViewSet(viewsets.ModelViewSet):
 
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()
+        instance.delete()
 
         if instance.area:
             instance.area.delete()
         if instance.marker:
             instance.marker.delete()
 
-        instance.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
