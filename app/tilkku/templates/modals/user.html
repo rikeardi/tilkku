@@ -273,6 +273,43 @@ function user_new_modal_save() {
         }
     });
 }
+
+function user_edit_modal_close() {
+    $('#user-edit-modal').removeClass('is-active');
+}
+
+function user_edit_modal_save() {
+    var username = $('#user-edit-modal-username').val();
+    var firstname = $('#user-edit-modal-firstname').val();
+    var lastname = $('#user-edit-modal-lastname').val();
+    var email = $('#user-edit-modal-email').val();
+    var password = $('#user-edit-modal-password').val();
+    var password_confirm = $('#user-edit-modal-password-confirm').val();
+    if(password != password_confirm) {
+        messages_alert("{% translate "Passwords don't match!" %}");
+        return;
+    }
+    $.ajax({
+        url: '/api/adm_users/' + selected_user.id + '/',
+        type: 'PATCH',
+        data: {
+            username: username,
+            first_name: firstname,
+            last_name: lastname,
+            email: email,
+            password: password,
+            password2: password_confirm,
+            is_superuser: $('#user-edit-modal-admin').prop('checked') ? 1 : 0
+        },
+        headers: {
+            'X-CSRFToken': csrf_token,
+        },
+        success: function(data) {
+            user_edit_modal_close();
+            users_init();
+        }
+    });
+}
 {% endif %}
 
 </script>
