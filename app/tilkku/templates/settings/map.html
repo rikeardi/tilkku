@@ -58,7 +58,7 @@ function settings_map_init() {
         var layer = map_layers[i];
 
         if(settings.map.layers.includes(i)) selected = " checked";
-        $("#settings-map-layers").append("<label class='checkbox'><input type='checkbox' value='" + i + "'" + selected + " onchange='map_select_layer();'> " + layer.name + " (" + layer.id + ")</label><br>");
+        $("#settings-map-layers").append("<label class='checkbox'><input type='checkbox'" + selected + " onchange='map_select_layer();'> " + layer.name + "</label><br>");
     }
 }
 

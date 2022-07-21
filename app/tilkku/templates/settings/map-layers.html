@@ -68,7 +68,7 @@ function settings_map_layers_init() {
     $("#map-layers-list").html("");
     for(var i=0;i<map_layers.length;i++) {
         var layer = map_layers[i];
-        $("#map-layers-list").append("<tr><td>" + layer.name + "</td><td style='text-align: right;'><button class=\"button is-primary is-small\" onclick=\"map_layer_open(" + layer.id + ");\">{% translate 'Edit' %}</button><button class=\"button is-danger is-small\" onclick=\"map_layer_delete(" + layer.id + ");\">{% translate 'Delete' %}</button></td></tr>");
+        $("#map-layers-list").append("<tr><td>" + layer.name + " (" + layer.id + ")</td><td style='text-align: right;'><button class=\"button is-primary is-small\" onclick=\"map_layer_open(" + layer.id + ");\">{% translate 'Edit' %}</button><button class=\"button is-danger is-small\" onclick=\"map_layer_delete(" + layer.id + ");\">{% translate 'Delete' %}</button></td></tr>");
     }
 }
 
