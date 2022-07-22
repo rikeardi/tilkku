@@ -110,11 +110,11 @@ def section_edit(request, id):
     section = DocsSection.objects.get(id=id)
 
     if request.method == 'POST':
-
         if request.POST.get('text'):
             section.text = request.POST['text']
         if request.POST.get('image'):
             print(request.POST['image'])
+
         section.save()
         return redirect('/docs/' + section.chapter.page.title + '/')
 
@@ -123,8 +123,17 @@ def section_edit(request, id):
 
 def section_new(request):
     if request.method == 'POST':
-        section = DocsSection.objects.create(text=request.POST['text'].lower(),
-                                             order=request.POST['order'],
-                                             chapter_id=request.POST['chapter_id'])
-        section.save()
-        return redirect('/docs/')
+        text = request.POST.get('text')
+        if text:
+            section = DocsSection.objects.create(text=text, order=request.POST['order'],
+                                                 chapter_id=request.POST['chapter_id'])
+            section.save()
+
+        image = request.POST.get('image')
+        if image:
+            print(image)
+#            section = DocsSection.objects.create(image=image, order=request.POST['order'],
+#                                                 chapter_id=request.POST['chapter_id'])
+#            section.save()
+
+        return redirect('/docs/' + section.chapter.page.title + '/')
