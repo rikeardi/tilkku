@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'main.apps.MainConfig',
     'map.apps.MapConfig',
     'chat.apps.ChatConfig',
+    'docs.apps.DocsConfig',
 ]
 
 MIDDLEWARE = [
@@ -67,7 +68,8 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            BASE_DIR / "templates"
+            BASE_DIR / "templates",
+            "docs/templates",
         ],
         'APP_DIRS': True,
         'OPTIONS': {

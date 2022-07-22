@@ -1,0 +1,180 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<style>
+ul ol {
+    list-style: none;
+}
+</style>
+<script>
+
+</script>
+<div class="columns" style="height: 100%; margin: 0px;">
+    <div class="column p-2 is-1 has-text-centered">
+        <div class="is-boxed">
+            <img src="{% static 'img/logo.png' %}" style="max-width: 60px;">
+        </div>
+    </div>
+    <div class="column is-quarter">
+        <div class="box">
+            <div class="block">
+                <h4 class="title is-4" style="cursor: pointer;" onclick="location.href='/docs';">User manual</h4>
+            </div>
+            <div class="block">
+                <aside class="menu">
+                    {% for header in headers %}
+                    <div class="m-2">
+                        {% if page in header.docspage_set.all %}
+                        <p class="menu-label" id="docs-label-{{ header.id }}" style="cursor: pointer;" onclick="docs_toggle_menu({{ header.id }})">
+                            <span class="icon is-small"><i class="fas fa-angle-down"></i></span> {{ header.title }}
+                        </p>
+                        <ul class="menu-list" id="docs-menu-{{ header.id }}">
+                        {% else %}
+                        <p class="menu-label" id="docs-label-{{ header.id }}" style="cursor: pointer;" onclick="docs_toggle_menu({{ header.id }})">
+                            <span class="icon is-small"><i class="fas fa-angle-right"></i></span> {{ header.title }}
+                        </p>
+                        <ul class="menu-list is-hidden" id="docs-menu-{{ header.id }}">
+                        {% endif %}
+                        {% for page in header.docspage_set.all %}
+                            <li><a href="/docs/{{ page.title | lower | escape }}">{{ page.title | title }}</a></li>
+                        {% endfor %}
+                            <li class="docs-edit is-hidden">
+                                <form method="post" action="/docs/new-page/">
+                                    <input type="hidden" name="header_id" value="{{ header.id }}">
+                                    {% csrf_token %}
+                                    <div class="field has-addons">
+                                        <div class="control is-expanded">
+                                            <input class="input is-small" name="title" type="text" placeholder="New page..." autocomplete="no">
+                                        </div>
+                                        <div class="control">
+                                            <button type="submit" class="button is-small is-success"><i class="fa fa-plus" title="Add..." onclick=""></i></button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                    {% endfor %}
+                    <div class="docs-edit is-hidden">
+                        <form method="post" action="/docs/new-header/">
+                            {% csrf_token %}
+                            <div class="field has-addons">
+                                <div class="control is-expanded">
+                                    <input class="input is-small" name="title" type="text" placeholder="New header..." autocomplete="no">
+                                </div>
+                                <div class="control">
+                                    <button class="button is-small is-success"><i class="fa fa-plus" title="Add..." onclick=""></i></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </div>
+    <div class="column is-two-thirds">
+        <div class="box" style="position: relative;">
+            {% if user.is_superuser %}
+            <button class="button is-primary is-small" style="position: absolute; top: 10px; right: 10px;" onclick="docs_toggle_edit();">Edit</button>
+            {% endif %}
+            {% if page %}
+            <div class="block">
+                <p><span class="icon is-small"><a href="/docs"><i class="fas fa-home"></i></a></span></p>
+                <form method="post" action="/docs/pages/{{ page.id }}/delete/">
+                    {% csrf_token %}
+                    <button class="button is-small docs-edit is-hidden is-danger" style="position: absolute; top: 10px; right: 65px;" type="submit"><i class="fa fa-trash" title="Delete..."></i></button>
+                </form>
+                <button class="button is-success is-small docs-edit is-hidden" style="position: absolute; top: 10px; right: 110px;" title="Save" onclick="docs_save_page();"><i class="fas fa-save"></i></button>
+            </div>
+            <form id="docs-page-form" method="post" action="/docs/pages/{{ page.id }}/">
+                {% csrf_token %}
+                <div class="block">
+                    <h2 class="title docs-view is-4">{{ page.title | title }}</h2>
+                    <input class="input docs-edit is-hidden" name="title" type="text" value="{{ page.title }}">
+                </div>
+            </form>
+            <hr>
+            {% for chapter in page.docschapter_set.all %}
+            <form method="post" action="/docs/chapters/{{ chapter.id }}/">
+                {% csrf_token %}
+                <div class="block" style="position: relative;">
+                    <h3 class="title docs-view is-5">{{ chapter.title | title }}<a name="{{ chapter.title | lower }}">&nbsp;</a></h3>
+                    <div class="field has-addons docs-edit is-hidden">
+                        <div class="control is-expanded">
+                            <input class="input" name="title" type="text" value="{{ chapter.title }}">
+                        </div>
+                        <div class="control">
+                            <button class="button is-success" type="submit"><i class="fa fa-save" title="Save..."></i></button>
+                            <button class="button is-danger" type="button" onclick="docs_delete_chapter({{ chapter.id }})"><i class="fa fa-trash" title="Delete..."></i></button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            {% for section in chapter.docssection_set.all %}
+            <form method="post" action="/docs/sections/{{ section.id }}/">
+                {% csrf_token %}
+                <div class="block mb-3" style="position: relative;">
+                    <p class="docs-view">{{ section.text }}</p>
+                    <textarea class="textarea docs-edit is-hidden" name="text">{{ section.text }}</textarea>
+                    <button class="button is-success is-small docs-edit is-hidden" title="Save"><i class="fas fa-save"></i></button>
+                </div>
+            </form>
+            {% endfor %}
+            <hr>
+            {% endfor %}
+            {% else %}
+            <div class="content">
+                <h3 class="title">User manual</h3>
+                <hr>
+                <h5>Site map</h5>
+                <ul>
+                    {% for header in headers %}
+                    <li>
+                        {{ header.title | title }}
+                        <ul>
+                        {% for page in header.docspage_set.all %}
+                            <li><a href="/docs/{{ page.title | lower | escape }}">{{ page.title | title }}</a></li>
+                        {% endfor %}
+                        </ul>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+            <div class="content">
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+var edit_mode = false;
+function docs_toggle_edit() {
+    edit_mode = !edit_mode;
+    if(edit_mode) {
+        $(".docs-edit").removeClass("is-hidden");
+        $(".docs-view").addClass("is-hidden");
+    } else {
+        $(".docs-edit").addClass("is-hidden");
+        $(".docs-view").removeClass("is-hidden");
+    }
+}
+
+function docs_toggle_menu(id) {
+    $(".menu-list").addClass("is-hidden");
+    $(".fa-angle-down").removeClass("fa-angle-down").addClass("fa-angle-right");
+    $("#docs-label-" + id + " svg").removeClass("fa-angle-right").addClass("fa-angle-down");
+    $("#docs-menu-" + id).removeClass("is-hidden");
+}
+
+function docs_save_page() {
+    $("#docs-page-form").submit();
+}
+
+function docs_delete_chapter(id) {
+    location.href = "/docs/chapters/" + id + "/delete/";
+}
+
+</script>
+{% endblock %}
