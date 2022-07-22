@@ -106,7 +106,7 @@ ul ol {
                     </div>
                 </div>
             </form>
-            {% section_order = 0 %}
+            {{ section_order = 0 }}
             {% for section in chapter.docssection_set.all %}
             <form method="post" action="/docs/sections/{{ section.id }}/">
                 {% csrf_token %}
