@@ -121,6 +121,7 @@ ul ol {
             {% for section in chapter.docssection_set.all %}
             <form method="post" action="/docs/sections/{{ section.id }}/">
                 {% csrf_token %}
+                {% if section.text %}
                 <div class="block mb-3" style="position: relative;">
                     <div class="docs-view">
                         {{ section.text | markdown | safe }}
@@ -128,6 +129,14 @@ ul ol {
                     <textarea class="textarea docs-edit is-hidden" name="text">{{ section.text }}</textarea>
                     <button class="button is-success is-small docs-edit is-hidden" title="{% translate 'Save' %}"><i class="fas fa-save"></i></button>
                 </div>
+                {% elif section.image %}
+                <div class="block mb-3" style="position: relative;">
+                    <div class="docs-view">
+                        <img src="data:image/jpeg;base64,{{ section.image }}">
+                    </div>
+                    <button class="button is-success is-small docs-edit is-hidden" title="{% translate 'Save' %}"><i class="fas fa-save"></i></button>
+                </div>
+                {% endif %}
             </form>
             {% endfor %}
             <div class="block">
