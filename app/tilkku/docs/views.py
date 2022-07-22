@@ -123,14 +123,14 @@ def section_edit(request, id):
 
 def section_new(request):
     if request.method == 'POST':
-        print(request)
+        print(request.FILES)
         text = request.POST.get('text')
         if text:
             section = DocsSection.objects.create(text=text, order=request.POST['order'],
                                                  chapter_id=request.POST['chapter_id'])
             section.save()
 
-        image = request.POST.get('image')
+        image = request.FILES.get('image')
         if image:
             print(image)
 #            section = DocsSection.objects.create(image=image, order=request.POST['order'],
