@@ -41,6 +41,8 @@ class DocsSection(models.Model):
     order = models.IntegerField(default=0)
     text = models.TextField(blank=True, default='')
     image = models.TextField(blank=True, default='')
+    image_type = models.CharField(max_length=20, blank=True, default='')
+    image_name = models.CharField(max_length=250, blank=True, default='')
 
     class Meta:
         ordering = ['order']
