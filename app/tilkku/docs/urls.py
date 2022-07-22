@@ -3,7 +3,6 @@ from . import views
 
 
 urlpatterns = [
-    path('<page_name>/', views.page, name='page'),
     path('headers/<id>/delete/', views.header_delete, name='header_delete'),
     path('headers/<id>/', views.header_edit, name='header_edit'),
     path('headers/', views.header_new, name='header_new'),
@@ -16,5 +15,6 @@ urlpatterns = [
     path('sections/<id>/delete/', views.section_delete, name='section_delete'),
     path('sections/<id>/', views.section_edit, name='section_edit'),
     path('sections/', views.section_new, name='section_new'),
+    path('<page_name>/', views.page, name='page'),
     path('', views.home, name='home'),
 ]
