@@ -105,7 +105,7 @@ def chapter_new(request):
 def section_delete(request, id):
     section = DocsSection.objects.get(id=id)
     section.delete()
-    return redirect('/docs/')
+    return redirect('/docs/' + request.GET['next'] + '/')
 
 
 def section_edit(request, id):
@@ -118,7 +118,7 @@ def section_edit(request, id):
             print(request.POST['image'])
 
         section.save()
-        return redirect('/docs/' + section.chapter.page.title + '/')
+        return redirect('/docs/' + request.POST['next'] + '/')
 
     return redirect('/docs/')
 
