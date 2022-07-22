@@ -78,9 +78,9 @@ ul ol {
                 <p><span class="icon is-small"><a href="/docs"><i class="fas fa-home"></i></a></span></p>
                 <form method="post" action="/docs/pages/{{ page.id }}/delete/">
                     {% csrf_token %}
-                    <button class="button is-small docs-edit is-hidden is-danger" style="position: absolute; top: 10px; right: 130px;" type="submit"><i class="fa fa-trash" title="{% translate 'Delete' %}..."></i></button>
+                    <button class="button is-small docs-edit is-hidden is-danger" style="position: absolute; top: 10px; right: 58px;" type="submit"><i class="fa fa-trash" title="{% translate 'Delete' %}..."></i></button>
                 </form>
-                <button class="button is-success is-small docs-edit is-hidden" style="position: absolute; top: 10px; right: 172px;" title="{% translate 'Save' %}" onclick="docs_save_page();"><i class="fas fa-save"></i></button>
+                <button class="button is-success is-small docs-edit is-hidden" style="position: absolute; top: 10px; right: 104px;" title="{% translate 'Save' %}" onclick="docs_save_page();"><i class="fas fa-save"></i></button>
             </div>
             <form id="docs-page-form" method="post" action="/docs/pages/{{ page.id }}/">
                 {% csrf_token %}
