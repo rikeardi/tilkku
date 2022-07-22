@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load i18n %}
 {% block content %}
 <style>
 ul ol {
@@ -10,15 +11,10 @@ ul ol {
 
 </script>
 <div class="columns" style="height: 100%; margin: 0px;">
-    <div class="column p-2 is-1 has-text-centered">
-        <div class="is-boxed">
-            <img src="{% static 'img/logo.png' %}" style="max-width: 60px;">
-        </div>
-    </div>
     <div class="column is-quarter">
         <div class="box">
             <div class="block">
-                <h4 class="title is-4" style="cursor: pointer;" onclick="location.href='/docs';">User manual</h4>
+                <h4 class="title is-4" style="cursor: pointer;" onclick="location.href='/docs';">{% translate 'User manual' %}</h4>
             </div>
             <div class="block">
                 <aside class="menu">
@@ -44,10 +40,10 @@ ul ol {
                                     {% csrf_token %}
                                     <div class="field has-addons">
                                         <div class="control is-expanded">
-                                            <input class="input is-small" name="title" type="text" placeholder="New page..." autocomplete="no">
+                                            <input class="input is-small" name="title" type="text" placeholder="{% translate 'New page' %}..." autocomplete="no">
                                         </div>
                                         <div class="control">
-                                            <button type="submit" class="button is-small is-success"><i class="fa fa-plus" title="Add..." onclick=""></i></button>
+                                            <button type="submit" class="button is-small is-success"><i class="fa fa-plus" title="{% translate 'Add' %}..." onclick=""></i></button>
                                         </div>
                                     </div>
                                 </form>
@@ -60,10 +56,10 @@ ul ol {
                             {% csrf_token %}
                             <div class="field has-addons">
                                 <div class="control is-expanded">
-                                    <input class="input is-small" name="title" type="text" placeholder="New header..." autocomplete="no">
+                                    <input class="input is-small" name="title" type="text" placeholder="{% translate 'New header' %}..." autocomplete="no">
                                 </div>
                                 <div class="control">
-                                    <button class="button is-small is-success"><i class="fa fa-plus" title="Add..." onclick=""></i></button>
+                                    <button class="button is-small is-success"><i class="fa fa-plus" title="{% translate 'Add' %}..." onclick=""></i></button>
                                 </div>
                             </div>
                         </form>
@@ -72,19 +68,19 @@ ul ol {
             </div>
         </div>
     </div>
-    <div class="column is-two-thirds">
+    <div class="column is-three-quarters">
         <div class="box" style="position: relative;">
             {% if user.is_superuser %}
-            <button class="button is-primary is-small" style="position: absolute; top: 10px; right: 10px;" onclick="docs_toggle_edit();">Edit</button>
+            <button class="button is-primary is-small" style="position: absolute; top: 10px; right: 10px;" onclick="docs_toggle_edit();">{% translate 'Edit' %}</button>
             {% endif %}
             {% if page %}
             <div class="block">
                 <p><span class="icon is-small"><a href="/docs"><i class="fas fa-home"></i></a></span></p>
                 <form method="post" action="/docs/pages/{{ page.id }}/delete/">
                     {% csrf_token %}
-                    <button class="button is-small docs-edit is-hidden is-danger" style="position: absolute; top: 10px; right: 65px;" type="submit"><i class="fa fa-trash" title="Delete..."></i></button>
+                    <button class="button is-small docs-edit is-hidden is-danger" style="position: absolute; top: 10px; right: 65px;" type="submit"><i class="fa fa-trash" title="{% translate 'Delete' %}..."></i></button>
                 </form>
-                <button class="button is-success is-small docs-edit is-hidden" style="position: absolute; top: 10px; right: 110px;" title="Save" onclick="docs_save_page();"><i class="fas fa-save"></i></button>
+                <button class="button is-success is-small docs-edit is-hidden" style="position: absolute; top: 10px; right: 110px;" title="{% translate 'Save' %}" onclick="docs_save_page();"><i class="fas fa-save"></i></button>
             </div>
             <form id="docs-page-form" method="post" action="/docs/pages/{{ page.id }}/">
                 {% csrf_token %}
@@ -104,8 +100,8 @@ ul ol {
                             <input class="input" name="title" type="text" value="{{ chapter.title }}">
                         </div>
                         <div class="control">
-                            <button class="button is-success" type="submit"><i class="fa fa-save" title="Save..."></i></button>
-                            <button class="button is-danger" type="button" onclick="docs_delete_chapter({{ chapter.id }})"><i class="fa fa-trash" title="Delete..."></i></button>
+                            <button class="button is-success" type="submit"><i class="fa fa-save" title="{% translate 'Save' %}..."></i></button>
+                            <button class="button is-danger" type="button" onclick="docs_delete_chapter({{ chapter.id }})"><i class="fa fa-trash" title="{% translate 'Delete' %}..."></i></button>
                         </div>
                     </div>
                 </div>
@@ -116,7 +112,7 @@ ul ol {
                 <div class="block mb-3" style="position: relative;">
                     <p class="docs-view">{{ section.text }}</p>
                     <textarea class="textarea docs-edit is-hidden" name="text">{{ section.text }}</textarea>
-                    <button class="button is-success is-small docs-edit is-hidden" title="Save"><i class="fas fa-save"></i></button>
+                    <button class="button is-success is-small docs-edit is-hidden" title="{% translate 'Save' %}"><i class="fas fa-save"></i></button>
                 </div>
             </form>
             {% endfor %}
@@ -124,7 +120,7 @@ ul ol {
             {% endfor %}
             {% else %}
             <div class="content">
-                <h3 class="title">User manual</h3>
+                <h3 class="title">{% translate 'User manual' %}</h3>
                 <hr>
                 <h5>Site map</h5>
                 <ul>
