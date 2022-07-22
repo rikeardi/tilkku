@@ -118,8 +118,10 @@ ul ol {
             {% endfor %}
             <hr>
             {% endfor %}
-            <button class="button is-success is-small docs-edit is-hidden" onclick="docs_new_chapter();">{% translate 'New chapter' %}</button>
-            <button class="button is-success is-small docs-edit is-hidden" onclick="docs_new_section();">{% translate 'New section' %}</button>
+            <div class="block">
+                <button class="button is-success is-small docs-edit is-hidden" onclick="docs_new_chapter();">{% translate 'New chapter' %}</button>
+                <button class="button is-success is-small docs-edit is-hidden" onclick="docs_new_section();">{% translate 'New section' %}</button>
+            </div>
             <form method="post" action="/docs/sections/">
                 {% csrf_token %}
                 <div class="block mt-2 docs-new is-hidden" id="docs-new-section">
