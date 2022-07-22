@@ -44,7 +44,7 @@ ul ol {
                         <p class="menu-label" id="docs-label-{{ header.id }}" style="cursor: pointer;" onclick="docs_toggle_menu({{ header.id }})">
                             <span class="icon is-small"><i class="fas fa-angle-right"></i></span> {{ header.title }}
                         </p>
-                        <span style="position: absolute; right: 10px; top: 0;" class="docs-edit is-hidden" onclick="docs_delete_header({{ header.id }});">
+                        <span style="position: absolute; right: 10px; top: 0;" class="docs-edit is-hidden is-interactive" onclick="docs_delete_header({{ header.id }});">
                             <i class="is-small has-text-danger fas fa-trash-alt"></i>
                         </span>
                         <ul class="menu-list is-hidden" id="docs-menu-{{ header.id }}">
