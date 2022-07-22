@@ -118,10 +118,16 @@ ul ol {
             {% endfor %}
             <hr>
             {% endfor %}
+            <form method="post" action="/docs/sections/">
+                {% csrf_token %}
+                <div class="block">
+                    <textarea class="textarea docs-edit is-hidden" name="text"></textarea>
+                    <button class="button is-success is-small docs-edit is-hidden" title="{% translate 'Save' %}"><i class="fas fa-save"></i></button>
+                </div>
+            </form>
             <form method="post" action="/docs/chapters">
                 {% csrf_token %}
                 <div class="block">
-                    <h3 class="title docs-edit is-5">{% translate 'New chapter' %}</h3>
                     <div class="field has-addons docs-edit is-hidden">
                         <div class="control is-expanded">
                             <input class="input" name="title" type="text" placeholder="{% translate 'New chapter' %}...">
