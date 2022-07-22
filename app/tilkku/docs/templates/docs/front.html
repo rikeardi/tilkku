@@ -105,7 +105,7 @@ ul ol {
             {% for chapter in page.docschapter_set.all %}
             <form method="post" action="/docs/chapters/{{ chapter.id }}/">
                 {% csrf_token %}
-                <div class="block" style="position: relative;">
+                <div class="block mb-2" style="position: relative;">
                     <h3 class="title docs-view is-5">{{ chapter.title | title }}<a name="{{ chapter.title | lower }}">&nbsp;</a></h3>
                     <div class="field has-addons docs-edit is-hidden">
                         <div class="control is-expanded">
