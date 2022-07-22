@@ -132,7 +132,7 @@ ul ol {
                 {% elif section.image %}
                 <div class="block mb-3" style="position: relative;">
                     <div class="docs-view">
-                        <img src="data:image/png;base64,{{ section.image }}">
+                        <img src="data:{{ section.image_type }};base64,{{ section.image }}" alt="{{ section.image_name }}">
                     </div>
                     <button class="button is-success is-small docs-edit is-hidden" title="{% translate 'Save' %}"><i class="fas fa-save"></i></button>
                 </div>
