@@ -1,2 +1,2 @@
 msgid "User manual"
-msgstr "Käyttöopas"
+msgstr "Käyttöohje"
