@@ -116,7 +116,7 @@ def section_edit(request, id):
         if request.POST.get('image'):
             print(request.POST['image'])
         section.save()
-        return redirect('/docs/')
+        return redirect('/docs/' + section.chapter.page.title + '/')
 
     return redirect('/docs/')
 
