@@ -128,7 +128,7 @@ ul ol {
                     </div>
                     <textarea class="textarea docs-edit is-hidden" name="text">{{ section.text }}</textarea>
                     <button class="button is-success is-small docs-edit is-hidden" title="{% translate 'Save' %}"><i class="fas fa-save"></i></button>
-                    <button type="button" class="button is-danger is-small docs-edit is-hidden" title="{% translate 'Delete' %}" onclick="docs_delete_section({{ section.id }});"><i class="fas fa-trash"></i></button>
+                    <button type="button" class="button is-danger is-small docs-edit is-hidden" title="{% translate 'Delete' %}" onclick="docs_delete_section({{ section.id }}, '{{ page.title }}');"><i class="fas fa-trash"></i></button>
                 </div>
                 {% elif section.image %}
                 <div class="block mb-3" style="position: relative;">
@@ -137,7 +137,7 @@ ul ol {
                     </div>
                     <img class="docs-edit is-hidden image is-128x128" src="data:{{ section.image_type }};base64,{{ section.image }}" alt="{{ section.image_name }}">
                     <button class="button is-success is-small docs-edit is-hidden" title="{% translate 'Save' %}"><i class="fas fa-save"></i></button>
-                    <button type="button" class="button is-danger is-small docs-edit is-hidden" title="{% translate 'Delete' %}" onclick="docs_delete_section({{ section.id }});"><i class="fas fa-trash"></i></button>
+                    <button type="button" class="button is-danger is-small docs-edit is-hidden" title="{% translate 'Delete' %}" onclick="docs_delete_section({{ section.id }}, '{{ page.title }}');"><i class="fas fa-trash"></i></button>
                 </div>
                 {% endif %}
             </form>
@@ -255,8 +255,8 @@ function docs_upload_image(id) {
     $("#docs-image-upload-" + id).submit();
 }
 
-function docs_delete_section(id) {
-    location.href = "/docs/sections/" + id + "/delete/";
+function docs_delete_section(id, next) {
+    location.href = "/docs/sections/" + id + "/delete/?next=" + next;
 }
 
 </script>
