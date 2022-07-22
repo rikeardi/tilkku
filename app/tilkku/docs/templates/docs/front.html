@@ -106,6 +106,7 @@ ul ol {
                     </div>
                 </div>
             </form>
+            {% section_order = 0 %}
             {% for section in chapter.docssection_set.all %}
             <form method="post" action="/docs/sections/{{ section.id }}/">
                 {% csrf_token %}
@@ -115,11 +116,14 @@ ul ol {
                     <button class="button is-success is-small docs-edit is-hidden" title="{% translate 'Save' %}"><i class="fas fa-save"></i></button>
                 </div>
             </form>
+            {% section_order = section_order + 1 %}
             {% endfor %}
             <div class="block">
                 <button class="button is-success is-small docs-edit is-hidden" onclick="docs_new_section({{ chapter.id }});">{% translate 'New section' %}</button>
             </div>
             <form method="post" action="/docs/sections/">
+                <input type="hidden" name="order" value="{{ section_order }}">
+                <input type="hidden" name="chapter" value="{{ chapter.id }}">
                 {% csrf_token %}
                 <div class="block mt-2 docs-new docs-section is-hidden" id="docs-new-section-{{ chapter.id }}">
                     <textarea class="textarea" name="text"></textarea>
