@@ -31,11 +31,14 @@ ul ol {
             <div class="block">
                 <aside class="menu">
                     {% for header in headers %}
-                    <div class="m-2">
+                    <div class="mb-2" style="position: relative">
                         {% if page in header.docspage_set.all %}
                         <p class="menu-label" id="docs-label-{{ header.id }}" style="cursor: pointer;" onclick="docs_toggle_menu({{ header.id }})">
                             <span class="icon is-small"><i class="fas fa-angle-down"></i></span> {{ header.title }}
                         </p>
+                        <button style="position: absolute; right: 10px;" class="button is-small is-danger docs-edit is-hidden" onclick="docs_delete_header({{ header.id }})">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
                         <ul class="menu-list" id="docs-menu-{{ header.id }}">
                         {% else %}
                         <p class="menu-label" id="docs-label-{{ header.id }}" style="cursor: pointer;" onclick="docs_toggle_menu({{ header.id }})">
