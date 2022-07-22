@@ -120,7 +120,7 @@ ul ol {
                 <button class="button is-success is-small docs-edit is-hidden" onclick="docs_new_section({{ chapter.id }});">{% translate 'New section' %}</button>
             </div>
             <form method="post" action="/docs/sections/">
-                <input type="hidden" name="order" value="{{ chapter.docssection_set.length }}">
+                <input type="hidden" name="order" value="{{ len(chapter.docssection_set) }}">
                 <input type="hidden" name="chapter_id" value="{{ chapter.id }}">
                 {% csrf_token %}
                 <div class="block mt-2 docs-new docs-section is-hidden" id="docs-new-section-{{ chapter.id }}">
