@@ -46,8 +46,11 @@ class DocsSection(models.Model):
         ordering = ['order']
 
     def __str__(self):
-        if len(self.text) > 100:
-            text = self.text[:100] + '...'
-        else:
-            text = self.text
-        return f'{text}'
+        if self.text:
+            if len(self.text) > 100:
+                text = self.text[:100] + '...'
+            else:
+                text = self.text
+            return f'{text}'
+        elif self.image:
+            return f'{self.chapter.title} - image {self.order}'
