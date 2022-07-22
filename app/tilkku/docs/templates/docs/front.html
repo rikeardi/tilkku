@@ -138,7 +138,7 @@ ul ol {
                 <input type="hidden" name="order" value="{{ chapter.docssection_set.count }}">
                 <input type="hidden" name="chapter_id" value="{{ chapter.id }}">
                 {% csrf_token %}
-                <input type="file" class="is-hidden" id="docs-new-image-{{ chapter.id }}" onchange="docs_upload_image({{ chapter.id }});">
+                <input type="file" class="is-hidden" name="image" id="docs-new-image-{{ chapter.id }}" onchange="docs_upload_image({{ chapter.id }});">
             </form>
             <form method="post" action="/docs/sections/">
                 <input type="hidden" name="order" value="{{ chapter.docssection_set.count }}">
