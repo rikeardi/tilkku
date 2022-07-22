@@ -133,7 +133,7 @@ def section_new(request):
 
         image = request.FILES.get('image')
         if image:
-            print(image)
+            print(image.__dict__)
             file = base64.b64encode(image.read()).decode('utf-8')
             section = DocsSection.objects.create(image=file, order=request.POST['order'],
                                                  chapter_id=request.POST['chapter_id'])
