@@ -35,7 +35,7 @@ ul ol {
                             <li><a href="/docs/{{ page.title | lower | escape }}">{{ page.title | title }}</a></li>
                         {% endfor %}
                             <li class="docs-edit is-hidden">
-                                <form method="post" action="/docs/new-page/">
+                                <form method="post" action="/docs/pages/">
                                     <input type="hidden" name="header_id" value="{{ header.id }}">
                                     {% csrf_token %}
                                     <div class="field has-addons">
@@ -52,7 +52,7 @@ ul ol {
                     </div>
                     {% endfor %}
                     <div class="docs-edit is-hidden">
-                        <form method="post" action="/docs/new-header/">
+                        <form method="post" action="/docs/headers/">
                             {% csrf_token %}
                             <div class="field has-addons">
                                 <div class="control is-expanded">

@@ -10,3 +10,15 @@ msgstr "Käyttöohje"
 
 msgid "Site map"
 msgstr "Sivukartta"
+
+msgid "New header"
+msgstr "Uusi otsikko"
+
+msgid "New page"
+msgstr "Uusi sivu"
+
+msgid "New chapter"
+msgstr "Uusi kappale"
+
+msgid "New section"
+msgstr "Uusi osa"
