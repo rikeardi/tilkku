@@ -132,7 +132,14 @@ ul ol {
             {% endfor %}
             <div class="block">
                 <button class="button is-success is-small docs-edit is-hidden" onclick="docs_new_section({{ chapter.id }});">{% translate 'New section' %}</button>
+                <button class="button is-success is-small docs-edit is-hidden" onclick="docs_new_image({{ chapter.id }});">{% translate 'New image' %}</button>
             </div>
+            <form method="post" action="/docs/sections/" enctype="multipart/form-data" id="docs-image-upload-{{ chapter.id }}">
+                <input type="hidden" name="order" value="{{ chapter.docssection_set.count }}">
+                <input type="hidden" name="chapter_id" value="{{ chapter.id }}">
+                {% csrf_token %}
+                <input type="file" class="is-hidden" id="docs-new-image-{{ chapter.id }}" onchange="docs_upload_image({{ chapter.id }});">
+            </form>
             <form method="post" action="/docs/sections/">
                 <input type="hidden" name="order" value="{{ chapter.docssection_set.count }}">
                 <input type="hidden" name="chapter_id" value="{{ chapter.id }}">
@@ -224,6 +231,14 @@ function docs_new_chapter() {
 function docs_new_section(id) {
     $(".docs-new").addClass("is-hidden");
     $("#docs-new-section-" + id).removeClass("is-hidden");
+}
+
+function docs_new_image(id) {
+    $("#docs-new-image-" + id).click();
+}
+
+function docs_upload_image(id) {
+    $("#docs-image-upload-" + id).submit();
 }
 
 </script>
