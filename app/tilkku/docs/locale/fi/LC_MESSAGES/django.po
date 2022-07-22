@@ -7,3 +7,6 @@ msgstr ""
 
 msgid "User manual"
 msgstr "Käyttöohje"
+
+msgid "Site map"
+msgstr "Sivukartta"
