@@ -122,14 +122,14 @@ ul ol {
             <button class="button is-success is-small docs-edit is-hidden" onclick="docs_new_section();">{% translate 'New section' %}</button>
             <form method="post" action="/docs/sections/">
                 {% csrf_token %}
-                <div class="block docs-new is-hidden" id="docs-new-section">
+                <div class="block mt-2 docs-new is-hidden" id="docs-new-section">
                     <textarea class="textarea" name="text"></textarea>
                     <button class="button is-success is-small" title="{% translate 'Add' %}"><i class="fas fa-plus"></i></button>
                 </div>
             </form>
             <form method="post" action="/docs/chapters/">
                 {% csrf_token %}
-                <div class="block docs-new is-hidden" id="docs-new-chapter">
+                <div class="block mt-2 docs-new is-hidden" id="docs-new-chapter">
                     <div class="field has-addons">
                         <div class="control is-expanded">
                             <input class="input" name="title" type="text" placeholder="{% translate 'New chapter' %}...">
