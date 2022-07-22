@@ -1,3 +1,5 @@
+import base64
+
 from django.shortcuts import render, redirect
 from .models import *
 
@@ -132,9 +134,9 @@ def section_new(request):
 
         image = request.FILES.get('image')
         if image:
-            print(image)
-#            section = DocsSection.objects.create(image=image, order=request.POST['order'],
-#                                                 chapter_id=request.POST['chapter_id'])
-#            section.save()
+            file = base64.b64encode(image.read())
+            section = DocsSection.objects.create(image=file, order=request.POST['order'],
+                                                 chapter_id=request.POST['chapter_id'])
+            section.save()
 
-        return redirect('/docs/' + section.chapter.page.title + '/')
+        return redirect('/docs/' + request.POST.get('next') + '/')
