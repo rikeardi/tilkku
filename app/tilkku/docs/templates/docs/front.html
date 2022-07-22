@@ -116,7 +116,7 @@ ul ol {
                     <button class="button is-success is-small docs-edit is-hidden" title="{% translate 'Save' %}"><i class="fas fa-save"></i></button>
                 </div>
             </form>
-            {% section_order = section_order + 1 %}
+            {{ section_order = section_order + 1 }}
             {% endfor %}
             <div class="block">
                 <button class="button is-success is-small docs-edit is-hidden" onclick="docs_new_section({{ chapter.id }});">{% translate 'New section' %}</button>
