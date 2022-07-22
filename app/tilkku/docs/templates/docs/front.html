@@ -125,7 +125,7 @@ ul ol {
                     <button class="button is-success is-small docs-edit is-hidden" title="{% translate 'Save' %}"><i class="fas fa-save"></i></button>
                 </div>
             </form>
-            <form method="post" action="/docs/chapters">
+            <form method="post" action="/docs/chapters/">
                 {% csrf_token %}
                 <div class="block">
                     <div class="field has-addons docs-edit is-hidden">
