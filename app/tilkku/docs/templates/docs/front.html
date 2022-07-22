@@ -122,14 +122,14 @@ ul ol {
             <button class="button is-success is-small docs-edit is-hidden" onclick="docs_new_section();">{% translate 'New section' %}</button>
             <form method="post" action="/docs/sections/">
                 {% csrf_token %}
-                <div class="block is-hidden" id="docs-new-section">
+                <div class="block docs-new is-hidden" id="docs-new-section">
                     <textarea class="textarea" name="text"></textarea>
                     <button class="button is-success is-small" title="{% translate 'Add' %}"><i class="fas fa-plus"></i></button>
                 </div>
             </form>
             <form method="post" action="/docs/chapters/">
                 {% csrf_token %}
-                <div class="block is-hidden" id="docs-new-chapter">
+                <div class="block docs-new is-hidden" id="docs-new-chapter">
                     <div class="field has-addons">
                         <div class="control is-expanded">
                             <input class="input" name="title" type="text" placeholder="{% translate 'New chapter' %}...">
@@ -175,6 +175,7 @@ function docs_toggle_edit() {
         $(".docs-view").addClass("is-hidden");
     } else {
         $(".docs-edit").addClass("is-hidden");
+        $(".docs-new").addClass("is-hidden");
         $(".docs-view").removeClass("is-hidden");
     }
 }
@@ -192,6 +193,16 @@ function docs_save_page() {
 
 function docs_delete_chapter(id) {
     location.href = "/docs/chapters/" + id + "/delete/";
+}
+
+function docs_new_chapter() {
+    $(".docs-new").addClass("is-hidden");
+    $("#docs-new-chapter").removeClass("is-hidden");
+}
+
+function docs_new_section() {
+    $(".docs-new").addClass("is-hidden");
+    $("#docs-new-section").removeClass("is-hidden");
 }
 
 </script>
