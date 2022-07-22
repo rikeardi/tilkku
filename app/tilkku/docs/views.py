@@ -123,6 +123,7 @@ def section_edit(request, id):
 
 def section_new(request):
     if request.method == 'POST':
+        print(request.POST)
         text = request.POST.get('text')
         if text:
             section = DocsSection.objects.create(text=text, order=request.POST['order'],
