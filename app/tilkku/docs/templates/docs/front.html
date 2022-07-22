@@ -130,6 +130,7 @@ ul ol {
                 </div>
             </form>
             <form method="post" action="/docs/chapters/">
+                <input type="hidden" name="page_id" value="{{ page.id }}">
                 {% csrf_token %}
                 <div class="block mt-2 docs-new is-hidden" id="docs-new-chapter">
                     <div class="field has-addons">
