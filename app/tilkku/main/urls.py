@@ -22,6 +22,7 @@ router.register(r'geojson', api.GeoJSONViewSet, basename='geojson')
 app_name = 'main'
 urlpatterns = [
     path('', views.home, name='home'),
+    path('docs/', include('docs.urls'), name='docs'),
     path('events/<id>/', views.events, name='events'),
     path('api/', include(router.urls)),
     path('lang/<lang>/', views.set_language, name='set_language'),
