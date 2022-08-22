@@ -269,7 +269,7 @@ map_layers.forEach(function(layer) {
 function map_set_layers() {
     for(var i = 0; i < map_layers.length; i++) {
         var layer = map_layers[i];
-        console.log(layer);
+
         if(layer.layer) {
             layer.layer.remove();
         }
