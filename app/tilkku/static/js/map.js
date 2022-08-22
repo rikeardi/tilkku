@@ -293,7 +293,7 @@ function map_set_layers() {
 
         layer.active = false;
 
-        if(settings.map.layers.includes(i)) {
+        if(settings.map.layers.includes(layer.id)) {
             layer.layer = L.featureGroup();
             layer.active = true;
 
