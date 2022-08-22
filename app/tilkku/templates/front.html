@@ -11,6 +11,8 @@ var wms_servers = {{ wms_servers | safe }};
 var map_layers = {{ map_layers | safe }};
 var map_styles = {{ map_styles | safe }};
 
+console.log(map_layers);
+
 const csrf_token = document.querySelector('[name="csrfmiddlewaretoken"]').value;
 
 var location_query = {};
