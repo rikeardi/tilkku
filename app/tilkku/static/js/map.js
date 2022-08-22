@@ -269,6 +269,7 @@ map_layers.forEach(function(layer) {
 function map_set_layers() {
     for(var i = 0; i < map_layers.length; i++) {
         var layer = map_layers[i];
+        console.log(layer);
         if(layer.layer) {
             layer.layer.remove();
         }
@@ -293,7 +294,7 @@ function map_set_layers() {
 
         layer.active = false;
 
-        if(settings.map.layers.includes(layer.options.id)) {
+        if(settings.map.layers.includes(layer.id)) {
             layer.layer = L.featureGroup();
             layer.active = true;
 
